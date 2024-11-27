@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://en3henr63844"]
+
+[ext_resource type="Script" path="res://src/objects/bumper/bumper.gd" id="1_jng87"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="1_oraeg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hp6fu"]
+friction = 0.5
+rough = true
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f3unc"]
+resource_local_to_scene = true
+radius = 55.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_30ink"]
+resource_local_to_scene = true
+radius = 60.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_jng87")
+
+[node name="Ellipse" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_oraeg")
+circle = true
+outline_width = 0
+
+[node name="Body" type="StaticBody2D" parent="."]
+disable_mode = 2
+collision_layer = 8
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_hp6fu")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Body"]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_f3unc")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_30ink")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]

@@ -15,6 +15,10 @@ run/main_scene="res://pinball_base.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FullscreenControl="*res://addons/fullscreen_control/FullscreenControl.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -24,7 +28,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/antialiased_line2d/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
 
 [input]
 

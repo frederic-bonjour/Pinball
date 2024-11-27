@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://gd2vjkhm8ywa"]
+
+[ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_7yepp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usju2"]
+friction = 0.0
+rough = true
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okj8v"]
+size = Vector2(200, 10)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmio4"]
+height = 380.0
+
+[sub_resource type="Gradient" id="Gradient_xlrph"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.235294, 1, 1, 1, 1)
+
+[node name="SlingshotLeft" type="Node2D"]
+script = ExtResource("1_7yepp")
+metadata/_edit_group_ = true
+
+[node name="FillPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.0980392)
+antialiased = true
+polygon = PackedVector2Array(0, 0, -210, -77, -210, -300)
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, -210, -77, -210, -300)
+closed = true
+width = 16.0
+joint_mode = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-5, 5, -218, -72, -218, -295)
+
+[node name="Pusher2" type="AnimatableBody2D" parent="."]
+rotation = -2.18166
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_usju2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher2"]
+position = Vector2(100, 0)
+shape = SubResource("RectangleShape2D_okj8v")
+
+[node name="Pusher1" type="AnimatableBody2D" parent="."]
+position = Vector2(-207, -296)
+rotation = 0.959931
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_usju2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher1"]
+position = Vector2(100, 0)
+shape = SubResource("RectangleShape2D_okj8v")
+
+[node name="BallDetectionArea" type="Area2D" parent="."]
+position = Vector2(-103, -149)
+rotation = -0.610865
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallDetectionArea"]
+position = Vector2(-1.14715, -1.6383)
+shape = SubResource("CapsuleShape2D_kmio4")
+
+[node name="PusherLine" type="Line2D" parent="."]
+points = PackedVector2Array(3, 0, -102, -150, -207, -300)
+gradient = SubResource("Gradient_xlrph")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[connection signal="body_entered" from="BallDetectionArea" to="." method="_on_ball_detection_area_body_entered"]

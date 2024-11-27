@@ -19,12 +19,16 @@ func _process_inputs() -> void:
 	if Input.is_action_just_released(&"flipper_right"):
 		get_tree().call_group(&"flipper_right", &"deactivate")
 
-
+var min = 0
 func _update_camera() -> void:
-	camera.position.y = clamp(remap(ball.position.y, -300, -2000, -540, -1620), -1620, -540)
+	#FIXME Hard-coded values
+	camera.position.y = clamp(ball.position.y, -2700, -540)
+	if ball.position.y < min:
+		min = ball.position.y
+		print(min)
 
 
-const BALL_INITIAL_POSITION: Vector2 = Vector2(685, -520)
+const BALL_INITIAL_POSITION: Vector2 = Vector2(1380, -695)
 
 
 func _on_lose_ball_area_body_entered(body: Node2D) -> void:

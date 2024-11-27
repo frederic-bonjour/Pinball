@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://src/objects/flipper/flipper.gd" id="1_ywy08"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tc2ty"]
+friction = 0.2
+rough = true
 bounce = 0.2
 
 [node name="Flipper" type="RigidBody2D"]
