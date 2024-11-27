@@ -15,10 +15,6 @@ run/main_scene="res://pinball_base.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
-
 [display]
 
 window/size/viewport_width=1920
