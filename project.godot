@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Pinball"
+run/main_scene="res://pinball_base.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
 
 [display]
 
@@ -20,3 +25,40 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/resizable=false
 window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/antialiased_line2d/plugin.cfg")
+
+[input]
+
+flipper_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":96,"key_label":0,"unicode":60,"location":0,"echo":false,"script":null)
+]
+}
+flipper_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":47,"key_label":0,"unicode":61,"location":0,"echo":false,"script":null)
+]
+}
+
+[layer_names]
+
+2d_physics/layer_1="wall"
+2d_physics/layer_2="ball"
+2d_physics/layer_3="flipper"
+2d_physics/layer_4="bumper"
+2d_physics/layer_5="brick"
+
+[physics]
+
+2d/run_on_separate_thread=true
+common/physics_ticks_per_second=120
+common/max_physics_steps_per_frame=16
+2d/physics_engine="GodotPhysics2D"
+2d/solver/solver_iterations=32
+
+[rendering]
+
+viewport/hdr_2d=true

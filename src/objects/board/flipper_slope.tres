@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WallProperties" load_steps=3 format=3 uid="uid://cwqsw6bj12pvh"]
+
+[ext_resource type="Script" path="res://src/objects/board/wall_properties.gd" id="1_80gr5"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6f5wp"]
+friction = 0.5
+bounce = 0.15
+
+[resource]
+script = ExtResource("1_80gr5")
+thickness = 40.0
+length = 346.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_6f5wp")
+collision_rounded = true
+adjust_collision_margin = Vector2(-1, 10)

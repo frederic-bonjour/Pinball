@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://pic0d12gq2ck"]
+
+[ext_resource type="Script" path="res://src/objects/board/wall.gd" id="1_22458"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4prvd"]
+resource_local_to_scene = true
+radius = 20.0
+height = 200.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q87ak"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
+
+[node name="Wall" type="Node2D"]
+script = ExtResource("1_22458")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CSCapsule" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CapsuleShape2D_4prvd")
+
+[node name="CSRectangle" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_q87ak")
+disabled = true
