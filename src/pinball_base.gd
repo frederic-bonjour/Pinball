@@ -21,7 +21,7 @@ func _process_inputs() -> void:
 
 
 func _update_camera() -> void:
-	camera.position.y = clamp(remap(ball.position.y, -200, -2000, -540, -1620), -1620, -540)
+	camera.position.y = clamp(remap(ball.position.y, -300, -2000, -540, -1620), -1620, -540)
 
 
 const BALL_INITIAL_POSITION: Vector2 = Vector2(685, -520)
