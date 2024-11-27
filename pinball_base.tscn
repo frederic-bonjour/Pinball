@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=26 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="1_c6e4k"]
 [ext_resource type="Script" path="res://src/pinball_base.gd" id="1_lwa0y"]
@@ -40,13 +40,44 @@ physics_material = ExtResource("2_nc8g7")
 collision_rounded = false
 adjust_collision_margin = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_tfxot"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ocxj"]
+friction = 0.2
+rough = true
+bounce = 1.0
+
+[sub_resource type="Resource" id="Resource_0qp5c"]
+resource_local_to_scene = true
 script = ExtResource("8_olgoh")
 thickness = 30.0
 length = 300.0
 rounded = true
 color = Color(1, 1, 1, 1)
-physics_material = ExtResource("2_nc8g7")
+physics_material = SubResource("PhysicsMaterial_7ocxj")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_tfxot"]
+script = ExtResource("8_olgoh")
+thickness = 30.0
+length = 500.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_7ocxj")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwyem"]
+friction = 0.2
+rough = true
+bounce = 0.2
+
+[sub_resource type="Resource" id="Resource_xm5dn"]
+script = ExtResource("8_olgoh")
+thickness = 30.0
+length = 600.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_rwyem")
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
 
@@ -97,12 +128,12 @@ disable_mode = 1
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="BottomLeft" parent="Walls" instance=ExtResource("7_xtwn0")]
-position = Vector2(508, -217)
+position = Vector2(512, -217)
 rotation = -1.22173
 properties = ExtResource("6_eljgd")
 
 [node name="BottomRight" parent="Walls" instance=ExtResource("7_xtwn0")]
-position = Vector2(1412, -217)
+position = Vector2(1408, -217)
 rotation = 1.22173
 properties = ExtResource("6_eljgd")
 
@@ -119,12 +150,28 @@ position = Vector2(10, -1620)
 properties = SubResource("Resource_irgvw")
 
 [node name="Wall2" parent="Walls" instance=ExtResource("7_xtwn0")]
-position = Vector2(1577, -547)
-properties = SubResource("Resource_tfxot")
+position = Vector2(750, -1870)
+properties = SubResource("Resource_0qp5c")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("7_xtwn0")]
-position = Vector2(1692, -557)
+position = Vector2(930, -1540)
+rotation = -0.785398
 properties = SubResource("Resource_tfxot")
+
+[node name="Wall6" parent="Walls" instance=ExtResource("7_xtwn0")]
+position = Vector2(190, -550)
+rotation = -0.546288
+properties = SubResource("Resource_xm5dn")
+
+[node name="Wall4" parent="Walls" instance=ExtResource("7_xtwn0")]
+position = Vector2(920, -2200)
+rotation = 0.785398
+properties = SubResource("Resource_tfxot")
+
+[node name="Wall5" parent="Walls" instance=ExtResource("7_xtwn0")]
+position = Vector2(1690, -570)
+rotation = 0.366519
+properties = SubResource("Resource_xm5dn")
 
 [node name="LoseBallArea" type="Area2D" parent="."]
 collision_mask = 2
@@ -138,37 +185,37 @@ shape = SubResource("WorldBoundaryShape2D_fbef7")
 
 [node name="Brick" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(90, -1230)
+position = Vector2(60, -1230)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick2" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(90, -1170)
+position = Vector2(60, -1170)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick3" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(150, -1200)
+position = Vector2(120, -1200)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick4" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(150, -1140)
+position = Vector2(120, -1140)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick5" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(150, -1080)
+position = Vector2(120, -1080)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick6" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(90, -1110)
+position = Vector2(60, -1110)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick7" parent="Bricks" instance=ExtResource("8_eqt0r")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(90, -1050)
+position = Vector2(60, -1050)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Main Flippers" type="Node2D" parent="."]
@@ -176,12 +223,12 @@ position = Vector2(960, -146)
 metadata/_edit_group_ = true
 
 [node name="FlipperLeft" parent="Main Flippers" instance=ExtResource("2_6ifbo")]
-position = Vector2(-265, 0)
+position = Vector2(-260, 0)
 rotation = 0.349066
 angle_degrees = -45.0
 
 [node name="FlipperRight" parent="Main Flippers" instance=ExtResource("2_6ifbo")]
-position = Vector2(265, 0)
+position = Vector2(260, 0)
 rotation = 2.79253
 side = 1
 
@@ -193,17 +240,22 @@ position = Vector2(1248, -287)
 
 [node name="Bumper" parent="." instance=ExtResource("12_181fa")]
 position = Vector2(1351, -1495)
+radius = 65.0
 
 [node name="Bumper4" parent="." instance=ExtResource("12_181fa")]
 position = Vector2(1030, -2016)
+radius = 65.0
 
 [node name="Bumper5" parent="." instance=ExtResource("12_181fa")]
 position = Vector2(1364, -2020)
+radius = 65.0
 
 [node name="Bumper2" parent="." instance=ExtResource("12_181fa")]
 position = Vector2(1206, -1734)
+radius = 65.0
 
 [node name="Bumper3" parent="." instance=ExtResource("12_181fa")]
 position = Vector2(1513, -1732)
+radius = 65.0
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]

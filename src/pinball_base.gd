@@ -19,13 +19,10 @@ func _process_inputs() -> void:
 	if Input.is_action_just_released(&"flipper_right"):
 		get_tree().call_group(&"flipper_right", &"deactivate")
 
-var min = 0
+
 func _update_camera() -> void:
 	#FIXME Hard-coded values
 	camera.position.y = clamp(ball.position.y, -2700, -540)
-	if ball.position.y < min:
-		min = ball.position.y
-		print(min)
 
 
 const BALL_INITIAL_POSITION: Vector2 = Vector2(1380, -695)

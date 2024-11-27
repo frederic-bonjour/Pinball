@@ -10,20 +10,24 @@ bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f3unc"]
 resource_local_to_scene = true
-radius = 55.0
+radius = 65.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30ink"]
 resource_local_to_scene = true
-radius = 60.0
+radius = 70.0
 
-[node name="Node2D" type="Node2D"]
+[node name="Bumper" type="Node2D"]
 script = ExtResource("1_jng87")
+radius = 50.0
 
 [node name="Ellipse" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_oraeg")
+size = Vector2(130, 130)
 circle = true
-outline_width = 0
+style = 2
+outline_width = 20
+outline_color = Color(1, 1, 1, 0.0980392)
 
 [node name="Body" type="StaticBody2D" parent="."]
 disable_mode = 2
@@ -35,12 +39,12 @@ physics_material_override = SubResource("PhysicsMaterial_hp6fu")
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_f3unc")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="BallDetectionArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="AreaCollisionShape" type="CollisionShape2D" parent="BallDetectionArea"]
 shape = SubResource("CircleShape2D_30ink")
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="body_entered" from="BallDetectionArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="BallDetectionArea" to="." method="_on_body_exited"]

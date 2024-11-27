@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/objects/board/wall_properties.gd" id="1_80gr5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6f5wp"]
-friction = 0.5
+friction = 0.8
 bounce = 0.15
 
 [resource]
