@@ -194,7 +194,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_ry6tl"]
+[sub_resource type="Resource" id="Resource_t616v"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -311,7 +311,7 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_ry6tl")
+properties = SubResource("Resource_t616v")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1540)
@@ -397,10 +397,10 @@ rotation = 2.79253
 side = 1
 
 [node name="SlingshotLeft" parent="." instance=ExtResource("10_dcn6p")]
-position = Vector2(671, -262)
+position = Vector2(670, -250)
 
 [node name="SlingshotRight" parent="." instance=ExtResource("11_l5mum")]
-position = Vector2(1248, -287)
+position = Vector2(1250, -250)
 
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1351, -1495)
