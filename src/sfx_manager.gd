@@ -31,13 +31,17 @@ func _bumper_hit(_bumper: Bumper, _ball: Ball) -> void:
 var _ball_wall_ts: int = 0
 func _ball_wall(_ball: Ball, _wall: Node2D) -> void:
 	var now = Time.get_ticks_msec()
-	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 100:
+	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
 		EventAudio.play_2d(&"ball_wall", _ball)
 		_ball_wall_ts = now
 
 
-func _ball_flipper(_ball: Ball, _wall: Node2D) -> void:
-	EventAudio.play_2d(&"ball_wall", _ball) #FIXME?
+var _ball_flipper_ts: int = 0
+func _ball_flipper(_ball: Ball, _flipper: Flipper) -> void:
+	var now = Time.get_ticks_msec()
+	if _ball_flipper_ts == 0 or (now - _ball_flipper_ts) >= 250:
+		EventAudio.play_2d(&"ball_flipper", _ball)
+		_ball_flipper_ts = now
 
 
 func _ball_lost(_ball: Ball) -> void:

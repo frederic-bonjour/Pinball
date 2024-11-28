@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=55 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="3_umkkw"]
 [ext_resource type="AudioStream" uid="uid://ca4neeyngldk0" path="res://assets/sounds/brick_destroyed.mp3" id="4_3su1s"]
 [ext_resource type="AudioStream" uid="uid://b2opnpo1ky340" path="res://assets/sounds/ball_lost.mp3" id="4_mb56a"]
-[ext_resource type="AudioStream" uid="uid://ecqfgv38e2co" path="res://assets/sounds/ball_wall.mp3" id="4_wp17m"]
+[ext_resource type="AudioStream" uid="uid://bon3t0fi4cyi4" path="res://assets/sounds/ball_wall.mp3" id="4_wp17m"]
 [ext_resource type="PackedScene" uid="uid://pic0d12gq2ck" path="res://src/objects/board/modular_wall.tscn" id="4_xc2ga"]
+[ext_resource type="AudioStream" uid="uid://dq8u1e3aa8mty" path="res://assets/sounds/ball_flipper.mp3" id="5_3gcje"]
 [ext_resource type="Resource" uid="uid://cwqsw6bj12pvh" path="res://src/objects/board/flipper_slope.tres" id="5_5iedj"]
 [ext_resource type="Script" path="res://src/objects/board/wall_properties.gd" id="6_e23bc"]
 [ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="7_1k30u"]
@@ -37,6 +38,26 @@ balls_color = Color(1, 1, 1, 1)
 [sub_resource type="Environment" id="Environment_log15"]
 background_mode = 3
 glow_enabled = true
+
+[sub_resource type="Resource" id="Resource_up5es"]
+script = ExtResource("16_l7b6c")
+stop_when_source_dies = false
+stationary = false
+volume_db = 0.0
+min_pitch = 1.0
+max_pitch = 1.0
+panning_strength = 1.0
+attenuation = 1.0
+max_distance = 2000
+unit_size = 10.0
+max_db = 3.0
+
+[sub_resource type="Resource" id="Resource_54wcp"]
+script = ExtResource("14_yim5u")
+audio_streams = Array[AudioStream]([ExtResource("5_3gcje")])
+probability_weights = Array[float]([1.0])
+trigger_tags = "ball_flipper"
+playback_settings = SubResource("Resource_up5es")
 
 [sub_resource type="Resource" id="Resource_kwr11"]
 script = ExtResource("16_l7b6c")
@@ -160,7 +181,7 @@ playback_settings = SubResource("Resource_7ahtv")
 
 [sub_resource type="Resource" id="Resource_enyqf"]
 script = ExtResource("18_nix55")
-entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_aqr0g")])
+entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_54wcp"), SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_aqr0g")])
 
 [sub_resource type="Gradient" id="Gradient_4tunj"]
 colors = PackedColorArray(0.263463, 0.643941, 1, 1, 0.0226506, 0.30918, 0.524441, 1)
@@ -194,7 +215,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_0xnwg"]
+[sub_resource type="Resource" id="Resource_o0mry"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -311,7 +332,7 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_0xnwg")
+properties = SubResource("Resource_o0mry")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1540)

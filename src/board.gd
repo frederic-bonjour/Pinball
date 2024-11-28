@@ -7,10 +7,6 @@ extends Node2D
 @onready var ball: Ball = %Ball
 
 
-func _ready() -> void:
-	pass
-
-
 func _process(_delta: float):
 	_process_inputs()
 	_update_camera()
