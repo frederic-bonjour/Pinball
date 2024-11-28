@@ -1,3 +1,4 @@
+@icon("res://icons/baseball-ball.svg")
 class_name Ball
 extends RigidBody2D
 
@@ -27,6 +28,16 @@ func _integrate_forces(state):
 		linear_velocity = Vector2.ZERO
 		reset_state = false
 
+
 func teleport_to(target_pos: Vector2):
 	move_vector = target_pos;
 	reset_state = true;
+
+
+func _on_body_entered(body: Node) -> void:
+	if body as ModularWall:
+		SignalHub.ball_touched_modular_wall.emit(self, body)
+	elif body.name.containsn(&"wall"):
+		SignalHub.ball_touched_wall.emit(self, body)
+	elif body is Flipper:
+		SignalHub.ball_touched_flipper.emit(self, body)

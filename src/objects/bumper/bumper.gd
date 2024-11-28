@@ -39,6 +39,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if body is Ball:
+		SignalHub.bumper_hit.emit(self, body)
 		_dest_extend = 25
 		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), 10, 200)
 		body.linear_velocity = body.linear_velocity.normalized() * 1200

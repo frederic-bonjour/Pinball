@@ -17,6 +17,9 @@ collision_mask = 31
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_rjoxb")
 gravity_scale = 2.0
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 2
 script = ExtResource("1_au3tj")
 properties = ExtResource("2_q7vl5")
 metadata/_edit_group_ = true
@@ -26,3 +29,5 @@ texture = ExtResource("1_5qmjn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gc081")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

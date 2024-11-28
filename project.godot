@@ -11,13 +11,16 @@ config_version=5
 [application]
 
 config/name="Pinball"
-run/main_scene="res://pinball_base.tscn"
+run/main_scene="res://src/board.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 FullscreenControl="*res://addons/fullscreen_control/FullscreenControl.gd"
+SignalHub="*res://src/signal_hub.gd"
+SfxManager="*res://src/sfx_manager.gd"
+EventAudio="*res://addons/event_audio/scenes/event_audio_autoload.tscn"
 
 [display]
 
@@ -28,7 +31,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
 
 [input]
 

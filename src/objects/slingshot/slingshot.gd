@@ -1,3 +1,4 @@
+class_name Slingshot
 extends Node2D
 
 @export var strength: float = 250.0
@@ -38,3 +39,4 @@ func _process(delta):
 func _on_ball_detection_area_body_entered(body):
 	if body is Ball:
 		_dest_offset = open_value * _side
+		SignalHub.slingshot_bounce.emit(self, body)

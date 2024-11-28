@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://u0gaea16k10i"
+path="res://.godot/imported/Laser_05.mp3-b1fb513bf6f271431e33c850cb506693.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/__unclassified/Sci-Fi Sound Library/Laser/Laser_05.mp3"
+dest_files=["res://.godot/imported/Laser_05.mp3-b1fb513bf6f271431e33c850cb506693.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

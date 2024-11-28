@@ -1,7 +1,7 @@
 @tool
 @icon("res://icons/cube.svg")
+class_name Brick
 extends RigidBody2D
-class_name SBO_Brick
 
 @export var properties: BrickProperties = BrickProperties.new()
 
@@ -11,7 +11,6 @@ class_name SBO_Brick
 @onready var cs_circle: CollisionShape2D = $CS_Circle
 
 var _remaining_hit_count: int = 1
-var _being_destroyed: bool = false
 
 
 func _ready() -> void:
@@ -22,8 +21,7 @@ func _ready() -> void:
 
 func _on_property_changed(prop_name: StringName) -> void:
 	match prop_name:
-		&"shape":
-			_update_shape()
+		&"shape": _update_shape()
 
 
 func _update_shape():
@@ -37,36 +35,11 @@ func _update_shape():
 		cs_circle.visible = not cs_circle.disabled
 
 
-"""
-## Returns true if the Brick has been destroyed, false if it has only been hit.
-func hit_by_ball(force: int = 1) -> bool:
-	if is_breakable and can_be_destroyed_by_ball:
-		remaining_hit_count = max(0, remaining_hit_count - force)
-		if not remaining_hit_count:
-			destroy()
-			return true
-	return false
-"""
-
-func destroy(play_sound: bool = true, can_provide_item: bool = true) -> bool:
-	if _being_destroyed:
-		return false
-	_being_destroyed = true
-
-	if play_sound:
-		# The Brick is not freed right now to let the AudioStreamPlayer2D the time to finish.
-		#$AudioDestroyed.play()
-		# But we want the Brick to be visually destroyed:
-		# So we disable collision:
-		collision_layer = 0
-		collision_mask = 0
-		# And remove the Sprite2D
-		remove_child($Sprite2D)
-	else:
-		queue_free()
-	return true
-
-
-func _on_audio_destroyed_finished() -> void:
-	# When the "destroyed" audio is finished, we can really free the Brick.
-	queue_free()
+func _on_body_entered(body: Node) -> void:
+	if body is Ball:
+		_remaining_hit_count -= 1
+		if _remaining_hit_count == 0:
+			SignalHub.brick_destroyed.emit(self, body)
+			queue_free()
+		else:
+			SignalHub.brick_touched.emit(self, body)

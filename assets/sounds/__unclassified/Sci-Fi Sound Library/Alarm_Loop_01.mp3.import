@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2701xogu16aa"
+path="res://.godot/imported/Alarm_Loop_01.mp3-2ae4b3db056eaef45872173e8cdd208a.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/__unclassified/Sci-Fi Sound Library/Alarm_Loop_01.mp3"
+dest_files=["res://.godot/imported/Alarm_Loop_01.mp3-2ae4b3db056eaef45872173e8cdd208a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

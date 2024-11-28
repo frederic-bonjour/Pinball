@@ -57,7 +57,7 @@ position = Vector2(100, 0)
 shape = SubResource("RectangleShape2D_okj8v")
 
 [node name="BallDetectionArea" type="Area2D" parent="."]
-position = Vector2(-103, -149)
+position = Vector2(-101, -150)
 rotation = -0.610865
 collision_mask = 2
 
