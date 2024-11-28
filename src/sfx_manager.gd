@@ -12,37 +12,40 @@ func _ready() -> void:
 	SignalHub.ball_lost.connect(_ball_lost)
 
 
+func play_audio(audio_name: StringName, target_node: Node2D) -> void:
+	EventAudio.play_2d(audio_name, target_node).player.bus = &"SFX"
+
+
 func _brick_touched(_brick: Brick, _ball: Ball) -> void:
-	EventAudio.play_2d(&"brick_hit", _brick)
+	play_audio(&"brick_hit", _brick)
 
 
 func _slingshot_bounce(_slingshot: Slingshot, _ball: Ball) -> void:
-	EventAudio.play_2d(&"slingshot", _slingshot)
+	play_audio(&"slingshot", _slingshot)
 
 
 func _brick_destroyed(_brick: Brick, _ball: Ball) -> void:
-	EventAudio.play_2d(&"brick_destroyed", _brick)
+	play_audio(&"brick_destroyed", _brick)
 
 
 func _bumper_hit(_bumper: Bumper, _ball: Ball) -> void:
-	EventAudio.play_2d(&"bumper", _bumper)
+	play_audio(&"bumper", _bumper)
 
 
 var _ball_wall_ts: int = 0
+
 func _ball_wall(_ball: Ball, _wall: Node2D) -> void:
 	var now = Time.get_ticks_msec()
 	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
-		EventAudio.play_2d(&"ball_wall", _ball)
+		play_audio(&"ball_wall", _ball)
+		_ball_wall_ts = now
+
+func _ball_flipper(_ball: Ball, _flipper: Flipper) -> void:
+	var now = Time.get_ticks_msec()
+	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
+		play_audio(&"ball_flipper", _ball)
 		_ball_wall_ts = now
 
 
-var _ball_flipper_ts: int = 0
-func _ball_flipper(_ball: Ball, _flipper: Flipper) -> void:
-	var now = Time.get_ticks_msec()
-	if _ball_flipper_ts == 0 or (now - _ball_flipper_ts) >= 250:
-		EventAudio.play_2d(&"ball_flipper", _ball)
-		_ball_flipper_ts = now
-
-
 func _ball_lost(_ball: Ball) -> void:
-	EventAudio.play_2d(&"ball_lost", _ball)
+	play_audio(&"ball_lost", _ball)
