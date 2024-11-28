@@ -194,7 +194,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_t616v"]
+[sub_resource type="Resource" id="Resource_0xnwg"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -311,7 +311,7 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_t616v")
+properties = SubResource("Resource_0xnwg")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1540)
@@ -349,37 +349,42 @@ shape = SubResource("WorldBoundaryShape2D_fbef7")
 
 [node name="Brick" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(928, -1002)
+position = Vector2(840, -990)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick2" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(928, -942)
+position = Vector2(900, -990)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick3" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(988, -972)
+position = Vector2(900, -930)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick4" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(988, -912)
+position = Vector2(960, -930)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick5" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(988, -852)
+position = Vector2(1020, -930)
 properties = SubResource("Resource_sr1u2")
 
 [node name="Brick6" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(928, -882)
+position = Vector2(960, -990)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick7" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(928, -822)
+position = Vector2(1020, -990)
+properties = SubResource("Resource_7ty7w")
+
+[node name="Brick8" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1080, -990)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Main Flippers" type="Node2D" parent="."]
