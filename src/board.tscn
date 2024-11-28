@@ -1,6 +1,7 @@
-[gd_scene load_steps=50 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=52 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
+[ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
 [ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="2_qvmef"]
 [ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="3_umkkw"]
 [ext_resource type="AudioStream" uid="uid://ca4neeyngldk0" path="res://assets/sounds/brick_destroyed.mp3" id="4_3su1s"]
@@ -22,6 +23,16 @@
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_playback_settings.gd" id="16_l7b6c"]
 [ext_resource type="AudioStream" uid="uid://cqo6bi2ygpwbu" path="res://addons/event_audio/example/sounds/shot1.wav" id="17_uw4lh"]
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_bank.gd" id="18_nix55"]
+
+[sub_resource type="Resource" id="Resource_qst8b"]
+script = ExtResource("2_66lkm")
+background_color = Color(0.254902, 0.411765, 0.882353, 1)
+bricks_color = Color(2, 2, 2, 1)
+walls_color = Color(1, 1, 1, 1)
+slingshots_color = Color(1, 1, 1, 1)
+bumpers_color = Color(1, 1, 1, 1)
+flippers_color = Color(1, 1, 1, 1)
+balls_color = Color(1, 1, 1, 1)
 
 [sub_resource type="Environment" id="Environment_log15"]
 background_mode = 3
@@ -183,7 +194,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_3mw2n"]
+[sub_resource type="Resource" id="Resource_ry6tl"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -235,8 +246,9 @@ can_be_destroyed_by_ball = true
 can_be_destroyed_by_rocket = true
 shape = 1
 
-[node name="Pinball Board" type="Node2D"]
+[node name="Board" type="Node2D"]
 script = ExtResource("1_dug60")
+theme = SubResource("Resource_qst8b")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_log15")
@@ -299,7 +311,7 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_3mw2n")
+properties = SubResource("Resource_ry6tl")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1540)
@@ -386,13 +398,9 @@ side = 1
 
 [node name="SlingshotLeft" parent="." instance=ExtResource("10_dcn6p")]
 position = Vector2(671, -262)
-strength = null
-open_value = null
 
 [node name="SlingshotRight" parent="." instance=ExtResource("11_l5mum")]
 position = Vector2(1248, -287)
-strength = null
-open_value = null
 
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1351, -1495)

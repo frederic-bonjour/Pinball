@@ -1,3 +1,4 @@
+class_name PinballBoard
 extends Node2D
 
 @export var theme: BoardTheme
@@ -13,6 +14,13 @@ func _ready() -> void:
 func _process(_delta: float):
 	_process_inputs()
 	_update_camera()
+	var t := get_tree()
+	t.set_group(&"bricks", "modulate", theme.bricks_color)
+	t.set_group(&"slingshots", "modulate", theme.slingshots_color)
+	t.set_group(&"bumpers", "modulate", theme.bumpers_color)
+	t.set_group(&"flippers", "modulate", theme.flippers_color)
+	t.set_group(&"balls", "modulate", theme.balls_color)
+	t.set_group(&"walls", "modulate", theme.walls_color)
 
 
 func _process_inputs() -> void:

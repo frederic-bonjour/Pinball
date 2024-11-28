@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bum4x2wh8uta0"]
+[gd_scene load_steps=7 format=3 uid="uid://bum4x2wh8uta0"]
 
 [ext_resource type="Texture2D" uid="uid://ba6oq2c30yi7i" path="res://src/objects/ball/assets/ball.png" id="1_5qmjn"]
 [ext_resource type="Script" path="res://src/objects/ball/ball.gd" id="1_au3tj"]
 [ext_resource type="Resource" uid="uid://de7eqfrrocpth" path="res://src/objects/ball/basic_ball.tres" id="2_q7vl5"]
+[ext_resource type="Texture2D" uid="uid://cjfkkiy5vbln2" path="res://src/objects/ball/assets/light.png" id="4_b4a32"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rjoxb"]
 friction = 0.2
@@ -20,6 +21,7 @@ gravity_scale = 2.0
 continuous_cd = 1
 contact_monitor = true
 max_contacts_reported = 2
+angular_damp = 0.5
 script = ExtResource("1_au3tj")
 properties = ExtResource("2_q7vl5")
 metadata/_edit_group_ = true
@@ -29,5 +31,9 @@ texture = ExtResource("1_5qmjn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gc081")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+show_behind_parent = true
+texture = ExtResource("4_b4a32")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

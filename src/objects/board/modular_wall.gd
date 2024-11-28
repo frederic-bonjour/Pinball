@@ -19,6 +19,7 @@ var half_length: float:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	add_to_group(&"walls")
 	properties.connect(&"property_changed", _update_ui)
 	_update_collision_shape()
 	_update_body()

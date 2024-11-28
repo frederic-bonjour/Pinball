@@ -9,12 +9,32 @@ signal property_changed(prop_name: StringName)
 		background_color = v
 		property_changed.emit(&"background_color")
 
-@export var primary_color: Color = Color.WHITE:
+@export var bricks_color: Color = Color(2, 2, 2, 1):
 	set(v):
-		primary_color = v
-		property_changed.emit(&"primary_color")
+		bricks_color = v
+		property_changed.emit(&"bricks_color")
 
-@export var secondary_color: Color = Color.CYAN:
+@export var walls_color: Color = Color.WHITE:
 	set(v):
-		secondary_color = v
-		property_changed.emit(&"secondary_color")
+		walls_color = v
+		property_changed.emit(&"walls_color")
+
+@export var slingshots_color: Color = Color.WHITE:
+	set(v):
+		slingshots_color = v
+		property_changed.emit(&"slingshots_color")
+
+@export var bumpers_color: Color = Color.WHITE:
+	set(v):
+		bumpers_color = v
+		property_changed.emit(&"bumpers_color")
+
+@export var flippers_color: Color = Color.WHITE:
+	set(v):
+		flippers_color = v
+		property_changed.emit(&"flippers_color")
+
+@export var balls_color: Color =  Color(1, 1, 1, 1):
+	set(v):
+		balls_color = v
+		property_changed.emit(&"balls_color")

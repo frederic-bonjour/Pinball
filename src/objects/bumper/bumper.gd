@@ -18,6 +18,7 @@ var _strength: float = 150.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group(&"bumpers")
 	_update_properties()
 
 

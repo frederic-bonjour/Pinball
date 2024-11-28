@@ -14,6 +14,7 @@ var _remaining_hit_count: int = 1
 
 
 func _ready() -> void:
+	add_to_group(&"bricks")
 	properties.connect(&"property_changed", _on_property_changed)
 	_remaining_hit_count = properties.hits
 	_update_shape()

@@ -21,6 +21,7 @@ var _pusher_line_center
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group(&"slingshots")
 	_pusher1_rest_rotation = pusher1.rotation_degrees
 	_pusher2_rest_rotation = pusher2.rotation_degrees
 	_pusher_line_center = pusher_line.get_point_position(1)

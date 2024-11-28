@@ -17,6 +17,7 @@ func _ready():
 	_initial_rotation = rotation
 	_active_rotation = _initial_rotation + deg_to_rad(angle_degrees)
 	_desired_rotation = _initial_rotation
+	add_to_group(&"flippers")
 	add_to_group(&"flipper_left" if side == 0 else &"flipper_right")
 
 
