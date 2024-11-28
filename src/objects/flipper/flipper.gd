@@ -29,7 +29,7 @@ func activate() -> void:
 
 func deactivate() -> void:
 	_desired_rotation = _initial_rotation
-	_speed = strength * 0.5
+	_speed = strength * 0.25
 	set_process(true)
 
 
