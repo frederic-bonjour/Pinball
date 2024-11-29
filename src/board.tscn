@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=72 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -25,7 +25,9 @@
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_playback_settings.gd" id="16_l7b6c"]
 [ext_resource type="AudioStream" uid="uid://cqo6bi2ygpwbu" path="res://addons/event_audio/example/sounds/shot1.wav" id="17_uw4lh"]
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_bank.gd" id="18_nix55"]
+[ext_resource type="Shader" path="res://src/board.gdshader" id="27_o87uh"]
 [ext_resource type="Script" path="res://src/objects/board/wall_joint_properties.gd" id="27_xks6i"]
+[ext_resource type="Texture2D" uid="uid://2pla8pd0bv6v" path="res://src/objects/board/assets/empty1x1.png" id="28_nbohr"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
 script = ExtResource("2_66lkm")
@@ -198,6 +200,15 @@ width = 1920
 height = 3240
 fill_to = Vector2(1, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g0lsj"]
+shader = ExtResource("27_o87uh")
+shader_parameter/bottom_color = Color(0, 0, 0, 0.501961)
+shader_parameter/top_color = Color(0, 0, 0, 0.0980392)
+shader_parameter/wave_amp = 0.044
+shader_parameter/wave_size = 1.559
+shader_parameter/wave_time_mul = 0.487
+shader_parameter/total_phases = 5
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f88l0"]
 normal = Vector2(0, 1)
 distance = -3240.0
@@ -208,12 +219,12 @@ bounce = 0.15
 
 [sub_resource type="Resource" id="Resource_b1qwt"]
 script = ExtResource("27_xks6i")
-radius = 36.0
+radius = 32.0
 hole_radius = 10.0
 
 [sub_resource type="Resource" id="Resource_5vyby"]
 script = ExtResource("27_xks6i")
-radius = 36.0
+radius = 32.0
 hole_radius = 10.0
 
 [sub_resource type="Resource" id="Resource_irgvw"]
@@ -231,7 +242,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_em5tn"]
+[sub_resource type="Resource" id="Resource_ajiug"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -270,7 +281,7 @@ bounce = 0.2
 [sub_resource type="Resource" id="Resource_12qaa"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 240.0
+length = 250.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_rwyem")
@@ -295,7 +306,7 @@ hole_radius = 5.0
 [sub_resource type="Resource" id="Resource_xm5dn"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 240.0
+length = 250.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_rwyem")
@@ -326,7 +337,7 @@ shape = 1
 [sub_resource type="Resource" id="Resource_b5id7"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 570.0
+length = 580.0
 rounded = true
 color = Color(1, 1, 1, 1)
 collision_rounded = true
@@ -335,7 +346,7 @@ adjust_collision_margin = Vector2(0, 0)
 [sub_resource type="Resource" id="Resource_72gcx"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 460.0
+length = 470.0
 rounded = true
 color = Color(1, 1, 1, 1)
 collision_rounded = true
@@ -363,6 +374,13 @@ position = Vector2(0, -3240)
 texture = SubResource("GradientTexture2D_a1hog")
 centered = false
 metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_g0lsj")
+position = Vector2(0, -500)
+scale = Vector2(1920, 500)
+texture = ExtResource("28_nbohr")
+centered = false
 
 [node name="Borders" type="StaticBody2D" parent="."]
 physics_material_override = ExtResource("2_qvmef")
@@ -415,7 +433,7 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_em5tn")
+properties = SubResource("Resource_ajiug")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1539)
@@ -536,12 +554,12 @@ position = Vector2(1513, -1732)
 radius = 65.0
 
 [node name="ModularWall" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(216, -754)
+position = Vector2(216, -758)
 rotation = -0.785398
 properties = SubResource("Resource_b5id7")
 
 [node name="ModularWall2" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1665, -715)
+position = Vector2(1665, -719)
 rotation = 0.785398
 properties = SubResource("Resource_72gcx")
 
