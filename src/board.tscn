@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=74 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://pic0d12gq2ck" path="res://src/objects/board/modular_wall.tscn" id="4_xc2ga"]
 [ext_resource type="AudioStream" uid="uid://dq8u1e3aa8mty" path="res://assets/sounds/ball_flipper.mp3" id="5_3gcje"]
 [ext_resource type="Resource" uid="uid://cwqsw6bj12pvh" path="res://src/objects/board/flipper_slope.tres" id="5_5iedj"]
+[ext_resource type="AudioStream" uid="uid://emjx16aamere" path="res://assets/sounds/kickback.mp3" id="5_vu7ap"]
 [ext_resource type="Script" path="res://src/objects/board/wall_properties.gd" id="6_e23bc"]
 [ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="7_1k30u"]
 [ext_resource type="AudioStream" uid="uid://x6phhu7d4w67" path="res://assets/sounds/bumper.mp3" id="7_6grxy"]
@@ -28,6 +29,8 @@
 [ext_resource type="Shader" path="res://src/board.gdshader" id="27_o87uh"]
 [ext_resource type="Script" path="res://src/objects/board/wall_joint_properties.gd" id="27_xks6i"]
 [ext_resource type="Texture2D" uid="uid://2pla8pd0bv6v" path="res://src/objects/board/assets/empty1x1.png" id="28_nbohr"]
+[ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="29_0neda"]
+[ext_resource type="PackedScene" uid="uid://de2kcbjq5ukfq" path="res://src/objects/board/rounded_corner.tscn" id="30_1ip7v"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
 script = ExtResource("2_66lkm")
@@ -163,6 +166,26 @@ probability_weights = Array[float]([1.0])
 trigger_tags = "bumper"
 playback_settings = SubResource("Resource_wov8n")
 
+[sub_resource type="Resource" id="Resource_4b417"]
+script = ExtResource("16_l7b6c")
+stop_when_source_dies = false
+stationary = false
+volume_db = 0.0
+min_pitch = 1.0
+max_pitch = 1.0
+panning_strength = 1.0
+attenuation = 1.0
+max_distance = 2000
+unit_size = 10.0
+max_db = 3.0
+
+[sub_resource type="Resource" id="Resource_awm70"]
+script = ExtResource("14_yim5u")
+audio_streams = Array[AudioStream]([ExtResource("5_vu7ap")])
+probability_weights = Array[float]([1.0])
+trigger_tags = "kickback"
+playback_settings = SubResource("Resource_4b417")
+
 [sub_resource type="Resource" id="Resource_7ahtv"]
 script = ExtResource("16_l7b6c")
 stop_when_source_dies = false
@@ -185,7 +208,7 @@ playback_settings = SubResource("Resource_7ahtv")
 
 [sub_resource type="Resource" id="Resource_enyqf"]
 script = ExtResource("18_nix55")
-entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_54wcp"), SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_aqr0g")])
+entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_54wcp"), SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_awm70"), SubResource("Resource_aqr0g")])
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_go1sc"]
 stream_count = 1
@@ -223,51 +246,20 @@ physics_material = ExtResource("2_qvmef")
 collision_rounded = false
 adjust_collision_margin = Vector2(0, 0)
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7ocxj"]
-friction = 0.2
-rough = true
-bounce = 1.0
-
-[sub_resource type="Resource" id="Resource_6rnx4"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_xfu38"]
 script = ExtResource("6_e23bc")
-thickness = 30.0
-length = 300.0
-rounded = true
+thickness = 20.0
+length = 3040.0
+rounded = false
 color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_7ocxj")
-collision_rounded = true
+physics_material = ExtResource("2_qvmef")
+collision_rounded = false
 adjust_collision_margin = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_tfxot"]
-script = ExtResource("6_e23bc")
-thickness = 30.0
-length = 500.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_7ocxj")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_pkfbn"]
+[sub_resource type="Resource" id="Resource_u0ffd"]
 script = ExtResource("27_xks6i")
-radius = 30.0
-hole_radius = 5.0
-
-[sub_resource type="Resource" id="Resource_1283n"]
-script = ExtResource("27_xks6i")
-radius = 30.0
-hole_radius = 5.0
-
-[sub_resource type="Resource" id="Resource_2hgh0"]
-script = ExtResource("27_xks6i")
-radius = 30.0
-hole_radius = 5.0
-
-[sub_resource type="Resource" id="Resource_xunp6"]
-script = ExtResource("27_xks6i")
-radius = 30.0
-hole_radius = 5.0
+radius = 15.0
+hole_radius = 0.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
 
@@ -284,6 +276,13 @@ hits = 1
 can_be_destroyed_by_ball = true
 can_be_destroyed_by_rocket = true
 shape = 1
+
+[sub_resource type="Resource" id="Resource_ggsk2"]
+script = ExtResource("8_pg5rm")
+hits = 1
+can_be_destroyed_by_ball = true
+can_be_destroyed_by_rocket = true
+shape = 6
 
 [sub_resource type="Resource" id="Resource_b5id7"]
 script = ExtResource("6_e23bc")
@@ -307,11 +306,6 @@ adjust_collision_margin = Vector2(0, 0)
 friction = 0.8
 bounce = 0.15
 
-[sub_resource type="Resource" id="Resource_b1qwt"]
-script = ExtResource("27_xks6i")
-radius = 32.0
-hole_radius = 10.0
-
 [sub_resource type="Resource" id="Resource_5vyby"]
 script = ExtResource("27_xks6i")
 radius = 32.0
@@ -325,7 +319,7 @@ bounce = 0.2
 [sub_resource type="Resource" id="Resource_12qaa"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 250.0
+length = 280.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_rwyem")
@@ -340,7 +334,7 @@ hole_radius = 0.0
 [sub_resource type="Resource" id="Resource_xm5dn"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 250.0
+length = 280.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_rwyem")
@@ -348,6 +342,21 @@ collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_2k2st"]
+script = ExtResource("27_xks6i")
+radius = 15.0
+hole_radius = 0.0
+
+[sub_resource type="Resource" id="Resource_cv700"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 293.0
+rounded = false
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_rwyem")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_k4i0i"]
 script = ExtResource("27_xks6i")
 radius = 15.0
 hole_radius = 0.0
@@ -395,7 +404,7 @@ position = Vector2(960, -1620)
 
 [node name="Ball" parent="." instance=ExtResource("3_umkkw")]
 unique_name_in_owner = true
-position = Vector2(1322, -1033)
+position = Vector2(1870, -184)
 disable_mode = 1
 collision_priority = 10.0
 
@@ -407,9 +416,10 @@ physics_material_override = ExtResource("2_qvmef")
 properties = SubResource("Resource_irgvw")
 
 [node name="Right2" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1830, -1620)
+position = Vector2(1830, -1521)
 physics_material_override = ExtResource("2_qvmef")
-properties = SubResource("Resource_irgvw")
+properties = SubResource("Resource_xfu38")
+start_joint_properties = SubResource("Resource_u0ffd")
 
 [node name="Left" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(10, -1620)
@@ -417,27 +427,6 @@ physics_material_override = ExtResource("2_qvmef")
 properties = SubResource("Resource_irgvw")
 
 [node name="InnerWalls" type="Node2D" parent="."]
-
-[node name="Wall2" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
-position = Vector2(750, -1870)
-physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_6rnx4")
-
-[node name="Wall3" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
-position = Vector2(930, -1539)
-rotation = -0.785398
-physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_tfxot")
-start_joint_properties = SubResource("Resource_pkfbn")
-end_joint_properties = SubResource("Resource_1283n")
-
-[node name="Wall4" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
-position = Vector2(929, -2201)
-rotation = 0.785398
-physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_tfxot")
-start_joint_properties = SubResource("Resource_2hgh0")
-end_joint_properties = SubResource("Resource_xunp6")
 
 [node name="LoseBallArea" type="Area2D" parent="."]
 collision_mask = 2
@@ -452,6 +441,11 @@ shape = SubResource("WorldBoundaryShape2D_fbef7")
 [node name="Brick" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
 position = Vector2(840, -990)
+properties = SubResource("Resource_7ty7w")
+
+[node name="Brick9" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(320, -3040)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick2" parent="Bricks" instance=ExtResource("7_1k30u")]
@@ -489,20 +483,60 @@ modulate = Color(2, 2, 2, 1)
 position = Vector2(1080, -990)
 properties = SubResource("Resource_7ty7w")
 
+[node name="Brick17" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1540, -2570)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick18" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1480, -2570)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick19" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1420, -2570)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick20" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1360, -2570)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick21" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1420, -2630)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick22" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1480, -2630)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick23" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1480, -2510)
+properties = SubResource("Resource_ggsk2")
+
+[node name="Brick24" parent="Bricks" instance=ExtResource("7_1k30u")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(1420, -2510)
+properties = SubResource("Resource_ggsk2")
+
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(1351, -1495)
+position = Vector2(1600, -890)
 radius = 65.0
 
 [node name="Bumper4" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(1030, -2016)
+position = Vector2(410, -2600)
 radius = 65.0
 
 [node name="Bumper5" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(1364, -2020)
+position = Vector2(670, -2450)
 radius = 65.0
 
 [node name="Bumper2" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(1206, -1734)
+position = Vector2(980, -2560)
 radius = 65.0
 
 [node name="Bumper3" parent="." instance=ExtResource("12_wkwpx")]
@@ -510,13 +544,13 @@ position = Vector2(1513, -1732)
 radius = 65.0
 
 [node name="ModularWall" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(216, -758)
+position = Vector2(216, -777)
 rotation = -0.785398
 properties = SubResource("Resource_b5id7")
 
 [node name="ModularWall2" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1665, -719)
-rotation = 0.785398
+position = Vector2(1715, -780)
+rotation = 0.488692
 properties = SubResource("Resource_72gcx")
 
 [node name="Flippers and Slingshots" type="Node2D" parent="."]
@@ -536,7 +570,7 @@ position = Vector2(550, -218)
 rotation = -1.13446
 physics_material_override = SubResource("PhysicsMaterial_6f5wp")
 properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_b1qwt")
+start_joint_properties = SubResource("Resource_5vyby")
 
 [node name="Wall Flip Right" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
 position = Vector2(1370, -218)
@@ -546,16 +580,23 @@ properties = ExtResource("5_5iedj")
 start_joint_properties = SubResource("Resource_5vyby")
 
 [node name="Wall SS Left" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(424, -426)
+position = Vector2(424, -430)
 physics_material_override = SubResource("PhysicsMaterial_rwyem")
 properties = SubResource("Resource_12qaa")
 start_joint_properties = SubResource("Resource_6vblj")
 
 [node name="Wall SS Right" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1496, -426)
+position = Vector2(1497, -430)
 physics_material_override = SubResource("PhysicsMaterial_rwyem")
 properties = SubResource("Resource_xm5dn")
 start_joint_properties = SubResource("Resource_2k2st")
+
+[node name="Wall SS Right2" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
+position = Vector2(1604, -423)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_cv700")
+start_joint_properties = SubResource("Resource_2k2st")
+end_joint_properties = SubResource("Resource_k4i0i")
 
 [node name="SlingshotLeft" parent="Flippers and Slingshots" instance=ExtResource("10_dcn6p")]
 position = Vector2(500, -594)
@@ -563,4 +604,21 @@ position = Vector2(500, -594)
 [node name="SlingshotRight" parent="Flippers and Slingshots" instance=ExtResource("11_l5mum")]
 position = Vector2(1420, -594)
 
+[node name="Launcher" parent="." instance=ExtResource("29_0neda")]
+position = Vector2(1870, -105)
+amplitude = 150.0
+strength = 32000.0
+auto_eject = false
+inactive = false
+
+[node name="RoundedCorner" parent="." instance=ExtResource("30_1ip7v")]
+position = Vector2(1699, -3240)
+
+[node name="KickBack" parent="." instance=ExtResource("29_0neda")]
+position = Vector2(1559, -227)
+strength = 200000.0
+disable_movement = true
+inactive = false
+
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
+[connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]

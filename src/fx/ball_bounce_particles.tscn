@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds42d5pgfrmcg"]
+
+[ext_resource type="Script" path="res://src/fx/ball_bounce_particles.gd" id="1_p80mu"]
+
+[sub_resource type="Curve" id="Curve_5ws28"]
+_data = [Vector2(0.00802752, 0.493102), 0.0, 0.0, 0, 0, Vector2(0.599771, 0.985179), 0.0, 0.0, 0, 0, Vector2(0.991176, 0.0766628), -6.708, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_4m3od"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+modulate = Color(2, 2, 2, 1)
+amount = 20
+lifetime = 0.6
+emission_shape = 3
+emission_rect_extents = Vector2(20, 20)
+spread = 180.0
+gravity = Vector2(0, 200)
+initial_velocity_min = 10.0
+initial_velocity_max = 70.0
+scale_amount_max = 4.0
+scale_amount_curve = SubResource("Curve_5ws28")
+color_ramp = SubResource("Gradient_4m3od")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+script = ExtResource("1_p80mu")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -9,3 +9,5 @@ signal ball_touched_modular_wall(ball: Ball, wall: ModularWall)
 signal ball_touched_wall(ball: Ball, wall: Node2D)
 signal ball_touched_flipper(ball: Ball, flipper: Flipper)
 signal ball_lost(ball: Ball)
+
+signal kickback_ejection(ball: PhysicsBody2D, kickback: KickBack, force: int)

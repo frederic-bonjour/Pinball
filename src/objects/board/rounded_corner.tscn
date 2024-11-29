@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://de2kcbjq5ukfq"]
+
+[ext_resource type="Texture2D" uid="uid://chyc5ku6jt8pj" path="res://src/objects/board/assets/rounded_corner.png" id="1_kmfwb"]
+
+[node name="RoundedCorner" type="StaticBody2D"]
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kmfwb")
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 42, 4, 75, 15, 114, 36, 143, 60, 167, 91, 184, 124, 194, 157, 200, 200, 200, 0)

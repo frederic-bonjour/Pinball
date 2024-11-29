@@ -2,10 +2,17 @@
 class_name Ball
 extends RigidBody2D
 
+
+@export var properties: BallProperties
+
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
 
-@export var properties: BallProperties
+
+var _trail_points: Array[Vector2] = []
+var _reset_state = false
+var _teleport_vector: Vector2
+var _last_pos: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -20,19 +27,16 @@ func _update_properties() -> void:
 		self.sprite.texture = properties.texture
 
 
-var reset_state = false
-var move_vector: Vector2
-
 func _integrate_forces(state):
-	if reset_state:
-		state.transform = Transform2D(0.0, move_vector)
+	if _reset_state:
+		state.transform = Transform2D(0.0, _teleport_vector)
 		linear_velocity = Vector2.ZERO
-		reset_state = false
+		_reset_state = false
 
 
 func teleport_to(target_pos: Vector2):
-	move_vector = target_pos;
-	reset_state = true;
+	_teleport_vector = target_pos;
+	_reset_state = true;
 
 
 func _on_body_entered(body: Node) -> void:

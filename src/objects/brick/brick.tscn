@@ -1,12 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjqub7vse1qrt"]
 
+[ext_resource type="PhysicsMaterial" uid="uid://bpb580y2n4mcp" path="res://src/materials/brick.tres" id="1_8ga3t"]
 [ext_resource type="Script" path="res://src/objects/brick/brick.gd" id="1_a18mc"]
 [ext_resource type="Texture2D" uid="uid://bhi2bgxcuyg4o" path="res://src/objects/brick/assets/bricks.png" id="1_u4g8l"]
 [ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="2_e873h"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wbvky"]
-friction = 0.5
-bounce = 0.1
 
 [sub_resource type="Resource" id="Resource_g7ipt"]
 script = ExtResource("2_e873h")
@@ -24,7 +21,7 @@ radius = 30.0
 [node name="Brick" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_wbvky")
+physics_material_override = ExtResource("1_8ga3t")
 gravity_scale = 0.0
 freeze = true
 freeze_mode = 1

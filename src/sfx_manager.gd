@@ -10,10 +10,13 @@ func _ready() -> void:
 	SignalHub.ball_touched_modular_wall.connect(_ball_wall)
 	SignalHub.ball_touched_flipper.connect(_ball_flipper)
 	SignalHub.ball_lost.connect(_ball_lost)
+	SignalHub.kickback_ejection.connect(_kickback_ejection)
 
 
 func play_audio(audio_name: StringName, target_node: Node2D) -> void:
-	EventAudio.play_2d(audio_name, target_node).player.bus = &"SFX"
+	var emitter = EventAudio.play_2d(audio_name, target_node)
+	if emitter:
+		emitter.player.bus = &"SFX"
 
 
 func _brick_touched(_brick: Brick, _ball: Ball) -> void:
@@ -49,3 +52,7 @@ func _ball_flipper(_ball: Ball, _flipper: Flipper) -> void:
 
 func _ball_lost(_ball: Ball) -> void:
 	play_audio(&"ball_lost", _ball)
+
+
+func _kickback_ejection(ball: PhysicsBody2D, kickback: KickBack, force: int) -> void:
+	play_audio(&"kickback", kickback)
