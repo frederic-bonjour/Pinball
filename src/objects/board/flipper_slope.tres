@@ -9,7 +9,7 @@ bounce = 0.15
 [resource]
 script = ExtResource("1_80gr5")
 thickness = 46.0
-length = 346.0
+length = 280.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_6f5wp")

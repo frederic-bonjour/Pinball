@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=69 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_playback_settings.gd" id="16_l7b6c"]
 [ext_resource type="AudioStream" uid="uid://cqo6bi2ygpwbu" path="res://addons/event_audio/example/sounds/shot1.wav" id="17_uw4lh"]
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_bank.gd" id="18_nix55"]
+[ext_resource type="Script" path="res://src/objects/board/wall_joint_properties.gd" id="27_xks6i"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
 script = ExtResource("2_66lkm")
@@ -205,6 +206,16 @@ distance = -3240.0
 friction = 0.8
 bounce = 0.15
 
+[sub_resource type="Resource" id="Resource_b1qwt"]
+script = ExtResource("27_xks6i")
+radius = 36.0
+hole_radius = 10.0
+
+[sub_resource type="Resource" id="Resource_5vyby"]
+script = ExtResource("27_xks6i")
+radius = 36.0
+hole_radius = 10.0
+
 [sub_resource type="Resource" id="Resource_irgvw"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
@@ -220,7 +231,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_0u4aa"]
+[sub_resource type="Resource" id="Resource_em5tn"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -241,20 +252,60 @@ physics_material = SubResource("PhysicsMaterial_7ocxj")
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
 
+[sub_resource type="Resource" id="Resource_pkfbn"]
+script = ExtResource("27_xks6i")
+radius = 30.0
+hole_radius = 5.0
+
+[sub_resource type="Resource" id="Resource_1283n"]
+script = ExtResource("27_xks6i")
+radius = 30.0
+hole_radius = 5.0
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwyem"]
 friction = 0.2
 rough = true
 bounce = 0.2
 
-[sub_resource type="Resource" id="Resource_xm5dn"]
+[sub_resource type="Resource" id="Resource_12qaa"]
 script = ExtResource("6_e23bc")
-thickness = 30.0
-length = 600.0
+thickness = 15.0
+length = 240.0
 rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = SubResource("PhysicsMaterial_rwyem")
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_6vblj"]
+script = ExtResource("27_xks6i")
+radius = 15.0
+hole_radius = 0.0
+
+[sub_resource type="Resource" id="Resource_2hgh0"]
+script = ExtResource("27_xks6i")
+radius = 30.0
+hole_radius = 5.0
+
+[sub_resource type="Resource" id="Resource_xunp6"]
+script = ExtResource("27_xks6i")
+radius = 30.0
+hole_radius = 5.0
+
+[sub_resource type="Resource" id="Resource_xm5dn"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 240.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_rwyem")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_2k2st"]
+script = ExtResource("27_xks6i")
+radius = 15.0
+hole_radius = 0.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
 
@@ -271,6 +322,24 @@ hits = 1
 can_be_destroyed_by_ball = true
 can_be_destroyed_by_rocket = true
 shape = 1
+
+[sub_resource type="Resource" id="Resource_b5id7"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 570.0
+rounded = true
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_72gcx"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 460.0
+rounded = true
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_dug60")
@@ -308,22 +377,25 @@ position = Vector2(960, -1620)
 
 [node name="Ball" parent="." instance=ExtResource("3_umkkw")]
 unique_name_in_owner = true
-position = Vector2(1076, -1205)
+position = Vector2(1322, -1033)
 disable_mode = 1
+collision_priority = 10.0
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="BottomLeft" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(512, -217)
-rotation = -1.22173
+position = Vector2(550, -218)
+rotation = -1.13446
 physics_material_override = SubResource("PhysicsMaterial_6f5wp")
 properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_b1qwt")
 
 [node name="BottomRight" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1408, -217)
-rotation = 1.22173
+position = Vector2(1370, -218)
+rotation = 1.13446
 physics_material_override = SubResource("PhysicsMaterial_6f5wp")
 properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_5vyby")
 
 [node name="Right" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(1910, -1620)
@@ -343,31 +415,35 @@ properties = SubResource("Resource_irgvw")
 [node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_0u4aa")
+properties = SubResource("Resource_em5tn")
 
 [node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(930, -1540)
+position = Vector2(930, -1539)
 rotation = -0.785398
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
 properties = SubResource("Resource_tfxot")
+start_joint_properties = SubResource("Resource_pkfbn")
+end_joint_properties = SubResource("Resource_1283n")
 
 [node name="Wall6" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(190, -550)
-rotation = -0.546288
+position = Vector2(424, -426)
 physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_xm5dn")
+properties = SubResource("Resource_12qaa")
+start_joint_properties = SubResource("Resource_6vblj")
 
 [node name="Wall4" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(920, -2200)
+position = Vector2(929, -2201)
 rotation = 0.785398
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
 properties = SubResource("Resource_tfxot")
+start_joint_properties = SubResource("Resource_2hgh0")
+end_joint_properties = SubResource("Resource_xunp6")
 
 [node name="Wall5" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1690, -570)
-rotation = 0.366519
+position = Vector2(1496, -426)
 physics_material_override = SubResource("PhysicsMaterial_rwyem")
 properties = SubResource("Resource_xm5dn")
+start_joint_properties = SubResource("Resource_2k2st")
 
 [node name="LoseBallArea" type="Area2D" parent="."]
 collision_mask = 2
@@ -425,19 +501,19 @@ metadata/_edit_group_ = true
 
 [node name="FlipperLeft" parent="Main Flippers" instance=ExtResource("9_rw7jb")]
 position = Vector2(-260, 0)
-rotation = 0.349066
+rotation = 0.436332
 angle_degrees = -45.0
 
 [node name="FlipperRight" parent="Main Flippers" instance=ExtResource("9_rw7jb")]
 position = Vector2(260, 0)
-rotation = 2.79253
+rotation = 2.70526
 side = 1
 
 [node name="SlingshotLeft" parent="." instance=ExtResource("10_dcn6p")]
-position = Vector2(670, -250)
+position = Vector2(500, -594)
 
 [node name="SlingshotRight" parent="." instance=ExtResource("11_l5mum")]
-position = Vector2(1250, -250)
+position = Vector2(1420, -594)
 
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1351, -1495)
@@ -458,5 +534,15 @@ radius = 65.0
 [node name="Bumper3" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1513, -1732)
 radius = 65.0
+
+[node name="ModularWall" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(216, -754)
+rotation = -0.785398
+properties = SubResource("Resource_b5id7")
+
+[node name="ModularWall2" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(1665, -715)
+rotation = 0.785398
+properties = SubResource("Resource_72gcx")
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]

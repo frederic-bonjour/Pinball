@@ -7,9 +7,11 @@ extends Node2D
 @onready var ball: Ball = %Ball
 
 
-func _process(_delta: float):
-	_process_inputs()
-	_update_camera()
+var _ball_initial_position: Vector2
+
+
+func _ready():
+	_ball_initial_position = ball.position
 	var t := get_tree()
 	t.set_group(&"bricks", "modulate", theme.bricks_color)
 	t.set_group(&"slingshots", "modulate", theme.slingshots_color)
@@ -17,6 +19,11 @@ func _process(_delta: float):
 	t.set_group(&"flippers", "modulate", theme.flippers_color)
 	t.set_group(&"balls", "modulate", theme.balls_color)
 	t.set_group(&"walls", "modulate", theme.walls_color)
+
+
+func _process(_delta: float):
+	_process_inputs()
+	_update_camera()
 
 
 func _process_inputs() -> void:
@@ -35,10 +42,7 @@ func _update_camera() -> void:
 	camera.position.y = clamp(ball.position.y, -2700, -540)
 
 
-const BALL_INITIAL_POSITION: Vector2 = Vector2(1380, -695)
-
-
 func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 	if body is Ball:
 		SignalHub.ball_lost.emit(body)
-		body.teleport_to(BALL_INITIAL_POSITION)
+		body.teleport_to(_ball_initial_position)

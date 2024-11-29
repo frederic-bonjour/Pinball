@@ -1,76 +1,60 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf1hlupu76v3o"]
+[gd_scene load_steps=7 format=3 uid="uid://cf1hlupu76v3o"]
 
 [ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_ooovr"]
+[ext_resource type="Texture2D" uid="uid://qnar1elt716p" path="res://src/objects/slingshot/assets/slingshot.svg" id="2_rcvls"]
+[ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="3_0jbsp"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usju2"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_menoq"]
 friction = 0.0
 rough = true
 bounce = 0.5
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_okj8v"]
-size = Vector2(200, 10)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g72ai"]
+radius = 15.0
+height = 380.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmio4"]
-height = 320.0
-
-[sub_resource type="Gradient" id="Gradient_s3161"]
-offsets = PackedFloat32Array(0, 0.5, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.235294, 1, 1, 1, 1)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mac4t"]
+height = 360.0
 
 [node name="SlingshotRight" type="Node2D"]
 script = ExtResource("1_ooovr")
-metadata/_edit_group_ = true
 
-[node name="FillPolygon" type="Polygon2D" parent="."]
-color = Color(1, 1, 1, 0.0980392)
-antialiased = true
-polygon = PackedVector2Array(0, 0, 210, -77, 210, -300)
-
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 210, -77, 210, -300)
-closed = true
-width = 16.0
-joint_mode = 2
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-90, 170)
+texture = ExtResource("2_rcvls")
+flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-180, 1)
+collision_mask = 2
+physics_material_override = ExtResource("3_0jbsp")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(5, 5, 218, -72, 218, -295)
+position = Vector2(90, 169)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(89, 168, 90, 157.6, -73.8, -169, -82, -171, -90, -166, -90, 92.4, 75.8, 170)
 
-[node name="Pusher2" type="AnimatableBody2D" parent="."]
-rotation = -0.959931
+[node name="Pusher" type="AnimatableBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-86, 172)
+rotation = 0.462512
 collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_usju2")
+physics_material_override = SubResource("PhysicsMaterial_menoq")
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher2"]
-position = Vector2(100, 0)
-shape = SubResource("RectangleShape2D_okj8v")
-
-[node name="Pusher1" type="AnimatableBody2D" parent="."]
-position = Vector2(207, -296)
-rotation = 2.18166
-collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_usju2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher1"]
-position = Vector2(100, 0)
-shape = SubResource("RectangleShape2D_okj8v")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+shape = SubResource("CapsuleShape2D_g72ai")
 
 [node name="BallDetectionArea" type="Area2D" parent="."]
-position = Vector2(103, -149)
-rotation = 0.610865
+position = Vector2(-95, 167)
+disable_mode = 2
 collision_mask = 2
+monitorable = false
+priority = 10
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallDetectionArea"]
-position = Vector2(-1.14715, -1.6383)
-shape = SubResource("CapsuleShape2D_kmio4")
-
-[node name="PusherLine" type="Line2D" parent="."]
-points = PackedVector2Array(-3, 0, 102, -150, 207, -300)
-gradient = SubResource("Gradient_s3161")
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-antialiased = true
+rotation = 0.462512
+shape = SubResource("CapsuleShape2D_mac4t")
 
 [connection signal="body_entered" from="BallDetectionArea" to="." method="_on_ball_detection_area_body_entered"]

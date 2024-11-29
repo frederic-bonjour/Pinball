@@ -7,6 +7,27 @@ extends StaticBody2D
 		properties = v
 		_update_properties()
 
+@export var start_joint_properties: WallJointProperties:
+	set(v):
+		if v:
+			start_joint_properties = v
+			start_joint_properties.connect(&"property_changed", _update_start_joint)
+		else:
+			start_joint_properties.disconnect(&"property_changed", _update_start_joint)
+			start_joint_properties = v
+		_update_start_joint(&"")
+
+@export var end_joint_properties: WallJointProperties:
+	set(v):
+		if v:
+			end_joint_properties = v
+			end_joint_properties.connect(&"property_changed", _update_end_joint)
+		else:
+			end_joint_properties.disconnect(&"property_changed", _update_end_joint)
+			end_joint_properties = v
+		_update_end_joint(&"")
+
+
 @onready var cs_capsule: CollisionShape2D = $CSCapsule
 @onready var cs_rectangle: CollisionShape2D = $CSRectangle
 
@@ -30,6 +51,41 @@ func _update_properties() -> void:
 	queue_redraw()
 
 
+func _update_start_joint(_name: StringName) -> void:
+	_update_joint("StartJoint", start_joint_properties, -half_length)
+
+func _update_end_joint(_name: StringName) -> void:
+	_update_joint("EndJoint", end_joint_properties, half_length)
+
+
+func _update_joint(joint_name: String, properties: WallJointProperties, p: float) -> void:
+	if properties:
+		var wjn: WallJoint = get_node_or_null(joint_name)
+		if not wjn:
+			var wjs = load("res://src/objects/board/wall_joint.tscn")
+			wjn = wjs.instantiate()
+			wjn.name = joint_name
+			add_child(wjn)
+			wjn.position.y = p
+			wjn.position.x = 0.0
+		wjn.properties = properties
+	else:
+		var wjn: WallJoint = get_node_or_null(joint_name)
+		if wjn:
+			remove_child(wjn)
+			wjn.queue_free()
+
+
+func _update_joints_position() -> void:
+	var wjn: WallJoint
+	wjn = get_node_or_null("StartJoint")
+	if wjn:
+		wjn.position.y = -half_length
+	wjn = get_node_or_null("EndJoint")
+	if wjn:
+		wjn.position.y = half_length
+
+
 func _update_ui(prop_name: StringName) -> void:
 	match prop_name:
 		&"color", \
@@ -40,6 +96,7 @@ func _update_ui(prop_name: StringName) -> void:
 		&"thickness", \
 		&"collision_rounded", \
 		&"adjust_collision_margin":
+			_update_joints_position()
 			_update_collision_shape()
 			queue_redraw()
 
