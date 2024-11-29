@@ -131,8 +131,12 @@ func _draw() -> void:
 	if properties.rounded:
 		var y1 = -half_length + radius
 		var y2 = half_length - radius
-		draw_circle(Vector2(0, y1), radius, properties.color, true, -1.0, true)
-		draw_circle(Vector2(0, y2), radius, properties.color, true, -1.0, true)
+		if not start_joint_properties:
+			draw_circle(Vector2(0, y1), radius, properties.color, true, -1.0, true)
+		if not end_joint_properties:
+			draw_circle(Vector2(0, y2), radius, properties.color, true, -1.0, true)
 		draw_rect(Rect2(-radius, y1, properties.thickness, properties.length - properties.thickness), properties.color, true, -1.0, true)
 	else:
-		draw_rect(Rect2(-radius, -half_length, properties.thickness, properties.length), properties.color, true, -1.0, true)
+		var offset_start: float = 0.0 if not start_joint_properties else radius
+		var offset_end: float = 0.0 if not end_joint_properties else radius
+		draw_rect(Rect2(-radius, -half_length + offset_start, properties.thickness, properties.length - offset_start - offset_end), properties.color, true, -1.0, true)

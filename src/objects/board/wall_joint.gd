@@ -32,6 +32,8 @@ func _update_radius() -> void:
 
 
 func _draw() -> void:
-	draw_circle(Vector2.ZERO, properties.radius, _theme.walls_color, true, -1, true)
 	if properties.hole_radius > 0.0:
-		draw_circle(Vector2.ZERO, min(properties.hole_radius, properties.radius), _theme.background_color, true, -1, true)
+		var thickness: float = properties.radius - properties.hole_radius
+		draw_circle(Vector2.ZERO, properties.radius - thickness / 2, _theme.walls_color, false, thickness, true)
+	else:
+		draw_circle(Vector2.ZERO, properties.radius, _theme.walls_color, true, -1, true)
