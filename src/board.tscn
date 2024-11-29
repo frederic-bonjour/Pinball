@@ -213,20 +213,6 @@ shader_parameter/total_phases = 5
 normal = Vector2(0, 1)
 distance = -3240.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6f5wp"]
-friction = 0.8
-bounce = 0.15
-
-[sub_resource type="Resource" id="Resource_b1qwt"]
-script = ExtResource("27_xks6i")
-radius = 32.0
-hole_radius = 10.0
-
-[sub_resource type="Resource" id="Resource_5vyby"]
-script = ExtResource("27_xks6i")
-radius = 32.0
-hole_radius = 10.0
-
 [sub_resource type="Resource" id="Resource_irgvw"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
@@ -242,7 +228,7 @@ friction = 0.2
 rough = true
 bounce = 1.0
 
-[sub_resource type="Resource" id="Resource_ajiug"]
+[sub_resource type="Resource" id="Resource_6rnx4"]
 resource_local_to_scene = true
 script = ExtResource("6_e23bc")
 thickness = 30.0
@@ -273,26 +259,6 @@ script = ExtResource("27_xks6i")
 radius = 30.0
 hole_radius = 5.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwyem"]
-friction = 0.2
-rough = true
-bounce = 0.2
-
-[sub_resource type="Resource" id="Resource_12qaa"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 250.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_rwyem")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_6vblj"]
-script = ExtResource("27_xks6i")
-radius = 15.0
-hole_radius = 0.0
-
 [sub_resource type="Resource" id="Resource_2hgh0"]
 script = ExtResource("27_xks6i")
 radius = 30.0
@@ -302,21 +268,6 @@ hole_radius = 5.0
 script = ExtResource("27_xks6i")
 radius = 30.0
 hole_radius = 5.0
-
-[sub_resource type="Resource" id="Resource_xm5dn"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 250.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_rwyem")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_2k2st"]
-script = ExtResource("27_xks6i")
-radius = 15.0
-hole_radius = 0.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
 
@@ -351,6 +302,55 @@ rounded = true
 color = Color(1, 1, 1, 1)
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6f5wp"]
+friction = 0.8
+bounce = 0.15
+
+[sub_resource type="Resource" id="Resource_b1qwt"]
+script = ExtResource("27_xks6i")
+radius = 32.0
+hole_radius = 10.0
+
+[sub_resource type="Resource" id="Resource_5vyby"]
+script = ExtResource("27_xks6i")
+radius = 32.0
+hole_radius = 10.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwyem"]
+friction = 0.2
+rough = true
+bounce = 0.2
+
+[sub_resource type="Resource" id="Resource_12qaa"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 250.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_rwyem")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_6vblj"]
+script = ExtResource("27_xks6i")
+radius = 15.0
+hole_radius = 0.0
+
+[sub_resource type="Resource" id="Resource_xm5dn"]
+script = ExtResource("6_e23bc")
+thickness = 15.0
+length = 250.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = SubResource("PhysicsMaterial_rwyem")
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_2k2st"]
+script = ExtResource("27_xks6i")
+radius = 15.0
+hole_radius = 0.0
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_dug60")
@@ -401,20 +401,6 @@ collision_priority = 10.0
 
 [node name="Walls" type="Node2D" parent="."]
 
-[node name="BottomLeft" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(550, -218)
-rotation = -1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_b1qwt")
-
-[node name="BottomRight" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1370, -218)
-rotation = 1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_5vyby")
-
 [node name="Right" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(1910, -1620)
 physics_material_override = ExtResource("2_qvmef")
@@ -430,12 +416,14 @@ position = Vector2(10, -1620)
 physics_material_override = ExtResource("2_qvmef")
 properties = SubResource("Resource_irgvw")
 
-[node name="Wall2" parent="Walls" instance=ExtResource("4_xc2ga")]
+[node name="InnerWalls" type="Node2D" parent="."]
+
+[node name="Wall2" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
 position = Vector2(750, -1870)
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
-properties = SubResource("Resource_ajiug")
+properties = SubResource("Resource_6rnx4")
 
-[node name="Wall3" parent="Walls" instance=ExtResource("4_xc2ga")]
+[node name="Wall3" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
 position = Vector2(930, -1539)
 rotation = -0.785398
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
@@ -443,25 +431,13 @@ properties = SubResource("Resource_tfxot")
 start_joint_properties = SubResource("Resource_pkfbn")
 end_joint_properties = SubResource("Resource_1283n")
 
-[node name="Wall6" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(424, -426)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_12qaa")
-start_joint_properties = SubResource("Resource_6vblj")
-
-[node name="Wall4" parent="Walls" instance=ExtResource("4_xc2ga")]
+[node name="Wall4" parent="InnerWalls" instance=ExtResource("4_xc2ga")]
 position = Vector2(929, -2201)
 rotation = 0.785398
 physics_material_override = SubResource("PhysicsMaterial_7ocxj")
 properties = SubResource("Resource_tfxot")
 start_joint_properties = SubResource("Resource_2hgh0")
 end_joint_properties = SubResource("Resource_xunp6")
-
-[node name="Wall5" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1496, -426)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_xm5dn")
-start_joint_properties = SubResource("Resource_2k2st")
 
 [node name="LoseBallArea" type="Area2D" parent="."]
 collision_mask = 2
@@ -513,26 +489,6 @@ modulate = Color(2, 2, 2, 1)
 position = Vector2(1080, -990)
 properties = SubResource("Resource_7ty7w")
 
-[node name="Main Flippers" type="Node2D" parent="."]
-position = Vector2(960, -146)
-metadata/_edit_group_ = true
-
-[node name="FlipperLeft" parent="Main Flippers" instance=ExtResource("9_rw7jb")]
-position = Vector2(-260, 0)
-rotation = 0.436332
-angle_degrees = -45.0
-
-[node name="FlipperRight" parent="Main Flippers" instance=ExtResource("9_rw7jb")]
-position = Vector2(260, 0)
-rotation = 2.70526
-side = 1
-
-[node name="SlingshotLeft" parent="." instance=ExtResource("10_dcn6p")]
-position = Vector2(500, -594)
-
-[node name="SlingshotRight" parent="." instance=ExtResource("11_l5mum")]
-position = Vector2(1420, -594)
-
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1351, -1495)
 radius = 65.0
@@ -562,5 +518,49 @@ properties = SubResource("Resource_b5id7")
 position = Vector2(1665, -719)
 rotation = 0.785398
 properties = SubResource("Resource_72gcx")
+
+[node name="Flippers and Slingshots" type="Node2D" parent="."]
+
+[node name="FlipperLeft" parent="Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
+position = Vector2(700, -146)
+rotation = 0.436332
+angle_degrees = -45.0
+
+[node name="FlipperRight" parent="Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
+position = Vector2(1220, -146)
+rotation = -0.436332
+side = 1
+
+[node name="Wall Flip Left" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
+position = Vector2(550, -218)
+rotation = -1.13446
+physics_material_override = SubResource("PhysicsMaterial_6f5wp")
+properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_b1qwt")
+
+[node name="Wall Flip Right" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
+position = Vector2(1370, -218)
+rotation = 1.13446
+physics_material_override = SubResource("PhysicsMaterial_6f5wp")
+properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_5vyby")
+
+[node name="Wall SS Left" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
+position = Vector2(424, -426)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_12qaa")
+start_joint_properties = SubResource("Resource_6vblj")
+
+[node name="Wall SS Right" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
+position = Vector2(1496, -426)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_xm5dn")
+start_joint_properties = SubResource("Resource_2k2st")
+
+[node name="SlingshotLeft" parent="Flippers and Slingshots" instance=ExtResource("10_dcn6p")]
+position = Vector2(500, -594)
+
+[node name="SlingshotRight" parent="Flippers and Slingshots" instance=ExtResource("11_l5mum")]
+position = Vector2(1420, -594)
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
