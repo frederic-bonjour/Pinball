@@ -26,25 +26,37 @@ func _ready():
 	SignalHub.ball_touched_flipper.connect(_add_ball_touch_particles)
 
 
-func _process(_delta: float):
+func _process(delta: float):
 	_process_inputs()
-	_update_camera()
+	_update_camera(delta)
 
 
 func _process_inputs() -> void:
+	var tree := get_tree()
 	if Input.is_action_just_pressed(&"flipper_left"):
-		get_tree().call_group(&"flipper_left", &"activate")
+		tree.call_group(&"flipper_left", &"activate")
+		tree.call_group(&"rotate_on_flip", &"rotate_left")
 	if Input.is_action_just_released(&"flipper_left"):
-		get_tree().call_group(&"flipper_left", &"deactivate")
+		tree.call_group(&"flipper_left", &"deactivate")
 	if Input.is_action_just_pressed(&"flipper_right"):
-		get_tree().call_group(&"flipper_right", &"activate")
+		tree.call_group(&"flipper_right", &"activate")
+		tree.call_group(&"rotate_on_flip", &"rotate_right")
 	if Input.is_action_just_released(&"flipper_right"):
-		get_tree().call_group(&"flipper_right", &"deactivate")
+		tree.call_group(&"flipper_right", &"deactivate")
 
 
-func _update_camera() -> void:
-	#FIXME Hard-coded values
-	camera.position.y = clamp(ball.position.y, -2700, -540)
+var _camera_zoom = 0.75
+
+func _update_camera(delta: float) -> void:
+	camera.position = ball.position
+	if Input.is_action_just_pressed(&"zoom_in"):
+		_camera_zoom = 0.5
+	elif Input.is_action_just_pressed(&"zoom_out"):
+		_camera_zoom = 0.75
+	var z = camera.zoom.x
+	z = move_toward(z, _camera_zoom, delta)
+	camera.zoom.x = z
+	camera.zoom.y = z
 
 
 func _on_lose_ball_area_body_entered(body: Node2D) -> void:

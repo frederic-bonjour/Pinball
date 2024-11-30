@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=84 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -31,6 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://2pla8pd0bv6v" path="res://src/objects/board/assets/empty1x1.png" id="28_nbohr"]
 [ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="29_0neda"]
 [ext_resource type="PackedScene" uid="uid://de2kcbjq5ukfq" path="res://src/objects/board/rounded_corner.tscn" id="30_1ip7v"]
+[ext_resource type="PackedScene" uid="uid://cdibewau1dffo" path="res://src/fx/regular_polygon.tscn" id="32_vnj5b"]
+[ext_resource type="Script" path="res://src/components/rotate_on_flip.gd" id="33_5wjiy"]
+[ext_resource type="Texture2D" uid="uid://cdylqw1o4toi8" path="res://src/objects/board/assets/2rounded.png" id="33_rnex6"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
 script = ExtResource("2_66lkm")
@@ -219,8 +222,8 @@ colors = PackedColorArray(0.263463, 0.643941, 1, 1, 0.0226506, 0.30918, 0.524441
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a1hog"]
 gradient = SubResource("Gradient_4tunj")
-width = 1920
-height = 3240
+width = 3840
+height = 2160
 fill_to = Vector2(1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0lsj"]
@@ -234,13 +237,13 @@ shader_parameter/total_phases = 5
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f88l0"]
 normal = Vector2(0, 1)
-distance = -3240.0
+distance = -2150.0
 
 [sub_resource type="Resource" id="Resource_irgvw"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
-length = 3240.0
-rounded = false
+length = 1400.0
+rounded = true
 color = Color(1, 1, 1, 1)
 physics_material = ExtResource("2_qvmef")
 collision_rounded = false
@@ -249,19 +252,61 @@ adjust_collision_margin = Vector2(0, 0)
 [sub_resource type="Resource" id="Resource_xfu38"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
-length = 3040.0
+length = 1400.0
+rounded = true
+color = Color(1, 1, 1, 1)
+physics_material = ExtResource("2_qvmef")
+collision_rounded = false
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_g1icn"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 2160.0
 rounded = false
 color = Color(1, 1, 1, 1)
 physics_material = ExtResource("2_qvmef")
 collision_rounded = false
 adjust_collision_margin = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_u0ffd"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
+
+[sub_resource type="Resource" id="Resource_htb34"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 140.0
+rounded = true
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_7xgnl"]
 script = ExtResource("27_xks6i")
-radius = 15.0
+radius = 20.0
 hole_radius = 0.0
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
+[sub_resource type="Resource" id="Resource_slfu6"]
+script = ExtResource("27_xks6i")
+radius = 20.0
+hole_radius = 0.0
+
+[sub_resource type="Resource" id="Resource_hpfjj"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 500.0
+rounded = true
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_0qct5"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 320.0
+rounded = true
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_7ty7w"]
 script = ExtResource("8_pg5rm")
@@ -296,7 +341,7 @@ adjust_collision_margin = Vector2(0, 0)
 [sub_resource type="Resource" id="Resource_72gcx"]
 script = ExtResource("6_e23bc")
 thickness = 15.0
-length = 470.0
+length = 590.0
 rounded = true
 color = Color(1, 1, 1, 1)
 collision_rounded = true
@@ -361,6 +406,24 @@ script = ExtResource("27_xks6i")
 radius = 15.0
 hole_radius = 0.0
 
+[sub_resource type="Resource" id="Resource_pjadb"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 360.0
+rounded = false
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_ne0r5"]
+script = ExtResource("6_e23bc")
+thickness = 20.0
+length = 2160.0
+rounded = false
+color = Color(1, 1, 1, 1)
+collision_rounded = true
+adjust_collision_margin = Vector2(0, 0)
+
 [node name="Board" type="Node2D"]
 script = ExtResource("1_dug60")
 theme = SubResource("Resource_qst8b")
@@ -379,15 +442,15 @@ autoplay = true
 bus = &"Music"
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(0, -3240)
+position = Vector2(0, -2160)
 texture = SubResource("GradientTexture2D_a1hog")
 centered = false
 metadata/_edit_lock_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="WaveEffect" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_g0lsj")
 position = Vector2(0, -500)
-scale = Vector2(1920, 500)
+scale = Vector2(3840, 500)
 texture = ExtResource("28_nbohr")
 centered = false
 
@@ -398,33 +461,74 @@ metadata/_edit_lock_ = true
 [node name="CollisionShapeTop" type="CollisionShape2D" parent="Borders"]
 shape = SubResource("WorldBoundaryShape2D_f88l0")
 
+[node name="Line2D" type="Line2D" parent="Borders"]
+points = PackedVector2Array(0, -2155, 3840, -2155)
+
+[node name="RegularPolygon" parent="." instance=ExtResource("32_vnj5b")]
+position = Vector2(570, -870)
+edges = 6
+filled = true
+fill_color = Color(1, 1, 1, 0.0156863)
+stroke_width = 0.0
+revolution_duration = 7.0
+
+[node name="RegularPolygon2" parent="." instance=ExtResource("32_vnj5b")]
+position = Vector2(660, -1430)
+edges = 8
+filled = true
+diameter = 200.0
+fill_color = Color(1, 1, 1, 0.0156863)
+stroke_width = 0.0
+revolution_duration = 12.0
+rotation_direction = 1
+
+[node name="RegularPolygon3" parent="." instance=ExtResource("32_vnj5b")]
+position = Vector2(1280, -1190)
+edges = 5
+filled = true
+diameter = 150.0
+fill_color = Color(1, 1, 1, 0.0156863)
+stroke_width = 0.0
+
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(960, -1620)
+position = Vector2(1920, -310)
+zoom = Vector2(0.75, 0.75)
+process_callback = 0
+limit_left = 0
+limit_top = -2160
+limit_right = 3840
+limit_bottom = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
 
 [node name="Ball" parent="." instance=ExtResource("3_umkkw")]
 unique_name_in_owner = true
-position = Vector2(1870, -184)
+position = Vector2(1920, -310)
 disable_mode = 1
 collision_priority = 10.0
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Right" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1910, -1620)
+position = Vector2(1960, -700)
 physics_material_override = ExtResource("2_qvmef")
 properties = SubResource("Resource_irgvw")
 
 [node name="Right2" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1830, -1521)
+position = Vector2(1880, -700)
 physics_material_override = ExtResource("2_qvmef")
 properties = SubResource("Resource_xfu38")
-start_joint_properties = SubResource("Resource_u0ffd")
 
 [node name="Left" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(10, -1620)
+position = Vector2(10, -1080)
 physics_material_override = ExtResource("2_qvmef")
-properties = SubResource("Resource_irgvw")
+properties = SubResource("Resource_g1icn")
 
 [node name="InnerWalls" type="Node2D" parent="."]
 
@@ -436,16 +540,39 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LoseBallArea"]
 shape = SubResource("WorldBoundaryShape2D_fbef7")
 
+[node name="ModularWall4" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(1140, -1870)
+properties = SubResource("Resource_htb34")
+start_joint_properties = SubResource("Resource_7xgnl")
+end_joint_properties = SubResource("Resource_slfu6")
+
+[node name="ModularWall5" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(1320, -1870)
+properties = SubResource("Resource_htb34")
+start_joint_properties = SubResource("Resource_7xgnl")
+end_joint_properties = SubResource("Resource_slfu6")
+
+[node name="ModularWall6" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(1500, -1870)
+properties = SubResource("Resource_htb34")
+start_joint_properties = SubResource("Resource_7xgnl")
+end_joint_properties = SubResource("Resource_slfu6")
+
+[node name="ModularWall8" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(2170, -695)
+rotation = -1.0472
+properties = SubResource("Resource_hpfjj")
+
+[node name="ModularWall9" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(3705, -652)
+rotation = 1.0472
+properties = SubResource("Resource_0qct5")
+
 [node name="Bricks" type="Node2D" parent="."]
 
 [node name="Brick" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
 position = Vector2(840, -990)
-properties = SubResource("Resource_7ty7w")
-
-[node name="Brick9" parent="Bricks" instance=ExtResource("7_1k30u")]
-modulate = Color(2, 2, 2, 1)
-position = Vector2(320, -3040)
 properties = SubResource("Resource_7ty7w")
 
 [node name="Brick2" parent="Bricks" instance=ExtResource("7_1k30u")]
@@ -485,42 +612,42 @@ properties = SubResource("Resource_7ty7w")
 
 [node name="Brick17" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1540, -2570)
+position = Vector2(470, -1840)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick18" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1480, -2570)
+position = Vector2(410, -1840)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick19" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1420, -2570)
+position = Vector2(350, -1840)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick20" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1360, -2570)
+position = Vector2(290, -1840)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick21" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1420, -2630)
+position = Vector2(350, -1900)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick22" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1480, -2630)
+position = Vector2(410, -1900)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick23" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1480, -2510)
+position = Vector2(410, -1780)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Brick24" parent="Bricks" instance=ExtResource("7_1k30u")]
 modulate = Color(2, 2, 2, 1)
-position = Vector2(1420, -2510)
+position = Vector2(350, -1780)
 properties = SubResource("Resource_ggsk2")
 
 [node name="Bumper" parent="." instance=ExtResource("12_wkwpx")]
@@ -528,19 +655,15 @@ position = Vector2(1600, -890)
 radius = 65.0
 
 [node name="Bumper4" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(410, -2600)
+position = Vector2(1050, -1580)
 radius = 65.0
 
 [node name="Bumper5" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(670, -2450)
+position = Vector2(1230, -1420)
 radius = 65.0
 
 [node name="Bumper2" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(980, -2560)
-radius = 65.0
-
-[node name="Bumper3" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(1513, -1732)
+position = Vector2(1420, -1580)
 radius = 65.0
 
 [node name="ModularWall" parent="." instance=ExtResource("4_xc2ga")]
@@ -549,7 +672,7 @@ rotation = -0.785398
 properties = SubResource("Resource_b5id7")
 
 [node name="ModularWall2" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1715, -780)
+position = Vector2(1744, -840)
 rotation = 0.488692
 properties = SubResource("Resource_72gcx")
 
@@ -560,9 +683,19 @@ position = Vector2(700, -146)
 rotation = 0.436332
 angle_degrees = -45.0
 
+[node name="FlipperLeft2" parent="Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
+position = Vector2(30, -1650)
+rotation = 1.13446
+angle_degrees = -45.0
+
 [node name="FlipperRight" parent="Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
 position = Vector2(1220, -146)
 rotation = -0.436332
+side = 1
+
+[node name="FlipperRight2" parent="Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
+position = Vector2(1860, -1360)
+rotation = -1.13446
 side = 1
 
 [node name="Wall Flip Left" parent="Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
@@ -604,21 +737,106 @@ position = Vector2(500, -594)
 [node name="SlingshotRight" parent="Flippers and Slingshots" instance=ExtResource("11_l5mum")]
 position = Vector2(1420, -594)
 
+[node name="Flippers and Slingshots2" type="Node2D" parent="."]
+position = Vector2(1960, 0)
+
+[node name="FlipperLeft" parent="Flippers and Slingshots2" instance=ExtResource("9_rw7jb")]
+position = Vector2(700, -146)
+rotation = 0.436332
+angle_degrees = -45.0
+
+[node name="FlipperRight" parent="Flippers and Slingshots2" instance=ExtResource("9_rw7jb")]
+position = Vector2(1220, -146)
+rotation = -0.436332
+side = 1
+
+[node name="FlipperRight2" parent="Flippers and Slingshots2" instance=ExtResource("9_rw7jb")]
+position = Vector2(1860, -1680)
+rotation = -1.13446
+side = 1
+
+[node name="Wall Flip Left" parent="Flippers and Slingshots2" instance=ExtResource("4_xc2ga")]
+position = Vector2(550, -218)
+rotation = -1.13446
+physics_material_override = SubResource("PhysicsMaterial_6f5wp")
+properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_5vyby")
+
+[node name="Wall Flip Right" parent="Flippers and Slingshots2" instance=ExtResource("4_xc2ga")]
+position = Vector2(1370, -218)
+rotation = 1.13446
+physics_material_override = SubResource("PhysicsMaterial_6f5wp")
+properties = ExtResource("5_5iedj")
+start_joint_properties = SubResource("Resource_5vyby")
+
+[node name="Wall SS Left" parent="Flippers and Slingshots2" instance=ExtResource("4_xc2ga")]
+position = Vector2(424, -430)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_12qaa")
+start_joint_properties = SubResource("Resource_6vblj")
+
+[node name="Wall SS Right" parent="Flippers and Slingshots2" instance=ExtResource("4_xc2ga")]
+position = Vector2(1497, -430)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_xm5dn")
+start_joint_properties = SubResource("Resource_2k2st")
+
+[node name="Wall SS Right2" parent="Flippers and Slingshots2" instance=ExtResource("4_xc2ga")]
+position = Vector2(1604, -423)
+physics_material_override = SubResource("PhysicsMaterial_rwyem")
+properties = SubResource("Resource_cv700")
+start_joint_properties = SubResource("Resource_2k2st")
+end_joint_properties = SubResource("Resource_k4i0i")
+
+[node name="SlingshotLeft" parent="Flippers and Slingshots2" instance=ExtResource("10_dcn6p")]
+position = Vector2(500, -594)
+
+[node name="SlingshotRight" parent="Flippers and Slingshots2" instance=ExtResource("11_l5mum")]
+position = Vector2(1420, -594)
+
 [node name="Launcher" parent="." instance=ExtResource("29_0neda")]
-position = Vector2(1870, -105)
+position = Vector2(1920, -100)
 amplitude = 150.0
 strength = 32000.0
 auto_eject = false
 inactive = false
 
 [node name="RoundedCorner" parent="." instance=ExtResource("30_1ip7v")]
-position = Vector2(1699, -3240)
+position = Vector2(970, -2150)
+rotation = -1.5708
 
 [node name="KickBack" parent="." instance=ExtResource("29_0neda")]
 position = Vector2(1559, -227)
 strength = 200000.0
 disable_movement = true
 inactive = false
+
+[node name="SideSelector" type="StaticBody2D" parent="."]
+position = Vector2(1920, -2180)
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SideSelector"]
+position = Vector2(0, 97)
+texture = ExtResource("33_rnex6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SideSelector"]
+position = Vector2(0, 97)
+polygon = PackedVector2Array(200, -100, -200, -100, -150, -90, -120, -80, -80, -60, -40, -20, -20, 20, -10.0001, 73, -0.00012207, 93, 9.99988, 73, 20, 20, 40, -20, 80, -60, 120, -80, 150, -90)
+
+[node name="RotateOnFlip" type="Node" parent="SideSelector"]
+script = ExtResource("33_5wjiy")
+left_angle = -9.0
+right_angle = 9.0
+
+[node name="ModularWall3" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(960, -1980)
+properties = SubResource("Resource_pjadb")
+end_joint_properties = SubResource("Resource_7xgnl")
+
+[node name="ModularWall7" parent="." instance=ExtResource("4_xc2ga")]
+position = Vector2(3840, -1080)
+properties = SubResource("Resource_ne0r5")
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
 [connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]

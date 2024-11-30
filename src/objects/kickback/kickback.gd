@@ -93,7 +93,8 @@ func _process(delta: float) -> void:
 		Ejecting:
 			if not disable_movement:
 				holder.position.y = move_toward(holder.position.y, _holder_idle_position, delta * 750)
-			_loaded_body.apply_central_impulse(Vector2(0, -(strength if auto_eject else _player_strength)))
+			var s = strength if auto_eject else _player_strength
+			_loaded_body.apply_central_impulse(Vector2(randf_range(-s*0.01, s*0.01), -s))
 			if disable_movement:
 				_state = Idle
 			elif is_equal_approx(holder.position.y, _holder_idle_position) and not _body_present:

@@ -6,8 +6,10 @@
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-200, 0)
 texture = ExtResource("1_kmfwb")
 centered = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-200, 0)
 polygon = PackedVector2Array(0, 0, 42, 4, 75, 15, 114, 36, 143, 60, 167, 91, 184, 124, 194, 157, 200, 200, 200, 0)
