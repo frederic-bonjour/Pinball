@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=72 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://bon3t0fi4cyi4" path="res://assets/sounds/ball_wall.mp3" id="4_wp17m"]
 [ext_resource type="PackedScene" uid="uid://pic0d12gq2ck" path="res://src/objects/board/modular_wall.tscn" id="4_xc2ga"]
 [ext_resource type="AudioStream" uid="uid://dq8u1e3aa8mty" path="res://assets/sounds/ball_flipper.mp3" id="5_3gcje"]
-[ext_resource type="Resource" uid="uid://cwqsw6bj12pvh" path="res://src/objects/board/flipper_slope.tres" id="5_5iedj"]
 [ext_resource type="AudioStream" uid="uid://emjx16aamere" path="res://assets/sounds/kickback.mp3" id="5_vu7ap"]
 [ext_resource type="Script" path="res://src/objects/board/wall_properties.gd" id="6_e23bc"]
 [ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="7_1k30u"]
@@ -36,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://cdibewau1dffo" path="res://src/fx/regular_polygon.tscn" id="32_vnj5b"]
 [ext_resource type="Script" path="res://src/components/rotate_on_flip.gd" id="33_5wjiy"]
 [ext_resource type="Texture2D" uid="uid://cdylqw1o4toi8" path="res://src/objects/board/assets/2rounded.png" id="33_rnex6"]
+[ext_resource type="Script" path="res://src/objects/board/wall.gd" id="37_qs8ee"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
 script = ExtResource("2_66lkm")
@@ -277,26 +277,6 @@ shader_parameter/total_phases = 5
 normal = Vector2(0, 1)
 distance = -2150.0
 
-[sub_resource type="Resource" id="Resource_irgvw"]
-script = ExtResource("6_e23bc")
-thickness = 20.0
-length = 1400.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = ExtResource("2_qvmef")
-collision_rounded = false
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_xfu38"]
-script = ExtResource("6_e23bc")
-thickness = 20.0
-length = 1400.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = ExtResource("2_qvmef")
-collision_rounded = false
-adjust_collision_margin = Vector2(0, 0)
-
 [sub_resource type="Resource" id="Resource_g1icn"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
@@ -308,43 +288,6 @@ collision_rounded = false
 adjust_collision_margin = Vector2(0, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fbef7"]
-
-[sub_resource type="Resource" id="Resource_htb34"]
-script = ExtResource("6_e23bc")
-thickness = 20.0
-length = 140.0
-rounded = true
-color = Color(1, 1, 1, 1)
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_7xgnl"]
-script = ExtResource("27_xks6i")
-radius = 20.0
-hole_radius = 0.0
-
-[sub_resource type="Resource" id="Resource_slfu6"]
-script = ExtResource("27_xks6i")
-radius = 20.0
-hole_radius = 0.0
-
-[sub_resource type="Resource" id="Resource_hpfjj"]
-script = ExtResource("6_e23bc")
-thickness = 20.0
-length = 500.0
-rounded = true
-color = Color(1, 1, 1, 1)
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_0qct5"]
-script = ExtResource("6_e23bc")
-thickness = 20.0
-length = 320.0
-rounded = true
-color = Color(1, 1, 1, 1)
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_sr1u2"]
 script = ExtResource("8_pg5rm")
@@ -360,94 +303,19 @@ can_be_destroyed_by_ball = true
 can_be_destroyed_by_rocket = true
 shape = 6
 
-[sub_resource type="Resource" id="Resource_b5id7"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 580.0
-rounded = true
-color = Color(1, 1, 1, 1)
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_72gcx"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 590.0
-rounded = true
-color = Color(1, 1, 1, 1)
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6f5wp"]
-friction = 0.8
-bounce = 0.15
-
-[sub_resource type="Resource" id="Resource_5vyby"]
-script = ExtResource("27_xks6i")
-radius = 32.0
-hole_radius = 10.0
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwyem"]
-friction = 0.2
-rough = true
-bounce = 0.2
-
-[sub_resource type="Resource" id="Resource_12qaa"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 280.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_rwyem")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_6vblj"]
-script = ExtResource("27_xks6i")
-radius = 15.0
-hole_radius = 0.0
-
-[sub_resource type="Resource" id="Resource_xm5dn"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 280.0
-rounded = true
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_rwyem")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_2k2st"]
-script = ExtResource("27_xks6i")
-radius = 15.0
-hole_radius = 0.0
-
-[sub_resource type="Resource" id="Resource_cv700"]
-script = ExtResource("6_e23bc")
-thickness = 15.0
-length = 293.0
-rounded = false
-color = Color(1, 1, 1, 1)
-physics_material = SubResource("PhysicsMaterial_rwyem")
-collision_rounded = true
-adjust_collision_margin = Vector2(0, 0)
-
-[sub_resource type="Resource" id="Resource_k4i0i"]
-script = ExtResource("27_xks6i")
-radius = 15.0
-hole_radius = 0.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajwc2"]
-size = Vector2(600, 40)
-
 [sub_resource type="Resource" id="Resource_pjadb"]
 script = ExtResource("6_e23bc")
 thickness = 20.0
-length = 360.0
+length = 400.0
 rounded = false
 color = Color(1, 1, 1, 1)
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_7xgnl"]
+script = ExtResource("27_xks6i")
+radius = 20.0
+hole_radius = 0.0
 
 [sub_resource type="Resource" id="Resource_ne0r5"]
 script = ExtResource("6_e23bc")
@@ -457,6 +325,9 @@ rounded = false
 color = Color(1, 1, 1, 1)
 collision_rounded = true
 adjust_collision_margin = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajwc2"]
+size = Vector2(490, 40)
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_dug60")
@@ -526,7 +397,7 @@ stroke_width = 0.0
 
 [node name="Camera" type="Camera2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1920, -310)
+position = Vector2(1920, -960)
 zoom = Vector2(0.75, 0.75)
 process_callback = 0
 limit_left = 0
@@ -543,21 +414,20 @@ drag_bottom_margin = 0.1
 
 [node name="Ball" parent="." instance=ExtResource("3_umkkw")]
 unique_name_in_owner = true
-position = Vector2(1920, -310)
+position = Vector2(1920, -1030)
 disable_mode = 1
 collision_priority = 10.0
 
+[node name="BottomLeft" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 0.5)
+polygon = PackedVector2Array(10, -980, 420, -570, 420, -300, 400, -290, 400, -270, 420, -260, 450, -260, 670, -160, 670, 0, 10, 0)
+
+[node name="BottomLeft2" type="Polygon2D" parent="."]
+position = Vector2(1600, 0)
+color = Color(0, 0, 0, 0.5)
+polygon = PackedVector2Array(10, -600, 280, -840, 360, -840, 660, -600, 660, -280, 660, 0, 10, 0)
+
 [node name="Walls" type="Node2D" parent="."]
-
-[node name="Right" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1960, -700)
-physics_material_override = ExtResource("2_qvmef")
-properties = SubResource("Resource_irgvw")
-
-[node name="Right2" parent="Walls" instance=ExtResource("4_xc2ga")]
-position = Vector2(1880, -700)
-physics_material_override = ExtResource("2_qvmef")
-properties = SubResource("Resource_xfu38")
 
 [node name="Left" parent="Walls" instance=ExtResource("4_xc2ga")]
 position = Vector2(10, -1080)
@@ -573,40 +443,6 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LoseBallArea"]
 shape = SubResource("WorldBoundaryShape2D_fbef7")
-
-[node name="ModularWall4" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1280, -1870)
-properties = SubResource("Resource_htb34")
-start_joint_properties = SubResource("Resource_7xgnl")
-end_joint_properties = SubResource("Resource_slfu6")
-
-[node name="ModularWall10" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1130, -1870)
-properties = SubResource("Resource_htb34")
-start_joint_properties = SubResource("Resource_7xgnl")
-end_joint_properties = SubResource("Resource_slfu6")
-
-[node name="ModularWall5" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1430, -1870)
-properties = SubResource("Resource_htb34")
-start_joint_properties = SubResource("Resource_7xgnl")
-end_joint_properties = SubResource("Resource_slfu6")
-
-[node name="ModularWall6" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1570, -1870)
-properties = SubResource("Resource_htb34")
-start_joint_properties = SubResource("Resource_7xgnl")
-end_joint_properties = SubResource("Resource_slfu6")
-
-[node name="ModularWall8" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(2170, -695)
-rotation = -1.0472
-properties = SubResource("Resource_hpfjj")
-
-[node name="ModularWall9" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(3705, -652)
-rotation = 1.0472
-properties = SubResource("Resource_0qct5")
 
 [node name="Bricks" type="Node2D" parent="."]
 
@@ -1025,6 +861,10 @@ polygon = PackedVector2Array(200, -100, -200, -100, -150, -90, -120, -80, -80, -
 position = Vector2(1600, -890)
 radius = 65.0
 
+[node name="Bumper10" parent="." instance=ExtResource("12_wkwpx")]
+position = Vector2(2250, -900)
+radius = 65.0
+
 [node name="Bumper8" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(120, -1030)
 radius = 65.0
@@ -1057,16 +897,6 @@ radius = 80.0
 position = Vector2(3600, -870)
 radius = 80.0
 
-[node name="ModularWall" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(216, -777)
-rotation = -0.785398
-properties = SubResource("Resource_b5id7")
-
-[node name="ModularWall2" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(1744, -840)
-rotation = 0.488692
-properties = SubResource("Resource_72gcx")
-
 [node name="Left Flippers and Slingshots" type="Node2D" parent="."]
 
 [node name="FlipperLeft" parent="Left Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
@@ -1085,42 +915,9 @@ rotation = -0.436332
 side = 1
 
 [node name="FlipperRight2" parent="Left Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
-position = Vector2(1860, -1360)
+position = Vector2(1850, -1300)
 rotation = -1.13446
 side = 1
-
-[node name="Wall Flip Left" parent="Left Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(550, -218)
-rotation = -1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_5vyby")
-
-[node name="Wall Flip Right" parent="Left Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1370, -218)
-rotation = 1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_5vyby")
-
-[node name="Wall SS Left" parent="Left Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(424, -430)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_12qaa")
-start_joint_properties = SubResource("Resource_6vblj")
-
-[node name="Wall SS Right" parent="Left Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1497, -430)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_xm5dn")
-start_joint_properties = SubResource("Resource_2k2st")
-
-[node name="Wall SS Right2" parent="Left Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1604, -423)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_cv700")
-start_joint_properties = SubResource("Resource_2k2st")
-end_joint_properties = SubResource("Resource_k4i0i")
 
 [node name="SlingshotLeft" parent="Left Flippers and Slingshots" instance=ExtResource("10_dcn6p")]
 position = Vector2(500, -594)
@@ -1128,11 +925,31 @@ position = Vector2(500, -594)
 [node name="SlingshotRight" parent="Left Flippers and Slingshots" instance=ExtResource("11_l5mum")]
 position = Vector2(1420, -594)
 
+[node name="Wall Bottom Right3" type="Line2D" parent="Left Flippers and Slingshots"]
+position = Vector2(-280, -280)
+points = PackedVector2Array(1780, -10, 1540, 110)
+width = 40.0
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("37_qs8ee")
+start_joint_radius = 30.0
+end_joint_radius = 20.0
+
+[node name="Wall Bottom Right4" type="Line2D" parent="Left Flippers and Slingshots"]
+position = Vector2(-1360, -280)
+points = PackedVector2Array(1780, -10, 2020, 110)
+width = 40.0
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("37_qs8ee")
+start_joint_radius = 30.0
+end_joint_radius = 20.0
+
 [node name="Right Flippers and Slingshots" type="Node2D" parent="."]
 position = Vector2(1960, 0)
 
 [node name="FlipperLeft" parent="Right Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
-position = Vector2(700, -146)
+position = Vector2(692, -152)
 rotation = 0.436332
 angle_degrees = -45.0
 
@@ -1146,49 +963,35 @@ position = Vector2(1860, -1680)
 rotation = -1.13446
 side = 1
 
-[node name="Wall Flip Left" parent="Right Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(550, -218)
-rotation = -1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_5vyby")
-
-[node name="Wall Flip Right" parent="Right Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1370, -218)
-rotation = 1.13446
-physics_material_override = SubResource("PhysicsMaterial_6f5wp")
-properties = ExtResource("5_5iedj")
-start_joint_properties = SubResource("Resource_5vyby")
-
-[node name="Wall SS Left" parent="Right Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(424, -430)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_12qaa")
-start_joint_properties = SubResource("Resource_6vblj")
-
-[node name="Wall SS Right" parent="Right Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1497, -430)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_xm5dn")
-start_joint_properties = SubResource("Resource_2k2st")
-
-[node name="Wall SS Right2" parent="Right Flippers and Slingshots" instance=ExtResource("4_xc2ga")]
-position = Vector2(1604, -423)
-physics_material_override = SubResource("PhysicsMaterial_rwyem")
-properties = SubResource("Resource_cv700")
-start_joint_properties = SubResource("Resource_2k2st")
-end_joint_properties = SubResource("Resource_k4i0i")
-
 [node name="SlingshotLeft" parent="Right Flippers and Slingshots" instance=ExtResource("10_dcn6p")]
-position = Vector2(500, -594)
+position = Vector2(492, -600)
 
 [node name="SlingshotRight" parent="Right Flippers and Slingshots" instance=ExtResource("11_l5mum")]
 position = Vector2(1420, -594)
 
+[node name="Wall Bottom Right5" type="Line2D" parent="Right Flippers and Slingshots"]
+position = Vector2(-280, -280)
+points = PackedVector2Array(1780, -10, 1540, 110)
+width = 40.0
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("37_qs8ee")
+start_joint_radius = 30.0
+end_joint_radius = 20.0
+
+[node name="Wall Bottom Right6" type="Line2D" parent="Right Flippers and Slingshots"]
+position = Vector2(-1370, -280)
+points = PackedVector2Array(1780, -10, 2020, 110)
+width = 40.0
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("37_qs8ee")
+start_joint_radius = 30.0
+end_joint_radius = 20.0
+
 [node name="Launcher" parent="." instance=ExtResource("29_0neda")]
-position = Vector2(1920, -100)
-amplitude = 150.0
-strength = 32000.0
+position = Vector2(1920, -893)
+strength = 25000.0
 auto_eject = false
 auto_inactive_delay = 0
 
@@ -1207,30 +1010,40 @@ scale = Vector2(2, 2)
 
 [node name="KickBack" parent="." instance=ExtResource("29_0neda")]
 unique_name_in_owner = true
-position = Vector2(1559, -227)
+position = Vector2(1560, -240)
 strength = 200000.0
 disable_movement = true
 inactive = true
-auto_inactive_delay = 10000
+auto_inactive_delay = 30000
 
 [node name="Indicator" type="Label" parent="KickBack"]
 visible = false
-offset_left = -27.0
-offset_top = -152.0
-offset_right = 150.0
-offset_bottom = -113.0
+offset_left = -24.0
+offset_top = -150.0
+offset_right = 153.0
+offset_bottom = -111.0
 rotation = -1.5708
 text = "KICKBACK
 "
+metadata/_edit_use_anchors_ = true
 
-[node name="KickbackActivationArea" type="Area2D" parent="."]
-position = Vector2(980, -1950)
-collision_layer = 0
-collision_mask = 2
+[node name="KickBack2" parent="." instance=ExtResource("29_0neda")]
+unique_name_in_owner = true
+position = Vector2(2307, -240)
+strength = 200000.0
+disable_movement = true
+inactive = true
+auto_inactive_delay = 30000
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KickbackActivationArea"]
-position = Vector2(290, 80)
-shape = SubResource("RectangleShape2D_ajwc2")
+[node name="Indicator" type="Label" parent="KickBack2"]
+visible = false
+offset_left = -20.0
+offset_top = -150.0
+offset_right = 157.0
+offset_bottom = -111.0
+rotation = -1.5708
+text = "KICKBACK
+"
 
 [node name="SideSelector" type="StaticBody2D" parent="."]
 position = Vector2(1920, -2180)
@@ -1251,7 +1064,7 @@ left_angle = -9.0
 right_angle = 9.0
 
 [node name="ModularWall3" parent="." instance=ExtResource("4_xc2ga")]
-position = Vector2(960, -1980)
+position = Vector2(960, -1970)
 properties = SubResource("Resource_pjadb")
 end_joint_properties = SubResource("Resource_7xgnl")
 
@@ -1259,6 +1072,92 @@ end_joint_properties = SubResource("Resource_7xgnl")
 position = Vector2(3840, -1080)
 properties = SubResource("Resource_ne0r5")
 
+[node name="Wall Bottom Left" type="Line2D" parent="."]
+position = Vector2(-850, -380)
+points = PackedVector2Array(860, -590, 1270, -190, 1270, 80)
+antialiased = true
+script = ExtResource("37_qs8ee")
+
+[node name="Wall Bottom Right" type="Line2D" parent="."]
+position = Vector2(1500, -420)
+points = PackedVector2Array(0, -180, 0, 120)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 15.0
+
+[node name="Wall Bottom Right4" type="Line2D" parent="."]
+position = Vector2(2370, -420)
+points = PackedVector2Array(0, -180, 0, 120)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 15.0
+
+[node name="Wall Bottom Right2" type="Line2D" parent="."]
+position = Vector2(385, -400)
+points = PackedVector2Array(1495, -930, 1495, -440, 1220, -200, 1220, 110)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("37_qs8ee")
+end_joint_radius = 15.0
+
+[node name="Wall Bottom Right3" type="Line2D" parent="."]
+position = Vector2(474, -400)
+points = PackedVector2Array(1486, -930, 1486, -440, 1786, -200, 1786, 110)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("37_qs8ee")
+end_joint_radius = 15.0
+
+[node name="Wall" type="Line2D" parent="."]
+position = Vector2(3460, -290)
+points = PackedVector2Array(0, 0, 0, -300, 380, -540)
+joint_mode = 2
+antialiased = true
+script = ExtResource("37_qs8ee")
+
+[node name="KickbackActivationArea" type="Node2D" parent="."]
+position = Vector2(990, -1950)
+metadata/_edit_group_ = true
+
+[node name="Aread2D" type="Area2D" parent="KickbackActivationArea"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickbackActivationArea/Aread2D"]
+position = Vector2(235, 80)
+shape = SubResource("RectangleShape2D_ajwc2")
+
+[node name="Wall2" type="Line2D" parent="KickbackActivationArea"]
+position = Vector2(100, 10)
+points = PackedVector2Array(0, 0, 0, 140)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 10.0
+end_joint_radius = 10.0
+
+[node name="Wall3" type="Line2D" parent="KickbackActivationArea"]
+position = Vector2(230, 10)
+points = PackedVector2Array(0, 0, 0, 140)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 10.0
+end_joint_radius = 10.0
+
+[node name="Wall4" type="Line2D" parent="KickbackActivationArea"]
+position = Vector2(360, 10)
+points = PackedVector2Array(0, 0, 0, 140)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 10.0
+end_joint_radius = 10.0
+
+[node name="Wall5" type="Line2D" parent="KickbackActivationArea"]
+position = Vector2(490, 10)
+points = PackedVector2Array(0, 0, 0, 140)
+script = ExtResource("37_qs8ee")
+start_joint_radius = 10.0
+end_joint_radius = 10.0
+
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
 [connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]
-[connection signal="body_entered" from="KickbackActivationArea" to="." method="_on_kickback_activation_area_body_entered"]
+[connection signal="ejected" from="KickBack2" to="." method="_on_kick_back_ejection"]
+[connection signal="body_entered" from="KickbackActivationArea/Aread2D" to="." method="_on_kickback_activation_area_body_entered"]
