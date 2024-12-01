@@ -10,6 +10,10 @@ extends Node2D
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 
 var _ball_initial_position: Vector2
+var _score: int = 0:
+	set(v):
+		_score = v
+		%ScoreLabel.text = TextServerManager.get_primary_interface().format_number(str(_score))
 
 
 func _ready():
@@ -24,6 +28,8 @@ func _ready():
 	SignalHub.ball_touched_modular_wall.connect(_add_ball_touch_particles)
 	SignalHub.ball_touched_wall.connect(_add_ball_touch_particles)
 	SignalHub.ball_touched_flipper.connect(_add_ball_touch_particles)
+	SignalHub.brick_destroyed.connect(_brick_destroyed)
+	SignalHub.bumper_hit.connect(_bumper_hit)
 	_activate_kickbacks()
 
 
@@ -89,3 +95,10 @@ func _on_kick_back_ejection(_ball: PhysicsBody2D, kickback: KickBack, force: int
 
 func _on_kickback_activation_area_body_entered(body):
 	%KickBack.inactive = false
+
+
+func _brick_destroyed(_brick, _ball) -> void:
+	_score += 1000
+
+func _bumper_hit(_bumper, _ball) -> void:
+	_score += 100
