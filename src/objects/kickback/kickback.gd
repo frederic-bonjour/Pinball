@@ -28,7 +28,7 @@ signal ejected(body: PhysicsBody2D, kickback: KickBack, force: int)
 			bottom_line.visible = not inactive and not disable_movement
 			top_line.visible = not inactive
 			for cs in find_children("*", "CollisionShape2D"):
-				cs.disabled = inactive
+				cs.set_deferred(&"disabled", inactive)
 			if _indicator:
 				_indicator.visible = not inactive
 
@@ -73,10 +73,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var now = Time.get_ticks_msec()
-	if _auto_inactive_ts > 0 and now >= _auto_inactive_ts:
-		inactive = true
 
 	match _state:
+		Idle:
+			if _auto_inactive_ts > 0 and now >= _auto_inactive_ts:
+				inactive = true
+
 		Ready:
 			if auto_eject:
 				if now - _state_ts >= auto_eject_time:
