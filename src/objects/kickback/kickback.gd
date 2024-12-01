@@ -22,22 +22,30 @@ signal ejected(body: PhysicsBody2D, kickback: KickBack, force: int)
 @export var inactive: bool = false:
 	set(v):
 		inactive = v
+		if not inactive and auto_inactive_delay > 0:
+			_auto_inactive_ts = Time.get_ticks_msec() + auto_inactive_delay
 		if is_node_ready():
 			bottom_line.visible = not inactive and not disable_movement
 			top_line.visible = not inactive
 			for cs in find_children("*", "CollisionShape2D"):
 				cs.disabled = inactive
+			if _indicator:
+				_indicator.visible = not inactive
+
+@export var auto_inactive_delay: int = 0
 
 @onready var holder = $Holder
 @onready var bottom_line = $BottomLine
 @onready var top_line = $Holder/TopLine
+
+var _indicator: Node
+var _auto_inactive_ts: int = 0
 
 enum { Idle, Ready, Loading, Waiting, Eject, Ejecting, Cooldown }
 var _state = Idle:
 	set(v):
 		_state = v
 		_state_ts = Time.get_ticks_msec()
-		set_process(_state != Idle)
 
 var _state_ts: int = 0
 
@@ -52,17 +60,22 @@ var _body_present: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group(&"kickbacks")
 	_holder_idle_position = holder.position.y
 	_holder_max_position = _holder_idle_position + amplitude
 	_state = Idle
 	_load_duration = 500 if auto_eject else 1500
 	bottom_line.position.y = amplitude - 50
+	_indicator = get_node_or_null("Indicator")
 	inactive = inactive
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var now = Time.get_ticks_msec()
+	if _auto_inactive_ts > 0 and now >= _auto_inactive_ts:
+		inactive = true
+
 	match _state:
 		Ready:
 			if auto_eject:

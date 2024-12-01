@@ -24,6 +24,7 @@ func _ready():
 	SignalHub.ball_touched_modular_wall.connect(_add_ball_touch_particles)
 	SignalHub.ball_touched_wall.connect(_add_ball_touch_particles)
 	SignalHub.ball_touched_flipper.connect(_add_ball_touch_particles)
+	_activate_kickbacks()
 
 
 func _process(delta: float):
@@ -68,6 +69,11 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 	if body is Ball:
 		SignalHub.ball_lost.emit(body)
 		body.teleport_to(_ball_initial_position)
+		_activate_kickbacks()
+
+
+func _activate_kickbacks() -> void:
+	get_tree().set_group(&"kickbacks", "inactive", false)
 
 
 func _add_ball_touch_particles(_ball: Ball, _body: Node2D) -> void:
@@ -79,3 +85,7 @@ func _add_ball_touch_particles(_ball: Ball, _body: Node2D) -> void:
 
 func _on_kick_back_ejection(_ball: PhysicsBody2D, kickback: KickBack, force: int):
 	SignalHub.kickback_ejection.emit(_ball, kickback, force)
+
+
+func _on_kickback_activation_area_body_entered(body):
+	%KickBack.inactive = false

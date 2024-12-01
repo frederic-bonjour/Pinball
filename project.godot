@@ -33,6 +33,10 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
 
+[gui]
+
+theme/custom="res://src/theme.tres"
+
 [input]
 
 flipper_left={

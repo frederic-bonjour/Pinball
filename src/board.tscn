@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=89 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -436,6 +436,9 @@ adjust_collision_margin = Vector2(0, 0)
 script = ExtResource("27_xks6i")
 radius = 15.0
 hole_radius = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajwc2"]
+size = Vector2(600, 40)
 
 [sub_resource type="Resource" id="Resource_pjadb"]
 script = ExtResource("6_e23bc")
@@ -1187,7 +1190,7 @@ position = Vector2(1920, -100)
 amplitude = 150.0
 strength = 32000.0
 auto_eject = false
-inactive = false
+auto_inactive_delay = 0
 
 [node name="RoundedCorner" parent="." instance=ExtResource("30_1ip7v")]
 position = Vector2(970, -2150)
@@ -1203,10 +1206,31 @@ position = Vector2(950, -2150)
 scale = Vector2(2, 2)
 
 [node name="KickBack" parent="." instance=ExtResource("29_0neda")]
+unique_name_in_owner = true
 position = Vector2(1559, -227)
 strength = 200000.0
 disable_movement = true
-inactive = false
+inactive = true
+auto_inactive_delay = 10000
+
+[node name="Indicator" type="Label" parent="KickBack"]
+visible = false
+offset_left = -27.0
+offset_top = -152.0
+offset_right = 150.0
+offset_bottom = -113.0
+rotation = -1.5708
+text = "KICKBACK
+"
+
+[node name="KickbackActivationArea" type="Area2D" parent="."]
+position = Vector2(980, -1950)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickbackActivationArea"]
+position = Vector2(290, 80)
+shape = SubResource("RectangleShape2D_ajwc2")
 
 [node name="SideSelector" type="StaticBody2D" parent="."]
 position = Vector2(1920, -2180)
@@ -1237,3 +1261,4 @@ properties = SubResource("Resource_ne0r5")
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
 [connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]
+[connection signal="body_entered" from="KickbackActivationArea" to="." method="_on_kickback_activation_area_body_entered"]
