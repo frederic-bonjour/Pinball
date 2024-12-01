@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=88 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://gd2vjkhm8ywa" path="res://src/objects/slingshot/slingshot_left.tscn" id="10_dcn6p"]
 [ext_resource type="PackedScene" uid="uid://cf1hlupu76v3o" path="res://src/objects/slingshot/slingshot_right.tscn" id="11_l5mum"]
 [ext_resource type="AudioStream" uid="uid://bmy6bg36tb1td" path="res://assets/sounds/bumper2.mp3" id="11_v80k5"]
+[ext_resource type="AudioStream" uid="uid://c2sy2deaesys0" path="res://assets/sounds/flipper_down.wav" id="12_m5vsy"]
 [ext_resource type="PackedScene" uid="uid://en3henr63844" path="res://src/objects/bumper/bumper.tscn" id="12_wkwpx"]
+[ext_resource type="AudioStream" uid="uid://dhblr4d5mdw8v" path="res://assets/sounds/flipper_up.wav" id="13_451x0"]
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event_bank_mounter.gd" id="13_q11xf"]
 [ext_resource type="Script" path="res://addons/event_audio/src/ea_event.gd" id="14_yim5u"]
 [ext_resource type="AudioStream" uid="uid://dmckl5n7ayf7q" path="res://assets/musics/Pinball.mp3" id="15_418ma"]
@@ -169,6 +171,46 @@ probability_weights = Array[float]([1.0])
 trigger_tags = "bumper"
 playback_settings = SubResource("Resource_wov8n")
 
+[sub_resource type="Resource" id="Resource_c768i"]
+script = ExtResource("16_l7b6c")
+stop_when_source_dies = false
+stationary = false
+volume_db = -10.0
+min_pitch = 1.0
+max_pitch = 1.0
+panning_strength = 1.0
+attenuation = 0.0
+max_distance = 10000
+unit_size = 10.0
+max_db = 3.0
+
+[sub_resource type="Resource" id="Resource_xw1wq"]
+script = ExtResource("14_yim5u")
+audio_streams = Array[AudioStream]([ExtResource("12_m5vsy")])
+probability_weights = Array[float]([1.0])
+trigger_tags = "flipper_down"
+playback_settings = SubResource("Resource_c768i")
+
+[sub_resource type="Resource" id="Resource_4qwsh"]
+script = ExtResource("16_l7b6c")
+stop_when_source_dies = false
+stationary = false
+volume_db = -10.0
+min_pitch = 1.0
+max_pitch = 1.0
+panning_strength = 1.0
+attenuation = 0.0
+max_distance = 10000
+unit_size = 10.0
+max_db = 3.0
+
+[sub_resource type="Resource" id="Resource_rigwb"]
+script = ExtResource("14_yim5u")
+audio_streams = Array[AudioStream]([ExtResource("13_451x0")])
+probability_weights = Array[float]([1.0])
+trigger_tags = "flipper_up"
+playback_settings = SubResource("Resource_4qwsh")
+
 [sub_resource type="Resource" id="Resource_4b417"]
 script = ExtResource("16_l7b6c")
 stop_when_source_dies = false
@@ -211,7 +253,7 @@ playback_settings = SubResource("Resource_7ahtv")
 
 [sub_resource type="Resource" id="Resource_enyqf"]
 script = ExtResource("18_nix55")
-entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_54wcp"), SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_awm70"), SubResource("Resource_aqr0g")])
+entries = Array[ExtResource("14_yim5u")]([SubResource("Resource_54wcp"), SubResource("Resource_oa1p7"), SubResource("Resource_7rpfo"), SubResource("Resource_j0wic"), SubResource("Resource_g8jcr"), SubResource("Resource_h4njo"), SubResource("Resource_xw1wq"), SubResource("Resource_rigwb"), SubResource("Resource_awm70"), SubResource("Resource_aqr0g")])
 
 [sub_resource type="Gradient" id="Gradient_4tunj"]
 colors = PackedColorArray(0.194075, 0.24783, 0.627565, 1, 0.0681335, 0.0928726, 0.253216, 1)

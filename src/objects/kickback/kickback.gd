@@ -46,7 +46,6 @@ var _holder_max_position: float
 
 var _load_duration: int
 var _loaded_body: RigidBody2D
-var _player_input_start_ts: int = 0
 var _player_strength: float
 var _body_present: bool = false
 
@@ -113,5 +112,5 @@ func _on_body_entered_detection_area(body: Node2D):
 	loaded.emit(body)
 
 
-func _on_body_exited_detection_area(body):
+func _on_body_exited_detection_area(_body):
 	_body_present = false

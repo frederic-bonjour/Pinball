@@ -36,13 +36,18 @@ func _process_inputs() -> void:
 	if Input.is_action_just_pressed(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"activate")
 		tree.call_group(&"rotate_on_flip", &"rotate_left")
+		SfxManager.play_audio(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"deactivate")
+		SfxManager.play_audio(&"flipper_down")
+	
 	if Input.is_action_just_pressed(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"activate")
 		tree.call_group(&"rotate_on_flip", &"rotate_right")
+		SfxManager.play_audio(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"deactivate")
+		SfxManager.play_audio(&"flipper_down")
 
 
 var _camera_zoom = 0.75
@@ -65,12 +70,12 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		body.teleport_to(_ball_initial_position)
 
 
-func _add_ball_touch_particles(ball: Ball, _body: Node2D) -> void:
+func _add_ball_touch_particles(_ball: Ball, _body: Node2D) -> void:
 	var particles = BallBounceScene.instantiate()
 	particles.top_level = true
-	particles.position = ball.global_position
+	particles.position = _ball.global_position
 	add_child(particles)
 
 
-func _on_kick_back_ejection(ball: PhysicsBody2D, kickback: KickBack, force: int):
-	SignalHub.kickback_ejection.emit(ball, kickback, force)
+func _on_kick_back_ejection(_ball: PhysicsBody2D, kickback: KickBack, force: int):
+	SignalHub.kickback_ejection.emit(_ball, kickback, force)

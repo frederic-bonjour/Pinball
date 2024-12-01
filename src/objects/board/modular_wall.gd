@@ -58,7 +58,7 @@ func _update_end_joint(_name: StringName) -> void:
 	_update_joint("EndJoint", end_joint_properties, half_length)
 
 
-func _update_joint(joint_name: String, properties: WallJointProperties, p: float) -> void:
+func _update_joint(joint_name: String, props: WallJointProperties, p: float) -> void:
 	if properties:
 		var wjn: WallJoint = get_node_or_null(joint_name)
 		if not wjn:
@@ -68,7 +68,7 @@ func _update_joint(joint_name: String, properties: WallJointProperties, p: float
 			add_child(wjn)
 			wjn.position.y = p
 			wjn.position.x = 0.0
-		wjn.properties = properties
+		wjn.properties = props
 	else:
 		var wjn: WallJoint = get_node_or_null(joint_name)
 		if wjn:

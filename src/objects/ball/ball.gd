@@ -9,10 +9,8 @@ extends RigidBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 
 
-var _trail_points: Array[Vector2] = []
 var _reset_state = false
 var _teleport_vector: Vector2
-var _last_pos: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:

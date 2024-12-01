@@ -13,7 +13,7 @@ func _ready() -> void:
 	SignalHub.kickback_ejection.connect(_kickback_ejection)
 
 
-func play_audio(audio_name: StringName, target_node: Node2D) -> void:
+func play_audio(audio_name: StringName, target_node: Node2D = null) -> void:
 	var emitter = EventAudio.play_2d(audio_name, target_node)
 	if emitter:
 		emitter.player.bus = &"SFX"
@@ -54,5 +54,5 @@ func _ball_lost(_ball: Ball) -> void:
 	play_audio(&"ball_lost", _ball)
 
 
-func _kickback_ejection(ball: PhysicsBody2D, kickback: KickBack, force: int) -> void:
+func _kickback_ejection(_ball: PhysicsBody2D, kickback: KickBack, _force: int) -> void:
 	play_audio(&"kickback", kickback)
