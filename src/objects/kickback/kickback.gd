@@ -89,7 +89,7 @@ func _process(delta: float) -> void:
 		Waiting:
 			if Input.is_action_pressed(&"launch"):
 				_state = Loading
-		
+
 		Loading:
 			var load_time: int = clamp(now - _state_ts, 0, _load_duration)
 			var load_value: float = float(load_time) / _load_duration
@@ -103,12 +103,12 @@ func _process(delta: float) -> void:
 				_player_strength = strength * load_value
 				_state = Ejecting
 				ejected.emit(_loaded_body, self, _player_strength)
-		
+
 		Ejecting:
 			if not disable_movement:
 				holder.position.y = move_toward(holder.position.y, _holder_idle_position, delta * 750)
 			var s = strength if auto_eject else _player_strength
-			_loaded_body.apply_central_impulse(Vector2(randf_range(-s*0.01, s*0.01), -s))
+			_loaded_body.apply_central_impulse(Vector2.from_angle(rotation + PI / 2.0) * -s)
 			if disable_movement:
 				_state = Idle
 			elif is_equal_approx(holder.position.y, _holder_idle_position) and not _body_present:
