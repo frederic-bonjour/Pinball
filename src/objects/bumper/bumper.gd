@@ -8,6 +8,7 @@ extends Node2D
 		_update_properties()
 
 @export var max_strength: int = 400
+@export var score: int = 100
 
 @onready var ellipse = %Ellipse
 @onready var collision_shape = %CollisionShape
@@ -33,7 +34,7 @@ func _update_properties() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta: float) -> void:
 	_extend = move_toward(_extend, _dest_extend, delta * _strength)
 	(collision_shape.shape as CircleShape2D).radius = radius + _extend
 	ellipse.size.x = radius * 2 + _extend
@@ -44,8 +45,8 @@ func _on_body_entered(body):
 	if body is Ball:
 		SignalHub.bumper_hit.emit(self, body)
 		_dest_extend = 35
-		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), max_strength / 10, max_strength)
-		#body.linear_velocity = body.linear_velocity.normalized() * 1200
+		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), roundi(max_strength / 10), max_strength)
+		body.linear_velocity = body.linear_velocity.normalized() * 1500
 
 
 func _on_body_exited(body):

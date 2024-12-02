@@ -109,7 +109,7 @@ func _process(delta: float) -> void:
 			if not disable_movement:
 				holder.position.y = move_toward(holder.position.y, _holder_idle_position, delta * 750)
 			var s = strength if auto_eject else _player_strength
-			_loaded_body.apply_central_impulse(Vector2.from_angle(rotation + PI / 2.0) * -s)
+			_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
 			if disable_movement:
 				_state = Idle
 			elif is_equal_approx(holder.position.y, _holder_idle_position) and not _body_present:

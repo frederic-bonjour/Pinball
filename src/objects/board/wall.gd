@@ -2,6 +2,9 @@
 class_name Wall
 extends AntialiasedLine2D
 
+const physics_material = preload("res://src/materials/walls.tres")
+
+
 @export var start_joint_radius: float = 0.0:
 	set(v):
 		start_joint_radius = v
@@ -27,6 +30,7 @@ var _body: StaticBody2D
 func _ready():
 	super._ready()
 	_body = StaticBody2D.new()
+	_body.physics_material_override = physics_material
 	_body.collision_mask = 2
 	add_child(_body)
 	_update_collision()

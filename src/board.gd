@@ -5,6 +5,8 @@ extends Node2D
 
 @onready var camera: Camera2D = %Camera
 @onready var ball: Ball = %Ball
+@onready var launcher: Node2D = %Launcher
+@onready var launcher_rotate_on_flip: ComponentRotateOnFlip = $Launcher/RotateOnFlip
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
@@ -74,6 +76,11 @@ func _update_camera(delta: float) -> void:
 func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 	if body is Ball:
 		SignalHub.ball_lost.emit(body)
+		# Stops the ball
+		body.linear_velocity = Vector2.ZERO
+		# Reset launcher to its default/central postion
+		await launcher_rotate_on_flip.reset()
+		# When launcher is ready, telepoty the ball into it.
 		body.teleport_to(_ball_initial_position)
 		_activate_kickbacks()
 
@@ -97,8 +104,8 @@ func _on_kickback_activation_area_body_entered(_body):
 	_activate_kickbacks()
 
 
-func _brick_destroyed(_brick, _ball) -> void:
+func _brick_destroyed(_brick: Brick, _ball) -> void:
 	_score += 1000
 
-func _bumper_hit(_bumper, _ball) -> void:
-	_score += 100
+func _bumper_hit(_bumper: Bumper, _ball) -> void:
+	_score = max(0, _score + _bumper.score)
