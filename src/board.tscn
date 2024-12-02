@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=73 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://cdibewau1dffo" path="res://src/fx/regular_polygon.tscn" id="32_vnj5b"]
 [ext_resource type="Script" path="res://src/components/rotate_on_flip.gd" id="33_5wjiy"]
 [ext_resource type="Texture2D" uid="uid://cdylqw1o4toi8" path="res://src/objects/board/assets/2rounded.png" id="33_rnex6"]
+[ext_resource type="Texture2D" uid="uid://bvly4cyo78oj" path="res://assets/logo.png" id="37_n48sv"]
 [ext_resource type="Script" path="res://src/objects/board/wall.gd" id="37_qs8ee"]
 
 [sub_resource type="Resource" id="Resource_qst8b"]
@@ -418,10 +419,6 @@ position = Vector2(1920, -1030)
 disable_mode = 1
 collision_priority = 10.0
 
-[node name="BottomLeft" type="Polygon2D" parent="."]
-color = Color(0, 0, 0, 0.5)
-polygon = PackedVector2Array(10, -980, 420, -570, 420, -300, 400, -290, 400, -270, 420, -260, 450, -260, 670, -160, 670, 0, 10, 0)
-
 [node name="BottomLeft2" type="Polygon2D" parent="."]
 position = Vector2(1600, 0)
 color = Color(0, 0, 0, 0.5)
@@ -429,11 +426,11 @@ polygon = PackedVector2Array(10, -600, 280, -840, 360, -840, 660, -600, 660, -28
 
 [node name="ScoreLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 1670.0
-offset_top = -600.0
-offset_right = 2170.0
-offset_bottom = -524.0
-theme_override_font_sizes/font_size = 60
+offset_left = 1720.0
+offset_top = -690.0
+offset_right = 2130.0
+offset_bottom = -614.0
+theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
 
@@ -875,10 +872,6 @@ radius = 65.0
 position = Vector2(2250, -900)
 radius = 65.0
 
-[node name="Bumper8" parent="." instance=ExtResource("12_wkwpx")]
-position = Vector2(120, -1030)
-radius = 65.0
-
 [node name="Bumper4" parent="." instance=ExtResource("12_wkwpx")]
 position = Vector2(1090, -1580)
 radius = 65.0
@@ -915,7 +908,7 @@ rotation = 0.436332
 angle_degrees = -45.0
 
 [node name="FlipperLeft2" parent="Left Flippers and Slingshots" instance=ExtResource("9_rw7jb")]
-position = Vector2(90.0001, -1560)
+position = Vector2(104, -1560)
 rotation = 0.785398
 angle_degrees = -45.0
 
@@ -1001,7 +994,7 @@ end_joint_radius = 20.0
 
 [node name="Launcher" parent="." instance=ExtResource("29_0neda")]
 position = Vector2(1920, -893)
-strength = 25000.0
+strength = 30000.0
 auto_eject = false
 auto_inactive_delay = 0
 
@@ -1027,6 +1020,25 @@ inactive = true
 auto_inactive_delay = 30000
 
 [node name="Indicator" type="Label" parent="KickBack"]
+visible = false
+offset_left = -24.0
+offset_top = -150.0
+offset_right = 153.0
+offset_bottom = -111.0
+rotation = -1.5708
+text = "KICKBACK
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="KickBack3" parent="." instance=ExtResource("29_0neda")]
+unique_name_in_owner = true
+position = Vector2(360, -240)
+strength = 200000.0
+disable_movement = true
+inactive = true
+auto_inactive_delay = 30000
+
+[node name="Indicator" type="Label" parent="KickBack3"]
 visible = false
 offset_left = -24.0
 offset_top = -150.0
@@ -1084,7 +1096,8 @@ properties = SubResource("Resource_ne0r5")
 
 [node name="Wall Bottom Left" type="Line2D" parent="."]
 position = Vector2(-850, -380)
-points = PackedVector2Array(860, -590, 1270, -190, 1270, 80)
+points = PackedVector2Array(940, -550, 1270, -220, 1270, 80)
+begin_cap_mode = 2
 antialiased = true
 script = ExtResource("37_qs8ee")
 
@@ -1167,7 +1180,19 @@ script = ExtResource("37_qs8ee")
 start_joint_radius = 10.0
 end_joint_radius = 10.0
 
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(1920, -340)
+texture = ExtResource("37_n48sv")
+
+[node name="Wall Bottom Left2" type="Line2D" parent="."]
+position = Vector2(-950, -70)
+points = PackedVector2Array(960, -350, 1270, -220)
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("37_qs8ee")
+
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
 [connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]
+[connection signal="ejected" from="KickBack3" to="." method="_on_kick_back_ejection"]
 [connection signal="ejected" from="KickBack2" to="." method="_on_kick_back_ejection"]
 [connection signal="body_entered" from="KickbackActivationArea/Aread2D" to="." method="_on_kickback_activation_area_body_entered"]

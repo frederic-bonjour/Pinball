@@ -47,7 +47,7 @@ func _process_inputs() -> void:
 	if Input.is_action_just_released(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"deactivate")
 		SfxManager.play_audio(&"flipper_down")
-	
+
 	if Input.is_action_just_pressed(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"activate")
 		tree.call_group(&"rotate_on_flip", &"rotate_right")
