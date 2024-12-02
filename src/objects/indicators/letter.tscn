@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpwuw1tsdeuqu"]
+
+[ext_resource type="Script" path="res://addons/antialiased_line2d/antialiased_regular_polygon2d.gd" id="1_p2815"]
+[ext_resource type="Script" path="res://src/objects/indicators/letter.gd" id="1_q6gs5"]
+[ext_resource type="LabelSettings" uid="uid://b8uguqv58l6p2" path="res://src/letter_label_settings.tres" id="2_651k6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6xns"]
+size = Vector2(70, 70)
+
+[node name="Letter" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_q6gs5")
+color_on = Color(2, 2, 2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q6xns")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(0, 0.8, 2, 1)
+rotation = 0.383972
+polygon = PackedVector2Array(0, -35, 24.7487, -24.7487, 35, 1.5299e-06, 24.7487, 24.7487, -3.0598e-06, 35, -24.7487, 24.7487, -35, -4.17371e-07, -24.7487, -24.7487)
+script = ExtResource("1_p2815")
+size = Vector2(70, 70)
+sides = 8
+stroke_width = 0.0
+
+[node name="Label" type="Label" parent="Polygon2D"]
+unique_name_in_owner = true
+modulate = Color(3, 3, 3, 1)
+offset_left = -39.0
+offset_top = -17.0
+offset_right = 21.0
+offset_bottom = 43.0
+rotation = -0.383972
+text = "K
+"
+label_settings = ExtResource("2_651k6")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -14,7 +14,11 @@ const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 var _ball_initial_position: Vector2
 var _score: int = 0:
 	set(v):
+		var d1 = floori(_score / 10_000)
 		_score = v
+		var d2 = floori(_score / 10_000)
+		if d1 != d2:
+			_score_step_reached()
 		%ScoreLabel.text = TextServerManager.get_primary_interface().format_number(str(_score))
 
 
@@ -107,5 +111,22 @@ func _on_kickback_activation_area_body_entered(_body):
 func _brick_destroyed(_brick: Brick, _ball) -> void:
 	_score += 1000
 
+
 func _bumper_hit(_bumper: Bumper, _ball) -> void:
 	_score = max(0, _score + _bumper.score)
+
+
+func _score_step_reached() -> void:
+	_activate_kickbacks()
+
+
+func _on_letter_group_letter_on(letter: IndicatorLetter):
+	SfxManager.play_audio(&"letter_on", letter)
+
+
+func _on_letter_group_kick_completed():
+	_activate_kickbacks()
+
+
+func _on_letter_group_save_completed():
+	pass #TODO

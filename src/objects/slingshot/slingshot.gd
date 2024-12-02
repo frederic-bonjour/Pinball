@@ -36,7 +36,6 @@ func _process(delta):
 
 
 func _on_ball_detection_area_body_entered(body):
-	print_debug("enter slingshot")
 	if body is Ball:
 		pusher.collision_mask = _ball_collision_mask
 		_dest_offset = open_value * _side

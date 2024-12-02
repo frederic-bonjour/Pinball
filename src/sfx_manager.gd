@@ -31,8 +31,11 @@ func _brick_destroyed(_brick: Brick, _ball: Ball) -> void:
 	play_audio(&"brick_destroyed", _brick)
 
 
-func _bumper_hit(_bumper: Bumper, _ball: Ball) -> void:
-	play_audio(&"bumper", _bumper)
+func _bumper_hit(bumper: Bumper, _ball: Ball) -> void:
+	if bumper.score > 0:
+		play_audio(&"bumper", bumper)
+	else:
+		play_audio(&"bumper_negative", bumper)
 
 
 var _ball_wall_ts: int = 0
