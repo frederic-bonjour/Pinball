@@ -1,6 +1,6 @@
 @tool
 class_name Wall
-extends Line2D
+extends AntialiasedLine2D
 
 @export var start_joint_radius: float = 0.0:
 	set(v):
@@ -25,7 +25,7 @@ var _body: StaticBody2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	super._ready()
 	_body = StaticBody2D.new()
 	_body.collision_mask = 2
 	add_child(_body)
@@ -40,8 +40,12 @@ func _update_collision() -> void:
 		var radius: float = 0.0
 		if i == 0: # first
 			radius = start_joint_radius
+			if not radius and begin_cap_mode == LineCapMode.LINE_CAP_ROUND:
+				radius = width / 2.0
 		elif i == ps - 1: # last
 			radius = end_joint_radius
+			if not radius and end_cap_mode == LineCapMode.LINE_CAP_ROUND:
+				radius = width / 2.0
 		else: # others = middle
 			radius = middle_joints_radius
 
@@ -56,7 +60,7 @@ func _update_collision() -> void:
 				_body.add_child(cs)
 			cs.position = p1
 			(cs.shape as CircleShape2D).radius = radius
-		
+
 		if i < ps - 1:
 			var p2 = points[i + 1]
 			cs = get_node_or_null("CSR%d" % i)
@@ -91,8 +95,3 @@ func _draw() -> void:
 		if radius > 0.0:
 			var p = points[i]
 			draw_circle(p, radius, Color.WHITE, true, -1, true)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

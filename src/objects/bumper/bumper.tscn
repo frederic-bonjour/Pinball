@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://en3henr63844"]
 
 [ext_resource type="Script" path="res://src/objects/bumper/bumper.gd" id="1_jng87"]
-[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="1_oraeg"]
+[ext_resource type="Script" path="res://addons/antialiased_line2d/antialiased_regular_polygon2d.gd" id="3_pfxy8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hp6fu"]
 friction = 0.5
@@ -19,14 +19,14 @@ radius = 60.0
 [node name="Bumper" type="Node2D"]
 script = ExtResource("1_jng87")
 radius = 50.0
+max_strength = null
 
-[node name="Ellipse" type="Node2D" parent="."]
+[node name="Ellipse" type="Polygon2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_oraeg")
-circle = true
-style = 2
-outline_width = 20
-outline_color = Color(1, 1, 1, 0.0980392)
+antialiased = true
+polygon = PackedVector2Array(0, -32, 6.24289, -31.3851, 12.2459, -29.5641, 17.7782, -26.607, 22.6274, -22.6274, 26.607, -17.7782, 29.5641, -12.2459, 31.3851, -6.24289, 32, 1.39876e-06, 31.3851, 6.24289, 29.5641, 12.2459, 26.607, 17.7782, 22.6274, 22.6274, 17.7782, 26.607, 12.2459, 29.5641, 6.24289, 31.3851, -2.79753e-06, 32, -6.24289, 31.3851, -12.2459, 29.5641, -17.7782, 26.607, -22.6274, 22.6274, -26.607, 17.7783, -29.5641, 12.2459, -31.3851, 6.24289, -32, -3.81596e-07, -31.3851, -6.24289, -29.5641, -12.2459, -26.607, -17.7782, -22.6274, -22.6274, -17.7782, -26.607, -12.2459, -29.5641, -6.24289, -31.3851)
+script = ExtResource("3_pfxy8")
+stroke_round_precision = 12
 
 [node name="Body" type="StaticBody2D" parent="."]
 disable_mode = 2

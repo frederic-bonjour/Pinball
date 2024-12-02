@@ -93,8 +93,8 @@ func _on_kick_back_ejection(_ball: PhysicsBody2D, kickback: KickBack, force: int
 	SignalHub.kickback_ejection.emit(_ball, kickback, force)
 
 
-func _on_kickback_activation_area_body_entered(body):
-	%KickBack.inactive = false
+func _on_kickback_activation_area_body_entered(_body):
+	_activate_kickbacks()
 
 
 func _brick_destroyed(_brick, _ball) -> void:
