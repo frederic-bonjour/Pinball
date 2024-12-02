@@ -1150,16 +1150,13 @@ scale = Vector2(2, 2)
 position = Vector2(950, -2150)
 scale = Vector2(2, 2)
 
-[node name="KickBack" parent="." instance=ExtResource("29_0neda")]
+[node name="KickBackLR" parent="." instance=ExtResource("29_0neda")]
 unique_name_in_owner = true
 position = Vector2(1546, -320)
 strength = 20000.0
 load_duration = 750
-inactive = true
-auto_inactive_delay = 30000
 
-[node name="Indicator" type="Label" parent="KickBack"]
-visible = false
+[node name="Indicator" type="Label" parent="KickBackLR"]
 offset_left = -20.0
 offset_top = -113.0
 offset_right = 157.0
@@ -1169,7 +1166,7 @@ text = "KICKBACK
 "
 metadata/_edit_use_anchors_ = true
 
-[node name="KickBack3" parent="." instance=ExtResource("29_0neda")]
+[node name="KickBackLL" parent="." instance=ExtResource("29_0neda")]
 unique_name_in_owner = true
 position = Vector2(270, -155)
 strength = 20000.0
@@ -1177,14 +1174,13 @@ auto_eject_time = 750
 always_active = true
 auto_inactive_delay = 30000
 
-[node name="KickBack2" parent="." instance=ExtResource("29_0neda")]
+[node name="KickBackRL" parent="." instance=ExtResource("29_0neda")]
 unique_name_in_owner = true
 position = Vector2(2295, -320)
 strength = 20000.0
 inactive = true
-auto_inactive_delay = 30000
 
-[node name="Indicator" type="Label" parent="KickBack2"]
+[node name="Indicator" type="Label" parent="KickBackRL"]
 visible = false
 offset_left = -19.0
 offset_top = -113.0
@@ -1365,9 +1361,9 @@ joint_mode = 2
 script = ExtResource("37_qs8ee")
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
-[connection signal="ejected" from="KickBack" to="." method="_on_kick_back_ejection"]
-[connection signal="ejected" from="KickBack3" to="." method="_on_kick_back_ejection"]
-[connection signal="ejected" from="KickBack2" to="." method="_on_kick_back_ejection"]
+[connection signal="ejected" from="KickBackLR" to="." method="_on_kick_back_ejection"]
+[connection signal="ejected" from="KickBackLL" to="." method="_on_kick_back_ejection"]
+[connection signal="ejected" from="KickBackRL" to="." method="_on_kick_back_ejection"]
 [connection signal="completed" from="LetterGroup_SAVE" to="." method="_on_letter_group_save_completed"]
 [connection signal="letter_on" from="LetterGroup_SAVE" to="." method="_on_letter_group_letter_on"]
 [connection signal="completed" from="LetterGroup_KICK" to="." method="_on_letter_group_kick_completed"]

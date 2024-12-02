@@ -119,6 +119,8 @@ func _process(delta: float) -> void:
 			if not disable_movement:
 				holder.position.y = _holder_idle_position
 			_state = Ready if _body_present else Idle
+			if not always_active:
+				inactive = true
 
 
 func _on_body_entered_detection_area(body: Node2D):
