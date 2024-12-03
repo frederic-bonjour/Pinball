@@ -2,6 +2,8 @@
 class_name IndicatorLetter
 extends Node2D
 
+const color_off: Color = Color(1, 1, 1, 0.3)
+
 @export var letter: String:
 	set(v):
 		letter = v
@@ -12,13 +14,13 @@ extends Node2D
 	set(v):
 		color_on = v
 		if is_node_ready():
-			polygon.self_modulate = color_on if lit else Color.GRAY
+			polygon.self_modulate = color_on if lit else color_off
 
 @export var lit: bool = true:
 	set(v):
 		lit = v
 		if is_node_ready():
-			polygon.self_modulate = color_on if lit else Color.GRAY
+			polygon.self_modulate = color_on if lit else color_off
 
 
 @onready var label = %Label
