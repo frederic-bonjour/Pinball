@@ -4,7 +4,7 @@ extends Node2D
 
 signal loaded(body: PhysicsBody2D)
 signal ejected(body: PhysicsBody2D, kickback: KickBack, force: int)
-
+signal state_changed(state: StringName)
 
 @export_group("Ejection")
 @export var amplitude: float = 100.0:
@@ -44,11 +44,13 @@ signal ejected(body: PhysicsBody2D, kickback: KickBack, force: int)
 var _indicator: Node
 var _auto_inactive_ts: int = 0
 
+const STATE_NAMES: Array[StringName] = [&"Idle", &"Ready", &"Loading", &"Waiting", &"Eject", &"Ejecting", &"Cooldown"]
 enum { Idle, Ready, Loading, Waiting, Eject, Ejecting, Cooldown }
 var _state = Idle:
 	set(v):
 		_state = v
 		_state_ts = Time.get_ticks_msec()
+		state_changed.emit(STATE_NAMES[_state])
 
 var _state_ts: int = 0
 
@@ -111,9 +113,9 @@ func _process(delta: float) -> void:
 			var s = strength if auto_eject else _player_strength
 			_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
 			if disable_movement:
-				_state = Idle
-			elif is_equal_approx(holder.position.y, _holder_idle_position) and not _body_present:
-				_state = Cooldown
+				_state = Ready if _body_present else Idle
+			elif is_equal_approx(holder.position.y, _holder_idle_position):
+				_state = Cooldown if not _body_present else Ready
 
 		Cooldown:
 			if not disable_movement:

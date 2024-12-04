@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://clr3jypcafe7s"]
+
+[ext_resource type="Script" path="res://tests/test_kickback.gd" id="1_6eyje"]
+[ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="1_iygtm"]
+[ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="2_vx677"]
+
+[node name="Test Kickback" type="Node2D"]
+script = ExtResource("1_6eyje")
+
+[node name="KickBack" parent="." instance=ExtResource("1_iygtm")]
+unique_name_in_owner = true
+position = Vector2(270, 1020)
+strength = 20000.0
+auto_eject = false
+always_active = true
+
+[node name="Ball" parent="." instance=ExtResource("2_vx677")]
+unique_name_in_owner = true
+position = Vector2(270, 870)
+
+[node name="EjectButton" type="Button" parent="."]
+offset_left = 380.0
+offset_top = 940.0
+offset_right = 590.0
+offset_bottom = 1010.0
+text = "Eject"
+
+[node name="State" type="Label" parent="."]
+offset_left = 380.0
+offset_top = 1020.0
+offset_right = 590.0
+offset_bottom = 1059.0
+
+[connection signal="state_changed" from="KickBack" to="." method="_on_kick_back_state_changed"]
+[connection signal="button_down" from="EjectButton" to="." method="_on_eject_button_button_down"]
+[connection signal="button_up" from="EjectButton" to="." method="_on_eject_button_button_up"]
