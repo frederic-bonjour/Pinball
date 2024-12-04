@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bi380gjk3gc2g"]
+[gd_scene load_steps=4 format=3 uid="uid://bi380gjk3gc2g"]
 
+[ext_resource type="Script" path="res://src/objects/launcher/rotative_launcher.gd" id="1_yq7ss"]
 [ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="2_7gq7a"]
 [ext_resource type="Texture2D" uid="uid://c7ijjgvkk6wso" path="res://src/objects/board/assets/rotative_launcher.png" id="3_o0g0l"]
 
 [node name="RotativeLauncher" type="Node2D"]
-position = Vector2(1920, -984)
+script = ExtResource("1_yq7ss")
 metadata/_edit_group_ = true
 
 [node name="Launcher" parent="." instance=ExtResource("2_7gq7a")]
-position = Vector2(0, -16)
-amplitude = 150.0
-strength = 20000.0
+position = Vector2(0, -30)
+strength = 450000.0
 auto_eject = false
 load_duration = 1000
 always_active = true
@@ -22,3 +22,16 @@ texture = ExtResource("3_o0g0l")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-34, -138.7, -50, -143, -79.5, -130, -112.5, -101, -137.3, -63, -148.1, -28, -150, 20.1, -140, 56.7, -120, 91.2, -96, 116.7, -63, 137.3, -20, 149.1, 23.6, 150, 56.5, 140, 97.2, 115, 124.5, 88, 141.5, 52, 149.3, 20, 148, -34.8, 130, -79.6, 91, -122.4, 49, -144, 35, -139, 35, 65, 23, 76, -22, 76, -34, 60.1)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 30.0
+offset_top = -48.0
+offset_right = 152.0
+offset_bottom = 12.0
+rotation = 1.5708
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[connection signal="loading" from="Launcher" to="." method="_on_launcher_loading"]

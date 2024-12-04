@@ -621,11 +621,12 @@ start_joint_radius = 30.0
 [node name="Wall Bottom Right4" type="Line2D" parent="Left Flippers"]
 texture_filter = 6
 position = Vector2(-1360, -260)
-points = PackedVector2Array(1680, 160, 1680, 60, 1770, -20, 2000, 110)
+points = PackedVector2Array(1370, -50, 1580, 60, 1660, 60, 1770, -20, 2000, 110)
 width = 40.0
 texture = SubResource("ImageTexture_ruwxo")
 texture_mode = 1
 joint_mode = 2
+begin_cap_mode = 1
 end_cap_mode = 2
 round_precision = 12
 antialiased = true
@@ -662,14 +663,14 @@ max_strength = 100
 score = -1000
 
 [node name="KickBack" parent="Left Flippers" instance=ExtResource("29_0neda")]
-position = Vector2(1546, -320)
-strength = 12000.0
+position = Vector2(1550, -245)
+strength = 250000.0
 load_duration = 750
 
 [node name="Indicator" type="Label" parent="Left Flippers/KickBack"]
-offset_left = -20.0
+offset_left = -25.0
 offset_top = -113.0
-offset_right = 157.0
+offset_right = 152.0
 offset_bottom = -74.0
 rotation = -1.5708
 text = "KICKBACK
@@ -752,15 +753,13 @@ max_strength = 100
 score = -1000
 
 [node name="KickBack" parent="Right Flippers" instance=ExtResource("29_0neda")]
-position = Vector2(335, -320)
-strength = 12000.0
-inactive = true
+position = Vector2(330, -245)
+strength = 250000.0
 
 [node name="Indicator" type="Label" parent="Right Flippers/KickBack"]
-visible = false
-offset_left = -19.0
+offset_left = -14.0
 offset_top = -113.0
-offset_right = 158.0
+offset_right = 163.0
 offset_bottom = -74.0
 rotation = -1.5708
 text = "KICKBACK
@@ -976,22 +975,10 @@ end_cap_mode = 2
 antialiased = true
 script = ExtResource("37_qs8ee")
 
-[node name="Wall2" type="Line2D" parent="LetterGroup_KICK"]
-texture_filter = 6
-position = Vector2(0, 10)
-points = PackedVector2Array(10, -320, 220, -210, 220, -110)
-width = 40.0
-texture = SubResource("ImageTexture_ruwxo")
-texture_mode = 1
-joint_mode = 2
-begin_cap_mode = 1
-antialiased = true
-script = ExtResource("37_qs8ee")
-
 [node name="KickBack" parent="LetterGroup_KICK" instance=ExtResource("29_0neda")]
 unique_name_in_owner = true
-position = Vector2(270, -155)
-strength = 12000.0
+position = Vector2(260, -190)
+strength = 250000.0
 auto_eject_time = 750
 always_active = true
 auto_inactive_delay = 30000

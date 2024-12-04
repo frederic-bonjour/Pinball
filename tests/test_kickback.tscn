@@ -10,26 +10,36 @@ script = ExtResource("1_6eyje")
 [node name="KickBack" parent="." instance=ExtResource("1_iygtm")]
 unique_name_in_owner = true
 position = Vector2(270, 1020)
-strength = 12000.0
+strength = 280000.0
 auto_eject = false
+always_active = true
 
 [node name="Ball" parent="." instance=ExtResource("2_vx677")]
 unique_name_in_owner = true
 position = Vector2(270, 870)
 
-[node name="EjectButton" type="Button" parent="."]
-offset_left = 380.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 360.0
 offset_top = 940.0
-offset_right = 590.0
-offset_bottom = 1010.0
+offset_right = 660.0
+offset_bottom = 1077.0
+
+[node name="EjectButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 text = "Eject"
 
-[node name="State" type="Label" parent="."]
-offset_left = 380.0
-offset_top = 1020.0
-offset_right = 590.0
-offset_bottom = 1059.0
+[node name="State" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+
+[connection signal="loading" from="KickBack" to="." method="_on_kick_back_loading"]
 [connection signal="state_changed" from="KickBack" to="." method="_on_kick_back_state_changed"]
-[connection signal="button_down" from="EjectButton" to="." method="_on_eject_button_button_down"]
-[connection signal="button_up" from="EjectButton" to="." method="_on_eject_button_button_up"]
+[connection signal="button_down" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_down"]
+[connection signal="button_up" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_up"]

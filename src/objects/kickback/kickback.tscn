@@ -11,7 +11,7 @@ rough = true
 bounce = 0.1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0adk"]
-size = Vector2(60, 110)
+size = Vector2(60, 60)
 
 [sub_resource type="Image" id="Image_3n08c"]
 data = {
@@ -28,29 +28,29 @@ image = SubResource("Image_3n08c")
 [node name="KickBack" type="Node2D"]
 script = ExtResource("1_10l53")
 
-[node name="Holder" type="Node2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="Holder"]
+[node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -80)
 disable_mode = 2
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Holder/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_t426p")
 
-[node name="Pusher" type="StaticBody2D" parent="Holder"]
+[node name="Blocker" type="StaticBody2D" parent="."]
 disable_mode = 2
 collision_mask = 2
 collision_priority = 10.0
 physics_material_override = SubResource("PhysicsMaterial_6hdhj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Holder/Pusher"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blocker"]
 shape = SubResource("RectangleShape2D_o0adk")
 
-[node name="TopLine" type="Line2D" parent="Holder"]
+[node name="TopLine" type="Line2D" parent="Blocker"]
+unique_name_in_owner = true
 texture_filter = 6
-position = Vector2(0, -50)
+position = Vector2(0, -25)
 points = PackedVector2Array(-25, 0, 25, 0)
 texture = SubResource("ImageTexture_ruwxo")
 texture_mode = 1
@@ -60,15 +60,5 @@ round_precision = 12
 antialiased = true
 script = ExtResource("2_gy4do")
 
-[node name="BottomLine" type="Line2D" parent="."]
-texture_filter = 6
-position = Vector2(0, 50)
-points = PackedVector2Array(-30, 0, 30, 0)
-texture = SubResource("ImageTexture_ruwxo")
-texture_mode = 1
-begin_cap_mode = 1
-end_cap_mode = 1
-script = ExtResource("2_gy4do")
-
-[connection signal="body_entered" from="Holder/Area2D" to="." method="_on_body_entered_detection_area"]
-[connection signal="body_exited" from="Holder/Area2D" to="." method="_on_body_exited_detection_area"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered_detection_area"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited_detection_area"]
