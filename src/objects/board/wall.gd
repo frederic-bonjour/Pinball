@@ -47,7 +47,6 @@ func _ready():
 func _update_collision() -> void:
 	if not _body: return
 	var ps: int = points.size()
-	var occluder_points: PackedVector2Array = PackedVector2Array()
 
 	for i in range(ps):
 		var radius: float = 0.0
@@ -87,7 +86,6 @@ func _update_collision() -> void:
 			var rs: RectangleShape2D = cs.shape
 			rs.size.x = abs(p1 - p2).length()
 			rs.size.y = width
-			var r = Rect2(cs.position, rs.size)
 
 	_occluder.occluder = OccluderPolygon2D.new()
 	_occluder.occluder.polygon = create_polyline_polygon()

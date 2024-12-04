@@ -16,7 +16,7 @@ func _ready():
 		l.lit = false
 
 
-func _ball_entered(ball, letter: IndicatorLetter) -> void:
+func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:
 	if not letter.lit:
 		letter.lit = true
 		letter_on.emit(letter)
