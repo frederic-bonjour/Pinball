@@ -22,6 +22,7 @@ SignalHub="*res://src/signal_hub.gd"
 SfxManager="*res://src/sfx_manager.gd"
 EventAudio="*res://addons/event_audio/scenes/event_audio_autoload.tscn"
 AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
+SessionManager="*res://src/session_manager.gd"
 
 [display]
 
