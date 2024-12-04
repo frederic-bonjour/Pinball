@@ -10,9 +10,8 @@ script = ExtResource("1_6eyje")
 [node name="KickBack" parent="." instance=ExtResource("1_iygtm")]
 unique_name_in_owner = true
 position = Vector2(270, 1020)
-strength = 20000.0
+strength = 12000.0
 auto_eject = false
-always_active = true
 
 [node name="Ball" parent="." instance=ExtResource("2_vx677")]
 unique_name_in_owner = true

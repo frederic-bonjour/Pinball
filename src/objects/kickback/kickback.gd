@@ -25,6 +25,7 @@ signal state_changed(state: StringName)
 @export var inactive: bool = false:
 	set(v):
 		inactive = false if always_active else v
+		print_debug("inactive=", inactive)
 		if not inactive and auto_inactive_delay > 0:
 			_auto_inactive_ts = Time.get_ticks_msec() + auto_inactive_delay
 		if is_node_ready():
@@ -109,20 +110,19 @@ func _process(delta: float) -> void:
 
 		Ejecting:
 			if not disable_movement:
-				holder.position.y = move_toward(holder.position.y, _holder_idle_position, delta * 750)
+				holder.position.y = move_toward(holder.position.y, _holder_idle_position, delta * 250)
 			var s = strength if auto_eject else _player_strength
 			_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
-			if disable_movement:
-				_state = Ready if _body_present else Idle
-			elif is_equal_approx(holder.position.y, _holder_idle_position):
-				_state = Cooldown if not _body_present else Ready
+			if disable_movement or is_equal_approx(holder.position.y, _holder_idle_position):
+				print_debug("ejecting: _body_present=", _body_present)
+				_state = Ready if _body_present else Cooldown
 
 		Cooldown:
+			print_debug("cooldown!")
 			if not disable_movement:
 				holder.position.y = _holder_idle_position
 			_state = Ready if _body_present else Idle
-			if not always_active:
-				inactive = true
+			inactive = true
 
 
 func _on_body_entered_detection_area(body: Node2D):
