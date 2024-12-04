@@ -9,12 +9,13 @@
 friction = 0.2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gc081"]
-radius = 25.0
+radius = 26.0
 
 [node name="Ball" type="RigidBody2D"]
 position = Vector2(287, 273)
 collision_layer = 2
 collision_mask = 31
+collision_priority = 5.0
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_rjoxb")
 gravity_scale = 2.3
