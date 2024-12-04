@@ -1,12 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://coh4tb7cvi0db"]
 
 [ext_resource type="Texture2D" uid="uid://bt384cwckxs3x" path="res://src/objects/flipper/assets/flipper.png" id="1_53da1"]
+[ext_resource type="PhysicsMaterial" uid="uid://5tovjgocnqrb" path="res://src/objects/flipper/flipper_physics_material.tres" id="1_vimnc"]
 [ext_resource type="Script" path="res://src/objects/flipper/flipper.gd" id="1_ywy08"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tc2ty"]
-friction = 0.3
-rough = true
-bounce = 0.4
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_06o0h"]
 polygon = PackedVector2Array(-1, -23, 220, -13, 226, -4, 226, 4, 220, 12, -1, 23, -17, 15, -24, 0, -17, -16)
@@ -16,7 +12,7 @@ disable_mode = 2
 collision_layer = 4
 collision_mask = 2
 collision_priority = 5.0
-physics_material_override = SubResource("PhysicsMaterial_tc2ty")
+physics_material_override = ExtResource("1_vimnc")
 freeze = true
 freeze_mode = 1
 continuous_cd = 2
