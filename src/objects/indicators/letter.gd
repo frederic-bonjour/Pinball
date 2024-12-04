@@ -14,17 +14,19 @@ const color_off: Color = Color(1, 1, 1, 0.3)
 	set(v):
 		color_on = v
 		if is_node_ready():
-			polygon.self_modulate = color_on if lit else color_off
+			point_light.color = color_on
 
 @export var lit: bool = true:
 	set(v):
 		lit = v
 		if is_node_ready():
-			polygon.self_modulate = color_on if lit else color_off
+			sprite.modulate = color_on if lit else color_off
+			point_light.enabled = lit
 
 
 @onready var label = %Label
-@onready var polygon = %Polygon2D
+@onready var point_light: PointLight2D = $PointLight2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 # Called when the node enters the scene tree for the first time.

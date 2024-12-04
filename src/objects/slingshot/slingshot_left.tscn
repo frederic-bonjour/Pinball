@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gd2vjkhm8ywa"]
+[gd_scene load_steps=8 format=3 uid="uid://gd2vjkhm8ywa"]
 
 [ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_7yepp"]
 [ext_resource type="Texture2D" uid="uid://qnar1elt716p" path="res://src/objects/slingshot/assets/slingshot.svg" id="2_h0w5k"]
@@ -15,6 +15,9 @@ height = 380.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kmio4"]
 height = 360.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yqjqw"]
+polygon = PackedVector2Array(0, 1, 0, 261, 170, 340, 181, 330, 17, 1)
 
 [node name="SlingshotLeft" type="Node2D"]
 position = Vector2(-25, -5)
@@ -54,5 +57,8 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallDetectionArea"]
 rotation = -0.462512
 shape = SubResource("CapsuleShape2D_kmio4")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_yqjqw")
 
 [connection signal="body_entered" from="BallDetectionArea" to="." method="_on_ball_detection_area_body_entered"]

@@ -10,7 +10,7 @@ metadata/_edit_group_ = true
 [node name="Launcher" parent="." instance=ExtResource("2_7gq7a")]
 position = Vector2(0, -16)
 amplitude = 150.0
-strength = 22000.0
+strength = 25000.0
 auto_eject = false
 load_duration = 1000
 always_active = true

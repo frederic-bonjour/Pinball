@@ -13,6 +13,7 @@ extends RigidBody2D
 
 @onready var sprite = $Sprite2D
 @onready var collision_polygon = $CollisionPolygon2D
+@onready var light_occluder_2d: LightOccluder2D = $LightOccluder2D
 
 var _initial_rotation: float
 var _active_rotation: float
@@ -26,6 +27,7 @@ func _ready():
 	_active_rotation = _initial_rotation + deg_to_rad(angle_degrees)
 	_desired_rotation = _initial_rotation
 	_update_side()
+	light_occluder_2d.occluder.polygon = collision_polygon.polygon
 	add_to_group(&"flippers")
 	add_to_group(&"flipper_left" if side == 0 else &"flipper_right")
 
@@ -36,6 +38,8 @@ func _update_side() -> void:
 		sprite.position.x = 101 if side == 0 else -101
 	if collision_polygon:
 		collision_polygon.scale.x = -1 if side == 1 else 1
+	if light_occluder_2d:
+		light_occluder_2d.scale.x = -1 if side == 1 else 1
 
 
 func activate() -> void:
