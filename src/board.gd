@@ -6,7 +6,7 @@ extends Node2D
 @onready var camera: Camera2D = %Camera
 @onready var ball: Ball = %Ball
 @onready var launcher: Node2D = %Launcher
-@onready var launcher_rotate_on_flip: ComponentRotateOnFlip = $Launcher/RotateOnFlip
+@onready var launcher_rotate_on_flip: ComponentRotateOnFlip = %Launcher/RotateOnFlip
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
@@ -20,6 +20,8 @@ var _score: int = 0:
 		if d1 != d2:
 			_score_step_reached()
 		%ScoreLabel.text = TextServerManager.get_primary_interface().format_number(str(_score))
+
+var _camera_zoom = 0.75
 
 
 func _ready():
@@ -62,8 +64,6 @@ func _process_inputs() -> void:
 		tree.call_group(&"flipper_right", &"deactivate")
 		SfxManager.play_audio(&"flipper_down")
 
-
-var _camera_zoom = 0.75
 
 func _update_camera(delta: float) -> void:
 	camera.position = ball.position
