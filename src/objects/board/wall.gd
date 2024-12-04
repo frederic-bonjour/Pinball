@@ -34,6 +34,8 @@ func _ready():
 	_body.collision_mask = 2
 	add_child(_body)
 	_update_collision()
+	round_precision = min(round_precision, 12)
+	antialiased = true
 
 
 func _update_collision() -> void:
