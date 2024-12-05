@@ -34,13 +34,11 @@ func _integrate_forces(state):
 
 func teleport_to(target_pos: Vector2):
 	_teleport_vector = target_pos;
-	_reset_state = true;
+	_reset_state = true
 
 
 func _on_body_entered(body: Node) -> void:
-	if body as ModularWall:
-		SignalHub.ball_touched_modular_wall.emit(self, body)
-	elif body.name.containsn(&"wall"):
+	if body as ModularWall or body.name.containsn(&"wall"):
 		SignalHub.wall_hit.emit(body, self)
 	elif body is Flipper:
 		SignalHub.flipper_hit.emit(body, self)
