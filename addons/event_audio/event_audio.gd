@@ -33,7 +33,7 @@ var _active_emitters_3d = Array()
 static func get_instance() -> EventAudioAPI:
 	return instance
 
-func play_2d(trigger: String, source: Node2D) -> AudioEmitter2D:
+func play_2d(trigger: String, source: Node) -> AudioEmitter2D:
 	var event := _find_event_for_trigger(trigger)
 	if event == null:
 		return null
