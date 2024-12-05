@@ -14,7 +14,7 @@ var _rng: RandomNumberGenerator
 var _audio_banks: Array[EAEventBank]
 
 class AudioEmitter2D:
-	var source: Node2D
+	var source: Node
 	var player: AudioStreamPlayer2D
 	var event: EAEvent
 

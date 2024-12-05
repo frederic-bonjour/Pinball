@@ -872,38 +872,37 @@ offset_left = 1030.0
 offset_top = -1840.0
 offset_right = 1030.0
 offset_bottom = -1840.0
+
+[node name="LetterGroup" type="Node" parent="LetterGroup_SAVE"]
 script = ExtResource("40_wggit")
 identifier = &"SAVE"
 
-[node name="Letter_S" parent="LetterGroup_SAVE" instance=ExtResource("41_6m4bg")]
-offset_left = -35.0
-offset_top = -30.0
-offset_right = 35.0
-offset_bottom = 40.0
+[node name="Letters" type="HBoxContainer" parent="LetterGroup_SAVE"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 410.0
+offset_bottom = 30.0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Letter_S" parent="LetterGroup_SAVE/Letters" instance=ExtResource("41_6m4bg")]
+layout_mode = 2
 letter = "S"
 color_on = Color(1, 0, 0.8, 1)
 
-[node name="Letter_A" parent="LetterGroup_SAVE" instance=ExtResource("41_6m4bg")]
-offset_left = 85.0
-offset_top = -30.0
-offset_right = 155.0
-offset_bottom = 40.0
+[node name="Letter_A" parent="LetterGroup_SAVE/Letters" instance=ExtResource("41_6m4bg")]
+layout_mode = 2
 letter = "A"
 color_on = Color(2, 2, 0, 1)
 
-[node name="Letter_V" parent="LetterGroup_SAVE" instance=ExtResource("41_6m4bg")]
-offset_left = 205.0
-offset_top = -30.0
-offset_right = 275.0
-offset_bottom = 40.0
+[node name="Letter_V" parent="LetterGroup_SAVE/Letters" instance=ExtResource("41_6m4bg")]
+layout_mode = 2
 letter = "V"
 color_on = Color(0, 2, 1, 1)
 
-[node name="Letter_E" parent="LetterGroup_SAVE" instance=ExtResource("41_6m4bg")]
-offset_left = 325.0
-offset_top = -30.0
-offset_right = 395.0
-offset_bottom = 40.0
+[node name="Letter_E" parent="LetterGroup_SAVE/Letters" instance=ExtResource("41_6m4bg")]
+layout_mode = 2
 letter = "E"
 color_on = Color(0.5, 2, 0, 1)
 
@@ -953,7 +952,10 @@ end_joint_radius = 10.0
 
 [node name="LetterGroup_KICK" type="Control" parent="."]
 anchors_preset = 0
+
+[node name="LetterGroup" type="Node" parent="LetterGroup_KICK"]
 script = ExtResource("40_wggit")
+identifier = &"KICK"
 
 [node name="Letter_K" parent="LetterGroup_KICK" instance=ExtResource("41_6m4bg")]
 offset_left = 20.0

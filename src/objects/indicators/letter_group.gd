@@ -1,3 +1,4 @@
+class_name LetterIndicatorGroup
 extends Node
 
 @export var identifier: StringName
@@ -10,9 +11,9 @@ var _letters: Array[Node]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_letters = find_children("*", "IndicatorLetter", true, false)
+	_letters = get_parent().find_children("*", "IndicatorLetter", true, false)
 	for l in _letters:
-		l.connect(&"body_entered", _ball_entered.bind(l))
+		l.connect(&"ball_entered", _ball_entered.bind(l))
 		l.lit = false
 
 

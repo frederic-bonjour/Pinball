@@ -8,28 +8,29 @@
 size = Vector2(70, 70)
 
 [node name="Letter" type="Control"]
+custom_minimum_size = Vector2(70, 70)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 70.0
 offset_bottom = 70.0
 script = ExtResource("1_q6gs5")
 
-[node name="Letter" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="."]
 position = Vector2(35, 35)
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Letter"]
+[node name="CollisionShape" type="CollisionShape2D" parent="Area"]
 shape = SubResource("RectangleShape2D_q6xns")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="Light" type="PointLight2D" parent="."]
 color = Color(2, 2, 2, 1)
 energy = 2.0
 shadow_enabled = true
 texture = ExtResource("2_m18wl")
 texture_scale = 1.5
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(2, 2, 2, 1)
 position = Vector2(35, 35)
 texture = ExtResource("3_7bpoe")
@@ -37,11 +38,15 @@ texture = ExtResource("3_7bpoe")
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
 modulate = Color(3, 3, 3, 1)
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 65.0
-offset_bottom = 65.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_type_variation = &"LetterIndicator"
 text = "A"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="body_entered" from="Area" to="." method="_on_letter_body_entered"]
