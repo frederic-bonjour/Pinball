@@ -41,6 +41,6 @@ func _on_body_entered(body: Node) -> void:
 	if body as ModularWall:
 		SignalHub.ball_touched_modular_wall.emit(self, body)
 	elif body.name.containsn(&"wall"):
-		SignalHub.ball_touched_wall.emit(self, body)
+		SignalHub.wall_hit.emit(body, self)
 	elif body is Flipper:
-		SignalHub.ball_touched_flipper.emit(self, body)
+		SignalHub.flipper_hit.emit(body, self)

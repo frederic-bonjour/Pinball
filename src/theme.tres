@@ -1,8 +1,13 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://p4bytcc1sqwl"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://p4bytcc1sqwl"]
 
+[ext_resource type="FontFile" uid="uid://66yn31olc080" path="res://assets/fonts/alpenkreuzer/Alpenkreuzer.ttf" id="1_65snj"]
 [ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_qnsqs"]
 
 [resource]
 default_font = ExtResource("1_qnsqs")
 default_font_size = 30
 Label/constants/outline_size = 5
+VanishingTooltip/colors/font_color = Color(1, 1, 1, 1)
+VanishingTooltip/colors/font_outline_color = Color(0, 0, 0, 1)
+VanishingTooltip/font_sizes/font_size = 30
+VanishingTooltip/fonts/font = ExtResource("1_65snj")

@@ -15,7 +15,7 @@ var _theme: BoardTheme
 
 
 func _ready():
-	_theme = Utils.get_board(self).theme
+	_theme = Utils.get_board(self).board_theme
 	properties.connect(&"property_changed", _on_property_changed)
 	_update_radius()
 

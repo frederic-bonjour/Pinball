@@ -1,28 +1,40 @@
 extends Node
 
 signal bumper_hit(bumper: Bumper, ball: Ball)
-signal brick_touched(brick: Brick, ball: Ball)
-signal brick_destroyed(brick: Brick, ball: Ball)
-signal slingshot_bounce(slingshot: Slingshot, ball: Ball)
+signal brick_hit(brick: Brick, ball: Ball, destroyed: bool)
+signal slingshot_hit(slingshot: Slingshot, ball: Ball)
 
-signal ball_touched_modular_wall(ball: Ball, wall: ModularWall)
-signal ball_touched_wall(ball: Ball, wall: Node2D)
-signal ball_touched_flipper(ball: Ball, flipper: Flipper)
+signal wall_hit(wall: Node2D, ball: Ball)
+signal flipper_hit(flipper: Flipper, ball: Ball)
 signal ball_lost(ball: Ball)
 
-signal kickback_ejection(ball: PhysicsBody2D, kickback: KickBack, force: int)
+#region Kickbacks
+signal kickback_loading(kickback: KickBack, value: float)
+signal kickback_ejection(kickback: KickBack, ball: PhysicsBody2D, force: int)
+signal kickback_ball_entered(kickback: KickBack, ball: PhysicsBody2D)
+#endregion
+
+#region Letter groups
+signal letter_group_letter_lit(identifier: StringName, letter: IndicatorLetter)
+signal letter_group_completed(identifier: StringName)
+#endregion
+
 
 func _ready() -> void:
 	# This is to avoid GDScript warnings.
 	bumper_hit.connect(_noop2)
-	brick_touched.connect(_noop2)
-	brick_destroyed.connect(_noop2)
-	slingshot_bounce.connect(_noop2)
-	ball_touched_modular_wall.connect(_noop2)
-	ball_touched_wall.connect(_noop2)
-	ball_touched_flipper.connect(_noop2)
+	brick_hit.connect(_noop3)
+	slingshot_hit.connect(_noop2)
+	wall_hit.connect(_noop2)
+	flipper_hit.connect(_noop2)
 	ball_lost.connect(_noop1)
+
 	kickback_ejection.connect(_noop3)
+	kickback_loading.connect(_noop2)
+	kickback_ball_entered.connect(_noop2)
+
+	letter_group_completed.connect(_noop1)
+	letter_group_letter_lit.connect(_noop2)
 
 
 func _noop1(_arg1) -> void:

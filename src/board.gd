@@ -1,7 +1,7 @@
 class_name PinballBoard
-extends Node2D
+extends Control
 
-@export var theme: BoardTheme
+@export var board_theme: BoardTheme
 
 @onready var camera: Camera2D = %Camera
 @onready var ball: Ball = %Ball
@@ -17,21 +17,27 @@ var _camera_zoom = 0.5
 
 
 func _ready():
-	_ball_initial_position = ball.position
+	_ball_initial_position = launcher.global_position - Vector2(0, 60)
+
 	var t := get_tree()
-	t.set_group(&"bricks", "modulate", theme.bricks_color)
-	t.set_group(&"slingshots", "modulate", theme.slingshots_color)
-	t.set_group(&"bumpers", "modulate", theme.bumpers_color)
-	t.set_group(&"flippers", "modulate", theme.flippers_color)
-	t.set_group(&"balls", "modulate", theme.balls_color)
-	t.set_group(&"walls", "modulate", theme.walls_color)
-	SignalHub.ball_touched_modular_wall.connect(_add_ball_touch_particles)
-	SignalHub.ball_touched_wall.connect(_add_ball_touch_particles)
-	SignalHub.ball_touched_flipper.connect(_add_ball_touch_particles)
-	SignalHub.brick_destroyed.connect(_brick_destroyed)
+	t.set_group(&"bricks", "modulate", board_theme.bricks_color)
+	t.set_group(&"slingshots", "modulate", board_theme.slingshots_color)
+	t.set_group(&"bumpers", "modulate", board_theme.bumpers_color)
+	t.set_group(&"flippers", "modulate", board_theme.flippers_color)
+	t.set_group(&"balls", "modulate", board_theme.balls_color)
+	t.set_group(&"walls", "modulate", board_theme.walls_color)
+
+	SignalHub.wall_hit.connect(_add_ball_touch_particles)
+	SignalHub.flipper_hit.connect(_add_ball_touch_particles)
+	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
+	SignalHub.kickback_ejection.connect(_kick_back_ejection)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
+
+	SignalHub.connect(&"letter_group_completed", _on_letter_group_completed)
+	SignalHub.connect(&"letter_group_letter_lit", _on_letter_group_letter_lit)
+
 	_activate_kickbacks()
 
 
@@ -69,11 +75,16 @@ func _process_inputs() -> void:
 
 
 func _update_camera(delta: float) -> void:
-	camera.position = ball.position
-	if Input.is_action_just_pressed(&"zoom_in"):
+	var balls = get_tree().get_nodes_in_group(&"balls")
+	if balls.size() == 1:
+		camera.position = balls[0].position
+		if Input.is_action_just_pressed(&"zoom_in"):
+			_camera_zoom = 0.5
+		elif Input.is_action_just_pressed(&"zoom_out"):
+			_camera_zoom = 0.75
+	else:
 		_camera_zoom = 0.5
-	elif Input.is_action_just_pressed(&"zoom_out"):
-		_camera_zoom = 0.75
+
 	var z = camera.zoom.x
 	z = move_toward(z, _camera_zoom, delta)
 	camera.zoom.x = z
@@ -96,39 +107,47 @@ func _activate_kickbacks() -> void:
 	get_tree().set_group(&"kickbacks", "inactive", false)
 
 
-func _add_ball_touch_particles(_ball: Ball, _body: Node2D) -> void:
+func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
 	var particles = BallBounceScene.instantiate()
 	particles.top_level = true
 	particles.position = _ball.global_position
 	add_child(particles)
 
 
-func _on_kick_back_ejection(_ball: PhysicsBody2D, kickback: KickBack, force: int):
-	SignalHub.kickback_ejection.emit(_ball, kickback, force)
+func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
+	SessionManager.score += 100 #FIXME
+	add_child(VanishingTooltip.make_int(100, kickback))
 
 
 func _on_kickback_activation_area_body_entered(_body):
 	_activate_kickbacks()
 
 
-func _brick_destroyed(brick: Brick, _ball) -> void:
-	var expl = BrickExplosionScene.instantiate()
-	expl.position = brick.global_position
-	expl.color = brick.modulate
-	add_child(expl)
-	SessionManager.score += 1000
+func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
+	if destroyed:
+		var expl = BrickExplosionScene.instantiate()
+		expl.position = brick.global_position
+		expl.color = brick.modulate
+		add_child(expl)
+
+		var points = SessionManager.brick_destroyed(brick)
+		add_child(VanishingTooltip.make_int(points, brick).offset_y(brick.size.y / 2))
 
 
-func _bumper_hit(_bumper: Bumper, _ball) -> void:
-	SessionManager.score += _bumper.score
+func _bumper_hit(bumper: Bumper, _ball) -> void:
+	SessionManager.score += bumper.score
+	add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-bumper.radius))
 
 
-func _on_letter_group_letter_on(letter: IndicatorLetter):
+func _on_letter_group_letter_lit(group_id: StringName, letter: IndicatorLetter):
 	SfxManager.play_audio(&"letter_on", letter)
+	SessionManager.score += 500 #FIXME
+	add_child(VanishingTooltip.make_int(500, letter).offset_y(-100))
 
 
-func _on_letter_group_kick_completed():
-	_activate_kickbacks()
+func _on_letter_group_completed(group_id: StringName):
+	match group_id:
+		&"KICK": _activate_kickbacks()
 
 
 func _on_letter_group_save_completed():

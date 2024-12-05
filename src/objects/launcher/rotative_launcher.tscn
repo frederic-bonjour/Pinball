@@ -9,6 +9,7 @@ script = ExtResource("1_yq7ss")
 metadata/_edit_group_ = true
 
 [node name="Launcher" parent="." instance=ExtResource("2_7gq7a")]
+unique_name_in_owner = true
 position = Vector2(0, -30)
 strength = 450000.0
 auto_eject = false
@@ -33,5 +34,3 @@ rotation = 1.5708
 max_value = 1.0
 step = 0.001
 show_percentage = false
-
-[connection signal="loading" from="Launcher" to="." method="_on_launcher_loading"]

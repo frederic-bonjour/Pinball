@@ -39,4 +39,4 @@ func _on_ball_detection_area_body_entered(body):
 	if body is Ball:
 		pusher.collision_mask = _ball_collision_mask
 		_dest_offset = open_value * _side
-		SignalHub.slingshot_bounce.emit(self, body)
+		SignalHub.slingshot_hit.emit(self, body)

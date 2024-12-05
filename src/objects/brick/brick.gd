@@ -12,6 +12,9 @@ extends RigidBody2D
 
 var _remaining_hit_count: int = 1
 
+var size: Vector2:
+	get: return Vector2(60, 60) #FIXME
+
 
 func _ready() -> void:
 	add_to_group(&"bricks")
@@ -40,7 +43,7 @@ func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		_remaining_hit_count -= 1
 		if _remaining_hit_count == 0:
-			SignalHub.brick_destroyed.emit(self, body)
+			SignalHub.brick_hit.emit(self, body, true)
 			queue_free()
 		else:
-			SignalHub.brick_touched.emit(self, body)
+			SignalHub.brick_hit.emit(self, body, false)

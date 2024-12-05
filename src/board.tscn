@@ -1,6 +1,7 @@
-[gd_scene load_steps=85 format=3 uid="uid://vpks3lkdh6n5"]
+[gd_scene load_steps=86 format=3 uid="uid://vpks3lkdh6n5"]
 
 [ext_resource type="Script" path="res://src/board.gd" id="1_dug60"]
+[ext_resource type="Theme" uid="uid://p4bytcc1sqwl" path="res://src/theme.tres" id="1_jed7h"]
 [ext_resource type="Script" path="res://src/board_theme.gd" id="2_66lkm"]
 [ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="2_qvmef"]
 [ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="3_umkkw"]
@@ -43,10 +44,10 @@
 [ext_resource type="Script" path="res://src/objects/indicators/letter_group.gd" id="40_wggit"]
 [ext_resource type="PackedScene" uid="uid://bpwuw1tsdeuqu" path="res://src/objects/indicators/letter.tscn" id="41_6m4bg"]
 
-[sub_resource type="Resource" id="Resource_qst8b"]
+[sub_resource type="Resource" id="Resource_5lrh7"]
 script = ExtResource("2_66lkm")
-background_color = Color(0.201648, 0.26288, 0.586487, 1)
-bricks_color = Color(0, 2, 1.4, 1)
+background_color = Color(0.254902, 0.411765, 0.882353, 1)
+bricks_color = Color(0, 2, 2, 1)
 walls_color = Color(1, 1, 1, 1)
 slingshots_color = Color(1, 1, 1, 1)
 bumpers_color = Color(1, 1, 1, 1)
@@ -377,9 +378,12 @@ can_be_destroyed_by_ball = true
 can_be_destroyed_by_rocket = true
 shape = 6
 
-[node name="Board" type="Node2D"]
+[node name="Board" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_jed7h")
 script = ExtResource("1_dug60")
-theme = SubResource("Resource_qst8b")
+board_theme = SubResource("Resource_5lrh7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_log15")
@@ -849,6 +853,7 @@ position = Vector2(1030, -1840)
 
 [node name="IndicatorLetterGroup" type="Node" parent="LetterGroup_SAVE"]
 script = ExtResource("40_wggit")
+identifier = &"SAVE"
 
 [node name="Letter_S" parent="LetterGroup_SAVE" instance=ExtResource("41_6m4bg")]
 letter = "S"
@@ -916,6 +921,7 @@ end_joint_radius = 10.0
 
 [node name="IndicatorLetterGroup" type="Node" parent="LetterGroup_KICK"]
 script = ExtResource("40_wggit")
+identifier = &"KICK"
 
 [node name="Letter_K" parent="LetterGroup_KICK" instance=ExtResource("41_6m4bg")]
 position = Vector2(60, -570)
@@ -1382,6 +1388,3 @@ position = Vector2(120, -240)
 properties = SubResource("Resource_ggsk2")
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]
-[connection signal="ejected" from="Left Flippers/KickBack" to="." method="_on_kick_back_ejection"]
-[connection signal="ejected" from="Right Flippers/KickBack" to="." method="_on_kick_back_ejection"]
-[connection signal="ejected" from="LetterGroup_KICK/KickBack" to="." method="_on_kick_back_ejection"]

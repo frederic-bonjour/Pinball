@@ -2,11 +2,6 @@
 class_name KickBack
 extends Node2D
 
-signal ball_present(body: PhysicsBody2D)
-signal loading(value: float)
-signal ejected(body: PhysicsBody2D, kickback: KickBack, force: int)
-signal state_changed(state: StringName)
-
 @export_group("Ejection")
 @export var strength: float = 50000.0
 @export var auto_eject: bool = true
@@ -35,13 +30,12 @@ signal state_changed(state: StringName)
 var _indicator: Node
 var _auto_inactive_ts: int = 0
 
-const STATE_NAMES: Array[StringName] = [&"Idle", &"Ready", &"Loading", &"Waiting", &"Ejection", &"Ejecting", &"Ejected"]
+#const STATE_NAMES: Array[StringName] = [&"Idle", &"Ready", &"Loading", &"Waiting", &"Ejection", &"Ejecting", &"Ejected"]
 enum { Idle, Ready, Loading, Waiting, Ejection, Ejecting, Ejected }
 var _state = Idle:
 	set(v):
 		_state = v
 		_state_ts = Time.get_ticks_msec()
-		state_changed.emit(STATE_NAMES[_state])
 
 var _state_ts: int = 0
 
@@ -84,7 +78,7 @@ func _process(_delta: float) -> void:
 		Loading:
 			var load_time: int = clamp(now - _state_ts, 0, load_duration)
 			var load_value: float = float(load_time) / load_duration
-			loading.emit(load_value)
+			SignalHub.kickback_loading.emit(self, load_value)
 			if auto_eject:
 				if load_time == load_duration:
 					_state = Ejection
@@ -94,10 +88,13 @@ func _process(_delta: float) -> void:
 
 		Ejection:
 			var s = strength if auto_eject else _player_strength
-			_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
-			ejected.emit(_loaded_body, self, s)
-			loading.emit(0)
-			_state = Ejecting
+			if _loaded_body:
+				_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
+				SignalHub.kickback_ejection.emit(self, _loaded_body, s)
+				SignalHub.kickback_loading.emit(self, 0)
+				_state = Ejecting
+			else:
+				_state = Idle
 
 		Ejecting:
 			if elapsed > 250:
@@ -114,7 +111,7 @@ func _process(_delta: float) -> void:
 func _on_body_entered_detection_area(body: Node2D):
 	_body_present = true
 	_loaded_body = body
-	ball_present.emit(body)
+	SignalHub.kickback_ball_entered.emit(self, body)
 
 
 func _on_body_exited_detection_area(_body):
