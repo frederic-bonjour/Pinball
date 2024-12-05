@@ -790,31 +790,40 @@ offset_bottom = 40.0
 
 [node name="Bumper" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(1610, -940)
+max_strength = 500
 
 [node name="Bumper8" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(2230, -940)
+max_strength = 500
 
 [node name="Bumper10" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(3290, -1760)
+max_strength = 500
 
 [node name="Bumper4" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(1090, -1580)
+max_strength = 500
 
 [node name="Bumper5" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(1290, -1390)
+max_strength = 500
 
 [node name="Bumper2" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(1500, -1580)
+max_strength = 500
 
 [node name="Bumper6" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(2690, -1490)
+max_strength = 500
 
 [node name="Bumper7" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(2900, -1850)
 scale = Vector2(1.5, 1.5)
+max_strength = 500
 
 [node name="Bumper3" parent="Bumpers" instance=ExtResource("12_wkwpx")]
 position = Vector2(3110, -1490)
+max_strength = 500
 
 [node name="FlipperSupport" type="StaticBody2D" parent="."]
 position = Vector2(10, -1220)

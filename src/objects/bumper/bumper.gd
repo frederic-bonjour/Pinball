@@ -2,7 +2,7 @@
 class_name Bumper
 extends Node2D
 
-@export var max_strength: int = 400
+@export var max_strength: int = 500
 @export var score: int = 100
 
 @onready var collision_shape = %CollisionShape
@@ -30,8 +30,8 @@ func _process(delta: float) -> void:
 func _on_body_entered(body):
 	if body is Ball:
 		_dest_scale = Vector2(1.2, 1.2)
-		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), roundi(max_strength / 10.0), max_strength)
-		body.linear_velocity = body.linear_velocity.normalized() * 1500
+		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), roundi(max_strength / 5.0), max_strength)
+		#body.linear_velocity = body.linear_velocity.normalized() * 1500
 		SignalHub.bumper_hit.emit(self, body)
 		set_process(true)
 

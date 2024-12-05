@@ -2,11 +2,7 @@
 
 [ext_resource type="Script" path="res://src/objects/bumper/bumper.gd" id="1_jng87"]
 [ext_resource type="Texture2D" uid="uid://dc1ugbumfm34q" path="res://src/objects/bumper/assets/bumper.png" id="2_3t64k"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hp6fu"]
-friction = 0.5
-rough = true
-bounce = 1.0
+[ext_resource type="PhysicsMaterial" uid="uid://crpikdeh4m5mb" path="res://src/objects/bumper/bumper_physics_material.tres" id="3_5covj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f3unc"]
 resource_local_to_scene = true
@@ -18,6 +14,7 @@ radius = 75.0
 
 [node name="Bumper" type="Node2D"]
 script = ExtResource("1_jng87")
+max_strength = 400
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -27,7 +24,7 @@ texture = ExtResource("2_3t64k")
 disable_mode = 2
 collision_layer = 8
 collision_mask = 2
-physics_material_override = SubResource("PhysicsMaterial_hp6fu")
+physics_material_override = ExtResource("3_5covj")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Body"]
 unique_name_in_owner = true
