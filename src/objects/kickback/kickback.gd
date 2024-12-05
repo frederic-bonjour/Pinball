@@ -41,13 +41,9 @@ var _state = Idle:
 	set(v):
 		_state = v
 		_state_ts = Time.get_ticks_msec()
-		prints(_state, STATE_NAMES[_state])
 		state_changed.emit(STATE_NAMES[_state])
 
 var _state_ts: int = 0
-
-var _holder_idle_position: float
-var _holder_max_position: float
 
 var _loaded_body: RigidBody2D
 var _player_strength: float
@@ -63,7 +59,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	var elapsed = now - _state_ts
 
@@ -102,14 +98,14 @@ func _process(delta: float) -> void:
 			ejected.emit(_loaded_body, self, s)
 			loading.emit(0)
 			_state = Ejecting
-		
+
 		Ejecting:
 			if elapsed > 250:
 				if not _body_present:
 					_state = Ejected
 				elif _is_body_stopped():
 					_state = Ready
-		
+
 		Ejected:
 			_state = Idle
 			inactive = true
@@ -121,7 +117,7 @@ func _on_body_entered_detection_area(body: Node2D):
 	ball_present.emit(body)
 
 
-func _on_body_exited_detection_area(body):
+func _on_body_exited_detection_area(_body):
 	_body_present = false
 	_loaded_body = null
 
