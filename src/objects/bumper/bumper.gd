@@ -2,53 +2,40 @@
 class_name Bumper
 extends Node2D
 
-@export var radius: float = 65:
-	set(v):
-		radius = v
-		_update_properties()
-
 @export var max_strength: int = 400
 @export var score: int = 100
 
-@onready var ellipse = %Ellipse
 @onready var collision_shape = %CollisionShape
 @onready var area_collision_shape = $BallDetectionArea/AreaCollisionShape
+@onready var sprite: Sprite2D = $Sprite2D
 
-var _extend: float = 0.0
-var _dest_extend: float = 0.0
+var _dest_scale: Vector2
 var _strength: float = 150.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group(&"bumpers")
-	_update_properties()
-
-
-func _update_properties() -> void:
-	if is_node_ready():
-		ellipse.size.x = radius * 2
-		ellipse.size.y = radius * 2
-		(collision_shape.shape as CircleShape2D).radius = radius
-		(area_collision_shape.shape as CircleShape2D).radius = radius + 10
+	set_process(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	_extend = move_toward(_extend, _dest_extend, delta * _strength)
-	(collision_shape.shape as CircleShape2D).radius = radius + _extend
-	ellipse.size.x = radius * 2 + _extend
-	ellipse.size.y = radius * 2 + _extend
+	if sprite:
+		sprite.scale = sprite.scale.move_toward(_dest_scale, delta * _strength)
+		if sprite.scale == Vector2.ONE:
+			set_process(false)
 
 
 func _on_body_entered(body):
 	if body is Ball:
-		SignalHub.bumper_hit.emit(self, body)
-		_dest_extend = 35
+		_dest_scale = Vector2(1.2, 1.2)
 		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), roundi(max_strength / 10.0), max_strength)
 		body.linear_velocity = body.linear_velocity.normalized() * 1500
+		SignalHub.bumper_hit.emit(self, body)
+		set_process(true)
 
 
 func _on_body_exited(body):
 	if body is Ball:
-		_dest_extend = 0
+		_dest_scale = Vector2.ONE

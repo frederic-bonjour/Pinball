@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://en3henr63844"]
 
 [ext_resource type="Script" path="res://src/objects/bumper/bumper.gd" id="1_jng87"]
-[ext_resource type="Script" path="res://addons/antialiased_line2d/antialiased_regular_polygon2d.gd" id="3_pfxy8"]
+[ext_resource type="Texture2D" uid="uid://dc1ugbumfm34q" path="res://src/objects/bumper/assets/bumper.png" id="2_3t64k"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hp6fu"]
 friction = 0.5
@@ -10,24 +10,18 @@ bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f3unc"]
 resource_local_to_scene = true
-radius = 50.0
+radius = 51.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30ink"]
 resource_local_to_scene = true
-radius = 60.0
+radius = 75.0
 
 [node name="Bumper" type="Node2D"]
 script = ExtResource("1_jng87")
-radius = 50.0
-score = null
 
-[node name="Ellipse" type="Polygon2D" parent="."]
-unique_name_in_owner = true
-antialiased = true
-polygon = PackedVector2Array(0, -50, 9.75452, -49.0393, 19.1342, -46.194, 27.7785, -41.5735, 35.3553, -35.3553, 41.5735, -27.7785, 46.194, -19.1342, 49.0393, -9.75452, 50, 2.18557e-06, 49.0393, 9.75452, 46.194, 19.1342, 41.5735, 27.7785, 35.3553, 35.3553, 27.7785, 41.5735, 19.1342, 46.194, 9.75452, 49.0393, -4.37114e-06, 50, -9.75451, 49.0393, -19.1342, 46.194, -27.7785, 41.5735, -35.3553, 35.3553, -41.5735, 27.7785, -46.194, 19.1342, -49.0393, 9.75452, -50, -5.96244e-07, -49.0393, -9.75452, -46.194, -19.1342, -41.5735, -27.7785, -35.3553, -35.3553, -27.7785, -41.5735, -19.1342, -46.194, -9.75451, -49.0393)
-script = ExtResource("3_pfxy8")
-size = Vector2(100, 100)
-stroke_round_precision = 12
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_3t64k")
 
 [node name="Body" type="StaticBody2D" parent="."]
 disable_mode = 2

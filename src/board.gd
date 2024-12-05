@@ -137,7 +137,7 @@ func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
 
 func _bumper_hit(bumper: Bumper, _ball) -> void:
 	SessionManager.score += bumper.score
-	effects.add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-bumper.radius))
+	effects.add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-50))
 
 
 func _slingshot_hit(_slingshot: Slingshot, ball: Ball) -> void:
