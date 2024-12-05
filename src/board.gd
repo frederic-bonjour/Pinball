@@ -10,9 +10,10 @@ extends Node2D
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
+const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
 
 var _ball_initial_position: Vector2
-var _camera_zoom = 0.75
+var _camera_zoom = 0.5
 
 
 func _ready():
@@ -34,7 +35,7 @@ func _ready():
 	_activate_kickbacks()
 
 
-func _update_score(score: int) -> void:
+func _update_score(_score: int) -> void:
 	%ScoreLabel.text = SessionManager.formatted_score
 
 
@@ -110,7 +111,11 @@ func _on_kickback_activation_area_body_entered(_body):
 	_activate_kickbacks()
 
 
-func _brick_destroyed(_brick: Brick, _ball) -> void:
+func _brick_destroyed(brick: Brick, _ball) -> void:
+	var expl = BrickExplosionScene.instantiate()
+	expl.position = brick.global_position
+	expl.color = brick.modulate
+	add_child(expl)
 	SessionManager.score += 1000
 
 
