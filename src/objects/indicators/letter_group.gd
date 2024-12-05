@@ -4,6 +4,9 @@ extends Node
 signal completed
 signal letter_on(letter: IndicatorLetter)
 
+@export var blink_count: int = 4
+@export var blink_delay: float = 0.1
+
 var _lit_count: int = 0
 var _letters: Array[Node]
 
@@ -22,8 +25,16 @@ func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:
 		letter_on.emit(letter)
 		_lit_count += 1
 		if _lit_count == _letters.size():
-			completed.emit()
-			reset()
+			_blink()
+
+
+func _blink() -> void:
+	for i in range(blink_count * 2):
+		for l in _letters:
+			l.lit = i % 2 > 0
+		await get_tree().create_timer(blink_delay).timeout
+	completed.emit()
+	reset()
 
 
 func reset() -> void:

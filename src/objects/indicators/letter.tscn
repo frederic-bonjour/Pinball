@@ -19,12 +19,14 @@ color_on = Color(2, 2, 2, 1)
 shape = SubResource("RectangleShape2D_q6xns")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(2, 2, 2, 1)
 energy = 2.0
 shadow_enabled = true
 texture = ExtResource("2_m18wl")
 texture_scale = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2, 2, 2, 1)
 texture = ExtResource("3_7bpoe")
 
 [node name="Label" type="Label" parent="."]
