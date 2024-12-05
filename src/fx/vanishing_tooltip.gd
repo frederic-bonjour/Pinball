@@ -5,20 +5,23 @@ extends Label
 @export var distance: Vector2 = Vector2(0, -100)
 
 
-func attach_to(node: Node) -> void:
-	node.add_child(self)
-
-
 func _ready():
-	# Position the tooltip: horizontally centered and vertically above its parent.
-	position.x -= size.x / 2.0
-	position.y -= size.y / 2.0
+	theme_type_variation = &"VanishingTooltip"
 
+
+func _process(_delta: float) -> void:
+	# The "size" is really reliable here and not before,
+	# so I use to here to compute the pivot_offset and the correct position.
+	pivot_offset = size / 2.0
+	position -= pivot_offset
+	# Then I create the tween for the animation...
 	var t := create_tween().set_ease(Tween.EASE_OUT)
 	t.tween_property(self, "position", position + distance, duration)
 	t.parallel().tween_property(self, "scale", Vector2(1.2, 0.8), duration)
 	t.parallel().tween_property(self, "modulate:a", 0.0, duration)
 	t.tween_callback(queue_free)
+	# ... and finally, I stop the process of this node (the Tween will keep running).
+	set_process(false)
 
 
 func offset_y(y: int) -> VanishingTooltip:
@@ -26,13 +29,13 @@ func offset_y(y: int) -> VanishingTooltip:
 	return self
 
 
-static func make_text(content: StringName, node: Node2D, color: Color = Color.WHITE) -> VanishingTooltip:
+static func make_text(content: StringName, node: Node, color: Color = Color.WHITE) -> VanishingTooltip:
 	var vt = VanishingTooltip.new()
 	vt.text = content
-	vt.position = node.global_position # FIXME
+	vt.position =  node.global_position
 	vt.modulate = color
 	return vt
 
 
-static func make_int(value: int, node: Node2D, color: Color = Color.WHITE) -> VanishingTooltip:
-	return make_text("%+d" % value, node, color)
+static func make_int(value: int, node: Node, color: Color = Color.WHITE) -> VanishingTooltip:
+	return make_text(str(value), node, color)

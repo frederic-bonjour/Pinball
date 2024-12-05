@@ -1,6 +1,6 @@
 @tool
 class_name IndicatorLetter
-extends Node2D
+extends Control
 
 const color_off: Color = Color(1, 1, 1, 0.3)
 
@@ -21,6 +21,7 @@ const color_off: Color = Color(1, 1, 1, 0.3)
 		lit = v
 		if is_node_ready():
 			sprite.modulate = color_on if lit else color_off
+			label.modulate = color_on if lit else color_off
 			point_light.enabled = lit
 
 

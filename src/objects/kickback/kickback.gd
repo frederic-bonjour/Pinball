@@ -2,6 +2,8 @@
 class_name KickBack
 extends Node2D
 
+@export var indicator: Control
+
 @export_group("Ejection")
 @export var strength: float = 50000.0
 @export var auto_eject: bool = true
@@ -19,15 +21,14 @@ extends Node2D
 		if is_node_ready():
 			for cs in find_children("*", "CollisionShape2D"):
 				cs.set_deferred(&"disabled", inactive)
-			if _indicator:
-				_indicator.visible = not inactive
+			if indicator:
+				indicator.visible = not inactive
 			top_line.visible = not inactive
 
 @export var auto_inactive_delay: int = 0
 
 @onready var top_line = %TopLine
 
-var _indicator: Node
 var _auto_inactive_ts: int = 0
 
 #const STATE_NAMES: Array[StringName] = [&"Idle", &"Ready", &"Loading", &"Waiting", &"Ejection", &"Ejecting", &"Ejected"]
@@ -48,7 +49,6 @@ var _body_present: bool = false
 func _ready():
 	add_to_group(&"kickbacks")
 	_state = Idle
-	_indicator = get_node_or_null("Indicator")
 	inactive = inactive
 
 

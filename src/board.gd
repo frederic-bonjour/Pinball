@@ -4,9 +4,9 @@ extends Control
 @export var board_theme: BoardTheme
 
 @onready var camera: Camera2D = %Camera
-@onready var ball: Ball = %Ball
 @onready var launcher: Node2D = %Launcher
 @onready var launcher_rotate_on_flip: ComponentRotateOnFlip = %Launcher/RotateOnFlip
+@onready var effects: Control = %Effects
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
@@ -29,6 +29,7 @@ func _ready():
 
 	SignalHub.wall_hit.connect(_add_ball_touch_particles)
 	SignalHub.flipper_hit.connect(_add_ball_touch_particles)
+	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
 	SignalHub.kickback_ejection.connect(_kick_back_ejection)
@@ -111,12 +112,12 @@ func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
 	var particles = BallBounceScene.instantiate()
 	particles.top_level = true
 	particles.position = _ball.global_position
-	add_child(particles)
+	effects.add_child(particles)
 
 
 func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
 	SessionManager.score += 100 #FIXME
-	add_child(VanishingTooltip.make_int(100, kickback))
+	effects.add_child(VanishingTooltip.make_int(100, kickback))
 
 
 func _on_kickback_activation_area_body_entered(_body):
@@ -131,18 +132,23 @@ func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
 		add_child(expl)
 
 		var points = SessionManager.brick_destroyed(brick)
-		add_child(VanishingTooltip.make_int(points, brick).offset_y(brick.size.y / 2))
+		effects.add_child(VanishingTooltip.make_int(points, brick).offset_y(brick.size.y / 2))
 
 
 func _bumper_hit(bumper: Bumper, _ball) -> void:
 	SessionManager.score += bumper.score
-	add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-bumper.radius))
+	effects.add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-bumper.radius))
 
 
-func _on_letter_group_letter_lit(group_id: StringName, letter: IndicatorLetter):
+func _slingshot_hit(_slingshot: Slingshot, ball: Ball) -> void:
+	SessionManager.score += 50 #FIXME
+	effects.add_child(VanishingTooltip.make_int(50, ball))
+
+
+func _on_letter_group_letter_lit(_group_id: StringName, letter: IndicatorLetter):
 	SfxManager.play_audio(&"letter_on", letter)
 	SessionManager.score += 500 #FIXME
-	add_child(VanishingTooltip.make_int(500, letter).offset_y(-100))
+	effects.add_child(VanishingTooltip.make_int(500, letter).offset_y(-100))
 
 
 func _on_letter_group_completed(group_id: StringName):

@@ -11,7 +11,7 @@ func _ready() -> void:
 	SignalHub.kickback_ejection.connect(_kickback_ejection)
 
 
-func play_audio(audio_name: StringName, target_node: Node2D = null) -> void:
+func play_audio(audio_name: StringName, target_node: Node = null) -> void:
 	var emitter = EventAudio.play_2d(audio_name, target_node)
 	if emitter:
 		emitter.player.bus = &"SFX"
