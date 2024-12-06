@@ -29,6 +29,7 @@ theme = ExtResource("2_dh282")
 
 [node name="Background" parent="." index="4"]
 texture = ExtResource("3_g6b41")
+flip_v = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Scenaries" index="0"]
 visible = false
