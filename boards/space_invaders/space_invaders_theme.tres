@@ -1,14 +1,19 @@
 [gd_resource type="Theme" load_steps=3 format=3 uid="uid://cggu13h68ftnr"]
 
-[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_do5nj"]
-[ext_resource type="FontFile" uid="uid://bqe8wsqxekx2l" path="res://assets/fonts/G7_Segment7_S5.ttf" id="2_cohli"]
+[ext_resource type="FontFile" uid="uid://ch21jcweftmlv" path="res://boards/space_invaders/assets/PressStart2P-Regular.ttf" id="3_xx7a3"]
+
+[sub_resource type="FontVariation" id="FontVariation_2j3ey"]
+base_font = ExtResource("3_xx7a3")
+spacing_glyph = -2
 
 [resource]
-default_font = ExtResource("1_do5nj")
-default_font_size = 30
+default_font = ExtResource("3_xx7a3")
+default_font_size = 28
 Ball/colors/default_color = Color(1, 1, 1, 1)
 Bumper/colors/color = Color(1, 1, 1, 1)
 Flipper/colors/color = Color(1, 1, 1, 1)
+IndicatorLetter/base_type = &"Label"
+IndicatorLetter/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -18,24 +23,22 @@ Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 30
-Label/fonts/font = ExtResource("1_do5nj")
+Label/fonts/font = ExtResource("3_xx7a3")
 Label/styles/normal = null
 Launcher/colors/color = Color(1, 1, 1, 1)
-LetterIndicator/base_type = &"Label"
-LetterIndicator/colors/font_color = Color(1, 1, 1, 1)
 ScoreLabel/base_type = &"Label"
 ScoreLabel/colors/font_color = Color(1, 1, 1, 1)
 ScoreLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 ScoreLabel/constants/outline_size = 10
-ScoreLabel/font_sizes/font_size = 70
-ScoreLabel/fonts/font = ExtResource("2_cohli")
+ScoreLabel/font_sizes/font_size = 44
+ScoreLabel/fonts/font = SubResource("FontVariation_2j3ey")
 Slingshot/colors/color = Color(1, 1, 1, 1)
 VanishingTooltip/base_type = &"Label"
 VanishingTooltip/colors/font_color = Color(1, 1, 1, 1)
 VanishingTooltip/colors/font_outline_color = Color(0, 0, 0, 0.5)
 VanishingTooltip/constants/outline_size = 20
-VanishingTooltip/font_sizes/font_size = 50
-VanishingTooltip/fonts/font = ExtResource("2_cohli")
+VanishingTooltip/font_sizes/font_size = 36
+VanishingTooltip/fonts/font = ExtResource("3_xx7a3")
 VanishingTooltipLarge/base_type = &"VanishingTooltip"
 VanishingTooltipLarge/colors/font_color = Color(1, 1, 1, 1)
 VanishingTooltipLarge/colors/font_outline_color = Color(0, 0, 0, 0.5)

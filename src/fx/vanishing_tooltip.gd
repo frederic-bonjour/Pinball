@@ -31,13 +31,12 @@ func offset_y(y: int) -> VanishingTooltip:
 	return self
 
 
-static func make_text(content: StringName, pos: Vector2, color: Color = Color.WHITE) -> VanishingTooltip:
+static func make_text(content: StringName, pos: Vector2) -> VanishingTooltip:
 	var vt = VanishingTooltip.new()
 	vt.text = content
 	vt.position =  pos
-	vt.modulate = color
 	return vt
 
 
-static func make_int(value: int, pos: Vector2, color: Color = Color.WHITE) -> VanishingTooltip:
-	return make_text(str(value), pos, color)
+static func make_int(value: int, pos: Vector2) -> VanishingTooltip:
+	return make_text(str(value), pos)

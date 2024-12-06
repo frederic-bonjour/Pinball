@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qc0g5fdjtuil"
-path="res://.godot/imported/background.jpg-8ca9ed488641625674f39e04c2e389e6.ctex"
+uid="uid://3c0b1prit7vh"
+path="res://.godot/imported/particles.png-d4d218b3c6cbe09eb30a4ad7d019818a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://boards/star_wars/assets/background.jpg"
-dest_files=["res://.godot/imported/background.jpg-8ca9ed488641625674f39e04c2e389e6.ctex"]
+source_file="res://boards/space_invaders/assets/particles.png"
+dest_files=["res://.godot/imported/particles.png-d4d218b3c6cbe09eb30a4ad7d019818a.ctex"]
 
 [params]
 

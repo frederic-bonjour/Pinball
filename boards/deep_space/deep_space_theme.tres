@@ -1,18 +1,18 @@
 [gd_resource type="Theme" load_steps=4 format=3 uid="uid://dr2i8jbfjfro4"]
 
-[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_117he"]
-[ext_resource type="FontFile" uid="uid://cf722chyp18ft" path="res://boards/star_wars/assets/starjedi.ttf" id="2_wihs4"]
+[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_lfyj0"]
+[ext_resource type="FontFile" uid="uid://cf722chyp18ft" path="res://boards/deep_space/assets/starjedi.ttf" id="2_ew6bs"]
 
 [sub_resource type="FontVariation" id="FontVariation_vf7c5"]
-base_font = ExtResource("2_wihs4")
+base_font = ExtResource("2_ew6bs")
 baseline_offset = -0.18
 
 [resource]
-default_font = ExtResource("1_117he")
+default_font = ExtResource("1_lfyj0")
 default_font_size = 30
-Ball/colors/default_color = Color(2, 1, 1, 1)
-Bumper/colors/color = Color(2, 1, 1, 1)
-Flipper/colors/color = Color(1, 1, 1, 1)
+Ball/colors/default_color = Color(2, 1, 2, 1)
+Bumper/colors/color = Color(2, 2, 2, 1)
+Flipper/colors/color = Color(2, 1, 2, 1)
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -22,27 +22,27 @@ Label/constants/shadow_offset_x = 0
 Label/constants/shadow_offset_y = 0
 Label/constants/shadow_outline_size = 0
 Label/font_sizes/font_size = 30
-Label/fonts/font = ExtResource("1_117he")
+Label/fonts/font = ExtResource("1_lfyj0")
 Label/styles/normal = null
-Launcher/colors/color = Color(2, 1, 1, 1)
+Launcher/colors/color = Color(2, 2, 2, 1)
 LetterIndicator/base_type = &"Label"
 LetterIndicator/colors/font_color = Color(1, 1, 1, 1)
 ScoreLabel/base_type = &"Label"
-ScoreLabel/colors/font_color = Color(2, 1, 1, 1)
+ScoreLabel/colors/font_color = Color(2, 2, 2, 1)
 ScoreLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 ScoreLabel/constants/outline_size = 10
 ScoreLabel/font_sizes/font_size = 70
 ScoreLabel/fonts/font = SubResource("FontVariation_vf7c5")
-Slingshot/colors/color = Color(2, 1, 1, 1)
+Slingshot/colors/color = Color(2, 1, 2, 1)
 VanishingTooltip/base_type = &"Label"
-VanishingTooltip/colors/font_color = Color(2, 1, 1, 1)
+VanishingTooltip/colors/font_color = Color(0, 2, 2, 1)
 VanishingTooltip/colors/font_outline_color = Color(0, 0, 0, 0.5)
 VanishingTooltip/constants/outline_size = 20
 VanishingTooltip/font_sizes/font_size = 50
-VanishingTooltip/fonts/font = ExtResource("2_wihs4")
+VanishingTooltip/fonts/font = ExtResource("2_ew6bs")
 VanishingTooltipLarge/base_type = &"VanishingTooltip"
-VanishingTooltipLarge/colors/font_color = Color(1, 1, 1, 1)
+VanishingTooltipLarge/colors/font_color = Color(0, 2, 2, 1)
 VanishingTooltipLarge/colors/font_outline_color = Color(0, 0, 0, 0.5)
 VanishingTooltipLarge/constants/outline_size = 30
 VanishingTooltipLarge/font_sizes/font_size = 60
-Wall/colors/color = Color(2, 1, 1, 1)
+Wall/colors/color = Color(2, 1, 2, 1)

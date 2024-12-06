@@ -24,7 +24,7 @@ const physics_material = preload("res://src/materials/walls.tres")
 		_update_collision()
 
 var _body: StaticBody2D
-var _occluder: LightOccluder2D
+#var _occluder: LightOccluder2D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -37,9 +37,9 @@ func _ready():
 	_body.collision_mask = 2
 	add_child(_body)
 
-	_occluder = LightOccluder2D.new()
-	_occluder.light_mask = 1
-	add_child(_occluder)
+	#_occluder = LightOccluder2D.new()
+	#_occluder.light_mask = 1
+	#add_child(_occluder)
 
 	_update_collision()
 	round_precision = min(round_precision, 12)
@@ -89,8 +89,8 @@ func _update_collision() -> void:
 			rs.size.x = abs(p1 - p2).length()
 			rs.size.y = width
 
-	_occluder.occluder = OccluderPolygon2D.new()
-	_occluder.occluder.polygon = create_polyline_polygon()
+	#_occluder.occluder = OccluderPolygon2D.new()
+	#_occluder.occluder.polygon = create_polyline_polygon()
 
 	# Remove any other CollisionShape
 	for cs in _body.get_children():

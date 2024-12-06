@@ -1,0 +1,156 @@
+[gd_scene load_steps=12 format=3 uid="uid://cp3neg7bnrwwh"]
+
+[ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_bkefw"]
+[ext_resource type="Theme" uid="uid://dr2i8jbfjfro4" path="res://boards/deep_space/deep_space_theme.tres" id="2_cf0sc"]
+[ext_resource type="Texture2D" uid="uid://qc0g5fdjtuil" path="res://boards/deep_space/assets/background.jpg" id="3_rwevp"]
+[ext_resource type="Texture2D" uid="uid://c02gsg1f7ra7j" path="res://addons/2d_shapes/Ellipse.svg" id="4_eepk8"]
+[ext_resource type="Script" path="res://src/components/brick_group_configurator.gd" id="5_62m8i"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="6_ekdbm"]
+[ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="7_4e130"]
+[ext_resource type="Script" path="res://boards/deep_space/bricks_movement.gd" id="7_lix56"]
+
+[sub_resource type="Curve" id="Curve_ty7am"]
+_data = [Vector2(0, 0), 0.0, 12.8, 0, 0, Vector2(0.325843, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.99808, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_nk47e"]
+offsets = PackedFloat32Array(0, 0.286561, 1)
+colors = PackedColorArray(1, 1, 1, 0.658824, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Resource" id="Resource_ppnrd"]
+script = ExtResource("6_ekdbm")
+hits = 1
+can_be_destroyed_by_ball = true
+can_be_destroyed_by_rocket = true
+scale = Vector2(2, 1)
+shape = 3
+
+[node name="Deep Space Board" instance=ExtResource("1_bkefw")]
+theme = ExtResource("2_cf0sc")
+
+[node name="Background" parent="." index="5"]
+texture = ExtResource("3_rwevp")
+flip_v = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Scenaries" index="0"]
+visible = false
+position = Vector2(1920, -1160)
+amount = 100
+lifetime = 5.0
+randomness = 0.29
+lifetime_randomness = 0.48
+texture = ExtResource("4_eepk8")
+emission_shape = 3
+emission_rect_extents = Vector2(1920, -1000)
+gravity = Vector2(0, 10)
+scale_amount_min = 0.5
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_ty7am")
+color_ramp = SubResource("Gradient_nk47e")
+hue_variation_min = -1.0
+hue_variation_max = 1.0
+
+[node name="Polygon2D" parent="CenterUI" index="0"]
+color = Color(0, 0, 0, 0.5)
+
+[node name="Bricks" type="Node2D" parent="." index="14"]
+
+[node name="Group1" type="Node2D" parent="Bricks" index="0"]
+modulate = Color(2, 1, 2, 1)
+position = Vector2(90, -1470)
+
+[node name="Bricks Configuration" type="Node" parent="Bricks/Group1" index="0"]
+script = ExtResource("5_62m8i")
+properties = SubResource("Resource_ppnrd")
+
+[node name="Bricks Movement" type="Node" parent="Bricks/Group1" index="1"]
+script = ExtResource("7_lix56")
+
+[node name="Brick01" parent="Bricks/Group1" index="2" instance=ExtResource("7_4e130")]
+position = Vector2(30, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick02" parent="Bricks/Group1" index="3" instance=ExtResource("7_4e130")]
+position = Vector2(210, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick03" parent="Bricks/Group1" index="4" instance=ExtResource("7_4e130")]
+position = Vector2(390, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick04" parent="Bricks/Group1" index="5" instance=ExtResource("7_4e130")]
+position = Vector2(570, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick05" parent="Bricks/Group1" index="6" instance=ExtResource("7_4e130")]
+position = Vector2(750, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick06" parent="Bricks/Group1" index="7" instance=ExtResource("7_4e130")]
+position = Vector2(930, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick07" parent="Bricks/Group1" index="8" instance=ExtResource("7_4e130")]
+position = Vector2(1110, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick08" parent="Bricks/Group1" index="9" instance=ExtResource("7_4e130")]
+position = Vector2(1290, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick09" parent="Bricks/Group1" index="10" instance=ExtResource("7_4e130")]
+position = Vector2(1470, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick10" parent="Bricks/Group1" index="11" instance=ExtResource("7_4e130")]
+position = Vector2(1650, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick11" parent="Bricks/Group1" index="12" instance=ExtResource("7_4e130")]
+position = Vector2(1830, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick12" parent="Bricks/Group1" index="13" instance=ExtResource("7_4e130")]
+position = Vector2(2010, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick13" parent="Bricks/Group1" index="14" instance=ExtResource("7_4e130")]
+position = Vector2(2190, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick14" parent="Bricks/Group1" index="15" instance=ExtResource("7_4e130")]
+position = Vector2(2370, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick15" parent="Bricks/Group1" index="16" instance=ExtResource("7_4e130")]
+position = Vector2(2550, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick16" parent="Bricks/Group1" index="17" instance=ExtResource("7_4e130")]
+position = Vector2(2730, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick17" parent="Bricks/Group1" index="18" instance=ExtResource("7_4e130")]
+position = Vector2(2910, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick18" parent="Bricks/Group1" index="19" instance=ExtResource("7_4e130")]
+position = Vector2(3090, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick19" parent="Bricks/Group1" index="20" instance=ExtResource("7_4e130")]
+position = Vector2(3270, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick20" parent="Bricks/Group1" index="21" instance=ExtResource("7_4e130")]
+position = Vector2(3450, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Brick21" parent="Bricks/Group1" index="22" instance=ExtResource("7_4e130")]
+position = Vector2(3630, 0)
+properties = SubResource("Resource_ppnrd")
+
+[node name="Bumpers" type="Node2D" parent="." index="15"]
+
+[node name="ScoreLabel" parent="HUD" index="0"]
+offset_bottom = -2027.0

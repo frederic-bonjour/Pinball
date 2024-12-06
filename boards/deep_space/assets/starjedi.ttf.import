@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cf722chyp18ft"
-path="res://.godot/imported/starjedi.ttf-a95e1316021ff729105843250aeabc85.fontdata"
+path="res://.godot/imported/starjedi.ttf-ebd49eb7b0eca3a540ac5dd49a670498.fontdata"
 
 [deps]
 
-source_file="res://boards/star_wars/assets/starjedi.ttf"
-dest_files=["res://.godot/imported/starjedi.ttf-a95e1316021ff729105843250aeabc85.fontdata"]
+source_file="res://boards/deep_space/assets/starjedi.ttf"
+dest_files=["res://.godot/imported/starjedi.ttf-ebd49eb7b0eca3a540ac5dd49a670498.fontdata"]
 
 [params]
 

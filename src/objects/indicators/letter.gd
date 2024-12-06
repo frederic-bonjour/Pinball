@@ -36,6 +36,7 @@ const color_off: Color = Color(1, 1, 1, 0.3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	label.theme_type_variation = &"IndicatorLetter"
 	lit = lit
 	color_on = color_on
 	letter = letter

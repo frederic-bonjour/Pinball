@@ -11,6 +11,10 @@ signal property_changed(prop_name: StringName)
 
 @export var can_be_destroyed_by_ball: bool = true
 @export var can_be_destroyed_by_rocket: bool = true
+@export var scale: Vector2 = Vector2.ONE:
+	set(v):
+		scale = v
+		property_changed.emit(&"scale")
 
 @export_enum(
 	"full", "bevel", "cross", "rounded",
