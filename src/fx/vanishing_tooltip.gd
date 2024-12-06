@@ -7,6 +7,8 @@ extends Label
 
 func _ready():
 	theme_type_variation = &"VanishingTooltip"
+	top_level = true
+	z_index = 100
 
 
 func _process(_delta: float) -> void:
@@ -29,13 +31,13 @@ func offset_y(y: int) -> VanishingTooltip:
 	return self
 
 
-static func make_text(content: StringName, node: Node, color: Color = Color.WHITE) -> VanishingTooltip:
+static func make_text(content: StringName, pos: Vector2, color: Color = Color.WHITE) -> VanishingTooltip:
 	var vt = VanishingTooltip.new()
 	vt.text = content
-	vt.position =  node.global_position
+	vt.position =  pos
 	vt.modulate = color
 	return vt
 
 
-static func make_int(value: int, node: Node, color: Color = Color.WHITE) -> VanishingTooltip:
-	return make_text(str(value), node, color)
+static func make_int(value: int, pos: Vector2, color: Color = Color.WHITE) -> VanishingTooltip:
+	return make_text(str(value), pos, color)

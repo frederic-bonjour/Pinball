@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://baevpxybqve37"
-path="res://.godot/imported/wall_v.png-dda5fbbedc92ed77e3d9652888bb8d07.ctex"
+uid="uid://b1jsr7dysjwej"
+path="res://.godot/imported/flipper_support.png-cb0231b154ced333635518f04d5da49a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/objects/board/assets/wall_v.png"
-dest_files=["res://.godot/imported/wall_v.png-dda5fbbedc92ed77e3d9652888bb8d07.ctex"]
+source_file="res://src/objects/board/assets/flipper_support.png"
+dest_files=["res://.godot/imported/flipper_support.png-cb0231b154ced333635518f04d5da49a.ctex"]
 
 [params]
 

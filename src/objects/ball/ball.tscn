@@ -12,13 +12,15 @@ friction = 0.2
 radius = 26.0
 
 [node name="Ball" type="RigidBody2D"]
+top_level = true
+z_index = 10
 position = Vector2(287, 273)
 collision_layer = 2
 collision_mask = 31
 collision_priority = 5.0
 mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_rjoxb")
-gravity_scale = 2.3
+gravity_scale = 3.0
 continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 2

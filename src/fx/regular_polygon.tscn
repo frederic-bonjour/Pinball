@@ -1,13 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdibewau1dffo"]
+[gd_scene load_steps=3 format=3 uid="uid://cdibewau1dffo"]
 
 [ext_resource type="Script" path="res://src/fx/regular_polygon.gd" id="1_8k4pe"]
+[ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="2_g0mr6"]
 
 [node name="RegularPolygon" type="Node2D"]
 script = ExtResource("1_8k4pe")
 edges = 3
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_mask = 6
+collision_mask = 2
+physics_material_override = ExtResource("2_g0mr6")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 disabled = true

@@ -35,6 +35,19 @@ window/stretch/mode="canvas_items"
 
 enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://src/fx/": "pink",
+"res://src/materials/": "gray",
+"res://src/objects/brick/": "blue",
+"res://src/objects/bumper/": "blue",
+"res://src/objects/indicators/": "blue",
+"res://src/objects/kickback/": "blue",
+"res://src/objects/launcher/": "blue",
+"res://src/objects/slingshot/": "blue"
+}
+
 [input]
 
 flipper_left={
@@ -65,6 +78,11 @@ zoom_out={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":72,"key_label":0,"unicode":104,"location":0,"echo":false,"script":null)
 ]
 }
+teleport_ball={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(348, 32),"global_position":Vector2(367, 123),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -78,9 +96,11 @@ zoom_out={
 
 2d/run_on_separate_thread=true
 common/physics_ticks_per_second=120
-common/max_physics_steps_per_frame=16
+common/max_physics_steps_per_frame=32
+common/physics_jitter_fix=0.0
 2d/physics_engine="GodotPhysics2D"
 2d/solver/solver_iterations=32
+common/physics_interpolation=true
 
 [rendering]
 

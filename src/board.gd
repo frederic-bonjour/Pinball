@@ -20,7 +20,6 @@ func _ready():
 	_ball_initial_position = launcher.global_position - Vector2(0, 60)
 
 	var t := get_tree()
-	t.set_group(&"bricks", "modulate", board_theme.bricks_color)
 	t.set_group(&"slingshots", "modulate", board_theme.slingshots_color)
 	t.set_group(&"bumpers", "modulate", board_theme.bumpers_color)
 	t.set_group(&"flippers", "modulate", board_theme.flippers_color)
@@ -57,6 +56,10 @@ func _process(delta: float):
 
 
 func _process_inputs() -> void:
+	if Input.is_action_just_pressed(&"teleport_ball"):
+		var balls = get_tree().get_nodes_in_group(&"balls")
+		if not balls.is_empty():
+			balls[0].teleport_to(get_global_mouse_position())
 	var tree := get_tree()
 	if Input.is_action_just_pressed(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"activate")
@@ -82,7 +85,7 @@ func _update_camera(delta: float) -> void:
 		if Input.is_action_just_pressed(&"zoom_in"):
 			_camera_zoom = 0.5
 		elif Input.is_action_just_pressed(&"zoom_out"):
-			_camera_zoom = 0.75
+			_camera_zoom = 0.65
 	else:
 		_camera_zoom = 0.5
 
@@ -116,8 +119,7 @@ func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
 
 
 func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
-	SessionManager.score += 100 #FIXME
-	effects.add_child(VanishingTooltip.make_int(100, kickback))
+	add_score(100, kickback) # FIXME
 
 
 func _on_kickback_activation_area_body_entered(_body):
@@ -132,29 +134,31 @@ func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
 		add_child(expl)
 
 		var points = SessionManager.brick_destroyed(brick)
-		effects.add_child(VanishingTooltip.make_int(points, brick).offset_y(brick.size.y / 2))
+		add_score(points, brick).offset_y(brick.size.y / 2)
 
 
 func _bumper_hit(bumper: Bumper, _ball) -> void:
-	SessionManager.score += bumper.score
-	effects.add_child(VanishingTooltip.make_int(bumper.score, bumper).offset_y(-50))
+	add_score(bumper.score, bumper).offset_y(-50)
 
 
 func _slingshot_hit(_slingshot: Slingshot, ball: Ball) -> void:
-	SessionManager.score += 50 #FIXME
-	effects.add_child(VanishingTooltip.make_int(50, ball))
+	add_score(50, ball) # FIXME
 
 
 func _on_letter_group_letter_lit(_group_id: StringName, letter: IndicatorLetter):
 	SfxManager.play_audio(&"letter_on", letter)
-	SessionManager.score += 500 #FIXME
-	effects.add_child(VanishingTooltip.make_int(500, letter).offset_y(-100))
+	add_score(500, letter).offset_y(-100) # FIXME
 
 
-func _on_letter_group_completed(group_id: StringName):
+func add_score(value: int, node) -> VanishingTooltip:
+	SessionManager.score += value
+	var t = VanishingTooltip.make_int(value, node.global_position)
+	effects.add_child(t)
+	return t
+
+
+func _on_letter_group_completed(group_id: StringName, group: Node):
+	if group is Node2D or group is Control:
+		add_score(2000, group).theme_type_variation = &"VanishingTooltipLarge"
 	match group_id:
 		&"KICK": _activate_kickbacks()
-
-
-func _on_letter_group_save_completed():
-	pass #TODO

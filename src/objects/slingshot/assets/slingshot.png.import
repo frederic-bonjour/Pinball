@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cayl4gkxra854"
-path="res://.godot/imported/wall_flipper_joint.png-69b2ca20e352231a83202a3b3db40727.ctex"
+uid="uid://gi7kal4e0ag7"
+path="res://.godot/imported/slingshot.png-295a92a5e11ef682e82b463c610dcbb4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/objects/board/assets/wall_flipper_joint.png"
-dest_files=["res://.godot/imported/wall_flipper_joint.png-69b2ca20e352231a83202a3b3db40727.ctex"]
+source_file="res://src/objects/slingshot/assets/slingshot.png"
+dest_files=["res://.godot/imported/slingshot.png-295a92a5e11ef682e82b463c610dcbb4.ctex"]
 
 [params]
 

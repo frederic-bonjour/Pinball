@@ -106,18 +106,20 @@ func create_polyline_polygon() -> PackedVector2Array:
 	for i in range(points.size()):
 		# Points actuels, précédent et suivant
 		var current = points[i]
-		var prev = points[i - 1] if i > 0 else null
-		var next = points[i + 1] if i < points.size() - 1 else null
+		var prev: Vector2
+		var next: Vector2
 
 		# Calcul des normales
 		var normal_prev = Vector2()
 		var normal_next = Vector2()
 
-		if prev:
+		if i > 0:
+			prev = points[i - 1]
 			var direction_prev = (current - prev).normalized()
 			normal_prev = Vector2(-direction_prev.y, direction_prev.x)
 
-		if next:
+		if i < points.size() - 1:
+			next = points[i + 1]
 			var direction_next = (next - current).normalized()
 			normal_next = Vector2(-direction_next.y, direction_next.x)
 

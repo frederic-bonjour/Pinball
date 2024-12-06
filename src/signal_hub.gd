@@ -16,7 +16,7 @@ signal kickback_ball_entered(kickback: KickBack, ball: PhysicsBody2D)
 
 #region Letter groups
 signal letter_group_letter_lit(identifier: StringName, letter: IndicatorLetter)
-signal letter_group_completed(identifier: StringName)
+signal letter_group_completed(identifier: StringName, group_node: Node)
 #endregion
 
 
@@ -33,7 +33,7 @@ func _ready() -> void:
 	kickback_loading.connect(_noop2)
 	kickback_ball_entered.connect(_noop2)
 
-	letter_group_completed.connect(_noop1)
+	letter_group_completed.connect(_noop2)
 	letter_group_letter_lit.connect(_noop2)
 
 

@@ -39,7 +39,5 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 
-[connection signal="loading" from="KickBack" to="." method="_on_kick_back_loading"]
-[connection signal="state_changed" from="KickBack" to="." method="_on_kick_back_state_changed"]
 [connection signal="button_down" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_down"]
 [connection signal="button_up" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_up"]

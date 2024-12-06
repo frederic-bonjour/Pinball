@@ -89,6 +89,7 @@ func _process(_delta: float) -> void:
 		Ejection:
 			var s = strength if auto_eject else _player_strength
 			if _loaded_body:
+				_loaded_body.linear_damp = _prev_damp
 				_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
 				SignalHub.kickback_ejection.emit(self, _loaded_body, s)
 				SignalHub.kickback_loading.emit(self, 0)
@@ -107,14 +108,18 @@ func _process(_delta: float) -> void:
 			_state = Idle
 			inactive = true
 
+var _prev_damp: float
 
 func _on_body_entered_detection_area(body: Node2D):
 	_body_present = true
 	_loaded_body = body
+	_prev_damp = _loaded_body.linear_damp
+	_loaded_body.linear_damp = 5
 	SignalHub.kickback_ball_entered.emit(self, body)
 
 
-func _on_body_exited_detection_area(_body):
+func _on_body_exited_detection_area(body):
+	body.linear_damp = _prev_damp
 	_body_present = false
 	_loaded_body = null
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf1hlupu76v3o"]
 
 [ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_ooovr"]
-[ext_resource type="Texture2D" uid="uid://qnar1elt716p" path="res://src/objects/slingshot/assets/slingshot.svg" id="2_rcvls"]
+[ext_resource type="Texture2D" uid="uid://gi7kal4e0ag7" path="res://src/objects/slingshot/assets/slingshot.png" id="2_qc7jr"]
 [ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="3_0jbsp"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_menoq"]
@@ -24,7 +24,7 @@ script = ExtResource("1_ooovr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-90, 170)
-texture = ExtResource("2_rcvls")
+texture = ExtResource("2_qc7jr")
 flip_h = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

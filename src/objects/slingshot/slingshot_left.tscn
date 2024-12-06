@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://gd2vjkhm8ywa"]
 
 [ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_7yepp"]
-[ext_resource type="Texture2D" uid="uid://qnar1elt716p" path="res://src/objects/slingshot/assets/slingshot.svg" id="2_h0w5k"]
+[ext_resource type="Texture2D" uid="uid://gi7kal4e0ag7" path="res://src/objects/slingshot/assets/slingshot.png" id="2_f2udr"]
 [ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="3_m5lby"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usju2"]
@@ -25,7 +25,7 @@ script = ExtResource("1_7yepp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(90, 169)
-texture = ExtResource("2_h0w5k")
+texture = ExtResource("2_f2udr")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_mask = 2

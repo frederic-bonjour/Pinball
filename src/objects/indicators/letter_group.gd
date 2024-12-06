@@ -31,7 +31,7 @@ func _blink() -> void:
 		for l in _letters:
 			l.lit = i % 2 > 0
 		await get_tree().create_timer(blink_delay).timeout
-	SignalHub.letter_group_completed.emit(identifier)
+	SignalHub.letter_group_completed.emit(identifier, get_parent())
 	reset()
 
 
