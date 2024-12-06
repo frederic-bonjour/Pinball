@@ -134,7 +134,7 @@ func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
 		add_child(expl)
 
 		var points = SessionManager.brick_destroyed(brick)
-		add_score(points, brick).offset_y(brick.size.y / 2)
+		add_score(points, brick).offset_y(roundi(brick.size.y / 2.0))
 
 
 func _bumper_hit(bumper: Bumper, _ball) -> void:
