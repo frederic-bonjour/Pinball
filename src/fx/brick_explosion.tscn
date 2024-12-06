@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ti1c4yb8hm4y"]
 
-[ext_resource type="Texture2D" uid="uid://bm7555k3y0dnp" path="res://src/objects/brick/assets/triangle.png" id="1_6xla8"]
+[ext_resource type="Texture2D" uid="uid://bm7555k3y0dnp" path="res://assets/brick/triangle.png" id="1_6xla8"]
 [ext_resource type="Script" path="res://src/fx/brick_explosion.gd" id="2_7xtll"]
 
 [sub_resource type="Curve" id="Curve_rsk3k"]

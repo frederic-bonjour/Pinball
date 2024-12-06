@@ -30,6 +30,8 @@ var _occluder: LightOccluder2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	super._ready()
+	add_to_group(&"walls")
+
 	_body = StaticBody2D.new()
 	_body.physics_material_override = physics_material
 	_body.collision_mask = 2

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://de2kcbjq5ukfq"]
 
-[ext_resource type="Texture2D" uid="uid://chyc5ku6jt8pj" path="res://src/objects/board/assets/rounded_corner.png" id="1_kmfwb"]
+[ext_resource type="Texture2D" uid="uid://chyc5ku6jt8pj" path="res://assets/board/rounded_corner.png" id="1_kmfwb"]
 
 [node name="RoundedCorner" type="StaticBody2D"]
 collision_mask = 2

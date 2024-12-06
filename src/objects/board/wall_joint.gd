@@ -11,11 +11,9 @@ extends Node2D
 
 @onready var collision_shape = $CollisionShape2D
 
-var _theme: BoardTheme
 
 
 func _ready():
-	_theme = Utils.get_board(self).board_theme
 	properties.connect(&"property_changed", _on_property_changed)
 	_update_radius()
 
@@ -34,6 +32,6 @@ func _update_radius() -> void:
 func _draw() -> void:
 	if properties.hole_radius > 0.0:
 		var thickness: float = properties.radius - properties.hole_radius
-		draw_circle(Vector2.ZERO, properties.radius - thickness / 2, _theme.walls_color, false, thickness, true)
+		draw_circle(Vector2.ZERO, properties.radius - thickness / 2, Color.WHITE, false, thickness, true)
 	else:
-		draw_circle(Vector2.ZERO, properties.radius, _theme.walls_color, true, -1, true)
+		draw_circle(Vector2.ZERO, properties.radius, Color.WHITE, true, -1, true)

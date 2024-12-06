@@ -1,7 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b8uguqv58l6p2"]
-
-[ext_resource type="FontFile" uid="uid://rm1g4nusis7b" path="res://assets/fonts/moon_get-Heavy.ttf" id="1_df1ti"]
-
-[resource]
-font = ExtResource("1_df1ti")
-font_size = 36

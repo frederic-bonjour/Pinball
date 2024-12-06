@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tests/test_walls.gd" id="1_5qxky"]
 [ext_resource type="Script" path="res://src/objects/board/wall.gd" id="1_22smx"]
-[ext_resource type="Texture2D" uid="uid://cjfkkiy5vbln2" path="res://src/objects/ball/assets/light.png" id="2_tsw07"]
+[ext_resource type="Texture2D" uid="uid://cjfkkiy5vbln2" path="res://assets/ball/light.png" id="2_tsw07"]
 
 [sub_resource type="Gradient" id="Gradient_8x31u"]
 colors = PackedColorArray(0.224227, 0.121017, 0.339775, 1, 0.519596, 0.276375, 0.48228, 1)

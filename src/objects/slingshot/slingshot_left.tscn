@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://gd2vjkhm8ywa"]
 
 [ext_resource type="Script" path="res://src/objects/slingshot/slingshot.gd" id="1_7yepp"]
-[ext_resource type="Texture2D" uid="uid://gi7kal4e0ag7" path="res://src/objects/slingshot/assets/slingshot.png" id="2_f2udr"]
+[ext_resource type="Texture2D" uid="uid://gi7kal4e0ag7" path="res://assets/slingshot/slingshot.png" id="2_f2udr"]
 [ext_resource type="PhysicsMaterial" uid="uid://gx1wmihfum86" path="res://src/materials/walls.tres" id="3_m5lby"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_usju2"]

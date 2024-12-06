@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BallProperties" load_steps=3 format=3 uid="uid://de7eqfrrocpth"]
 
 [ext_resource type="Script" path="res://src/objects/ball/ball_properties.gd" id="1_beg1e"]
-[ext_resource type="Texture2D" uid="uid://ba6oq2c30yi7i" path="res://src/objects/ball/assets/ball.png" id="2_biya8"]
+[ext_resource type="Texture2D" uid="uid://ba6oq2c30yi7i" path="res://assets/ball/ball.png" id="2_biya8"]
 
 [resource]
 script = ExtResource("1_beg1e")

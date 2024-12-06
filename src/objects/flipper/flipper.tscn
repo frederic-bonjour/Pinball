@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://coh4tb7cvi0db"]
 
-[ext_resource type="Texture2D" uid="uid://bt384cwckxs3x" path="res://src/objects/flipper/assets/flipper.png" id="1_53da1"]
+[ext_resource type="Texture2D" uid="uid://bt384cwckxs3x" path="res://assets/flipper/flipper.png" id="1_53da1"]
 [ext_resource type="PhysicsMaterial" uid="uid://5tovjgocnqrb" path="res://src/objects/flipper/flipper_physics_material.tres" id="1_vimnc"]
 [ext_resource type="Script" path="res://src/objects/flipper/flipper.gd" id="1_ywy08"]
 

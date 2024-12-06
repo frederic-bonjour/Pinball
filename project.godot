@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pinball"
-run/main_scene="res://src/board.tscn"
+run/main_scene="res://boards/space_invaders/space_invaders_board.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -38,6 +38,7 @@ enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/ali
 [file_customization]
 
 folder_colors={
+"res://boards/": "yellow",
 "res://src/fx/": "pink",
 "res://src/materials/": "gray",
 "res://src/objects/brick/": "blue",
@@ -47,6 +48,10 @@ folder_colors={
 "res://src/objects/launcher/": "blue",
 "res://src/objects/slingshot/": "blue"
 }
+
+[global_group]
+
+walls=""
 
 [input]
 

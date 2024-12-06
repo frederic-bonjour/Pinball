@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://en3henr63844"]
 
 [ext_resource type="Script" path="res://src/objects/bumper/bumper.gd" id="1_jng87"]
-[ext_resource type="Texture2D" uid="uid://dc1ugbumfm34q" path="res://src/objects/bumper/assets/bumper.png" id="2_3t64k"]
+[ext_resource type="Texture2D" uid="uid://dc1ugbumfm34q" path="res://assets/bumper/bumper.png" id="2_3t64k"]
 [ext_resource type="PhysicsMaterial" uid="uid://crpikdeh4m5mb" path="res://src/objects/bumper/bumper_physics_material.tres" id="3_5covj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f3unc"]

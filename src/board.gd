@@ -1,12 +1,11 @@
 class_name PinballBoard
 extends Control
 
-@export var board_theme: BoardTheme
-
 @onready var camera: Camera2D = %Camera
 @onready var launcher: Node2D = %Launcher
 @onready var launcher_rotate_on_flip: ComponentRotateOnFlip = %Launcher/RotateOnFlip
 @onready var effects: Control = %Effects
+@onready var border_line: Line2D = %BorderLine
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
@@ -20,11 +19,13 @@ func _ready():
 	_ball_initial_position = launcher.global_position - Vector2(0, 60)
 
 	var t := get_tree()
-	t.set_group(&"slingshots", "modulate", board_theme.slingshots_color)
-	t.set_group(&"bumpers", "modulate", board_theme.bumpers_color)
-	t.set_group(&"flippers", "modulate", board_theme.flippers_color)
-	t.set_group(&"balls", "modulate", board_theme.balls_color)
-	t.set_group(&"walls", "modulate", board_theme.walls_color)
+	t.set_group(&"slingshots", "modulate", get_theme_color(&"color", &"Slingshot"))
+	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
+	t.set_group(&"flippers", "modulate", get_theme_color(&"color", &"Flipper"))
+	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
+	t.set_group(&"walls", "modulate", get_theme_color(&"color", &"Wall"))
+	border_line.default_color = get_theme_color(&"color", &"Wall")
+	launcher.modulate = get_theme_color(&"color", &"Launcher")
 
 	SignalHub.wall_hit.connect(_add_ball_touch_particles)
 	SignalHub.flipper_hit.connect(_add_ball_touch_particles)

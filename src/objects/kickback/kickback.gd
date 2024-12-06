@@ -2,7 +2,7 @@
 class_name KickBack
 extends Node2D
 
-@export var indicator: Control
+@export var indicator: Node2D
 
 @export_group("Ejection")
 @export var strength: float = 50000.0
@@ -22,7 +22,7 @@ extends Node2D
 			for cs in find_children("*", "CollisionShape2D"):
 				cs.set_deferred(&"disabled", inactive)
 			if indicator:
-				indicator.visible = not inactive
+				indicator.modulate = Color(1, 1, 1, 0.25) if inactive else Color(2, 3, 2)
 			top_line.visible = not inactive
 
 @export var auto_inactive_delay: int = 0
@@ -52,8 +52,8 @@ func _ready():
 	inactive = inactive
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _physics_process(_delta: float) -> void:
 	var now = Time.get_ticks_msec()
 	var elapsed = now - _state_ts
 
@@ -89,7 +89,7 @@ func _process(_delta: float) -> void:
 		Ejection:
 			var s = strength if auto_eject else _player_strength
 			if _loaded_body:
-				_loaded_body.linear_damp = _prev_damp
+				_loaded_body.linear_damp = _prev_body_damp
 				_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
 				SignalHub.kickback_ejection.emit(self, _loaded_body, s)
 				SignalHub.kickback_loading.emit(self, 0)
@@ -108,18 +108,19 @@ func _process(_delta: float) -> void:
 			_state = Idle
 			inactive = true
 
-var _prev_damp: float
+
+var _prev_body_damp: float
 
 func _on_body_entered_detection_area(body: Node2D):
 	_body_present = true
 	_loaded_body = body
-	_prev_damp = _loaded_body.linear_damp
+	_prev_body_damp = _loaded_body.linear_damp
 	_loaded_body.linear_damp = 5
 	SignalHub.kickback_ball_entered.emit(self, body)
 
 
 func _on_body_exited_detection_area(body):
-	body.linear_damp = _prev_damp
+	body.linear_damp = _prev_body_damp
 	_body_present = false
 	_loaded_body = null
 
