@@ -14,6 +14,9 @@ const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
 var _ball_initial_position: Vector2
 var _camera_zoom = 0.5
 
+var _brick_groups: Array[Node]:
+	get: return find_children("*", "BrickGroup", true, false)
+
 
 func _ready():
 	_ball_initial_position = launcher.global_position - Vector2(0, 60)
@@ -33,15 +36,21 @@ func _ready():
 	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
 	SignalHub.kickback_ejection.connect(_kick_back_ejection)
+	SignalHub.brick_group_cleared.connect(_brick_group_cleared)
 	
 	_update_score(SessionManager.score)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
 
-	SignalHub.connect(&"letter_group_completed", _on_letter_group_completed)
 	SignalHub.connect(&"letter_group_letter_lit", _on_letter_group_letter_lit)
+	SignalHub.connect(&"letter_group_completed", _on_letter_group_completed_common)
 
 	_activate_kickbacks()
+	_board_ready()
+
+
+func _board_ready() -> void:
+	pass
 
 
 func _update_score(_score: int) -> void:
@@ -148,20 +157,41 @@ func _slingshot_hit(_slingshot: Slingshot, ball: Ball) -> void:
 	add_score(50, ball) # FIXME
 
 
-func _on_letter_group_letter_lit(_group_id: StringName, letter: IndicatorLetter):
+func _on_letter_group_letter_lit(_group: LetterIndicatorGroup, letter: IndicatorLetter):
 	SfxManager.play_audio(&"letter_on", letter)
 	add_score(500, letter).offset_y(-100) # FIXME
 
 
-func add_score(value: int, node) -> VanishingTooltip:
+func add_score(value: int, node, large: bool = false) -> VanishingTooltip:
 	SessionManager.score += value
 	var t = VanishingTooltip.make_int(value, node.global_position)
+	if large:
+		t.theme_type_variation = &"VanishingTooltipLarge"
 	effects.add_child(t)
 	return t
 
 
-func _on_letter_group_completed(group_id: StringName, group: Node):
-	if group is Node2D or group is Control:
-		add_score(2000, group).theme_type_variation = &"VanishingTooltipLarge"
-	match group_id:
-		&"KICK": _activate_kickbacks()
+var all_brick_groups_cleared: bool:
+	get:
+		for bg in _brick_groups:
+			if not bg.is_empty:
+				return false
+		return true
+
+
+func _brick_group_cleared(group_node: BrickGroup) -> void:
+	add_score(50000 if all_brick_groups_cleared else 5000, group_node, true) # FIXME
+
+
+func _on_letter_group_completed_common(group: LetterIndicatorGroup):
+	add_score(2000, group, true)
+	if group.name.ends_with(&"_KICK"):
+		_activate_kickbacks()
+	elif group.name.ends_with(&"_SAVE"):
+		pass # TODO
+	else:
+		_on_letter_group_completed(group)
+
+
+func _on_letter_group_completed(_group: LetterIndicatorGroup):
+	pass
