@@ -162,9 +162,12 @@ func _on_letter_group_letter_lit(_group: LetterIndicatorGroup, letter: Indicator
 	add_score(500, letter).offset_y(-100) # FIXME
 
 
-func add_score(value: int, node, large: bool = false) -> VanishingTooltip:
+func add_score(value: int, node: Node, large: bool = false) -> VanishingTooltip:
 	SessionManager.score += value
-	var t = VanishingTooltip.make_int(value, node.global_position)
+	var p = node.global_position
+	if node is Control:
+		p += node.size / 2
+	var t = VanishingTooltip.make_int(value, p)
 	if large:
 		t.theme_type_variation = &"VanishingTooltipLarge"
 	effects.add_child(t)
