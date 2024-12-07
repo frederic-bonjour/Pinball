@@ -2,24 +2,32 @@
 class_name LetterIndicatorGroup
 extends Control
 
-@export var blink_count: int = 4
-@export var blink_delay: float = 0.1
-@export var multiple: bool = true
-
+@export_group("Layout & Colors")
+## The letters in this group.
 @export var letters: String:
 	set(v):
 		letters = v
 		_update_letters()
 
+## The colors for the letters, in the same order.
+## If size is less than the number of letters,
+## the pingpong() function is used to get the other colors.
 @export var colors: Array[Color]:
 	set(v):
 		colors = v
 		_update_letters()
 
+## The offset between each letter.
 @export var offset: Vector2:
 	set(v):
 		offset = v
 		_update_positions()
+
+@export_group("Completion")
+@export var blink_count: int = 4
+@export var blink_delay: float = 0.1
+@export var redoable: bool = true
+
 
 const LetterIndicatorScene = preload("res://src/objects/indicators/letter.tscn")
 const LETTER_SIZE: Vector2 = Vector2(70, 70)
@@ -71,14 +79,14 @@ func _update_letters() -> void:
 func _update_positions() -> void:
 	for i in range(_letter_nodes.size()):
 		var node: IndicatorLetter = _letter_nodes[i]
-		prints(i, offset * i)
 		node.position = offset * i
 
 
 func _update_colors() -> void:
-	for i in range(_letter_nodes.size()):
-		var node: IndicatorLetter = _letter_nodes[i]
-		node.color_on = colors[i] if colors and colors.size() > i else Color.WHITE
+	if colors and not colors.is_empty():
+		for i in range(_letter_nodes.size()):
+			var node: IndicatorLetter = _letter_nodes[i]
+			node.color_on = colors[pingpong(i, colors.size() - 1)]
 
 
 func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:
@@ -96,7 +104,7 @@ func _blink() -> void:
 			l.lit = i % 2 > 0
 		await get_tree().create_timer(blink_delay).timeout
 	SignalHub.letter_group_completed.emit(self)
-	if multiple:
+	if redoable:
 		reset()
 
 

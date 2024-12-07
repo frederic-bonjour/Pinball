@@ -1,6 +1,6 @@
 extends PinballBoard
 
-@onready var letter_group_space: LetterIndicatorGroup = %LetterGroup_SPACE
+@onready var letter_group_space: LetterIndicatorGroup = %Letters_SPACE
 
 func _board_ready() -> void:
 	pass
