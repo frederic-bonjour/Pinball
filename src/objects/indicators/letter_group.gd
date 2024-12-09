@@ -56,7 +56,7 @@ func _ready():
 		SignalHub.ball_lost.connect(_do_reset_on_ball_lost)
 
 
-func _do_reset_on_ball_lost(ball) -> void:
+func _do_reset_on_ball_lost(_ball: Ball) -> void:
 	reset()
 
 

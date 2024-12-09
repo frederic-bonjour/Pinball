@@ -113,7 +113,7 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		SignalHub.ball_lost.emit(body)
 		# Stops the ball
 		body.linear_velocity = Vector2.ZERO
-		body.remove_all_components()
+		# FIXME body.remove_all_components()
 		# Reset launcher to its default/central postion
 		await launcher_rotate_on_flip.reset()
 		# When launcher is ready, telepoty the ball into it.

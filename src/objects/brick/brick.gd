@@ -100,6 +100,11 @@ func _use_triangle_shape() -> void:
 	cs_triangle.polygon[2] = Vector2(-s.x / 2, s.y / 2)
 
 
+func hit() -> int:
+	_remaining_hit_count -= 1
+	return _remaining_hit_count
+
+
 func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		_remaining_hit_count -= 1

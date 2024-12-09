@@ -9,10 +9,6 @@ extends RigidBody2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var particles: CPUParticles2D = $"Trail Particles"
 
-var _line_2d_point_x: float = 0.0
-var _trail_points: Array[Vector2] = []
-var _last_pos: Vector2 = Vector2.ZERO
-
 var _reset_state = false
 var _teleport_vector: Vector2
 
@@ -55,8 +51,12 @@ func _update_properties() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	particles.rotation = - rotation
+	particles.rotation = -rotation
 	particles.emitting = linear_velocity.length_squared() > 25_000
+
+
+func _process(_delta: float) -> void:
+	pass
 
 
 func _integrate_forces(state):
@@ -74,8 +74,18 @@ func teleport_to(target_pos: Vector2):
 	_reset_state = true
 
 
+var _entered_body: Node
+var _entered_body_pos: Vector2
+
 func _on_body_entered(body: Node) -> void:
-	if body as ModularWall or body.name.containsn(&"wall"):
+	_entered_body = body
+	if body is Brick:
+		_entered_body_pos = body.global_position
+		var destroyed = body.hit() == 0
+		SignalHub.brick_hit.emit(body, self, destroyed)
+		if destroyed:
+			body.queue_free()
+	elif body as ModularWall or body.name.containsn(&"wall"):
 		SignalHub.wall_hit.emit(body, self)
 	elif body is Flipper:
 		SignalHub.flipper_hit.emit(body, self)

@@ -29,5 +29,5 @@ func _on_body_entered(body):
 		add_child(BUMPER_WAVE_SCENE.instantiate())
 
 
-func _on_body_exited(body):
+func _on_body_exited(_body):
 	pass
