@@ -38,7 +38,7 @@ func _ready() -> void:
 
 	letter_group_completed.connect(_noop1)
 	letter_group_letter_lit.connect(_noop2)
-	
+
 	brick_group_cleared.connect(_noop1)
 
 
