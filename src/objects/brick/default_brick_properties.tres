@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BrickProperties" load_steps=2 format=3 uid="uid://crji6wgitk5g6"]
+
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="1_086pq"]
+
+[resource]
+script = ExtResource("1_086pq")
+shape = 0
+scale = Vector2(1, 1)
+alt_texture_hframes = 0
+alt_texture_vframes = 0
+hits = 1
+can_be_destroyed_by_ball = true
+can_be_destroyed_by_rocket = true

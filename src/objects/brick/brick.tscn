@@ -1,21 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjqub7vse1qrt"]
+[gd_scene load_steps=7 format=3 uid="uid://cjqub7vse1qrt"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://bpb580y2n4mcp" path="res://src/materials/brick.tres" id="1_8ga3t"]
 [ext_resource type="Script" path="res://src/objects/brick/brick.gd" id="1_a18mc"]
 [ext_resource type="Texture2D" uid="uid://bhi2bgxcuyg4o" path="res://assets/brick/bricks.png" id="1_u4g8l"]
-[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="2_e873h"]
-
-[sub_resource type="Resource" id="Resource_g7ipt"]
-script = ExtResource("2_e873h")
-hits = 1
-can_be_destroyed_by_ball = true
-can_be_destroyed_by_rocket = true
-shape = 0
+[ext_resource type="Resource" uid="uid://crji6wgitk5g6" path="res://src/objects/brick/default_brick_properties.tres" id="3_x0sax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pobi"]
-size = Vector2(60, 60)
+resource_local_to_scene = true
+size = Vector2(240, 180)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3xld7"]
+resource_local_to_scene = true
 radius = 30.0
 
 [node name="Brick" type="RigidBody2D"]
@@ -28,9 +23,10 @@ freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_a18mc")
-properties = SubResource("Resource_g7ipt")
+properties = ExtResource("3_x0sax")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
 texture = ExtResource("1_u4g8l")
 hframes = 4
 vframes = 3

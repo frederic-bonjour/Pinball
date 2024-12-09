@@ -28,7 +28,7 @@ func _ready():
 	_properties_changed()
 
 
-func _properties_changed() -> void:
+func _properties_changed(_prop_name = null) -> void:
 	for b in bricks:
 		if properties:
 			(b as Brick).properties = properties
