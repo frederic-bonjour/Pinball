@@ -30,6 +30,9 @@ func _integrate_forces(state):
 		state.transform = Transform2D(0.0, _teleport_vector)
 		linear_velocity = Vector2.ZERO
 		_reset_state = false
+	else:
+		if linear_velocity.length_squared() > 20_000_000: # TODO Needed?
+			linear_velocity = linear_velocity.normalized() * 4400
 
 
 func teleport_to(target_pos: Vector2):
