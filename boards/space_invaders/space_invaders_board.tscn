@@ -257,8 +257,9 @@ offset_right = 1420.0
 offset_bottom = -1790.0
 script = ExtResource("8_mqmdq")
 letters = "SAVE"
-colors = Array[Color]([Color(1.5, 0, 2, 1), Color(2, 2, 0, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
+colors = Array[Color]([Color(1.566, 0.764, 1.97, 1), Color(2, 2, 0, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
 offset = Vector2(120, 0)
+reset_on_ball_lost = null
 
 [node name="Wall2" type="Line2D" parent="Letters_SAVE" index="0"]
 texture_filter = 6
@@ -312,8 +313,9 @@ offset_right = 402.0
 offset_bottom = -405.0
 script = ExtResource("8_mqmdq")
 letters = "KICK"
-colors = Array[Color]([Color(1.5, 0, 2, 1), Color(2, 2, 0, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
+colors = Array[Color]([Color(1.566, 0.764, 1.97, 1), Color(2, 2, 0, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
 offset = Vector2(105, 35)
+reset_on_ball_lost = null
 metadata/_edit_pinned_properties_ = [&"colors"]
 
 [node name="Wall6" type="Line2D" parent="Letters_KICK" index="0"]
@@ -924,27 +926,16 @@ end_cap_mode = 1
 antialiased = true
 script = ExtResource("6_vk3d7")
 
-[node name="Letters_SPACE" type="Control" parent="." index="29"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_left = 3050.0
-offset_top = -2100.0
-offset_right = 3480.0
-offset_bottom = -2030.0
-script = ExtResource("8_mqmdq")
-letters = "SPACE"
-colors = Array[Color]([Color(2, 0, 2, 1), Color(2, 2, 0, 1), Color(2, 2, 2, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
-offset = Vector2(90, 0)
-redoable = false
-
-[node name="Letters_INVADERS" type="Control" parent="." index="30"]
+[node name="Letters_THROUGH" type="Control" parent="." index="29"]
 anchors_preset = 0
 offset_left = 3710.0
 offset_top = -1800.0
 offset_right = 3780.0
-offset_bottom = -1100.0
+offset_bottom = -1190.0
 script = ExtResource("8_mqmdq")
-letters = "INVADERS"
-colors = Array[Color]([Color(1.5, 0, 2, 1), Color(2, 2, 0, 1), Color(0, 2, 2, 1), Color(0, 2, 0, 1)])
+letters = "THROUGH"
+colors = Array[Color]([Color(0, 2, 2, 1)])
+colors_cycling = "repeat"
 offset = Vector2(0, 90)
 redoable = false
+reset_on_ball_lost = true

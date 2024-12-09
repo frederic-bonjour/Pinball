@@ -34,6 +34,7 @@ extends Control
 @export var blink_count: int = 4
 @export var blink_delay: float = 0.1
 @export var redoable: bool = true
+@export var reset_on_ball_lost: bool = false
 
 
 const LetterIndicatorScene = preload("res://src/objects/indicators/letter.tscn")
@@ -51,6 +52,12 @@ func _ready():
 	_update_letters()
 	_update_positions()
 	_update_colors()
+	if reset_on_ball_lost:
+		SignalHub.ball_lost.connect(_do_reset_on_ball_lost)
+
+
+func _do_reset_on_ball_lost(ball) -> void:
+	reset()
 
 
 func _update_letters() -> void:
