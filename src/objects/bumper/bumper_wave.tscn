@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl0qwc1pcvxoh"]
+
+[ext_resource type="Texture2D" uid="uid://ctuchqxdox0co" path="res://assets/bumper/bumper_wave.png" id="1_wb7gm"]
+[ext_resource type="Script" path="res://src/objects/bumper/bumper_wave.gd" id="2_3wun6"]
+
+[node name="Bumper Wave" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.5)
+texture = ExtResource("1_wb7gm")
+script = ExtResource("2_3wun6")

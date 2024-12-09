@@ -9,7 +9,8 @@ extends Node2D
 @onready var area_collision_shape = $BallDetectionArea/AreaCollisionShape
 @onready var sprite: Sprite2D = $Sprite2D
 
-var _dest_scale: Vector2
+const BUMPER_WAVE_SCENE = preload("res://src/objects/bumper/bumper_wave.tscn")
+
 var _strength: float = 150.0
 
 
@@ -17,25 +18,16 @@ var _strength: float = 150.0
 func _ready():
 	add_to_group(&"bumpers")
 	set_physics_process(false)
-	sprite.scale = Vector2.ONE
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
-	sprite.scale = sprite.scale.move_toward(_dest_scale, delta * _strength)
-	if sprite.scale == Vector2.ONE:
-		set_physics_process(false)
 
 
 func _on_body_entered(body):
 	if body is Ball:
-		_dest_scale = Vector2(1.2, 1.2)
 		_strength = clamp(remap(body.linear_velocity.length_squared(), 0, 9_000_000, 200, 10), roundi(max_strength / 5.0), max_strength)
 		body.linear_velocity = body.linear_velocity.normalized() * 1500
 		SignalHub.bumper_hit.emit(self, body)
 		set_physics_process(true)
+		add_child(BUMPER_WAVE_SCENE.instantiate())
 
 
 func _on_body_exited(body):
-	if body is Ball:
-		_dest_scale = Vector2.ONE
+	pass
