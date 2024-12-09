@@ -74,13 +74,8 @@ func teleport_to(target_pos: Vector2):
 	_reset_state = true
 
 
-var _entered_body: Node
-var _entered_body_pos: Vector2
-
 func _on_body_entered(body: Node) -> void:
-	_entered_body = body
 	if body is Brick:
-		_entered_body_pos = body.global_position
 		var destroyed = body.hit() == 0
 		SignalHub.brick_hit.emit(body, self, destroyed)
 		if destroyed:
