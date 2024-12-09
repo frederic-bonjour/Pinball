@@ -17,6 +17,9 @@ var _camera_zoom = 0.5
 var _brick_groups: Array[Node]:
 	get: return find_children("*", "BrickGroup", true, false)
 
+var _balls: Array[Node]:
+	get: return get_tree().get_nodes_in_group(&"balls")
+
 
 func _ready():
 	_ball_initial_position = launcher.global_position - Vector2(0, 60)
@@ -63,11 +66,6 @@ func _on_score_steps_reached(steps: Array[StringName]) -> void:
 func _process(delta: float):
 	_process_inputs()
 	_update_camera(delta)
-	_update_balls_trails()
-
-
-func _update_balls_trails() -> void:
-	pass
 
 
 func _process_inputs() -> void:
@@ -115,6 +113,7 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		SignalHub.ball_lost.emit(body)
 		# Stops the ball
 		body.linear_velocity = Vector2.ZERO
+		body.remove_all_components()
 		# Reset launcher to its default/central postion
 		await launcher_rotate_on_flip.reset()
 		# When launcher is ready, telepoty the ball into it.

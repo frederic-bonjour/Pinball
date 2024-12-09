@@ -22,6 +22,31 @@ func _ready() -> void:
 	_update_properties()
 
 
+#region Components
+func add_component(component: Node) -> bool:
+	component.name = "Component_%s" % component.get_class()
+	if not get_node_or_null(str(component.name)):
+		add_child(component)
+		return true
+	return false
+
+
+func remove_component(component_name: StringName) -> bool:
+	var n = get_node_or_null("Component_%s" % component_name)
+	if n:
+		remove_child(n)
+		n.queue_free()
+		return true
+	return false
+
+
+func remove_all_components() -> void:
+	for c in find_children("Component_*", "", false, false):
+		remove_child(c)
+		c.queue_free()
+#endregion
+
+
 func _update_properties() -> void:
 	if is_node_ready():
 		self.mass = properties.mass

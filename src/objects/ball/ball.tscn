@@ -12,7 +12,7 @@ friction = 0.2
 radius = 26.0
 
 [sub_resource type="Curve" id="Curve_u6mxt"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, -1.51831, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_0pv5m"]
@@ -54,12 +54,12 @@ emitting = false
 amount = 50
 emission_shape = 2
 emission_sphere_radius = 26.0
-spread = 15.0
+spread = 10.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 20.0
-initial_velocity_max = 100.0
-scale_amount_max = 8.0
+scale_amount_min = 2.0
+scale_amount_max = 12.0
 scale_amount_curve = SubResource("Curve_u6mxt")
+color = Color(2, 2, 2, 1)
 color_ramp = SubResource("Gradient_0pv5m")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

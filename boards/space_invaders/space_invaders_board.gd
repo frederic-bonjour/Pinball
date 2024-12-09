@@ -17,5 +17,8 @@ func check_board_complete() -> void:
 		get_tree().quit()
 
 
-func _on_letter_group_completed(_group: LetterIndicatorGroup):
+func _on_letter_group_completed(group: LetterIndicatorGroup):
 	check_board_complete()
+	if group.name == &"Letters_INVADERS":
+		for b in _balls:
+			(b as Ball).add_component(BallComponentPassThrough.new())
