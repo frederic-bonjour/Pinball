@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bum4x2wh8uta0"]
+[gd_scene load_steps=9 format=3 uid="uid://bum4x2wh8uta0"]
 
 [ext_resource type="Texture2D" uid="uid://ba6oq2c30yi7i" path="res://assets/ball/ball.png" id="1_5qmjn"]
 [ext_resource type="Script" path="res://src/objects/ball/ball.gd" id="1_au3tj"]
@@ -11,14 +11,21 @@ friction = 0.2
 [sub_resource type="CircleShape2D" id="CircleShape2D_gc081"]
 radius = 26.0
 
+[sub_resource type="Curve" id="Curve_u6mxt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0pv5m"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
 [node name="Ball" type="RigidBody2D"]
 top_level = true
 z_index = 10
-position = Vector2(287, 273)
+position = Vector2(356, 268)
 collision_layer = 2
 collision_mask = 31
 collision_priority = 5.0
-mass = 200.0
+mass = 150.0
 physics_material_override = SubResource("PhysicsMaterial_rjoxb")
 gravity_scale = 3.5
 continuous_cd = 2
@@ -29,17 +36,30 @@ script = ExtResource("1_au3tj")
 properties = ExtResource("2_q7vl5")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_5qmjn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gc081")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="PointLight" type="PointLight2D" parent="."]
 show_behind_parent = true
 energy = 1.5
 shadow_enabled = true
 texture = ExtResource("4_b4a32")
 texture_scale = 3.5
+
+[node name="Trail Particles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+emission_shape = 2
+emission_sphere_radius = 26.0
+spread = 15.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_u6mxt")
+color_ramp = SubResource("Gradient_0pv5m")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

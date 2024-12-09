@@ -30,8 +30,6 @@ func _ready():
 	border_line.default_color = get_theme_color(&"color", &"Wall")
 	launcher.modulate = get_theme_color(&"color", &"Launcher")
 
-	SignalHub.wall_hit.connect(_add_ball_touch_particles)
-	SignalHub.flipper_hit.connect(_add_ball_touch_particles)
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
@@ -65,6 +63,11 @@ func _on_score_steps_reached(steps: Array[StringName]) -> void:
 func _process(delta: float):
 	_process_inputs()
 	_update_camera(delta)
+	_update_balls_trails()
+
+
+func _update_balls_trails() -> void:
+	pass
 
 
 func _process_inputs() -> void:
@@ -122,13 +125,13 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 func _activate_kickbacks() -> void:
 	get_tree().set_group(&"kickbacks", "inactive", false)
 
-
+"""
 func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
 	var particles = BallBounceScene.instantiate()
 	particles.top_level = true
 	particles.position = _ball.global_position
 	effects.add_child(particles)
-
+"""
 
 func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
 	add_score(100, kickback) # FIXME

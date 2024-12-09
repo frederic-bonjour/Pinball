@@ -5,9 +5,13 @@ extends RigidBody2D
 
 @export var properties: BallProperties
 
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape
+@onready var sprite: Sprite2D = $Sprite
+@onready var particles: CPUParticles2D = $"Trail Particles"
 
+var _line_2d_point_x: float = 0.0
+var _trail_points: Array[Vector2] = []
+var _last_pos: Vector2 = Vector2.ZERO
 
 var _reset_state = false
 var _teleport_vector: Vector2
@@ -23,6 +27,11 @@ func _update_properties() -> void:
 		self.mass = properties.mass
 		self.collision_shape.shape.radius = properties.radius
 		self.sprite.texture = properties.texture
+
+
+func _physics_process(_delta: float) -> void:
+	particles.rotation = - rotation
+	particles.emitting = linear_velocity.length_squared() > 25_000
 
 
 func _integrate_forces(state):
