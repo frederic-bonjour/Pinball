@@ -17,6 +17,13 @@ extends Control
 		colors = v
 		_update_letters()
 
+## If [member colors]'s size is less than the number of letters, define how to
+## reuse the provided [member colors]:[br][br]
+## [b]repeat[/b]: repeat the [member colors] from the start.[br][br]
+## [b]repeat_last[/b]: repeat only the last value of [member colors] for all the remaining letters.[br][br]
+## [b]pingpong[/b]: the [method pingpong] function is used for each letter to pick its color from [member colors].
+@export_enum("repeat", "repeat_last", "pingpong") var colors_cycling: String = "pingpong"
+
 ## The offset between each letter.
 @export var offset: Vector2:
 	set(v):
@@ -86,7 +93,13 @@ func _update_colors() -> void:
 	if colors and not colors.is_empty():
 		for i in range(_letter_nodes.size()):
 			var node: IndicatorLetter = _letter_nodes[i]
-			node.color_on = colors[pingpong(i, colors.size() - 1)]
+			match colors_cycling:
+				&"repeat":
+					node.color_on = colors[i % colors.size()]
+				&"repeat_last":
+					node.color_on = colors[min(i, colors.size() - 1)]
+				&"pingpong":
+					node.color_on = colors[pingpong(i, colors.size() - 1)]
 
 
 func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:

@@ -37,7 +37,7 @@ func _ready():
 	SignalHub.bumper_hit.connect(_bumper_hit)
 	SignalHub.kickback_ejection.connect(_kick_back_ejection)
 	SignalHub.brick_group_cleared.connect(_brick_group_cleared)
-	
+
 	_update_score(SessionManager.score)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
