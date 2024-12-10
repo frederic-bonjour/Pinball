@@ -2,8 +2,14 @@
 class_name Ball
 extends RigidBody2D
 
-
 @export var properties: BallProperties
+
+#region The signals here are meant to be used "locally" by Ball's Components.
+signal touched_brick(brick: Brick, destroyed: bool)
+signal touched_wall(wall)
+signal touched_flipper(flipper: Flipper)
+signal touched_bumper(bumper: Bumper)
+#endregion
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape
 @onready var sprite: Sprite2D = $Sprite
@@ -77,10 +83,16 @@ func teleport_to(target_pos: Vector2):
 func _on_body_entered(body: Node) -> void:
 	if body is Brick:
 		var destroyed = body.hit() == 0
+		touched_brick.emit(body, destroyed)
 		SignalHub.brick_hit.emit(body, self, destroyed)
 		if destroyed:
 			body.queue_free()
 	elif body as ModularWall or body.name.containsn(&"wall"):
+		touched_wall.emit(body)
 		SignalHub.wall_hit.emit(body, self)
 	elif body is Flipper:
+		touched_flipper.emit(body)
 		SignalHub.flipper_hit.emit(body, self)
+	elif body is Bumper:
+		touched_bumper.emit(body)
+		SignalHub.bumper_hit.emit(body, self)
