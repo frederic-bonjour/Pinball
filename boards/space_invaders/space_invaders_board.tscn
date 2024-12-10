@@ -141,13 +141,13 @@ position = Vector2(1410, -635)
 position = Vector2(1550, -310)
 
 [node name="KickBack Right Icon" parent="Left Flippers" index="5"]
-position = Vector2(1545, -430)
+position = Vector2(1545, -402)
 
 [node name="KickBack Left" parent="Left Flippers" index="6"]
 position = Vector2(260, -210)
 
 [node name="KickBack Left Icon" parent="Left Flippers" index="7"]
-position = Vector2(260, -300)
+position = Vector2(260, -308)
 
 [node name="Wall Bottom Right3" parent="Left Flippers" index="8"]
 position = Vector2(-280, -285)
@@ -205,7 +205,7 @@ texture = SubResource("ImageTexture_vncsu")
 position = Vector2(330, -310)
 
 [node name="KickBack Left Icon" parent="Right Flippers" index="9"]
-position = Vector2(335, -430)
+position = Vector2(335, -402)
 
 [node name="Wall Bottom Right2" parent="CenterUI" index="1"]
 texture = SubResource("ImageTexture_vncsu")
@@ -949,10 +949,10 @@ reset_on_ball_lost = true
 
 [node name="Letters_EXPLODE" type="Control" parent="." index="30"]
 anchors_preset = 0
-offset_left = 205.0
-offset_top = -2110.0
-offset_right = 755.0
-offset_bottom = -2040.0
+offset_left = 660.0
+offset_top = -1310.0
+offset_right = 1210.0
+offset_bottom = -1240.0
 script = ExtResource("8_mqmdq")
 letters = "EXPLODE"
 colors = Array[Color]([Color(1.566, 0.764, 1.97, 1), Color(0, 2, 2, 1)])

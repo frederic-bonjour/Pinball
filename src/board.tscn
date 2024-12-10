@@ -414,6 +414,8 @@ stroke_width = 0.0
 position = Vector2(1920, -980)
 disable_mode = 1
 collision_priority = 10.0
+mass = 100.0
+gravity_scale = 3.0
 
 [node name="Left Flippers" type="Node2D" parent="."]
 
