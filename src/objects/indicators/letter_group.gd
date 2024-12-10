@@ -2,6 +2,9 @@
 class_name LetterIndicatorGroup
 extends Control
 
+signal letter_lit(letter: IndicatorLetter)
+signal completed
+
 @export_group("Layout & Colors")
 ## The letters in this group.
 @export var letters: String:
@@ -112,6 +115,7 @@ func _update_colors() -> void:
 func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:
 	if not letter.lit:
 		letter.lit = true
+		letter_lit.emit(letter)
 		SignalHub.letter_group_letter_lit.emit(self, letter)
 		_lit_count += 1
 		if is_completed:
@@ -123,6 +127,7 @@ func _blink() -> void:
 		for l in _letter_nodes:
 			l.lit = i % 2 > 0
 		await get_tree().create_timer(blink_delay).timeout
+	completed.emit()
 	SignalHub.letter_group_completed.emit(self)
 	if redoable:
 		reset()

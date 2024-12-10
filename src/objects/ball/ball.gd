@@ -26,7 +26,7 @@ func _ready() -> void:
 
 #region Components
 func add_component(component: Node) -> bool:
-	component.name = "Component_%s" % component.get_class()
+	component.name = "Component_%s" % component.name
 	if not get_node_or_null(str(component.name)):
 		add_child(component)
 		return true

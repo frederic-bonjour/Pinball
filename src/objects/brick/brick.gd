@@ -105,6 +105,12 @@ func hit() -> int:
 	return _remaining_hit_count
 
 
+func destroy(by: Ball) -> void:
+	_remaining_hit_count = 0
+	SignalHub.brick_hit.emit(self, by, true)
+	queue_free()
+
+
 func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		_remaining_hit_count -= 1
