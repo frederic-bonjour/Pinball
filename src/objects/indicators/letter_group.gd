@@ -33,12 +33,17 @@ signal completed
 		offset = v
 		_update_positions()
 
+## The specific offset for particular letters. Key is th index, value is a Vector2.
+@export var each_letter_offset: Dictionary:
+	set(v):
+		each_letter_offset = v
+		_update_positions()
+
 @export_group("Completion")
 @export var blink_count: int = 4
 @export var blink_delay: float = 0.1
 @export var redoable: bool = true
 @export var reset_on_ball_lost: bool = false
-
 
 const LetterIndicatorScene = preload("res://src/objects/indicators/letter.tscn")
 const LETTER_SIZE: Vector2 = Vector2(70, 70)
@@ -84,19 +89,22 @@ func _update_letters() -> void:
 			node.name = node_name
 			node.connect(&"ball_entered", _ball_entered.bind(node))
 			node.lit = false
-			node.position = offset * i
 			_letter_nodes.append(node)
 			add_child(node)
 		size = (letters.length() - 1) * offset + LETTER_SIZE
 	else:
 		size.x = 0
 		size.y = 0
+	_update_positions()
 
 
 func _update_positions() -> void:
 	for i in range(_letter_nodes.size()):
 		var node: IndicatorLetter = _letter_nodes[i]
 		node.position = offset * i
+		if each_letter_offset and each_letter_offset.has(i):
+			prints(i, each_letter_offset[i])
+			node.position += each_letter_offset[i]
 
 
 func _update_colors() -> void:
