@@ -76,7 +76,7 @@ func _integrate_forces(state):
 
 
 func teleport_to(target_pos: Vector2):
-	_teleport_vector = target_pos;
+	_teleport_vector = target_pos
 	_reset_state = true
 
 
