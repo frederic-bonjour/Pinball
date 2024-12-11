@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://src/objects/flipper/flipper.gd" id="1_ywy08"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_06o0h"]
-polygon = PackedVector2Array(-1, -23, 220, -12, 230, -10, 230, 10, 220, 12, -1, 23, -20, 20, -24, 0, -20, -20)
+polygon = PackedVector2Array(-1, -24, 220, -13, 228, 0, 220, 13, -1, 24, -19, 18, -24, 0, -18, -19)
 
 [node name="Flipper" type="RigidBody2D"]
 disable_mode = 2
@@ -23,7 +23,7 @@ position = Vector2(101, 0)
 texture = ExtResource("1_53da1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-1, -24, 229, -13, 234, 0, 229, 13, -1, 24, -19, 18, -24, 0, -18, -19)
+polygon = PackedVector2Array(-1, -24, 220, -13, 228, 0, 220, 13, -1, 24, -19, 18, -24, 0, -18, -19)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 process_mode = 4
