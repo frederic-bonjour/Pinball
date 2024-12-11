@@ -2,17 +2,16 @@ class_name PinballBoard
 extends Control
 
 @onready var camera: Camera2D = %Camera
-@onready var launcher: Node2D = %Launcher
-@onready var launcher_rotate_on_flip: ComponentRotateOnFlip = %Launcher/RotateOnFlip
 @onready var effects: Control = %Effects
 @onready var border_line: Line2D = %BorderLine
 
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
+const BallScene = preload("res://src/objects/ball/ball.tscn")
 
-var _ball_initial_position: Vector2
 var _camera_zoom = 0.5
+
 
 var _brick_groups: Array[Node]:
 	get: return find_children("*", "BrickGroup", true, false)
@@ -22,8 +21,6 @@ var _balls: Array[Node]:
 
 
 func _ready():
-	_ball_initial_position = launcher.global_position - Vector2(0, 60)
-
 	var t := get_tree()
 	t.set_group(&"slingshots", "modulate", get_theme_color(&"color", &"Slingshot"))
 	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
@@ -31,7 +28,6 @@ func _ready():
 	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
 	t.set_group(&"walls", "modulate", get_theme_color(&"color", &"Wall"))
 	border_line.default_color = get_theme_color(&"color", &"Wall")
-	launcher.modulate = get_theme_color(&"color", &"Launcher")
 
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
@@ -50,6 +46,13 @@ func _ready():
 
 func _board_ready() -> void:
 	pass
+
+
+func new_ball() -> Ball:
+	var ball: Ball = BallScene.instantiate()
+	ball.modulate = get_theme_color(&"default_color", &"Ball")
+	add_child(ball)
+	return ball
 
 
 func _update_score(_score: int) -> void:
@@ -78,7 +81,7 @@ func _process_inputs() -> void:
 		SfxManager.play_audio(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"deactivate")
-		SfxManager.play_audio(&"flipper_down")
+		SfxManager.play_audio(&"flipper_down", null, 0.2)
 
 	if Input.is_action_just_pressed(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"activate")
@@ -86,7 +89,7 @@ func _process_inputs() -> void:
 		SfxManager.play_audio(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"deactivate")
-		SfxManager.play_audio(&"flipper_down")
+		SfxManager.play_audio(&"flipper_down", null, 0.2)
 
 
 func _update_camera(delta: float) -> void:
@@ -111,12 +114,14 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		SignalHub.ball_lost.emit(body)
 		# Stops the ball
 		body.linear_velocity = Vector2.ZERO
-		# FIXME body.remove_all_components()
-		# Reset launcher to its default/central postion
-		await launcher_rotate_on_flip.reset()
-		# When launcher is ready, telepoty the ball into it.
-		body.teleport_to(_ball_initial_position)
+		if not SessionManager._ball_save_active: #TODO
+			body.remove_all_components()
 		_activate_kickbacks()
+		_board_ball_lost(body)
+
+
+func _board_ball_lost(_ball: Ball):
+	pass
 
 
 func _activate_kickbacks() -> void:
@@ -193,8 +198,8 @@ func _on_letter_group_completed_common(group: LetterIndicatorGroup):
 	elif group.name.ends_with(&"_SAVE"):
 		pass # TODO
 	else:
-		_on_letter_group_completed(group)
+		_board_on_letter_group_completed(group)
 
 
-func _on_letter_group_completed(_group: LetterIndicatorGroup):
+func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
 	pass
