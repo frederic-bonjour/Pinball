@@ -61,10 +61,6 @@ func _physics_process(_delta: float) -> void:
 	particles.emitting = linear_velocity.length_squared() > 25_000
 
 
-func _process(_delta: float) -> void:
-	pass
-
-
 func _integrate_forces(state):
 	if _reset_state:
 		state.transform = Transform2D(0.0, _teleport_vector)
