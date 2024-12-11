@@ -1,13 +1,14 @@
+class_name BallLauncher
 extends Node2D
 
-@onready var light_occluder_2d = $StaticBody2D/LightOccluder2D
-@onready var collision_polygon_2d = $StaticBody2D/CollisionPolygon2D
+@export var strength: int = 380000
+
 @onready var kick_back: KickBack = $KickBack
 
 
 func _ready() -> void:
 	SignalHub.kickback_loading.connect(_kickback_loading)
-	light_occluder_2d.occluder.polygon = collision_polygon_2d.polygon
+	kick_back.strength = strength
 
 
 func _kickback_loading(kickback, value):

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnu631kutmn24"]
+
+[ext_resource type="Script" path="res://src/objects/launcher/launcher.gd" id="1_2ihp5"]
+[ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="2_emsin"]
+
+[node name="Launcher" type="Node2D"]
+script = ExtResource("1_2ihp5")
+metadata/_edit_group_ = true
+
+[node name="KickBack" parent="." instance=ExtResource("2_emsin")]
+unique_name_in_owner = true
+position = Vector2(0, -30)
+strength = 450000.0
+auto_eject = false
+load_duration = 1000
+always_active = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = 30.0
+offset_top = -48.0
+offset_right = 152.0
+offset_bottom = 12.0
+rotation = 1.5708
+max_value = 1.0
+step = 0.001
+show_percentage = false

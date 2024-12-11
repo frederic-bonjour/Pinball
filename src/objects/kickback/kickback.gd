@@ -127,3 +127,7 @@ func _on_body_exited_detection_area(body):
 
 func _is_body_stopped() -> bool:
 	return false if not _loaded_body else _loaded_body.linear_velocity.length_squared() < 10
+
+
+func load_ball(ball: Ball) -> void:
+	ball.teleport_to($Area2D.global_position)

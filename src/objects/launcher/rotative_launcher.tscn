@@ -11,7 +11,7 @@
 script = ExtResource("1_yq7ss")
 metadata/_edit_group_ = true
 
-[node name="Launcher" parent="." instance=ExtResource("2_7gq7a")]
+[node name="KickBack" parent="." instance=ExtResource("2_7gq7a")]
 unique_name_in_owner = true
 position = Vector2(0, -30)
 strength = 450000.0
