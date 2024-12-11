@@ -23,6 +23,11 @@ const physics_material = preload("res://src/materials/walls.tres")
 		queue_redraw()
 		_update_collision()
 
+@export var one_way_collision: bool = false:
+	set(v):
+		one_way_collision = v
+		_update_collision()
+
 var _body: StaticBody2D
 #var _occluder: LightOccluder2D
 
@@ -80,6 +85,7 @@ func _update_collision() -> void:
 			cs = get_node_or_null("CSR%d" % i)
 			if not cs:
 				cs = CollisionShape2D.new()
+				cs.one_way_collision = one_way_collision
 				cs.name = "CSR%d" % i
 				cs.shape = RectangleShape2D.new()
 				_body.add_child(cs)
