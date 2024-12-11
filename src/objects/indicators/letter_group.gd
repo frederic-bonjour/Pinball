@@ -18,7 +18,7 @@ signal completed
 		offset = v
 		_update_positions()
 
-## The specific offset for particular letters. Key is th index, value is a Vector2.
+## The offset for specific letters. Key is the letter's index, value is a Vector2, relative.
 @export var each_letter_offset: Dictionary:
 	set(v):
 		each_letter_offset = v
