@@ -37,7 +37,10 @@ func _on_property_changed(prop_name: StringName) -> void:
 			sprite.scale = properties.scale
 		&"shape":
 			_update_shape()
-		&"alt_texture", &"alt_texture_hframes", &"alt_texture_vframes", &"alt_collision_shape":
+		&"alt_texture", \
+		&"alt_texture_hframes", \
+		&"alt_texture_vframes", \
+		&"alt_collision_shape":
 			_update_alt_texture()
 
 
