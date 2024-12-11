@@ -63,6 +63,7 @@ func _update_alt_texture() -> bool:
 func _update_shape():
 	if is_node_ready():
 		sprite.frame = properties.shape
+		sprite.scale = properties.scale
 		match properties.shape:
 			8, 9: _use_triangle_shape()
 			10, 11: _use_circle_shape()
@@ -76,7 +77,7 @@ func _use_square_shape() -> void:
 	cs_square.visible = true
 	cs_triangle.visible = false
 	cs_circle.visible = false
-	cs_square.shape.size = sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)
+	cs_square.shape.size = (sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)) * properties.scale
 
 func _use_circle_shape() -> void:
 	cs_square.disabled = true
@@ -85,7 +86,7 @@ func _use_circle_shape() -> void:
 	cs_square.visible = false
 	cs_triangle.visible = false
 	cs_circle.visible = true
-	cs_circle.shape.radius = sprite.texture.get_size().x / 2.0
+	cs_circle.shape.radius = (sprite.texture.get_size().x / 2.0) * properties.scale
 
 func _use_triangle_shape() -> void:
 	cs_square.disabled = true
@@ -95,9 +96,9 @@ func _use_triangle_shape() -> void:
 	cs_triangle.visible = true
 	cs_circle.visible = false
 	var s = sprite.texture.get_size()
-	cs_triangle.polygon[0] = Vector2(-s.x / 2, -s.y / 2)
-	cs_triangle.polygon[1] = Vector2(s.x / 2, -s.y / 2)
-	cs_triangle.polygon[2] = Vector2(-s.x / 2, s.y / 2)
+	cs_triangle.polygon[0] = Vector2(-s.x / 2, -s.y / 2) * properties.scale
+	cs_triangle.polygon[1] = Vector2(s.x / 2, -s.y / 2) * properties.scale
+	cs_triangle.polygon[2] = Vector2(-s.x / 2, s.y / 2) * properties.scale
 
 
 func hit() -> int:
