@@ -21,27 +21,34 @@ var _balls: Array[Node]:
 
 
 func _ready():
-	var t := get_tree()
-	t.set_group(&"slingshots", "modulate", get_theme_color(&"color", &"Slingshot"))
-	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
-	t.set_group(&"flippers", "modulate", get_theme_color(&"color", &"Flipper"))
-	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
-	t.set_group(&"walls", "modulate", get_theme_color(&"color", &"Wall"))
-	border_line.default_color = get_theme_color(&"color", &"Wall")
-
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
 	SignalHub.kickback_ejection.connect(_kick_back_ejection)
 	SignalHub.brick_group_cleared.connect(_brick_group_cleared)
+	SignalHub.letter_group_letter_lit.connect(_on_letter_group_letter_lit)
+	SignalHub.letter_group_completed.connect(_on_letter_group_completed_common)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
-	SignalHub.connect(&"letter_group_letter_lit", _on_letter_group_letter_lit)
-	SignalHub.connect(&"letter_group_completed", _on_letter_group_completed_common)
 
+	_apply_theme()
 	_update_score(SessionManager.score)
 	_activate_kickbacks()
 	_board_ready()
+
+
+func _apply_theme() -> void:
+	var t := get_tree()
+	t.set_group(&"slingshots", "modulate", get_theme_color(&"color", &"Slingshot"))
+	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
+	t.set_group(&"flippers", "modulate", get_theme_color(&"color", &"Flipper"))
+	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
+	
+	for wall in get_tree().get_nodes_in_group(&"walls"):
+		var a = wall.modulate.a
+		wall.modulate = get_theme_color(&"color", &"Wall")
+		wall.modulate.a = a
+	border_line.default_color = get_theme_color(&"color", &"Wall")
 
 
 func _board_ready() -> void:

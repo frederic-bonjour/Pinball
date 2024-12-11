@@ -44,4 +44,4 @@ VanishingTooltipLarge/colors/font_color = Color(0, 2, 2, 1)
 VanishingTooltipLarge/colors/font_outline_color = Color(0, 0, 0, 0.5)
 VanishingTooltipLarge/constants/outline_size = 30
 VanishingTooltipLarge/font_sizes/font_size = 60
-Wall/colors/color = Color(1, 1, 1, 1)
+Wall/colors/color = Color(0, 0.6, 1, 1)

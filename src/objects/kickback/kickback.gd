@@ -7,8 +7,10 @@ extends Node2D
 @export_group("Ejection")
 @export var strength: float = 50000.0
 @export var auto_eject: bool = true
+
 ## The time, in milliseconds, after which the ball is automatically ejected.
 @export var auto_eject_time: int = 500
+
 @export var load_duration: int = 500
 
 @export_group("Activation")
@@ -19,13 +21,21 @@ extends Node2D
 		if not inactive and auto_inactive_delay > 0:
 			_auto_inactive_ts = Time.get_ticks_msec() + auto_inactive_delay
 		if is_node_ready():
-			for cs in find_children("*", "CollisionShape2D"):
-				cs.set_deferred(&"disabled", inactive)
+			$Area2D/CollisionShape2D.set_deferred(&"disabled", inactive)
+			$Blocker/CollisionShape2D.set_deferred(&"disabled", inactive or disable_blocker_body)
 			if indicator:
 				indicator.modulate = Color(1, 1, 1, 0.25) if inactive else Color(2, 3, 2)
 			top_line.visible = not inactive
 
 @export var auto_inactive_delay: int = 0
+
+@export var disable_blocker_body: bool = false:
+	set(v):
+		disable_blocker_body = v
+		if is_node_ready():
+			$Blocker.visible = not disable_blocker_body
+			$Blocker/CollisionShape2D.set_deferred(&"disabled", inactive or disable_blocker_body)
+
 
 @onready var top_line = %TopLine
 
@@ -50,6 +60,7 @@ func _ready():
 	add_to_group(&"kickbacks")
 	_state = Idle
 	inactive = inactive
+	disable_blocker_body = disable_blocker_body
 
 
 # Called every frame. '_delta' is the elapsed time since the previous frame.
@@ -115,7 +126,7 @@ func _on_body_entered_detection_area(body: Node2D):
 	_body_present = true
 	_loaded_body = body
 	_prev_body_damp = _loaded_body.linear_damp
-	_loaded_body.linear_damp = 5
+	_loaded_body.linear_damp = 8
 	SignalHub.kickback_ball_entered.emit(self, body)
 
 

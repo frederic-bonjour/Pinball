@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pinball"
-run/main_scene="res://boards/space_invaders/space_invaders_board.tscn"
+run/main_scene="res://boards/pacman/pacman_board.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
