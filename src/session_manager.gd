@@ -46,12 +46,15 @@ signal game_over
 var _balls: int = 3
 var _ball_save_active: bool = true
 
-func ball_lost() -> void:
+func ball_lost() -> bool:
 	if not _ball_save_active:
 		if _balls == 0:
 			game_over.emit()
 		else:
 			_balls -= 1
+		return false
+	_ball_save_active = false
+	return true
 #endregion
 
 
