@@ -1,6 +1,11 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://drblqinbw6ql4"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://drblqinbw6ql4"]
 
 [ext_resource type="FontFile" uid="uid://ch21jcweftmlv" path="res://boards/space_invaders/assets/PressStart2P-Regular.ttf" id="1_rhc7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk0nx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n82kq"]
+bg_color = Color(1, 1, 0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_2j3ey"]
 base_font = ExtResource("1_rhc7h")
@@ -26,6 +31,9 @@ Label/font_sizes/font_size = 30
 Label/fonts/font = ExtResource("1_rhc7h")
 Label/styles/normal = null
 Launcher/colors/color = Color(1, 1, 0, 1)
+ProgressBar/colors/font_color = Color(0, 0, 0, 0.6)
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_fk0nx")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_n82kq")
 ScoreLabel/base_type = &"Label"
 ScoreLabel/colors/font_color = Color(1, 1, 1, 1)
 ScoreLabel/colors/font_outline_color = Color(0, 0, 0, 1)

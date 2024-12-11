@@ -118,10 +118,11 @@ func _update_camera(delta: float) -> void:
 
 func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 	if body is Ball:
-		SignalHub.ball_lost.emit(body)
 		# Stops the ball
 		body.linear_velocity = Vector2.ZERO
-		if not SessionManager._ball_save_active: #TODO
+		await get_tree().create_timer(1.0).timeout
+		SignalHub.ball_lost.emit(body)
+		if not SessionManager.ball_lost():
 			body.remove_all_components()
 		_activate_kickbacks()
 		_board_ball_lost(body)
@@ -200,12 +201,10 @@ func _brick_group_cleared(group_node: BrickGroup) -> void:
 
 func _on_letter_group_completed_common(group: LetterIndicatorGroup):
 	add_score(2000, group, true)
-	if group.name.ends_with(&"_KICK"):
-		_activate_kickbacks()
-	elif group.name.ends_with(&"_SAVE"):
-		pass # TODO
-	else:
-		_board_on_letter_group_completed(group)
+	match group.letters:
+		&"KICK": _activate_kickbacks()
+		&"SAVE": pass # TODO
+		_: _board_on_letter_group_completed(group)
 
 
 func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
