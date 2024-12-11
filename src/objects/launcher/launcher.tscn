@@ -3,7 +3,9 @@
 [ext_resource type="Script" path="res://src/objects/launcher/launcher.gd" id="1_2ihp5"]
 [ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="2_emsin"]
 
-[node name="Launcher" type="Node2D"]
+[node name="Launcher" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_2ihp5")
 metadata/_edit_group_ = true
 
@@ -17,6 +19,7 @@ always_active = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 30.0
 offset_top = -40.0
 offset_right = 152.0

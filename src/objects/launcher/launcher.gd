@@ -1,5 +1,5 @@
 class_name BallLauncher
-extends Node2D
+extends Control
 
 @export var strength: int = 380000
 
