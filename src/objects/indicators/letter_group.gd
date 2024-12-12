@@ -166,4 +166,3 @@ func reset() -> void:
 func _validate_property(property: Dictionary):
 	if property.name == "colors_cycling":
 		property.usage = PROPERTY_USAGE_DEFAULT if color_mode == 0 else PROPERTY_USAGE_NO_EDITOR
-		

@@ -43,7 +43,7 @@ func _apply_theme() -> void:
 	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
 	t.set_group(&"flippers", "modulate", get_theme_color(&"color", &"Flipper"))
 	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
-	
+
 	for wall in get_tree().get_nodes_in_group(&"walls"):
 		var a = wall.modulate.a
 		wall.modulate = get_theme_color(&"color", &"Wall")
