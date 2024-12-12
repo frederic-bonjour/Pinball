@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="SfxDb" load_steps=6 format=3 uid="uid://b1reqhmf8ey3w"]
+
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry.gd" id="1_tdy5b"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry_files.gd" id="2_3oj72"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db.gd" id="2_co7t1"]
+
+[sub_resource type="Resource" id="Resource_wmg0d"]
+script = ExtResource("2_3oj72")
+file = "res://assets/sounds/__unclassified/529558__drmrsir__power-down.mp3"
+weight = 1
+
+[sub_resource type="Resource" id="Resource_xxiyr"]
+script = ExtResource("1_tdy5b")
+key = &"positive"
+type = 0
+files = Array[ExtResource("2_3oj72")]([SubResource("Resource_wmg0d")])
+volume_db = 0.0
+pitch_scale = 1.0
+max_distance = 0.0
+attenuation = 1.0
+
+[resource]
+script = ExtResource("2_co7t1")
+entries = Array[ExtResource("1_tdy5b")]([SubResource("Resource_xxiyr")])
+background_music_bus = &"Music"
+background_sound_bus = &"Music"
+sound_effect_bus = &"SFX"
+music_effect_bus = &"Music"
