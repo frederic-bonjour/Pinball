@@ -1,4 +1,3 @@
-@icon("res://icons/baseball-ball.svg")
 class_name Ball
 extends RigidBody2D
 
