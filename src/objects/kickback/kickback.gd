@@ -2,6 +2,8 @@
 class_name KickBack
 extends Node2D
 
+signal loading(value: float)
+
 @export var indicator: Node2D
 
 @export_group("Ejection")
@@ -90,6 +92,7 @@ func _physics_process(_delta: float) -> void:
 			var load_time: int = clamp(now - _state_ts, 0, load_duration)
 			var load_value: float = float(load_time) / load_duration
 			SignalHub.kickback_loading.emit(self, load_value)
+			loading.emit(load_value)
 			if auto_eject:
 				if load_time == load_duration:
 					_state = Ejection
@@ -104,6 +107,7 @@ func _physics_process(_delta: float) -> void:
 				_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
 				SignalHub.kickback_ejection.emit(self, _loaded_body, s)
 				SignalHub.kickback_loading.emit(self, 0)
+				loading.emit(0)
 				_state = Ejecting
 			else:
 				_state = Idle

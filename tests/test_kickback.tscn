@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://clr3jypcafe7s"]
+[gd_scene load_steps=6 format=3 uid="uid://clr3jypcafe7s"]
 
 [ext_resource type="Script" path="res://tests/test_kickback.gd" id="1_6eyje"]
 [ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="1_iygtm"]
 [ext_resource type="PackedScene" uid="uid://bum4x2wh8uta0" path="res://src/objects/ball/ball.tscn" id="2_vx677"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pi5p3"]
+size = Vector2(60, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv1yf"]
+size = Vector2(60, 60)
 
 [node name="Test Kickback" type="Node2D"]
 script = ExtResource("1_6eyje")
@@ -17,6 +23,10 @@ always_active = true
 [node name="Ball" parent="." instance=ExtResource("2_vx677")]
 unique_name_in_owner = true
 position = Vector2(270, 870)
+
+[node name="Ball2" parent="." instance=ExtResource("2_vx677")]
+unique_name_in_owner = true
+position = Vector2(1230, 510)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_left = 360.0
@@ -39,5 +49,41 @@ layout_mode = 2
 max_value = 1.0
 step = 0.001
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1230, 990)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_pi5p3")
+
+[node name="GravityArea2D" type="Area2D" parent="."]
+position = Vector2(1230, 900)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea2D"]
+position = Vector2(0, 30)
+shape = SubResource("RectangleShape2D_kv1yf")
+
+[node name="InverseGravityButton" type="Button" parent="."]
+offset_left = 1330.0
+offset_top = 900.0
+offset_right = 1452.0
+offset_bottom = 931.0
+text = "Inverse gravity"
+
+[node name="SpinBox" type="SpinBox" parent="."]
+offset_left = 1470.0
+offset_top = 900.0
+offset_right = 1553.06
+offset_bottom = 931.0
+max_value = 30.0
+value = 1.0
+
+[connection signal="loading" from="KickBack" to="." method="_on_kick_back_loading"]
 [connection signal="button_down" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_down"]
 [connection signal="button_up" from="VBoxContainer/EjectButton" to="." method="_on_eject_button_button_up"]
+[connection signal="body_entered" from="GravityArea2D" to="." method="_on_gravity_area_2d_body_entered"]
+[connection signal="body_exited" from="GravityArea2D" to="." method="_on_gravity_area_2d_body_exited"]
+[connection signal="pressed" from="InverseGravityButton" to="." method="_on_inverse_gravity_button_pressed"]
