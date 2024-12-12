@@ -23,6 +23,7 @@ SfxManager="*res://src/sfx_manager.gd"
 EventAudio="*res://addons/event_audio/scenes/event_audio_autoload.tscn"
 AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
 SessionManager="*res://src/session_manager.gd"
+SfxMusicManager="*res://src/sfx/sfx_music_manager.gd"
 
 [display]
 
@@ -106,6 +107,11 @@ common/physics_jitter_fix=0.0
 2d/physics_engine="GodotPhysics2D"
 2d/solver/solver_iterations=32
 common/physics_interpolation=true
+
+[questify]
+
+general/update_polling=true
+general/update_interval=0.5
 
 [rendering]
 

@@ -5,6 +5,7 @@ extends Control
 @onready var effects: Control = %Effects
 @onready var border_line: Line2D = %BorderLine
 
+@export var sfxfb: SfxDb
 
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
@@ -21,6 +22,10 @@ var _balls: Array[Node]:
 
 
 func _ready():
+	if sfxfb:
+		SfxMusicManager.use_db(sfxfb)
+	SfxMusicManager.play_at(&"Bumper", $LoseBallArea)
+
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
 	SignalHub.bumper_hit.connect(_bumper_hit)
