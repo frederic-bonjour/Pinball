@@ -33,7 +33,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 
