@@ -23,8 +23,6 @@ var _balls: Array[Node]:
 
 func _ready():
 	SfxMusicManager.add_db(&"board", sfxfb)
-	await get_tree().create_timer(5.0).timeout
-	SfxMusicManager.play_at(&"positive", self)
 
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
 	SignalHub.brick_hit.connect(_brick_hit)
