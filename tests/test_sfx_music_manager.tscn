@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgiq7h5cssvfa"]
+
+[ext_resource type="Script" path="res://tests/test_sfx_music_manager.gd" id="1_yexgh"]
+[ext_resource type="Resource" uid="uid://d4cxe18nu1lj" path="res://src/sfxdb_global.tres" id="2_0r4ut"]
+[ext_resource type="Resource" uid="uid://cjordxgqqb106" path="res://tests/sfxdb_local.tres" id="2_lbc1w"]
+
+[node name="TestSfxMusicManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yexgh")
+db_global = ExtResource("2_0r4ut")
+db_local = ExtResource("2_lbc1w")

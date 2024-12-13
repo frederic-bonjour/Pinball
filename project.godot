@@ -20,8 +20,6 @@ config/icon="res://icon.svg"
 
 FullscreenControl="*res://addons/fullscreen_control/FullscreenControl.gd"
 SignalHub="*res://src/signal_hub.gd"
-SfxManager="*res://src/sfx_manager.gd"
-EventAudio="*res://addons/event_audio/scenes/event_audio_autoload.tscn"
 AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
 SessionManager="*res://src/session_manager.gd"
 SfxMusicManager="*res://src/sfx/sfx_music_manager.gd"
@@ -35,7 +33,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/event_audio/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/ScriptEditorQoL/plugin.cfg", "res://addons/alignment-tool/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/fullscreen_control/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [file_customization]
 

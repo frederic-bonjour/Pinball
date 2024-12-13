@@ -5,6 +5,7 @@ extends PinballBoard
 
 func _board_ready() -> void:
 	launcher_plot.load_ball(new_ball())
+	SfxMusicManager.play(&"jump")
 
 
 func _board_ball_lost(ball: Ball):

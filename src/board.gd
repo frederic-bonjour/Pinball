@@ -22,6 +22,7 @@ var _balls: Array[Node]:
 
 
 func _ready():
+	SfxMusicManager.add_db(&"common", load("res://src/sfxdb_global.tres"))
 	SfxMusicManager.add_db(&"board", sfxfb)
 
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
@@ -31,6 +32,8 @@ func _ready():
 	SignalHub.brick_group_cleared.connect(_brick_group_cleared)
 	SignalHub.letter_group_letter_lit.connect(_on_letter_group_letter_lit)
 	SignalHub.letter_group_completed.connect(_on_letter_group_completed_common)
+	SignalHub.flipper_hit.connect(_on_flipper_hit)
+	SignalHub.wall_hit.connect(_on_wall_hit)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
 
@@ -88,18 +91,18 @@ func _process_inputs() -> void:
 	if Input.is_action_just_pressed(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"activate")
 		tree.call_group(&"rotate_on_flip", &"rotate_left")
-		SfxManager.play_audio(&"flipper_up")
+		SfxMusicManager.play(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_left"):
 		tree.call_group(&"flipper_left", &"deactivate")
-		SfxManager.play_audio(&"flipper_down", null, 0.2)
+		SfxMusicManager.play(&"flipper_down", 0.2)
 
 	if Input.is_action_just_pressed(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"activate")
 		tree.call_group(&"rotate_on_flip", &"rotate_right")
-		SfxManager.play_audio(&"flipper_up")
+		SfxMusicManager.play(&"flipper_up")
 	if Input.is_action_just_released(&"flipper_right"):
 		tree.call_group(&"flipper_right", &"deactivate")
-		SfxManager.play_audio(&"flipper_down", null, 0.2)
+		SfxMusicManager.play(&"flipper_down", 0.2)
 
 
 func _update_camera(delta: float) -> void:
@@ -124,6 +127,7 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		# Stops the ball
 		body.linear_velocity = Vector2.ZERO
 		await get_tree().create_timer(1.0).timeout
+		SfxMusicManager.play(&"ball_lost")
 		SignalHub.ball_lost.emit(body)
 		if not SessionManager.ball_lost():
 			body.remove_all_components()
@@ -147,6 +151,7 @@ func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
 """
 
 func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
+	SfxMusicManager.play_at(&"kickback_ejection", kickback)
 	add_score(100, kickback) # FIXME
 
 
@@ -155,6 +160,7 @@ func _on_kickback_activation_area_body_entered(_body):
 
 
 func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
+	SfxMusicManager.play(&"brick_destroyed" if destroyed else &"brick_hit")
 	if destroyed:
 		var expl = BrickExplosionScene.instantiate()
 		expl.position = brick.global_position
@@ -166,15 +172,17 @@ func _brick_hit(brick: Brick, _ball, destroyed: bool) -> void:
 
 
 func _bumper_hit(bumper: Bumper, _ball) -> void:
+	SfxMusicManager.play_at(&"bumper_negative" if bumper.score < 0 else &"bumper", bumper)
 	add_score(bumper.score, bumper).offset_y(-50)
 
 
-func _slingshot_hit(_slingshot: Slingshot, ball: Ball) -> void:
+func _slingshot_hit(slingshot: Slingshot, ball: Ball) -> void:
+	SfxMusicManager.play_at(&"slingshot", slingshot)
 	add_score(50, ball) # FIXME
 
 
 func _on_letter_group_letter_lit(_group: LetterIndicatorGroup, letter: IndicatorLetter):
-	SfxManager.play_audio(&"letter_on", letter)
+	SfxMusicManager.play_at(&"letter_on", letter)
 	add_score(500, letter).offset_y(-100) # FIXME
 
 
@@ -212,3 +220,18 @@ func _on_letter_group_completed_common(group: LetterIndicatorGroup):
 
 func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
 	pass
+
+
+var _ball_wall_ts: int = 0
+
+func _on_wall_hit(_ball: Ball, _wall: Node2D) -> void:
+	var now = Time.get_ticks_msec()
+	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
+		SfxMusicManager.play_at(&"ball_wall", _ball)
+		_ball_wall_ts = now
+
+func _on_flipper_hit(flipper: Flipper, _ball: Ball) -> void:
+	var now = Time.get_ticks_msec()
+	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
+		SfxMusicManager.play_at(&"ball_flipper", flipper)
+		_ball_wall_ts = now
