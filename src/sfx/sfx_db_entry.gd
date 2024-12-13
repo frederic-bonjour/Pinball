@@ -52,8 +52,8 @@ func _init():
 	_update_resource_name()
 
 
-static func _get_sound_type(type: int) -> StringName:
-	match type:
+static func _get_sound_type(sound_type: int) -> StringName:
+	match sound_type:
 		0: return &"BGM"
 		1: return &"BGS"
 		2: return &"SE"

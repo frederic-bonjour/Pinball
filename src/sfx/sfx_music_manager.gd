@@ -2,7 +2,6 @@ extends Node
 
 var _databases: Dictionary = {}
 var _compiled: Dictionary = {}
-var _active_players: Array = []
 
 
 class CompiledEntry:
@@ -15,40 +14,6 @@ class CompiledEntry:
 	var attenuation: float
 	var pitch_scale: float
 	var db_id: StringName
-
-
-static func _create_compiled_entry(e: SfxDbEntry, db_id: StringName) -> CompiledEntry:
-	var new_entry := CompiledEntry.new()
-	new_entry.type = e.type
-	new_entry.max_distance = e.max_distance
-	new_entry.volume_db = e.volume_db
-	new_entry.attenuation = e.attenuation
-	new_entry.pitch_scale = e.pitch_scale
-	new_entry.db_id = db_id
-	new_entry.streams_weighted = PackedInt32Array()
-	if e.multiple_streams:
-		new_entry.streams = e.weighted_streams.map(func(n): return n.stream)
-		for fi in e.files.size():
-			for wi in range(e.weighted_streams[fi].weight):
-				new_entry.streams_weighted.append(fi)
-	else:
-		new_entry.streams
-		new_entry.streams.append(e.single_stream)
-		new_entry.streams_weighted.append(0)
-	return new_entry
-
-
-static func _merge_compiled_entries(dst: CompiledEntry, new_one: CompiledEntry) -> void:
-	for i in new_one.streams.size():
-		# Is the file already present in the current (dst) entry?
-		var idx = dst.streams.find(new_one.streams[i])
-		if idx == -1:
-			# File not present, so we add it and store its index.
-			dst.streams.append(new_one.streams[i])
-			idx = dst.streams.size() - 1
-		# Adds the values in files_weighted.
-		for w in new_one.streams_weighted.count(i):
-			dst.streams_weighted.append(idx)
 
 
 ## Adds a SfxDb to use.
@@ -67,6 +32,7 @@ func add_db(db_id: StringName, db: SfxDb, merge_entries: bool = true) -> bool:
 		_databases[db_id] = db
 		print("Adding database...")
 		_init_database(db_id, merge_entries)
+		print_contents()
 		return true
 	print("'db' is null: no database added.")
 	return false
@@ -186,5 +152,39 @@ func print_contents():
 		print(" * type=", entry.type)
 		print(" * files=")
 		for fi in entry.streams.size():
-			print("     - %d: \"%s\" (x%d)" % [fi, entry.streams[fi], entry.streams_weighted.count(fi)])
+			print("     - %d: \"%s\" (x%d)" % [fi, entry.streams[fi].resource_path.get_file(), entry.streams_weighted.count(fi)])
 		print("       weigths=", entry.streams_weighted)
+		print()
+
+
+static func _create_compiled_entry(e: SfxDbEntry, db_id: StringName) -> CompiledEntry:
+	var new_entry := CompiledEntry.new()
+	new_entry.type = e.type
+	new_entry.max_distance = e.max_distance
+	new_entry.volume_db = e.volume_db
+	new_entry.attenuation = e.attenuation
+	new_entry.pitch_scale = e.pitch_scale
+	new_entry.db_id = db_id
+	new_entry.streams_weighted = PackedInt32Array()
+	if e.multiple_streams:
+		new_entry.streams = e.weighted_streams.map(func(n): return n.stream)
+		for fi in e.files.size():
+			for wi in range(e.weighted_streams[fi].weight):
+				new_entry.streams_weighted.append(fi)
+	else:
+		new_entry.streams.append(e.single_stream)
+		new_entry.streams_weighted.append(0)
+	return new_entry
+
+
+static func _merge_compiled_entries(dst: CompiledEntry, new_one: CompiledEntry) -> void:
+	for i in new_one.streams.size():
+		# Is the file already present in the current (dst) entry?
+		var idx = dst.streams.find(new_one.streams[i])
+		if idx == -1:
+			# File not present, so we add it and store its index.
+			dst.streams.append(new_one.streams[i])
+			idx = dst.streams.size() - 1
+		# Adds the values in files_weighted.
+		for w in new_one.streams_weighted.count(i):
+			dst.streams_weighted.append(idx)

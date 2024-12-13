@@ -1,6 +1,7 @@
 class_name BallComponent
 extends Node
 
+@warning_ignore("unused_private_class_variable")
 var _ball: Ball:
 	get: return get_parent()
 

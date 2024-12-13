@@ -17,6 +17,7 @@ var _camera_zoom = 0.5
 var _brick_groups: Array[Node]:
 	get: return find_children("*", "BrickGroup", true, false)
 
+@warning_ignore("unused_private_class_variable")
 var _balls: Array[Node]:
 	get: return get_tree().get_nodes_in_group(&"balls")
 
