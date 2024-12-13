@@ -21,6 +21,7 @@ stream = ExtResource("2_20upu")
 weight = 1
 
 [sub_resource type="Resource" id="Resource_hqegh"]
+resource_name = "bumper (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"bumper"
 type = 2
@@ -33,6 +34,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_7bye0"]
+resource_name = "slingshot (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"slingshot"
 type = 2
@@ -45,6 +47,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_tqgw2"]
+resource_name = "flipper_up (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"flipper_up"
 type = 2
@@ -57,6 +60,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_2gmpu"]
+resource_name = "flipper_down (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"flipper_down"
 type = 2
@@ -69,6 +73,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_7g1wp"]
+resource_name = "ball_flipper (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"ball_flipper"
 type = 2
@@ -81,6 +86,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_ai46c"]
+resource_name = "ball_lost (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"ball_lost"
 type = 2
@@ -93,6 +99,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_lkvcc"]
+resource_name = "ball_wall (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"ball_wall"
 type = 2
@@ -105,6 +112,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_78ajv"]
+resource_name = "brick_destroyed (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"brick_destroyed"
 type = 2
@@ -117,6 +125,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_l78ed"]
+resource_name = "brick_hit (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"brick_hit"
 type = 2
@@ -129,6 +138,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_h0yt1"]
+resource_name = "kickback_ejection (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"kickback_ejection"
 type = 2
@@ -141,6 +151,7 @@ max_distance = 0.0
 attenuation = 1.0
 
 [sub_resource type="Resource" id="Resource_276fe"]
+resource_name = "letter_on (SE, 1)"
 script = ExtResource("1_dhyob")
 key = &"letter_on"
 type = 2
@@ -155,7 +166,7 @@ attenuation = 1.0
 [resource]
 script = ExtResource("3_bwlre")
 entries = Array[ExtResource("1_dhyob")]([SubResource("Resource_hqegh"), SubResource("Resource_7bye0"), SubResource("Resource_tqgw2"), SubResource("Resource_2gmpu"), SubResource("Resource_7g1wp"), SubResource("Resource_ai46c"), SubResource("Resource_lkvcc"), SubResource("Resource_78ajv"), SubResource("Resource_l78ed"), SubResource("Resource_h0yt1"), SubResource("Resource_276fe")])
-background_music_bus = &""
-background_sound_bus = &""
-sound_effect_bus = &""
-music_effect_bus = &""
+background_music_bus = &"Music"
+background_sound_bus = &"SFX"
+sound_effect_bus = &"SFX"
+music_effect_bus = &"Music"

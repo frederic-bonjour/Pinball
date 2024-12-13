@@ -142,13 +142,6 @@ func _board_ball_lost(_ball: Ball):
 func _activate_kickbacks() -> void:
 	get_tree().set_group(&"kickbacks", "inactive", false)
 
-"""
-func _add_ball_touch_particles(_body: Node2D, _ball: Ball) -> void:
-	var particles = BallBounceScene.instantiate()
-	particles.top_level = true
-	particles.position = _ball.global_position
-	effects.add_child(particles)
-"""
 
 func _kick_back_ejection(kickback: KickBack, _ball: PhysicsBody2D, _force: int):
 	SfxMusicManager.play_at(&"kickback_ejection", kickback)

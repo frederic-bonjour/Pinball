@@ -1,26 +1,15 @@
-[gd_resource type="Resource" script_class="SfxDb" load_steps=9 format=3 uid="uid://u3nce4l2xn3"]
+[gd_resource type="Resource" script_class="SfxDb" load_steps=7 format=3 uid="uid://u3nce4l2xn3"]
 
 [ext_resource type="Script" path="res://src/sfx/sfx_db_entry.gd" id="1_qqi7i"]
 [ext_resource type="Script" path="res://src/sfx/sfx_db_entry_stream.gd" id="2_1owdw"]
 [ext_resource type="Script" path="res://src/sfx/sfx_db.gd" id="3_77h5l"]
 
-[sub_resource type="Resource" id="Resource_w21vf"]
-script = ExtResource("2_1owdw")
-file = "res://assets/sounds/bumper2.mp3"
-weight = 3
-
-[sub_resource type="Resource" id="Resource_sbd62"]
-script = ExtResource("2_1owdw")
-file = "res://assets/sounds/bumper.mp3"
-weight = 1
-
 [sub_resource type="Resource" id="Resource_hqegh"]
 script = ExtResource("1_qqi7i")
 key = &"jump"
 type = 2
-multiple_sounds = true
-single_file = ""
-files = Array[ExtResource("2_1owdw")]([SubResource("Resource_w21vf"), SubResource("Resource_sbd62")])
+multiple_streams = false
+weighted_streams = Array[ExtResource("2_1owdw")]([])
 volume_db = 0.0
 pitch_scale = 1.0
 max_distance = 0.0
@@ -30,9 +19,8 @@ attenuation = 1.0
 script = ExtResource("1_qqi7i")
 key = &"music"
 type = 0
-multiple_sounds = false
-single_file = "res://assets/musics/255585__frankum__electronic-music-loop-001.mp3"
-files = Array[ExtResource("2_1owdw")]([])
+multiple_streams = false
+weighted_streams = Array[ExtResource("2_1owdw")]([])
 volume_db = 0.0
 pitch_scale = 1.0
 max_distance = 0.0
@@ -42,9 +30,8 @@ attenuation = 1.0
 script = ExtResource("1_qqi7i")
 key = &"explose"
 type = 2
-multiple_sounds = false
-single_file = "res://assets/sounds/__unclassified/529558__drmrsir__power-down.mp3"
-files = Array[ExtResource("2_1owdw")]([])
+multiple_streams = false
+weighted_streams = Array[ExtResource("2_1owdw")]([])
 volume_db = 0.0
 pitch_scale = 1.0
 max_distance = 0.0

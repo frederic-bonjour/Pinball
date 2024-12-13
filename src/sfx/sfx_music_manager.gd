@@ -118,10 +118,17 @@ func _choose_stream(entry: CompiledEntry) -> AudioStream:
 func play_at(key: StringName, parent: Node) -> AudioStreamPlayer2D:
 	if _compiled.has(key):
 		var entry: CompiledEntry = _compiled[key]
-		var player := AudioStreamPlayer2D.new()
-		_init_player(player, _compiled[key])
-		(parent if parent else self).add_child(player)
-		player.connect(&"finished", _remove_player_2d.bind(player))
+		var stream = _choose_stream(entry)
+		var p = (parent if parent else self)
+		var ap_name = "_AP_%s" % stream.resource_path.get_file().to_snake_case().replace(".", "_")
+		var player: AudioStreamPlayer2D = p.get_node_or_null(ap_name)
+		if not player:
+			player = AudioStreamPlayer2D.new()
+			player.stream = stream
+			player.name = ap_name
+			_init_player(player, entry)
+			#player.connect(&"finished", _remove_player_2d.bind(player))
+			p.add_child(player)
 		player.play()
 		return player
 	return null
@@ -130,10 +137,17 @@ func play_at(key: StringName, parent: Node) -> AudioStreamPlayer2D:
 ## Plays the sound/music identified by [param key].
 func play(key: StringName, delay: float = 0.0) -> AudioStreamPlayer:
 	if _compiled.has(key):
-		var player := AudioStreamPlayer.new()
-		_init_player(player, _compiled[key])
-		self.add_child(player)
-		player.connect(&"finished", _remove_player.bind(player))
+		var entry: CompiledEntry = _compiled[key]
+		var stream = _choose_stream(entry)
+		var ap_name = "_AP_%s" % stream.resource_path.get_file().to_snake_case().replace(".", "_")
+		var player: AudioStreamPlayer = get_node_or_null(ap_name)
+		if not player:
+			player = AudioStreamPlayer.new()
+			player.stream = stream
+			player.name = ap_name
+			_init_player(player, entry)
+			#player.connect(&"finished", _remove_player.bind(player))
+			add_child(player)
 		if delay > 0.0:
 			await get_tree().create_timer(delay).timeout
 		player.play()
@@ -142,7 +156,7 @@ func play(key: StringName, delay: float = 0.0) -> AudioStreamPlayer:
 
 
 func _init_player(player: Variant, entry: CompiledEntry) -> void:
-	player.stream = _choose_stream(entry)
+	player.max_polyphony = 4
 	var db: SfxDb = _databases[entry.db_id]
 	match entry.type:
 		0: player.bus = db.background_music_bus
