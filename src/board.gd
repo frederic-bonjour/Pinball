@@ -207,9 +207,13 @@ func _brick_group_cleared(group_node: BrickGroup) -> void:
 func _on_letter_group_completed_common(group: LetterIndicatorGroup):
 	add_score(2000, group, true)
 	match group.letters:
-		&"KICK": _activate_kickbacks()
-		&"SAVE": pass # TODO
-		_: _board_on_letter_group_completed(group)
+		&"KICK", \
+		&"KICKBACK":
+			_activate_kickbacks()
+		&"SAVE":
+			pass # TODO
+		_:
+			_board_on_letter_group_completed(group)
 
 
 func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
