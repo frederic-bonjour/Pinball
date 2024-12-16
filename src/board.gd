@@ -62,7 +62,6 @@ func _apply_theme() -> void:
 func _apply_shadows() -> void:
 	for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
 		BodySpriteShadow.add_to_body(b)
-		print("added shadow to ", b)
 
 
 func _board_ready() -> void:
@@ -73,6 +72,9 @@ func new_ball() -> Ball:
 	var ball: Ball = BallScene.instantiate()
 	ball.modulate = get_theme_color(&"default_color", &"Ball")
 	BodySpriteShadow.add_to_body(ball)
+	# Give it a position outside the "ball lost area".
+	# The ball must be positioned by the Board in its launcher.
+	ball.position = Vector2(1920, 1080)
 	add_child(ball)
 	return ball
 
