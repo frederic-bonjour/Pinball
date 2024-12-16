@@ -55,6 +55,7 @@ signal completed
 @export var blink_delay: float = 0.1
 @export var redoable: bool = true
 @export var reset_on_ball_lost: bool = false
+@export var rotate_on_flip: bool = false
 
 const LetterIndicatorScene = preload("res://src/objects/indicators/letter.tscn")
 const LETTER_SIZE: Vector2 = Vector2(70, 70)
@@ -68,6 +69,8 @@ var is_completed: bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if rotate_on_flip:
+		add_to_group(&"rotate_on_flip")
 	_update_letters()
 	_update_positions()
 	_update_colors()
@@ -77,6 +80,20 @@ func _ready():
 
 func _do_reset_on_ball_lost(_ball: Ball) -> void:
 	reset()
+
+
+func rotate_left() -> void:
+	var count = _letter_nodes.size()
+	var lit = _letter_nodes.map(func(n): return n.lit)
+	for i in range(count):
+		_letter_nodes[i].lit = lit[wrap(i + 1, 0, count)]
+
+
+func rotate_right() -> void:
+	var count = _letter_nodes.size()
+	var lit = _letter_nodes.map(func(n): return n.lit)
+	for i in range(count):
+		_letter_nodes[i].lit = lit[wrap(i - 1, 0, count)]
 
 
 func _update_letters() -> void:
