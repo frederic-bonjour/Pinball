@@ -19,6 +19,7 @@ var _ball_collision_mask: int
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group(&"slingshots")
+	add_to_group(&"bodies_with_shadow")
 	_side = SideLeft if self.name.containsn("left") else SideRight
 
 	_ball_collision_mask = pusher.collision_mask

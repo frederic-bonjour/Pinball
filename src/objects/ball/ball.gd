@@ -20,6 +20,7 @@ var _teleport_vector: Vector2
 
 func _ready() -> void:
 	add_to_group(&"balls")
+	add_to_group(&"bodies_with_shadow")
 	_update_properties()
 
 

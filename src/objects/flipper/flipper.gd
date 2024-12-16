@@ -29,6 +29,7 @@ func _ready():
 	_update_side()
 	light_occluder_2d.occluder.polygon = collision_polygon.polygon
 	add_to_group(&"flippers")
+	add_to_group(&"bodies_with_shadow")
 	add_to_group(&"flipper_left" if side == 0 else &"flipper_right")
 
 

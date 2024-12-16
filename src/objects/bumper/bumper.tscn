@@ -20,7 +20,7 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_jng87")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_3t64k")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]

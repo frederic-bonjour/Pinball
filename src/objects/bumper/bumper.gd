@@ -10,7 +10,7 @@ extends RigidBody2D
 		_update_radius()
 
 @onready var collision_shape = %CollisionShape
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Sprite
 
 const BUMPER_WAVE_SCENE = preload("res://src/objects/bumper/bumper_wave.tscn")
 
@@ -18,6 +18,7 @@ const BUMPER_WAVE_SCENE = preload("res://src/objects/bumper/bumper_wave.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_to_group(&"bumpers")
+	add_to_group(&"bodies_with_shadow")
 	_update_radius()
 
 

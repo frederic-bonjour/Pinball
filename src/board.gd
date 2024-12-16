@@ -39,6 +39,7 @@ func _ready():
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
 
 	_apply_theme()
+	_apply_shadows()
 	_update_score(SessionManager.score)
 	_activate_kickbacks()
 	_board_ready()
@@ -58,6 +59,12 @@ func _apply_theme() -> void:
 	border_line.default_color = get_theme_color(&"color", &"Wall")
 
 
+func _apply_shadows() -> void:
+	for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
+		BodySpriteShadow.add_to_body(b)
+		print("added shadow to ", b)
+
+
 func _board_ready() -> void:
 	pass
 
@@ -65,6 +72,7 @@ func _board_ready() -> void:
 func new_ball() -> Ball:
 	var ball: Ball = BallScene.instantiate()
 	ball.modulate = get_theme_color(&"default_color", &"Ball")
+	BodySpriteShadow.add_to_body(ball)
 	add_child(ball)
 	return ball
 

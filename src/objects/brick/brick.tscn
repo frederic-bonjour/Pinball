@@ -25,7 +25,7 @@ max_contacts_reported = 1
 script = ExtResource("1_a18mc")
 properties = ExtResource("3_x0sax")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="."]
 show_behind_parent = true
 texture = ExtResource("1_u4g8l")
 hframes = 4

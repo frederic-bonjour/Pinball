@@ -10,7 +10,7 @@ const BASE_TEXTURE_HFRAMES: int = 4
 const BASE_TEXTURE_VFRAMES: int = 3
 const BASE_SHAPE_SIZE: Vector2 = Vector2(60, 60)
 
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = $Sprite
 @onready var cs_square: CollisionShape2D = $CS_Square
 @onready var cs_triangle: CollisionPolygon2D = $CS_Triangle
 @onready var cs_circle: CollisionShape2D = $CS_Circle
@@ -23,6 +23,7 @@ var size: Vector2:
 
 func _ready() -> void:
 	add_to_group(&"bricks")
+	add_to_group(&"bodies_with_shadow")
 	if not properties:
 		properties = load("res://src/objects/brick/default_brick_properties.tres")
 	properties.connect(&"property_changed", _on_property_changed)
