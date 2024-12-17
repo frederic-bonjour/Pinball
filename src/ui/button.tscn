@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://chae8rqxth3mp"]
+
+[ext_resource type="Shader" path="res://src/button.gdshader" id="1_tolix"]
+[ext_resource type="Texture2D" uid="uid://cn21yikv2budg" path="res://assets/icons/light/play-circle.svg" id="2_cgjnb"]
+[ext_resource type="Script" path="res://src/ui/button.gd" id="2_krkn6"]
+[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="3_tr2qr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ox4b"]
+shader = ExtResource("1_tolix")
+shader_parameter/hover = false
+
+[sub_resource type="LabelSettings" id="LabelSettings_wvdeb"]
+font = ExtResource("3_tr2qr")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="PlayButton" type="Button"]
+material = SubResource("ShaderMaterial_7ox4b")
+custom_minimum_size = Vector2(200, 90)
+alignment = 0
+script = ExtResource("2_krkn6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("2_cgjnb")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Play"
+label_settings = SubResource("LabelSettings_wvdeb")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

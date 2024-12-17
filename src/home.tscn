@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
 [ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_p1bcf"]
-[ext_resource type="Texture2D" uid="uid://cn21yikv2budg" path="res://assets/icons/light/play-circle.svg" id="3_e4pro"]
+[ext_resource type="PackedScene" uid="uid://chae8rqxth3mp" path="res://src/ui/button.tscn" id="3_1cpbu"]
 [ext_resource type="Texture2D" uid="uid://506amwerefoq" path="res://assets/icons/light/times-circle.svg" id="4_ygvej"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc1vg"]
@@ -112,31 +112,8 @@ grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 90)
+[node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 layout_mode = 2
-alignment = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="VBoxContainer/PlayButton/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("3_e4pro")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="VBoxContainer/PlayButton/HBoxContainer"]
-layout_mode = 2
-text = "Play"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 90)
@@ -150,7 +127,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 15
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/QuitButton/HBoxContainer"]
@@ -164,5 +141,4 @@ stretch_mode = 5
 layout_mode = 2
 text = "Quit"
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
