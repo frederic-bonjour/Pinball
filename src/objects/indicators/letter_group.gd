@@ -83,6 +83,7 @@ func _do_reset_on_ball_lost(_ball: Ball) -> void:
 
 
 func rotate_left() -> void:
+	if _lit_count == 0: return
 	var count = _letter_nodes.size()
 	var lit = _letter_nodes.map(func(n): return n.lit)
 	for i in range(count):
@@ -90,6 +91,7 @@ func rotate_left() -> void:
 
 
 func rotate_right() -> void:
+	if _lit_count == 0: return
 	var count = _letter_nodes.size()
 	var lit = _letter_nodes.map(func(n): return n.lit)
 	for i in range(count):
@@ -181,5 +183,5 @@ func reset() -> void:
 
 
 func _validate_property(property: Dictionary):
-	if property.name == "colors_cycling":
+	if property.name == &"colors_cycling":
 		property.usage = PROPERTY_USAGE_DEFAULT if color_mode == 0 else PROPERTY_USAGE_NO_EDITOR
