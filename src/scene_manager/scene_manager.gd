@@ -36,6 +36,11 @@ func start_game() -> void:
 	next_board()
 
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed(&"pause"):
+		get_tree().paused = not get_tree().paused
+
+
 func next_board(play_fade_out: bool = true) -> void:
 	var b: int = 0
 	if not _current_board_name.is_empty():
