@@ -1,6 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4rdgqi1se45g"]
+[gd_scene load_steps=11 format=3 uid="uid://c4rdgqi1se45g"]
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
+[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_p1bcf"]
+[ext_resource type="Texture2D" uid="uid://cn21yikv2budg" path="res://assets/icons/light/play-circle.svg" id="3_e4pro"]
+[ext_resource type="Texture2D" uid="uid://506amwerefoq" path="res://assets/icons/light/times-circle.svg" id="4_ygvej"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc1vg"]
+content_margin_left = 40.0
+content_margin_top = 25.0
+content_margin_right = 40.0
+content_margin_bottom = 25.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5o4b"]
+content_margin_left = 40.0
+content_margin_top = 25.0
+content_margin_right = 40.0
+content_margin_bottom = 25.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxf4k"]
+content_margin_left = 40.0
+content_margin_top = 25.0
+content_margin_right = 40.0
+content_margin_bottom = 25.0
+bg_color = Color(1, 1, 1, 0.501961)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 20
+
+[sub_resource type="Theme" id="Theme_g56d2"]
+default_font = ExtResource("1_p1bcf")
+default_font_size = 40
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/constants/h_separation = 20
+Button/constants/icon_max_width = 50
+Button/styles/focus = SubResource("StyleBoxFlat_uc1vg")
+Button/styles/hover = SubResource("StyleBoxFlat_o5o4b")
+Button/styles/normal = SubResource("StyleBoxFlat_jxf4k")
+Label/colors/font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_ex0yo"]
+colors = PackedColorArray(0.18292, 0.0952, 0.68, 1, 0.39, 0.78, 0.5395, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7t0ji"]
+gradient = SubResource("Gradient_ex0yo")
+fill_to = Vector2(1, 1)
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -9,21 +70,99 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_g56d2")
 script = ExtResource("1_6qdly")
 
-[node name="PlayButton" type="Button" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_7t0ji")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(960, 1080)
+amount = 100
+lifetime = 6.0
+emission_shape = 3
+emission_rect_extents = Vector2(960, 1)
+gravity = Vector2(0, -80)
+angular_velocity_min = 5.0
+angular_velocity_max = 20.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_max = 4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -15.5
-offset_right = 20.5
-offset_bottom = 15.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/PlayButton/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("3_e4pro")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/PlayButton/HBoxContainer"]
+layout_mode = 2
 text = "Play"
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+alignment = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/QuitButton/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("4_ygvej")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton/HBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
