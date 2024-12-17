@@ -37,6 +37,7 @@ func _ready():
 	SignalHub.wall_hit.connect(_on_wall_hit)
 	SessionManager.connect(&"score_changed", _update_score)
 	SessionManager.connect(&"score_step_reached", _on_score_steps_reached)
+	SessionManager.connect(&"ball_saver_changed", _on_ball_saver_changed)
 
 	_apply_theme()
 	_apply_shadows()
@@ -62,10 +63,6 @@ func _apply_theme() -> void:
 func _apply_shadows() -> void:
 	for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
 		BodySpriteShadow.add_to_body(b)
-
-
-func _board_ready() -> void:
-	pass
 
 
 func new_ball() -> Ball:
@@ -146,10 +143,6 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		_board_ball_lost(body)
 
 
-func _board_ball_lost(_ball: Ball):
-	pass
-
-
 func _activate_kickbacks() -> void:
 	get_tree().set_group(&"kickbacks", "inactive", false)
 
@@ -217,17 +210,20 @@ func _brick_group_cleared(group_node: BrickGroup) -> void:
 func _on_letter_group_completed_common(group: LetterIndicatorGroup):
 	add_score(2000, group, true)
 	match group.letters:
-		&"KICK", \
-		&"KICKBACK":
-			_activate_kickbacks()
-		&"SAVE":
-			pass # TODO
-		_:
-			_board_on_letter_group_completed(group)
+		&"KICK", &"KICKBACK": _activate_kickbacks()
+		&"THROUGH": _activate_pass_through_balls()
+		&"EXPLOSE": _activate_explosive_balls()
+		&"SAVE": SessionManager.ball_save_active = true
+	_board_on_letter_group_completed(group)
 
 
-func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
-	pass
+func _activate_explosive_balls() -> void:
+	for b in _balls:
+		(b as Ball).add_component(BallComponentExplosive.new())
+
+func _activate_pass_through_balls() -> void:
+	for b in _balls:
+		(b as Ball).add_component(BallComponentPassThrough.new())
 
 
 var _ball_wall_ts: int = 0
@@ -243,3 +239,19 @@ func _on_flipper_hit(flipper: Flipper, _ball: Ball) -> void:
 	if _ball_wall_ts == 0 or (now - _ball_wall_ts) >= 250:
 		SfxMusicManager.play_at(&"ball_flipper", flipper)
 		_ball_wall_ts = now
+
+
+func _board_ready() -> void:
+	pass
+
+
+func _on_ball_saver_changed(_active: bool) -> void:
+	pass
+
+
+func _board_ball_lost(_ball: Ball):
+	pass
+
+
+func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
+	pass

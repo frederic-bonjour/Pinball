@@ -42,18 +42,24 @@ static func _get_reached_steps(prev: int, next: int) -> Array[StringName]:
 
 #region Balls
 signal game_over
+signal ball_saver_changed(active: bool)
 
 var _balls: int = 3
-var _ball_save_active: bool = true
+
+var ball_save_active: bool = true:
+	set(v):
+		ball_save_active = v
+		ball_saver_changed.emit(ball_save_active)
+
 
 func ball_lost() -> bool:
-	if not _ball_save_active:
+	if not ball_save_active:
 		if _balls == 0:
 			game_over.emit()
 		else:
 			_balls -= 1
 		return false
-	_ball_save_active = false
+	ball_save_active = false
 	return true
 #endregion
 
@@ -66,4 +72,4 @@ func brick_destroyed(brick: Brick) -> int:
 func reset() -> void:
 	score = 0
 	_balls = 3
-	_ball_save_active = true
+	ball_save_active = true
