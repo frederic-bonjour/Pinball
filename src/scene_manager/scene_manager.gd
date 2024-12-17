@@ -1,6 +1,8 @@
 extends Control
 
 
+@onready var canvas_layer = $TransitionCanvasLayer
+
 var _current_scene_node: Node
 var _current_board_name: StringName
 
@@ -15,27 +17,38 @@ var boards: Array[StringName]:
 		return boards
 
 
-func nav_to_board(board_name: StringName, fade_out: bool = true) -> void:
-	if fade_out:
+func nav_to_board(board_name: StringName, play_fade_out: bool = true) -> void:
+	if play_fade_out:
 		await fade_out()
 	_load_scene("res://boards/%s/%s_board.tscn" % [board_name, board_name])
 	_current_board_name = board_name
 
 
-func next_board(fade_out: bool = true) -> bool:
+func has_next_board() -> bool:
+	if not _current_board_name:
+		return true
+	var b := boards.find(_current_board_name)
+	return b >= 0 and b < boards.size() - 1
+
+
+func start_game() -> void:
+	_current_board_name = &""
+	next_board()
+
+
+func next_board(play_fade_out: bool = true) -> void:
 	var b: int = 0
-	if _current_board_name:
+	if not _current_board_name.is_empty():
 		b = boards.find(_current_board_name)
 		if b >= 0 and b < boards.size() - 1:
 			b += 1
-	await nav_to_board(boards[b], fade_out)
-	return true
+	await nav_to_board(boards[b], play_fade_out)
 
 
-func nav_home() -> void:
-	if fade_out:
+func nav_home(play_fade_out: bool = true) -> void:
+	if play_fade_out:
 		await fade_out()
-	_load_scene("res://src/main.tscn")
+	_load_scene("res://src/home.tscn")
 
 
 func _load_scene(scene_file: String) -> void:

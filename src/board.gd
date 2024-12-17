@@ -209,7 +209,10 @@ func _brick_group_cleared(group_node: BrickGroup) -> void:
 
 func _check_board_complete() -> void:
 	if _is_board_complete():
-		SceneManager.next_board()
+		if SceneManager.has_next_board():
+			SceneManager.next_board()
+		else:
+			SceneManager.nav_home()
 
 
 func _on_letter_group_completed_common(group: LetterIndicatorGroup):

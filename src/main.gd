@@ -2,6 +2,6 @@ extends Control
 
 
 func _ready():
+	visible = false
 	SfxMusicManager.add_db(&"common", load("res://src/sfxdb_global.tres"))
-	SceneManager.immediate_out()
-	SceneManager.next_board(false)
+	SceneManager.nav_home(false)
