@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://baibps0r1p4oh"]
+
+[ext_resource type="Script" path="res://src/scene_manager/scene_manager.gd" id="1_26mya"]
+[ext_resource type="Shader" path="res://src/scene_manager/transition.gdshader" id="2_3ruve"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_25wll"]
+shader = ExtResource("2_3ruve")
+shader_parameter/count = 16.0
+shader_parameter/progress = 0.0
+shader_parameter/invert = false
+shader_parameter/direction = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_jr883"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionCanvasLayer/Overlay:material:shader_parameter/amount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_8lgbq"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionCanvasLayer/Overlay:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_pfxls"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionCanvasLayer/Overlay:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qgiga"]
+_data = {
+"RESET": SubResource("Animation_jr883"),
+"fade_in": SubResource("Animation_8lgbq"),
+"fade_out": SubResource("Animation_pfxls")
+}
+
+[node name="SceneManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_26mya")
+
+[node name="TransitionCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Overlay" type="ColorRect" parent="TransitionCanvasLayer"]
+material = SubResource("ShaderMaterial_25wll")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qgiga")
+}

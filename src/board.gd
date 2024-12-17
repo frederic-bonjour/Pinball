@@ -23,7 +23,6 @@ var _balls: Array[Node]:
 
 
 func _ready():
-	SfxMusicManager.add_db(&"common", load("res://src/sfxdb_global.tres"))
 	SfxMusicManager.add_db(&"board", sfxfb)
 
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
@@ -205,6 +204,12 @@ var all_brick_groups_cleared: bool:
 
 func _brick_group_cleared(group_node: BrickGroup) -> void:
 	add_score(50000 if all_brick_groups_cleared else 5000, group_node, true) # FIXME
+	_check_board_complete()
+
+
+func _check_board_complete() -> void:
+	if _is_board_complete():
+		SceneManager.next_board()
 
 
 func _on_letter_group_completed_common(group: LetterIndicatorGroup):
@@ -255,3 +260,7 @@ func _board_ball_lost(_ball: Ball):
 
 func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
 	pass
+
+
+func _is_board_complete() -> bool:
+	return all_brick_groups_cleared

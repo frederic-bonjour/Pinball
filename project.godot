@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pinball"
-run/main_scene="res://boards/pacman/pacman_board.tscn"
+run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ SignalHub="*res://src/signal_hub.gd"
 AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
 SessionManager="*res://src/session_manager.gd"
 SfxMusicManager="*res://src/sfx/sfx_music_manager.gd"
+SceneManager="*res://src/scene_manager/scene_manager.tscn"
 
 [display]
 
