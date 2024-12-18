@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4rdgqi1se45g"]
+[gd_scene load_steps=17 format=3 uid="uid://c4rdgqi1se45g"]
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
 [ext_resource type="FontFile" uid="uid://c4148ugw6re7e" path="res://assets/fonts/Orbitron-ExtraBold.ttf" id="1_gjjl4"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" path="res://src/button.gdshader" id="3_knrsg"]
 [ext_resource type="Texture2D" uid="uid://d2js1e1ucjswg" path="res://assets/icons/solid/play-circle.svg" id="5_jqi8r"]
 [ext_resource type="Texture2D" uid="uid://4pvl75qb8v1q" path="res://assets/icons/solid/times-circle.svg" id="6_jf41c"]
+[ext_resource type="Texture2D" uid="uid://bvly4cyo78oj" path="res://assets/logo.png" id="8_2ncoh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc1vg"]
 content_margin_left = 40.0
@@ -63,7 +64,7 @@ fill_to = Vector2(1, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmcal"]
 resource_local_to_scene = true
 shader = ExtResource("3_knrsg")
-shader_parameter/hover = true
+shader_parameter/hover = false
 shader_parameter/hover_color = Color(0.93666, 0.938878, 0.185029, 1)
 shader_parameter/stripe_attenuation = 0.2
 shader_parameter/stripe_slope = 2.0
@@ -115,19 +116,20 @@ scale_amount_max = 4.0
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -350.0
+offset_right = 150.0
+offset_bottom = -130.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_constants/separation = 40
 alignment = 1
+metadata/_edit_group_ = true
 
 [node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_rmcal")
@@ -142,6 +144,14 @@ layout_mode = 2
 icon_texture = ExtResource("6_jf41c")
 separation = 15
 label = "QUIT"
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 704.0
+offset_top = 130.0
+offset_right = 1216.0
+offset_bottom = 642.0
+texture = ExtResource("8_2ncoh")
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
