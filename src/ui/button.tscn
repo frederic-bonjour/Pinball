@@ -1,46 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://chae8rqxth3mp"]
+[gd_scene load_steps=5 format=3 uid="uid://chae8rqxth3mp"]
 
 [ext_resource type="Shader" path="res://src/button.gdshader" id="1_tolix"]
-[ext_resource type="Texture2D" uid="uid://cn21yikv2budg" path="res://assets/icons/light/play-circle.svg" id="2_cgjnb"]
 [ext_resource type="Script" path="res://src/ui/button.gd" id="2_krkn6"]
-[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="3_tr2qr"]
+[ext_resource type="Script" path="res://src/ui/waving_text.gd" id="3_rfxy2"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ox4b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5a14v"]
+resource_local_to_scene = true
 shader = ExtResource("1_tolix")
-shader_parameter/hover = false
+shader_parameter/hover = true
+shader_parameter/hover_color = Color(0.95061, 0.868696, 0.967139, 1)
+shader_parameter/stripe_attenuation = 0.1
+shader_parameter/stripe_slope = 3.0
+shader_parameter/stripe_count = 10
+shader_parameter/speed = 2.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_wvdeb"]
-font = ExtResource("3_tr2qr")
-font_size = 40
-font_color = Color(0, 0, 0, 1)
-
-[node name="PlayButton" type="Button"]
-material = SubResource("ShaderMaterial_7ox4b")
+[node name="IconButton" type="Button"]
+material = SubResource("ShaderMaterial_5a14v")
 custom_minimum_size = Vector2(200, 90)
 alignment = 0
 script = ExtResource("2_krkn6")
+separation = null
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = -34.5
+offset_right = 42.5
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 15
+mouse_filter = 2
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
+modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
-texture = ExtResource("2_cgjnb")
+size_flags_horizontal = 4
+mouse_filter = 2
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="WavingText" type="HBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
-text = "Play"
-label_settings = SubResource("LabelSettings_wvdeb")
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+script = ExtResource("3_rfxy2")
+one_shot = true
+wave_amplitude = 10
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_focus_exited"]

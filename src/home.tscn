@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://c4rdgqi1se45g"]
+[gd_scene load_steps=16 format=3 uid="uid://c4rdgqi1se45g"]
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
-[ext_resource type="FontFile" uid="uid://0hnsdmkxoqlp" path="res://assets/fonts/Orbitron-Medium.ttf" id="1_p1bcf"]
+[ext_resource type="FontFile" uid="uid://c4148ugw6re7e" path="res://assets/fonts/Orbitron-ExtraBold.ttf" id="1_gjjl4"]
+[ext_resource type="FontFile" uid="uid://o053yl5pq5lt" path="res://assets/fonts/Orbitron-SemiBold.ttf" id="1_gp78m"]
 [ext_resource type="PackedScene" uid="uid://chae8rqxth3mp" path="res://src/ui/button.tscn" id="3_1cpbu"]
-[ext_resource type="Texture2D" uid="uid://506amwerefoq" path="res://assets/icons/light/times-circle.svg" id="4_ygvej"]
+[ext_resource type="Shader" path="res://src/button.gdshader" id="3_knrsg"]
+[ext_resource type="Texture2D" uid="uid://d2js1e1ucjswg" path="res://assets/icons/solid/play-circle.svg" id="5_jqi8r"]
+[ext_resource type="Texture2D" uid="uid://4pvl75qb8v1q" path="res://assets/icons/solid/times-circle.svg" id="6_jf41c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc1vg"]
 content_margin_left = 40.0
@@ -42,19 +45,13 @@ corner_radius_bottom_left = 15
 shadow_size = 20
 
 [sub_resource type="Theme" id="Theme_g56d2"]
-default_font = ExtResource("1_p1bcf")
+default_font = ExtResource("1_gp78m")
 default_font_size = 40
-Button/colors/font_color = Color(0, 0, 0, 1)
-Button/colors/font_focus_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_color = Color(0, 0, 0, 1)
-Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(0, 0, 0, 1)
-Button/constants/h_separation = 20
-Button/constants/icon_max_width = 50
 Button/styles/focus = SubResource("StyleBoxFlat_uc1vg")
 Button/styles/hover = SubResource("StyleBoxFlat_o5o4b")
 Button/styles/normal = SubResource("StyleBoxFlat_jxf4k")
 Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_gjjl4")
 
 [sub_resource type="Gradient" id="Gradient_ex0yo"]
 colors = PackedColorArray(0.18292, 0.0952, 0.68, 1, 0.39, 0.78, 0.5395, 1)
@@ -62,6 +59,26 @@ colors = PackedColorArray(0.18292, 0.0952, 0.68, 1, 0.39, 0.78, 0.5395, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7t0ji"]
 gradient = SubResource("Gradient_ex0yo")
 fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rmcal"]
+resource_local_to_scene = true
+shader = ExtResource("3_knrsg")
+shader_parameter/hover = true
+shader_parameter/hover_color = Color(0.93666, 0.938878, 0.185029, 1)
+shader_parameter/stripe_attenuation = 0.2
+shader_parameter/stripe_slope = 2.0
+shader_parameter/stripe_count = 10
+shader_parameter/speed = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v36sp"]
+resource_local_to_scene = true
+shader = ExtResource("3_knrsg")
+shader_parameter/hover = false
+shader_parameter/hover_color = Color(0.97, 0.6693, 0.779557, 1)
+shader_parameter/stripe_attenuation = 0.1
+shader_parameter/stripe_slope = 2.0
+shader_parameter/stripe_count = 10
+shader_parameter/speed = 2.0
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -113,32 +130,15 @@ theme_override_constants/separation = 40
 alignment = 1
 
 [node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
+material = SubResource("ShaderMaterial_rmcal")
 layout_mode = 2
+icon_texture = ExtResource("5_jqi8r")
+separation = 15
+label = "PLAY"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 90)
+[node name="QuitButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
+material = SubResource("ShaderMaterial_v36sp")
 layout_mode = 2
-alignment = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QuitButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 15
-alignment = 1
-
-[node name="Icon" type="TextureRect" parent="VBoxContainer/QuitButton/HBoxContainer"]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-texture = ExtResource("4_ygvej")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="Label" type="Label" parent="VBoxContainer/QuitButton/HBoxContainer"]
-layout_mode = 2
-text = "Quit"
-
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+icon_texture = ExtResource("6_jf41c")
+separation = 15
+label = "QUIT"
