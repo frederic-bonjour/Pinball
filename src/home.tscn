@@ -142,3 +142,6 @@ layout_mode = 2
 icon_texture = ExtResource("6_jf41c")
 separation = 15
 label = "QUIT"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
