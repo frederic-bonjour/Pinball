@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c4rdgqi1se45g"]
+[gd_scene load_steps=16 format=3 uid="uid://c4rdgqi1se45g"]
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
 [ext_resource type="FontFile" uid="uid://c4148ugw6re7e" path="res://assets/fonts/Orbitron-ExtraBold.ttf" id="1_gjjl4"]
@@ -9,48 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://4pvl75qb8v1q" path="res://assets/icons/solid/times-circle.svg" id="6_jf41c"]
 [ext_resource type="Texture2D" uid="uid://bvly4cyo78oj" path="res://assets/logo.png" id="8_2ncoh"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uc1vg"]
-content_margin_left = 40.0
-content_margin_top = 25.0
-content_margin_right = 40.0
-content_margin_bottom = 25.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_size = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5o4b"]
-content_margin_left = 40.0
-content_margin_top = 25.0
-content_margin_right = 40.0
-content_margin_bottom = 25.0
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_size = 20
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jxf4k"]
-content_margin_left = 40.0
-content_margin_top = 25.0
-content_margin_right = 40.0
-content_margin_bottom = 25.0
-bg_color = Color(1, 1, 1, 0.501961)
-corner_radius_top_left = 15
-corner_radius_top_right = 15
-corner_radius_bottom_right = 15
-corner_radius_bottom_left = 15
-shadow_size = 20
-
 [sub_resource type="Theme" id="Theme_g56d2"]
 default_font = ExtResource("1_gp78m")
 default_font_size = 40
-Button/styles/focus = SubResource("StyleBoxFlat_uc1vg")
-Button/styles/hover = SubResource("StyleBoxFlat_o5o4b")
-Button/styles/normal = SubResource("StyleBoxFlat_jxf4k")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("1_gjjl4")
 
@@ -64,6 +25,7 @@ fill_to = Vector2(1, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmcal"]
 resource_local_to_scene = true
 shader = ExtResource("3_knrsg")
+shader_parameter/rest_color = Color(0.843184, 0.843184, 0.843184, 1)
 shader_parameter/hover = false
 shader_parameter/hover_color = Color(0.93666, 0.938878, 0.185029, 1)
 shader_parameter/stripe_attenuation = 0.2
@@ -71,15 +33,32 @@ shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ordf"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 15
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v36sp"]
 resource_local_to_scene = true
 shader = ExtResource("3_knrsg")
+shader_parameter/rest_color = Color(1, 1, 1, 1)
 shader_parameter/hover = false
 shader_parameter/hover_color = Color(0.97, 0.6693, 0.779557, 1)
 shader_parameter/stripe_attenuation = 0.1
 shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qw3pr"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 15
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -134,16 +113,24 @@ metadata/_edit_group_ = true
 [node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_rmcal")
 layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_6ordf")
+theme_override_styles/normal = SubResource("StyleBoxFlat_6ordf")
 icon_texture = ExtResource("5_jqi8r")
-separation = 15
 label = "PLAY"
+separation = 15
+corner_radius = 50
+shadow_size = 15
 
 [node name="QuitButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_v36sp")
 layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_qw3pr")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qw3pr")
 icon_texture = ExtResource("6_jf41c")
-separation = 15
 label = "QUIT"
+separation = 15
+corner_radius = 50
+shadow_size = 15
 
 [node name="Logo" type="TextureRect" parent="."]
 layout_mode = 0

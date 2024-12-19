@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://chae8rqxth3mp"]
+[gd_scene load_steps=6 format=3 uid="uid://chae8rqxth3mp"]
 
 [ext_resource type="Shader" path="res://src/button.gdshader" id="1_tolix"]
 [ext_resource type="Script" path="res://src/ui/button.gd" id="2_krkn6"]
@@ -7,19 +7,29 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5a14v"]
 resource_local_to_scene = true
 shader = ExtResource("1_tolix")
-shader_parameter/hover = true
+shader_parameter/rest_color = Color(1, 1, 1, 1)
+shader_parameter/hover = false
 shader_parameter/hover_color = Color(0.95061, 0.868696, 0.967139, 1)
 shader_parameter/stripe_attenuation = 0.1
 shader_parameter/stripe_slope = 3.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7fer"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_size = 20
+
 [node name="IconButton" type="Button"]
 material = SubResource("ShaderMaterial_5a14v")
 custom_minimum_size = Vector2(200, 90)
+theme_override_styles/hover = SubResource("StyleBoxFlat_w7fer")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w7fer")
 alignment = 0
 script = ExtResource("2_krkn6")
-separation = null
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
