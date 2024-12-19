@@ -80,6 +80,8 @@ func _update_stylebox() -> void:
 	sb.shadow_size = shadow_size
 	add_theme_stylebox_override(&"normal", sb)
 	add_theme_stylebox_override(&"hover", sb)
+	add_theme_stylebox_override(&"pressed", sb)
+	add_theme_stylebox_override(&"focus", sb)
 
 var dest_scale: Vector2 = Vector2.ONE
 
