@@ -8,6 +8,7 @@ extends Button
 		icon_texture = v
 		if is_node_ready():
 			$HBoxContainer/Icon.texture = icon_texture
+			$HBoxContainer/Icon.visible = icon_texture != null
 
 ## The icon's color modulate.
 @export var icon_modulate: Color = Color.BLACK:
@@ -53,6 +54,9 @@ extends Button
 		if is_node_ready():
 			_update_stylebox()
 
+## The scale to use when button is focused.
+@export var hover_scale: Vector2 = Vector2(1.05, 1.05)
+
 @onready var waving_text = $HBoxContainer/WavingText
 
 
@@ -62,6 +66,7 @@ func _ready():
 	icon_texture = icon_texture
 	letter_spacing = letter_spacing
 	label = label
+	pivot_offset = size / 2.0
 	_on_focus_exited()
 
 
@@ -76,16 +81,23 @@ func _update_stylebox() -> void:
 	add_theme_stylebox_override(&"normal", sb)
 	add_theme_stylebox_override(&"hover", sb)
 
+var dest_scale: Vector2 = Vector2.ONE
 
 func _on_focus_exited():
 	material.set_shader_parameter("hover", false)
 	$HBoxContainer.modulate = get_theme_color(&"font_color")
+	dest_scale = Vector2.ONE
 
 
 func _on_focus_entered():
 	material.set_shader_parameter("hover", true)
 	waving_text.waving = true
 	$HBoxContainer.modulate = get_theme_color(&"font_hover_color")
+	dest_scale = hover_scale
+
+
+func _process(delta: float) -> void:
+	scale = scale.move_toward(dest_scale, delta)
 
 
 func _validate_property(property: Dictionary) -> void:

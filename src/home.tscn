@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4rdgqi1se45g"]
+[gd_scene load_steps=16 format=3 uid="uid://c4rdgqi1se45g"]
 
 [ext_resource type="Script" path="res://src/home.gd" id="1_6qdly"]
 [ext_resource type="FontFile" uid="uid://c4148ugw6re7e" path="res://assets/fonts/Orbitron-ExtraBold.ttf" id="1_gjjl4"]
@@ -25,13 +25,21 @@ fill_to = Vector2(1, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rmcal"]
 resource_local_to_scene = true
 shader = ExtResource("3_knrsg")
-shader_parameter/rest_color = Color(0.843184, 0.843184, 0.843184, 1)
+shader_parameter/rest_color = Color(1, 1, 1, 1)
 shader_parameter/hover = false
 shader_parameter/hover_color = Color(0.93666, 0.938878, 0.185029, 1)
 shader_parameter/stripe_attenuation = 0.2
 shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q452t"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v36sp"]
 resource_local_to_scene = true
@@ -43,6 +51,14 @@ shader_parameter/stripe_attenuation = 0.1
 shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjxgm"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_size = 15
 
 [node name="Home" type="Control"]
 layout_mode = 3
@@ -98,6 +114,8 @@ metadata/_edit_group_ = true
 material = SubResource("ShaderMaterial_rmcal")
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_styles/hover = SubResource("StyleBoxFlat_q452t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q452t")
 icon_texture = ExtResource("5_jqi8r")
 label = "PLAY"
 separation = 15
@@ -107,6 +125,8 @@ shadow_size = 15
 [node name="QuitButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_v36sp")
 layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_gjxgm")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gjxgm")
 icon_texture = ExtResource("6_jf41c")
 label = "QUIT"
 separation = 15
