@@ -53,7 +53,6 @@ extends Button
 		if is_node_ready():
 			_update_stylebox()
 
-
 @onready var waving_text = $HBoxContainer/WavingText
 
 
@@ -61,7 +60,6 @@ extends Button
 func _ready():
 	_update_stylebox()
 	icon_texture = icon_texture
-	icon_modulate = icon_modulate
 	letter_spacing = letter_spacing
 	label = label
 	_on_focus_exited()
@@ -81,11 +79,14 @@ func _update_stylebox() -> void:
 
 func _on_focus_exited():
 	material.set_shader_parameter("hover", false)
+	$HBoxContainer.modulate = get_theme_color(&"font_color")
 
 
 func _on_focus_entered():
 	material.set_shader_parameter("hover", true)
 	waving_text.waving = true
+	$HBoxContainer.modulate = get_theme_color(&"font_hover_color")
+
 
 func _validate_property(property: Dictionary) -> void:
 	match property.name:

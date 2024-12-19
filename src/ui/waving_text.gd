@@ -35,6 +35,7 @@ func _update_label() -> void:
 		remove_child(get_child(0))
 	for l in text:
 		var ln := Label.new()
+		ln.add_theme_color_override(&"font_color", Color.WHITE)
 		ln.text = l
 		add_child(ln)
 
