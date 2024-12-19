@@ -11,7 +11,7 @@ func _on_quit_button_pressed():
 
 func _on_quit_button_mouse_entered() -> void:
 	var qb: Button = $VBoxContainer/QuitButton
-	var vt := VanishingTooltip.make_text("Déjà ?", qb.global_position + Vector2(qb.size.x + 90, qb.size.y / 2))
+	var vt := VanishingTooltip.make_text_anchored("You're leaving soon?", $VBoxContainer/QuitButton, HORIZONTAL_ALIGNMENT_RIGHT, VERTICAL_ALIGNMENT_CENTER, Vector2(20, 0))
 	vt.add_theme_color_override(&"font_color", Color.WHITE)
 	vt.distance = Vector2(100, 0)
 	add_child(vt)

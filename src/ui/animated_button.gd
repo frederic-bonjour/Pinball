@@ -1,23 +1,8 @@
 @tool
 extends Button
 
-@export_group("Icon")
-## The icon's texture.
-@export var icon_texture: Texture2D:
-	set(v):
-		icon_texture = v
-		if is_node_ready():
-			$HBoxContainer/Icon.texture = icon_texture
-			$HBoxContainer/Icon.visible = icon_texture != null
-
-## The icon's color modulate.
-@export var icon_modulate: Color = Color.BLACK:
-	set(v):
-		icon_modulate = v
-		if is_node_ready():
-			$HBoxContainer/Icon.modulate = icon_modulate
-
 @export_group("Text")
+
 ## The text to be displayed in the button.
 @export var label: String:
 	set(v):
@@ -32,7 +17,38 @@ extends Button
 		if is_node_ready():
 			waving_text.letter_spacing = v
 
+@export_group("Icon")
+
+## The icon's texture.
+@export var icon_texture: Texture2D:
+	set(v):
+		icon_texture = v
+		notify_property_list_changed()
+		if is_node_ready():
+			$HBoxContainer/Icon.texture = icon_texture
+			$HBoxContainer/Icon.visible = icon_texture != null
+
+## The icon's color modulate.
+@export var icon_modulate: Color = Color.BLACK:
+	set(v):
+		icon_modulate = v
+		if is_node_ready():
+			$HBoxContainer/Icon.modulate = icon_modulate
+
 @export_group("Layout")
+
+@export var content_align: HBoxContainer.AlignmentMode = HBoxContainer.AlignmentMode.ALIGNMENT_CENTER:
+	set(v):
+		content_align = v
+		if is_node_ready():
+			_update_alignment()
+
+@export var margin_h: int = 10:
+	set(v):
+		margin_h = v
+		if is_node_ready():
+			_update_margin()
+
 ## The separation between the icon and the label, in pixels.
 @export var separation: int = 20:
 	set(v):
@@ -57,10 +73,12 @@ extends Button
 ## The scale to use when button is focused.
 @export var hover_scale: Vector2 = Vector2(1.05, 1.05)
 
+
 @onready var waving_text = $HBoxContainer/WavingText
 
+var _dest_scale: Vector2 = Vector2.ONE
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	_update_stylebox()
 	icon_texture = icon_texture
@@ -68,6 +86,22 @@ func _ready():
 	label = label
 	pivot_offset = size / 2.0
 	_on_focus_exited()
+	_update_margin()
+	_update_alignment()
+
+
+func _update_alignment() -> void:
+	$HBoxContainer.alignment = content_align
+	if content_align == HBoxContainer.AlignmentMode.ALIGNMENT_CENTER:
+		$HBoxContainer.offset_left = 0
+		$HBoxContainer.offset_right = 0
+	else:
+		_update_margin()
+
+
+func _update_margin() -> void:
+	$HBoxContainer.offset_left = margin_h
+	$HBoxContainer.offset_right = margin_h
 
 
 func _update_stylebox() -> void:
@@ -83,26 +117,27 @@ func _update_stylebox() -> void:
 	add_theme_stylebox_override(&"pressed", sb)
 	add_theme_stylebox_override(&"focus", sb)
 
-var dest_scale: Vector2 = Vector2.ONE
 
 func _on_focus_exited():
 	material.set_shader_parameter("hover", false)
 	$HBoxContainer.modulate = get_theme_color(&"font_color")
-	dest_scale = Vector2.ONE
+	_dest_scale = Vector2.ONE
 
 
 func _on_focus_entered():
 	material.set_shader_parameter("hover", true)
 	waving_text.waving = true
 	$HBoxContainer.modulate = get_theme_color(&"font_hover_color")
-	dest_scale = hover_scale
+	_dest_scale = hover_scale
 
 
 func _process(delta: float) -> void:
-	scale = scale.move_toward(dest_scale, delta)
+	scale = scale.move_toward(_dest_scale, delta)
 
 
 func _validate_property(property: Dictionary) -> void:
 	match property.name:
-		&"text", &"icon", &"flat":
+		&"text", &"icon", &"flat", &"alignment":
 			property.usage = PROPERTY_USAGE_NO_EDITOR
+		&"icon_modulate", &"separation":
+			property.usage = PROPERTY_USAGE_NO_EDITOR if not icon_texture else PROPERTY_USAGE_DEFAULT
