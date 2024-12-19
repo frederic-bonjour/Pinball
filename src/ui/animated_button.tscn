@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://chae8rqxth3mp"]
 
 [ext_resource type="Shader" path="res://src/button.gdshader" id="1_tolix"]
-[ext_resource type="Script" path="res://src/ui/button.gd" id="2_krkn6"]
+[ext_resource type="Script" path="res://src/ui/animated_button.gd" id="2_krkn6"]
 [ext_resource type="Script" path="res://src/ui/waving_text.gd" id="3_rfxy2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5a14v"]
@@ -15,7 +15,7 @@ shader_parameter/stripe_slope = 3.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7fer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vv3n"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -23,11 +23,11 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 shadow_size = 20
 
-[node name="IconButton" type="Button"]
+[node name="AnimatedButton" type="Button"]
 material = SubResource("ShaderMaterial_5a14v")
 custom_minimum_size = Vector2(200, 90)
-theme_override_styles/hover = SubResource("StyleBoxFlat_w7fer")
-theme_override_styles/normal = SubResource("StyleBoxFlat_w7fer")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5vv3n")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5vv3n")
 alignment = 0
 script = ExtResource("2_krkn6")
 
