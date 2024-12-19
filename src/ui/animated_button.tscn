@@ -15,7 +15,7 @@ shader_parameter/stripe_slope = 3.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vv3n"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exobq"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -26,20 +26,22 @@ shadow_size = 20
 [node name="AnimatedButton" type="Button"]
 material = SubResource("ShaderMaterial_5a14v")
 custom_minimum_size = Vector2(200, 90)
+pivot_offset = Vector2(100, 45)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/hover = SubResource("StyleBoxFlat_5vv3n")
-theme_override_styles/normal = SubResource("StyleBoxFlat_5vv3n")
+theme_override_styles/focus = SubResource("StyleBoxFlat_exobq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_exobq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_exobq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_exobq")
 script = ExtResource("2_krkn6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 10.0
-offset_right = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -47,6 +49,7 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 4
