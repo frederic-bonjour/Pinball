@@ -15,3 +15,7 @@ func _on_quit_button_mouse_entered() -> void:
 	vt.add_theme_color_override(&"font_color", Color.WHITE)
 	vt.distance = Vector2(100, 0)
 	add_child(vt)
+
+
+func _on_button_mouse_entered():
+	SfxMusicManager.play(&"button_hover")

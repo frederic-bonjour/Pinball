@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SfxDb" load_steps=27 format=3 uid="uid://d4cxe18nu1lj"]
+[gd_resource type="Resource" script_class="SfxDb" load_steps=29 format=3 uid="uid://d4cxe18nu1lj"]
 
 [ext_resource type="Script" path="res://src/sfx/sfx_db_entry.gd" id="1_dhyob"]
 [ext_resource type="AudioStream" uid="uid://bmy6bg36tb1td" path="res://assets/sounds/bumper2.mp3" id="2_20upu"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://6emicvlxtifi" path="res://assets/sounds/brick_hit.mp3" id="11_1trxt"]
 [ext_resource type="AudioStream" uid="uid://emjx16aamere" path="res://assets/sounds/kickback.mp3" id="12_27ea3"]
 [ext_resource type="AudioStream" uid="uid://cs0hr76vpqoe8" path="res://assets/sounds/letter_on.mp3" id="13_diivn"]
+[ext_resource type="AudioStream" uid="uid://4lw833n4evtt" path="res://assets/sounds/button_hover.mp3" id="14_3syll"]
 
 [sub_resource type="Resource" id="Resource_xgaeh"]
 script = ExtResource("3_b5ryd")
@@ -163,9 +164,22 @@ pitch_scale = 1.0
 max_distance = 0.0
 attenuation = 1.0
 
+[sub_resource type="Resource" id="Resource_ogehn"]
+resource_name = "button_hover (SE, 1)"
+script = ExtResource("1_dhyob")
+key = &"button_hover"
+type = 2
+multiple_streams = false
+single_stream = ExtResource("14_3syll")
+weighted_streams = Array[ExtResource("3_b5ryd")]([])
+volume_db = 0.0
+pitch_scale = 1.0
+max_distance = 0.0
+attenuation = 1.0
+
 [resource]
 script = ExtResource("3_bwlre")
-entries = Array[ExtResource("1_dhyob")]([SubResource("Resource_hqegh"), SubResource("Resource_7bye0"), SubResource("Resource_tqgw2"), SubResource("Resource_2gmpu"), SubResource("Resource_7g1wp"), SubResource("Resource_ai46c"), SubResource("Resource_lkvcc"), SubResource("Resource_78ajv"), SubResource("Resource_l78ed"), SubResource("Resource_h0yt1"), SubResource("Resource_276fe")])
+entries = Array[ExtResource("1_dhyob")]([SubResource("Resource_hqegh"), SubResource("Resource_7bye0"), SubResource("Resource_tqgw2"), SubResource("Resource_2gmpu"), SubResource("Resource_7g1wp"), SubResource("Resource_ai46c"), SubResource("Resource_lkvcc"), SubResource("Resource_78ajv"), SubResource("Resource_l78ed"), SubResource("Resource_h0yt1"), SubResource("Resource_276fe"), SubResource("Resource_ogehn")])
 background_music_bus = &"Music"
 background_sound_bus = &"SFX"
 sound_effect_bus = &"SFX"
