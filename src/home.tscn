@@ -33,7 +33,7 @@ shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q452t"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06d4k"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -52,7 +52,7 @@ shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjxgm"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hq6hd"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -114,8 +114,10 @@ metadata/_edit_group_ = true
 material = SubResource("ShaderMaterial_rmcal")
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_styles/hover = SubResource("StyleBoxFlat_q452t")
-theme_override_styles/normal = SubResource("StyleBoxFlat_q452t")
+theme_override_styles/focus = SubResource("StyleBoxFlat_06d4k")
+theme_override_styles/hover = SubResource("StyleBoxFlat_06d4k")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_06d4k")
+theme_override_styles/normal = SubResource("StyleBoxFlat_06d4k")
 icon_texture = ExtResource("5_jqi8r")
 label = "PLAY"
 separation = 15
@@ -125,8 +127,10 @@ shadow_size = 15
 [node name="QuitButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_v36sp")
 layout_mode = 2
-theme_override_styles/hover = SubResource("StyleBoxFlat_gjxgm")
-theme_override_styles/normal = SubResource("StyleBoxFlat_gjxgm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hq6hd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hq6hd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hq6hd")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hq6hd")
 icon_texture = ExtResource("6_jf41c")
 label = "QUIT"
 separation = 15
@@ -142,4 +146,5 @@ offset_bottom = 642.0
 texture = ExtResource("8_2ncoh")
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
