@@ -7,12 +7,15 @@ signal reset_done
 @export var angles_l2r: Array[int] = [0, -90]
 @export var initial_angle_index: int = 0
 @export var speed: int = 250
-
+@export var cycle: bool = false
 
 var _angle: float = 0.0
 var _index: int = 0:
 	set(v):
-		_index = clamp(v, 0, angles_l2r.size() - 1)
+		if cycle:
+			_index = wrap(v, 0, angles_l2r.size())
+		else:
+			_index = clamp(v, 0, angles_l2r.size() - 1)
 		_angle = angles_l2r[_index]
 
 var _target: Node2D
@@ -26,6 +29,7 @@ func _ready():
 	add_to_group(&"rotate_on_flip")
 	_index = initial_angle_index
 	_target = get_parent()
+	_target.add_to_group(&"has_rotate_on_flip")
 
 
 func rotate_left() -> void:

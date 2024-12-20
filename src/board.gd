@@ -23,6 +23,8 @@ var _balls: Array[Node]:
 
 
 func _ready():
+	if not SfxMusicManager.has_db(&"pinball"):
+		SfxMusicManager.add_db(&"pinball", load("res://src/sfxdb_global.tres"))
 	SfxMusicManager.add_db(&"board", sfxfb)
 
 	SignalHub.slingshot_hit.connect(_slingshot_hit)
@@ -54,7 +56,7 @@ func _apply_theme() -> void:
 
 	for wall in get_tree().get_nodes_in_group(&"walls"):
 		var a = wall.modulate.a
-		wall.modulate = get_theme_color(&"color", &"Wall")
+		wall.modulate = get_theme_color(&"color", &"SwitchWall" if wall.is_in_group(&"has_rotate_on_flip") else &"Wall")
 		wall.modulate.a = a
 	border_line.default_color = get_theme_color(&"color", &"Wall")
 
@@ -139,7 +141,7 @@ func _on_lose_ball_area_body_entered(body: Node2D) -> void:
 		if not SessionManager.ball_lost():
 			body.remove_all_components()
 		_activate_kickbacks()
-		_board_ball_lost(body)
+		_board_load_ball_in_launcher(body)
 
 
 func _activate_kickbacks() -> void:
@@ -215,14 +217,15 @@ func _check_board_complete() -> void:
 			SceneManager.nav_home()
 
 
-func _on_letter_group_completed_common(group: LetterIndicatorGroup):
+func _on_letter_group_completed_common(group: LetterIndicatorGroup, ball: Ball):
 	add_score(2000, group, true)
 	match group.letters:
 		&"KICK", &"KICKBACK": _activate_kickbacks()
 		&"THROUGH": _activate_pass_through_balls()
 		&"EXPLOSE": _activate_explosive_balls()
+		&"LOAD": _board_load_ball_in_launcher(ball)
 		&"SAVE": SessionManager.ball_save_active = true
-	_board_on_letter_group_completed(group)
+	_board_on_letter_group_completed(group, ball)
 
 
 func _activate_explosive_balls() -> void:
@@ -257,11 +260,11 @@ func _on_ball_saver_changed(_active: bool) -> void:
 	pass
 
 
-func _board_ball_lost(_ball: Ball):
+func _board_load_ball_in_launcher(_ball: Ball):
 	pass
 
 
-func _board_on_letter_group_completed(_group: LetterIndicatorGroup):
+func _board_on_letter_group_completed(_group: LetterIndicatorGroup, _ball: Ball):
 	pass
 
 
