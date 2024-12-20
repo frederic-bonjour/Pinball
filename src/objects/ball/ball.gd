@@ -72,6 +72,7 @@ func _integrate_forces(state):
 
 
 func teleport_to(target_pos: Vector2):
+	linear_damp = 0.0
 	_teleport_vector = target_pos
 	_reset_state = true
 
@@ -80,6 +81,7 @@ func _on_body_entered(body: Node) -> void:
 	if body is Brick:
 		var destroyed = body.hit() == 0
 		touched_brick.emit(body, destroyed)
+		body.touched.emit(body)
 		SignalHub.brick_hit.emit(body, self, destroyed)
 		if destroyed:
 			body.queue_free()
