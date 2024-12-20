@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BrickProperties" load_steps=2 format=3 uid="uid://cu3r1idca0sg2"]
+
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="1_0kuqg"]
+
+[resource]
+script = ExtResource("1_0kuqg")
+shape = 0
+scale = Vector2(4, 1)
+alt_texture_hframes = 0
+alt_texture_vframes = 0
+alt_collision_shape = 0
+hits = 1
