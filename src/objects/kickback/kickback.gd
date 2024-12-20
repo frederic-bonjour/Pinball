@@ -101,7 +101,7 @@ func _physics_process(_delta: float) -> void:
 				_state = Ejection
 
 		Ejection:
-			var s = strength if auto_eject else _player_strength
+			var s = strength * randf_range(0.95, 1.05) if auto_eject else _player_strength
 			if _loaded_body:
 				_loaded_body.linear_damp = _prev_body_damp
 				_loaded_body.apply_central_impulse(Vector2.from_angle(global_rotation + PI / 2.0) * -s)
