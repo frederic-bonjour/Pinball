@@ -31,9 +31,12 @@ func has_next_board() -> bool:
 	return b >= 0 and b < boards.size() - 1
 
 
-func start_game() -> void:
-	_current_board_name = &""
-	next_board()
+func start_game(board_name: String = "") -> void:
+	if board_name.is_empty():
+		_current_board_name = &""
+		next_board()
+	else:
+		nav_to_board(board_name)
 
 
 func _process(_delta: float) -> void:
