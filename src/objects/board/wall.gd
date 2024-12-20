@@ -22,11 +22,25 @@ const physics_material = preload("res://src/materials/walls.tres")
 		middle_joints_radius = v
 		queue_redraw()
 		_update_collision()
+		
+
+@export_group("Collisions")
+@export var start_joint_no_collision: bool = false
+@export var middle_joints_no_collision: bool = false
+@export var end_joint_no_collision: bool = false
 
 @export var one_way_collision: bool = false:
 	set(v):
 		one_way_collision = v
 		_update_collision()
+
+@export var ball_can_pass_through: bool = false:
+	set(v):
+		ball_can_pass_through = v
+		if _body:
+			_body.collision_mask = 0 if ball_can_pass_through else 2
+			_body.collision_layer = 0 if ball_can_pass_through else 1
+
 
 var _body: StaticBody2D
 #var _occluder: LightOccluder2D
@@ -39,8 +53,8 @@ func _ready():
 
 	_body = StaticBody2D.new()
 	_body.physics_material_override = physics_material
-	_body.collision_mask = 2
 	add_child(_body)
+	ball_can_pass_through = ball_can_pass_through
 
 	#_occluder = LightOccluder2D.new()
 	#_occluder.light_mask = 1
@@ -58,15 +72,15 @@ func _update_collision() -> void:
 	for i in range(ps):
 		var radius: float = 0.0
 		if i == 0: # first
-			radius = start_joint_radius
+			radius = start_joint_radius if not start_joint_no_collision else 0.0
 			if not radius and begin_cap_mode == LineCapMode.LINE_CAP_ROUND:
 				radius = width / 2.0
 		elif i == ps - 1: # last
-			radius = end_joint_radius
+			radius = end_joint_radius if not end_joint_no_collision else 0.0
 			if not radius and end_cap_mode == LineCapMode.LINE_CAP_ROUND:
 				radius = width / 2.0
 		else: # others = middle
-			radius = middle_joints_radius
+			radius = middle_joints_radius if not middle_joints_no_collision else 0.0
 
 		var cs: CollisionShape2D
 		var p1 = points[i]
