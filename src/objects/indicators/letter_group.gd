@@ -60,11 +60,13 @@ signal completed
 const LetterIndicatorScene = preload("res://src/objects/indicators/letter.tscn")
 const LETTER_SIZE: Vector2 = Vector2(70, 70)
 
-var _lit_count: int = 0
-var _letter_nodes: Array[IndicatorLetter] = []
-
 var is_completed: bool:
 	get: return _lit_count == letters.length()
+
+
+var _lit_count: int = 0
+var _letter_nodes: Array[IndicatorLetter] = []
+var _completion_ball: Ball
 
 
 # Called when the node enters the scene tree for the first time.
@@ -155,13 +157,14 @@ func _update_colors() -> void:
 						node.color_on = colors[pingpong(i, colors.size() - 1)]
 
 
-func _ball_entered(_ball: Ball, letter: IndicatorLetter) -> void:
+func _ball_entered(ball: Ball, letter: IndicatorLetter) -> void:
 	if not letter.lit:
 		letter.lit = true
 		letter_lit.emit(letter)
 		SignalHub.letter_group_letter_lit.emit(self, letter)
 		_lit_count += 1
 		if is_completed:
+			_completion_ball = ball
 			_blink()
 
 
@@ -171,7 +174,7 @@ func _blink() -> void:
 			l.lit = i % 2 > 0
 		await get_tree().create_timer(blink_delay).timeout
 	completed.emit()
-	SignalHub.letter_group_completed.emit(self)
+	SignalHub.letter_group_completed.emit(self, _completion_ball)
 	if redoable:
 		reset()
 
