@@ -38,6 +38,10 @@ func add_db(db_id: StringName, db: SfxDb, merge_entries: bool = true) -> bool:
 	return false
 
 
+func has_db(db_id: StringName) -> bool:
+	return _databases.has(db_id)
+
+
 func remove_db(db_id: StringName) -> void:
 	var db = _databases[db_id]
 	for e in db.entries:
