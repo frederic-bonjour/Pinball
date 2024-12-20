@@ -9,6 +9,7 @@ extends Button
 		label = v
 		if is_node_ready():
 			waving_text.text = v
+			waving_text.visible = not v.is_empty()
 
 ## Space between letters in pixels. May be negative.
 @export var letter_spacing: int = 0:
@@ -88,6 +89,8 @@ func _ready():
 	_on_focus_exited()
 	_update_margin()
 	_update_alignment()
+	for c in find_children("*", "Control", true, false):
+		(c as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 func _update_alignment() -> void:

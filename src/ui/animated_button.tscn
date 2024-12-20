@@ -15,7 +15,7 @@ shader_parameter/stripe_slope = 3.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exobq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm63y"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -25,14 +25,14 @@ shadow_size = 20
 
 [node name="AnimatedButton" type="Button"]
 material = SubResource("ShaderMaterial_5a14v")
-custom_minimum_size = Vector2(200, 90)
+custom_minimum_size = Vector2(90, 90)
 pivot_offset = Vector2(100, 45)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxFlat_exobq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_exobq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_exobq")
-theme_override_styles/normal = SubResource("StyleBoxFlat_exobq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_jm63y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jm63y")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jm63y")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jm63y")
 script = ExtResource("2_krkn6")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -58,8 +58,10 @@ expand_mode = 5
 stretch_mode = 5
 
 [node name="WavingText" type="HBoxContainer" parent="HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/separation = 0
 script = ExtResource("3_rfxy2")
 one_shot = true
