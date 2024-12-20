@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i5g6tnlmwo8b"
-path="res://.godot/imported/pipes.png-0627c69d65e1bfc313023aeac1faa6c7.ctex"
+uid="uid://m34l63qedkck"
+path="res://.godot/imported/pacman-pipes.png-537f8b51eafbc15994795d6912fee75e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://boards/pacman/assets/pipes.png"
-dest_files=["res://.godot/imported/pipes.png-0627c69d65e1bfc313023aeac1faa6c7.ctex"]
+source_file="res://boards/pacman/assets/pacman-pipes.png"
+dest_files=["res://.godot/imported/pacman-pipes.png-537f8b51eafbc15994795d6912fee75e.ctex"]
 
 [params]
 
