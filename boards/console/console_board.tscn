@@ -1,13 +1,17 @@
-[gd_scene load_steps=37 format=3 uid="uid://c8jlu006mk4rw"]
+[gd_scene load_steps=42 format=3 uid="uid://c8jlu006mk4rw"]
 
 [ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_gtwy8"]
 [ext_resource type="Script" path="res://boards/console/console_board.gd" id="2_1bwp3"]
 [ext_resource type="PackedScene" uid="uid://cpr3fjreo8q7j" path="res://src/objects/board/flippers_slingshots.tscn" id="3_7yh7y"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry.gd" id="3_m2dkn"]
 [ext_resource type="AudioStream" uid="uid://c1m8e8nk5qonl" path="res://boards/console/assets/electro1.mp3" id="3_m3ou8"]
 [ext_resource type="Texture2D" uid="uid://br4weawiw8wrp" path="res://boards/console/assets/pcb1.jpg" id="4_3pl70"]
 [ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="4_jg1cf"]
+[ext_resource type="AudioStream" uid="uid://b546h478bksyn" path="res://boards/console/assets/computer/startup_sound.mp3" id="4_l62lf"]
 [ext_resource type="Texture2D" uid="uid://c80fiplvisqhu" path="res://assets/kickback/kickback_icon.png" id="5_4bq1l"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry_stream.gd" id="5_a2ufl"]
 [ext_resource type="Script" path="res://src/objects/board/wall.gd" id="6_1068u"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db.gd" id="6_f22ak"]
 [ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="7_27dbf"]
 [ext_resource type="Script" path="res://src/objects/brick/brick_group.gd" id="7_d74ln"]
 [ext_resource type="PackedScene" uid="uid://de2kcbjq5ukfq" path="res://src/objects/board/rounded_corner.tscn" id="7_xmurn"]
@@ -20,9 +24,38 @@
 [ext_resource type="Resource" uid="uid://s2nxtkfcan5a" path="res://boards/console/brick_2x1.tres" id="11_n5g8i"]
 [ext_resource type="Texture2D" uid="uid://cfxxngekhmnlu" path="res://boards/console/assets/matrix_letters.png" id="15_73mly"]
 [ext_resource type="Script" path="res://src/objects/indicators/letter_group.gd" id="16_1jy4b"]
-[ext_resource type="Texture2D" uid="uid://cqx7l0h6jwibg" path="res://boards/console/assets/computer/old_computer.png" id="17_ca8v6"]
 [ext_resource type="PackedScene" uid="uid://en3henr63844" path="res://src/objects/bumper/bumper.tscn" id="17_j8pca"]
-[ext_resource type="Texture2D" uid="uid://cjfg2qn5xm0f1" path="res://boards/console/assets/computer/screen_overlay.png" id="21_cbhli"]
+[ext_resource type="PackedScene" uid="uid://cwss3786ecam3" path="res://boards/console/computer.tscn" id="24_ftnk7"]
+
+[sub_resource type="Resource" id="Resource_y01ys"]
+resource_name = "computer_startup (SE, 1)"
+script = ExtResource("3_m2dkn")
+key = &"computer_startup"
+type = 2
+multiple_streams = false
+single_stream = ExtResource("4_l62lf")
+weighted_streams = Array[ExtResource("5_a2ufl")]([])
+volume_db = 0.0
+pitch_scale = 1.0
+max_distance = 0.0
+attenuation = 1.0
+
+[sub_resource type="Resource" id="Resource_mntl1"]
+script = ExtResource("6_f22ak")
+entries = Array[ExtResource("3_m2dkn")]([SubResource("Resource_y01ys")])
+background_music_bus = &""
+background_sound_bus = &""
+sound_effect_bus = &""
+music_effect_bus = &""
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_51h0x"]
+particles_animation = true
+particles_anim_h_frames = 9
+particles_anim_v_frames = 5
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_nwwa4"]
+colors = PackedColorArray(0, 1, 0, 0.7, 0, 0, 0, 0.2)
 
 [sub_resource type="Image" id="Image_k3u31"]
 data = {
@@ -35,24 +68,6 @@ data = {
 
 [sub_resource type="ImageTexture" id="ImageTexture_nfwsm"]
 image = SubResource("Image_k3u31")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_51h0x"]
-particles_animation = true
-particles_anim_h_frames = 9
-particles_anim_v_frames = 5
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="Gradient_nwwa4"]
-colors = PackedColorArray(0, 1, 0, 0.7, 0, 0, 0, 0.2)
-
-[sub_resource type="Resource" id="Resource_hxmu5"]
-script = ExtResource("8_qqpwi")
-shape = 10
-scale = Vector2(1, 1)
-alt_texture_hframes = 0
-alt_texture_vframes = 0
-alt_collision_shape = 0
-hits = 1
 
 [sub_resource type="Animation" id="Animation_y4wv5"]
 length = 0.001
@@ -67,6 +82,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Power On Brick:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(2, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_hfm2f"]
@@ -84,12 +111,33 @@ tracks/0/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Power On Brick:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.5, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(2, 0, 0, 1), Color(1, 0, 0, 1), Color(3, 0, 0, 1), Color(1, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1qxo4"]
 _data = {
 "RESET": SubResource("Animation_y4wv5"),
 "bricks": SubResource("Animation_hfm2f")
 }
+
+[sub_resource type="Resource" id="Resource_hxmu5"]
+script = ExtResource("8_qqpwi")
+shape = 10
+scale = Vector2(1, 1)
+alt_texture_hframes = 0
+alt_texture_vframes = 0
+alt_collision_shape = 0
+hits = 1
 
 [sub_resource type="Resource" id="Resource_n0vv2"]
 script = ExtResource("8_qqpwi")
@@ -126,6 +174,7 @@ size = Vector2(60, 120)
 
 [node name="Console Board" instance=ExtResource("1_gtwy8")]
 script = ExtResource("2_1bwp3")
+sfxfb = SubResource("Resource_mntl1")
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("3_m3ou8")
@@ -136,7 +185,6 @@ texture = ExtResource("4_3pl70")
 stretch_mode = 5
 
 [node name="Wall" parent="Score Display" index="0"]
-texture = SubResource("ImageTexture_nfwsm")
 start_joint_no_collision = false
 middle_joints_no_collision = false
 end_joint_no_collision = false
@@ -211,7 +259,7 @@ always_active = true
 
 [node name="KickBack Left Icon" type="Sprite2D" parent="Right Flippers" index="9"]
 modulate = Color(2, 3, 2, 1)
-position = Vector2(-590, -190)
+position = Vector2(-590, -20)
 texture = ExtResource("5_4bq1l")
 
 [node name="Wall4" type="Line2D" parent="." index="14"]
@@ -422,12 +470,7 @@ position = Vector2(10, -1530)
 rotation = 3.14159
 scale = Vector2(1.5, 1.5)
 
-[node name="Golden Brick" parent="." index="32" instance=ExtResource("7_27dbf")]
-modulate = Color(2, 2, 0, 1)
-position = Vector2(2770, -160)
-properties = SubResource("Resource_hxmu5")
-
-[node name="Bricks" type="Node2D" parent="." index="33"]
+[node name="Bricks" type="Node2D" parent="." index="32"]
 position = Vector2(930, -1830)
 metadata/_edit_group_ = true
 
@@ -437,7 +480,12 @@ libraries = {
 }
 autoplay = "bricks"
 
-[node name="C" type="Node2D" parent="Bricks" index="1"]
+[node name="Power On Brick" parent="Bricks" index="1" instance=ExtResource("7_27dbf")]
+modulate = Color(2, 0, 0, 1)
+position = Vector2(1680, 1660)
+properties = SubResource("Resource_hxmu5")
+
+[node name="C" type="Node2D" parent="Bricks" index="2"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(10, 0)
 script = ExtResource("7_d74ln")
@@ -462,7 +510,7 @@ properties = SubResource("Resource_n0vv2")
 position = Vector2(-30, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="O1" type="Node2D" parent="Bricks" index="2"]
+[node name="O1" type="Node2D" parent="Bricks" index="3"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(270, 0)
 script = ExtResource("7_d74ln")
@@ -499,7 +547,7 @@ properties = SubResource("Resource_n0vv2")
 position = Vector2(150, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="S" type="Node2D" parent="Bricks" index="3"]
+[node name="S" type="Node2D" parent="Bricks" index="4"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(900, 0)
 script = ExtResource("7_d74ln")
@@ -524,7 +572,7 @@ properties = ExtResource("9_8h8s3")
 position = Vector2(160, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="N" type="Node2D" parent="Bricks" index="4"]
+[node name="N" type="Node2D" parent="Bricks" index="5"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(550, 0)
 script = ExtResource("7_d74ln")
@@ -576,7 +624,7 @@ properties = SubResource("Resource_n0vv2")
 position = Vector2(208, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="O2" type="Node2D" parent="Bricks" index="5"]
+[node name="O2" type="Node2D" parent="Bricks" index="6"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(1210, 0)
 script = ExtResource("7_d74ln")
@@ -613,7 +661,7 @@ properties = SubResource("Resource_n0vv2")
 position = Vector2(150, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="L" type="Node2D" parent="Bricks" index="6"]
+[node name="L" type="Node2D" parent="Bricks" index="7"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(1500, 0)
 script = ExtResource("7_d74ln")
@@ -638,7 +686,7 @@ properties = ExtResource("9_8h8s3")
 position = Vector2(-20, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="E" type="Node2D" parent="Bricks" index="7"]
+[node name="E" type="Node2D" parent="Bricks" index="8"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(1800, 0)
 script = ExtResource("7_d74ln")
@@ -663,7 +711,7 @@ properties = ExtResource("9_8h8s3")
 position = Vector2(-20, 210)
 properties = SubResource("Resource_n0vv2")
 
-[node name="Cursor" type="Node2D" parent="Bricks" index="8"]
+[node name="Cursor" type="Node2D" parent="Bricks" index="9"]
 modulate = Color(0, 2, 0, 1)
 position = Vector2(2100, 0)
 script = ExtResource("7_d74ln")
@@ -672,21 +720,14 @@ script = ExtResource("7_d74ln")
 position = Vector2(70, 280)
 properties = SubResource("Resource_u1rqf")
 
-[node name="LauncherPlot" parent="." index="34" instance=ExtResource("9_nsxr5")]
+[node name="LauncherPlot" parent="." index="33" instance=ExtResource("9_nsxr5")]
 background_color = Color(0, 0, 0, 0.5)
 
-[node name="Computer" type="Node2D" parent="LauncherPlot" index="4"]
-position = Vector2(0, -410)
+[node name="Computer" parent="LauncherPlot" index="4" instance=ExtResource("24_ftnk7")]
+unique_name_in_owner = true
+position = Vector2(0, -420)
 
-[node name="Sprite2D" type="Sprite2D" parent="LauncherPlot/Computer" index="0"]
-position = Vector2(0, 80)
-texture = ExtResource("17_ca8v6")
-
-[node name="ScreenOverlay" type="Sprite2D" parent="LauncherPlot/Computer" index="1"]
-position = Vector2(-2, -23)
-texture = ExtResource("21_cbhli")
-
-[node name="LetterGroup_ACTIVATE" type="Control" parent="." index="35"]
+[node name="LetterGroup_ACTIVATE" type="Control" parent="." index="34"]
 anchors_preset = 0
 offset_left = 210.0
 offset_top = -1280.0
@@ -784,39 +825,39 @@ end_cap_mode = 2
 antialiased = true
 script = ExtResource("6_1068u")
 
-[node name="Bumper2" parent="." index="36" instance=ExtResource("17_j8pca")]
+[node name="Bumper2" parent="." index="35" instance=ExtResource("17_j8pca")]
 position = Vector2(420, -1680)
 
-[node name="Bumper5" parent="." index="37" instance=ExtResource("17_j8pca")]
+[node name="Bumper5" parent="." index="36" instance=ExtResource("17_j8pca")]
 position = Vector2(2280, -1020)
 
-[node name="Bumper11" parent="." index="38" instance=ExtResource("17_j8pca")]
-position = Vector2(1190, -770)
+[node name="Bumper11" parent="." index="37" instance=ExtResource("17_j8pca")]
+position = Vector2(1190, -880)
 
-[node name="Bumper10" parent="." index="39" instance=ExtResource("17_j8pca")]
+[node name="Bumper10" parent="." index="38" instance=ExtResource("17_j8pca")]
 position = Vector2(2700, -1200)
 
-[node name="Bumper9" parent="." index="40" instance=ExtResource("17_j8pca")]
+[node name="Bumper9" parent="." index="39" instance=ExtResource("17_j8pca")]
 position = Vector2(1440, -1200)
 radius = 80
 
-[node name="Bumper6" parent="." index="41" instance=ExtResource("17_j8pca")]
+[node name="Bumper6" parent="." index="40" instance=ExtResource("17_j8pca")]
 position = Vector2(2460, -1200)
 
-[node name="Bumper7" parent="." index="42" instance=ExtResource("17_j8pca")]
+[node name="Bumper7" parent="." index="41" instance=ExtResource("17_j8pca")]
 position = Vector2(3540, -1560)
 radius = 70
 
-[node name="Bumper8" parent="." index="43" instance=ExtResource("17_j8pca")]
+[node name="Bumper8" parent="." index="42" instance=ExtResource("17_j8pca")]
 position = Vector2(3360, -1800)
 
-[node name="Bumper3" parent="." index="44" instance=ExtResource("17_j8pca")]
+[node name="Bumper3" parent="." index="43" instance=ExtResource("17_j8pca")]
 position = Vector2(540, -1980)
 
-[node name="Bumper4" parent="." index="45" instance=ExtResource("17_j8pca")]
+[node name="Bumper4" parent="." index="44" instance=ExtResource("17_j8pca")]
 position = Vector2(240, -1920)
 
-[node name="Wall5" type="Line2D" parent="." index="46"]
+[node name="Wall5" type="Line2D" parent="." index="45"]
 texture_filter = 6
 position = Vector2(1185, -290)
 points = PackedVector2Array(405, 190, 315, 190, -5, -40)
@@ -827,7 +868,7 @@ joint_mode = 2
 antialiased = true
 script = ExtResource("6_1068u")
 
-[node name="LetterGroup_LOAD" type="Control" parent="." index="47"]
+[node name="LetterGroup_LOAD" type="Control" parent="." index="46"]
 anchors_preset = 0
 offset_left = 1210.0
 offset_top = -410.0
@@ -839,7 +880,7 @@ offset = Vector2(75, 53)
 color_mode = 1
 colors = Array[Color]([Color(2, 2, 0, 1), Color(0, 2, 0, 1)])
 
-[node name="LetterGroup_SAVE" type="Control" parent="." index="48"]
+[node name="LetterGroup_SAVE" type="Control" parent="." index="47"]
 anchors_preset = 0
 offset_left = 30.0
 offset_top = -2010.0
@@ -855,7 +896,7 @@ each_letter_offset = {
 colors = Array[Color]([Color(0, 2, 0, 1), Color(0, 2, 0, 1)])
 colors_cycling = "repeat"
 
-[node name="LetterGroup_GREP" type="Control" parent="." index="49"]
+[node name="LetterGroup_GREP" type="Control" parent="." index="48"]
 anchors_preset = 0
 offset_left = 20.0
 offset_top = -1020.0
@@ -867,7 +908,7 @@ offset = Vector2(0, 90)
 color_mode = 1
 colors = Array[Color]([Color(2, 2, 2, 1), Color(0, 1, 2, 1)])
 
-[node name="LetterGroup_ECHO" type="Control" parent="." index="50"]
+[node name="LetterGroup_ECHO" type="Control" parent="." index="49"]
 anchors_preset = 0
 offset_left = 2380.0
 offset_top = -450.0
@@ -880,7 +921,7 @@ color_mode = 1
 colors = Array[Color]([Color(2, 2, 2, 1), Color(0, 1, 2, 1)])
 redoable = false
 
-[node name="LetterGroup_BASH" type="Control" parent="." index="51"]
+[node name="LetterGroup_BASH" type="Control" parent="." index="50"]
 anchors_preset = 0
 offset_left = 3750.0
 offset_top = -1590.0
@@ -892,7 +933,7 @@ offset = Vector2(0, 90)
 color_mode = 1
 colors = Array[Color]([Color(2, 2, 2, 1), Color(0, 1, 2, 1)])
 
-[node name="LetterGroup_CURL" type="Control" parent="." index="52"]
+[node name="LetterGroup_CURL" type="Control" parent="." index="51"]
 anchors_preset = 0
 offset_left = 2270.0
 offset_top = -450.0
@@ -904,7 +945,7 @@ offset = Vector2(0, 80)
 color_mode = 1
 colors = Array[Color]([Color(2, 0.6, 0, 1), Color(2, 0.2, 0, 1)])
 
-[node name="Wall15" type="Line2D" parent="." index="53"]
+[node name="Wall15" type="Line2D" parent="." index="52"]
 texture_filter = 6
 position = Vector2(2360, -360)
 points = PackedVector2Array(0, -90, 0, 230)
@@ -915,7 +956,7 @@ end_cap_mode = 2
 antialiased = true
 script = ExtResource("6_1068u")
 
-[node name="Wall18" type="Line2D" parent="." index="54"]
+[node name="Wall18" type="Line2D" parent="." index="53"]
 texture_filter = 6
 position = Vector2(2470, -260)
 points = PackedVector2Array(0, -110, 0, 60, 100, 150)
@@ -931,7 +972,7 @@ middle_joints_radius = 15.0
 start_joint_no_collision = true
 middle_joints_no_collision = true
 
-[node name="Wall19" type="Line2D" parent="." index="55"]
+[node name="Wall19" type="Line2D" parent="." index="54"]
 texture_filter = 6
 position = Vector2(2650, -110)
 rotation = -2.35619
@@ -952,7 +993,7 @@ end_joint_no_collision = true
 script = ExtResource("10_jhbg5")
 angles_l2r = Array[int]([-135, -90])
 
-[node name="Wall17" type="Line2D" parent="." index="56"]
+[node name="Wall17" type="Line2D" parent="." index="55"]
 texture_filter = 6
 position = Vector2(2560, -370)
 points = PackedVector2Array(50, -380, 0, -320, 0, 130)
@@ -967,7 +1008,7 @@ end_joint_radius = 15.0
 middle_joints_radius = 15.0
 end_joint_no_collision = true
 
-[node name="Wall16" type="Line2D" parent="." index="57"]
+[node name="Wall16" type="Line2D" parent="." index="56"]
 texture_filter = 6
 position = Vector2(3740, -510)
 points = PackedVector2Array(0, 0, 0, -270, -110, -380)
@@ -979,7 +1020,7 @@ end_cap_mode = 2
 antialiased = true
 script = ExtResource("6_1068u")
 
-[node name="ForceBallToLeft" type="Area2D" parent="." index="58"]
+[node name="ForceBallToLeft" type="Area2D" parent="." index="57"]
 position = Vector2(3030, -2115)
 collision_layer = 0
 collision_mask = 2
@@ -993,7 +1034,7 @@ metadata/_edit_group_ = true
 position = Vector2(-50, 5)
 shape = SubResource("RectangleShape2D_1ut8l")
 
-[node name="ForceBallToLeft2" type="Area2D" parent="." index="59"]
+[node name="ForceBallToLeft2" type="Area2D" parent="." index="58"]
 position = Vector2(570, -1030)
 collision_layer = 0
 collision_mask = 2
@@ -1006,7 +1047,7 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForceBallToLeft2" index="0"]
 shape = SubResource("RectangleShape2D_a5gvt")
 
-[node name="ForceBallToRight" type="Area2D" parent="." index="60"]
+[node name="ForceBallToRight" type="Area2D" parent="." index="59"]
 position = Vector2(680, -1030)
 collision_layer = 0
 collision_mask = 2
@@ -1019,4 +1060,5 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForceBallToRight" index="0"]
 shape = SubResource("RectangleShape2D_a5gvt")
 
+[connection signal="touched" from="Bricks/Power On Brick" to="." method="_on_power_on_brick_touched"]
 [connection signal="touched" from="Bricks/Cursor/Brick_08" to="." method="_on_cursor_brick_touched"]

@@ -23,7 +23,7 @@ var score: int = 0:
 		score_changed.emit(score)
 
 var formatted_score: String:
-	get: return TextServerManager.get_primary_interface().format_number(str(score))
+	get: return Utils.format_number(score)
 
 
 static func _get_reached_steps(prev: int, next: int) -> Array[StringName]:

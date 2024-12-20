@@ -19,6 +19,8 @@ func _on_ball_saver_changed(_active: bool):
 func _board_on_letter_group_completed(group: LetterIndicatorGroup, _ball: Ball):
 	# On this board, activate the kickbacks everytime a group is completed.
 	_activate_kickbacks()
+	match group.letters:
+		&"ACTIVATE": %Computer.activated = true
 
 
 func _is_board_complete():
@@ -27,3 +29,7 @@ func _is_board_complete():
 
 func _on_cursor_brick_touched(brick: Brick):
 	brick.update_scale(Vector2(-0.2, 0))
+
+
+func _on_power_on_brick_touched(brick):
+	%Computer.started = true
