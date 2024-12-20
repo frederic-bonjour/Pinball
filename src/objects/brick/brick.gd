@@ -3,6 +3,9 @@
 class_name Brick
 extends RigidBody2D
 
+@warning_ignore("unused_signal")
+signal touched(brick: Brick)
+
 @export var properties: BrickProperties
 
 const BASE_TEXTURE: Texture2D = preload("res://assets/brick/bricks.png")
@@ -19,6 +22,9 @@ var _remaining_hit_count: int = 1
 
 var size: Vector2:
 	get: return Vector2(60, 60) * scale
+
+var sprite_size: Vector2:
+	get: return (sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)) * properties.scale
 
 
 func _ready() -> void:
@@ -74,6 +80,11 @@ func _update_shape():
 			_: _use_square_shape()
 
 
+func update_scale(offset: Vector2) -> void:
+	properties.scale += offset
+	_update_shape.call_deferred()
+
+
 func _use_square_shape() -> void:
 	cs_square.disabled = false
 	cs_triangle.disabled = true
@@ -81,7 +92,7 @@ func _use_square_shape() -> void:
 	cs_square.visible = true
 	cs_triangle.visible = false
 	cs_circle.visible = false
-	cs_square.shape.size = (sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)) * properties.scale
+	cs_square.shape.size = sprite_size
 
 func _use_circle_shape() -> void:
 	cs_square.disabled = true
@@ -90,7 +101,7 @@ func _use_circle_shape() -> void:
 	cs_square.visible = false
 	cs_triangle.visible = false
 	cs_circle.visible = true
-	cs_circle.shape.radius = (sprite.texture.get_size().x / 2.0) * properties.scale
+	cs_circle.shape.radius = sprite_size.x / 2.0
 
 func _use_triangle_shape() -> void:
 	cs_square.disabled = true
@@ -99,10 +110,10 @@ func _use_triangle_shape() -> void:
 	cs_square.visible = false
 	cs_triangle.visible = true
 	cs_circle.visible = false
-	var s = sprite.texture.get_size()
-	cs_triangle.polygon[0] = Vector2(-s.x / 2, -s.y / 2) * properties.scale
-	cs_triangle.polygon[1] = Vector2(s.x / 2, -s.y / 2) * properties.scale
-	cs_triangle.polygon[2] = Vector2(-s.x / 2, s.y / 2) * properties.scale
+	var s = sprite_size
+	cs_triangle.polygon[0] = Vector2(-s.x / 2, -s.y / 2)
+	cs_triangle.polygon[1] = Vector2(s.x / 2, -s.y / 2)
+	cs_triangle.polygon[2] = Vector2(-s.x / 2, s.y / 2)
 
 
 func hit() -> int:
@@ -115,12 +126,14 @@ func destroy(by: Ball) -> void:
 	SignalHub.brick_hit.emit(self, by, true)
 	queue_free()
 
-
+"""
 func _on_body_entered(body: Node) -> void:
 	if body is Ball:
 		_remaining_hit_count -= 1
+		touched.emit(self)
 		if _remaining_hit_count == 0:
 			SignalHub.brick_hit.emit(self, body, true)
 			queue_free()
 		else:
 			SignalHub.brick_hit.emit(self, body, false)
+"""

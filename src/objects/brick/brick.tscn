@@ -30,13 +30,14 @@ show_behind_parent = true
 texture = ExtResource("1_u4g8l")
 hframes = 4
 vframes = 3
+frame = 6
 
 [node name="CS_Square" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4pobi")
 
 [node name="CS_Triangle" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(-30, -30, 30, -30, -30, 30)
+polygon = PackedVector2Array(-120, -90, 120, -90, -120, 90)
 disabled = true
 
 [node name="CS_Circle" type="CollisionShape2D" parent="."]
