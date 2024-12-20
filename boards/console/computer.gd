@@ -16,6 +16,12 @@ extends Node2D
 			animation_player.play(&"start")
 		started = v
 
+@export var backup_done: bool = false:
+	set(v):
+		backup_done = v
+		if is_node_ready():
+			_update_screen_contents()
+
 
 func _ready():
 	screen_contents.text = ""
@@ -31,4 +37,6 @@ func _update_screen_contents() -> void:
 		c.append("System starting...")
 	if activated:
 		c.append("System activated.")
+	if activated:
+		c.append("Backup done.")
 	screen_contents.text = "\n".join(c)

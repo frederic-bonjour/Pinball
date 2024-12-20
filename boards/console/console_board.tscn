@@ -308,7 +308,7 @@ strength = 8.0
 [node name="Accelerator3" parent="." index="19" instance=ExtResource("9_one05")]
 position = Vector2(1440, -2115)
 rotation = -3.14159
-strength = 2.0
+strength = 4.0
 
 [node name="Wall7" type="Line2D" parent="." index="20"]
 texture_filter = 6
@@ -448,7 +448,7 @@ end_joint_no_collision = true
 
 [node name="ComponentRotateOnFlip" type="Node" parent="Wall12" index="0"]
 script = ExtResource("10_jhbg5")
-angles_l2r = Array[int]([-45, 0])
+angles_l2r = Array[int]([0, -45])
 cycle = true
 
 [node name="RoundedCorner3" parent="." index="28" instance=ExtResource("7_xmurn")]
@@ -726,6 +726,7 @@ background_color = Color(0, 0, 0, 0.5)
 [node name="Computer" parent="LauncherPlot" index="4" instance=ExtResource("24_ftnk7")]
 unique_name_in_owner = true
 position = Vector2(0, -420)
+backup_done = null
 
 [node name="LetterGroup_ACTIVATE" type="Control" parent="." index="34"]
 anchors_preset = 0
@@ -880,20 +881,23 @@ offset = Vector2(75, 53)
 color_mode = 1
 colors = Array[Color]([Color(2, 2, 0, 1), Color(0, 2, 0, 1)])
 
-[node name="LetterGroup_SAVE" type="Control" parent="." index="47"]
+[node name="LetterGroup_BACKUP" type="Control" parent="." index="47"]
 anchors_preset = 0
 offset_left = 30.0
-offset_top = -2010.0
+offset_top = -2100.0
 offset_right = 100.0
-offset_bottom = -1670.0
+offset_bottom = -1580.0
 script = ExtResource("16_1jy4b")
-letters = "SAVE"
+letters = "BACKUP"
 offset = Vector2(0, 90)
 each_letter_offset = {
-0: Vector2(30, 0),
-3: Vector2(30, 0)
+0: Vector2(110, 10),
+1: Vector2(35, 0),
+4: Vector2(35, 0),
+5: Vector2(110, -10)
 }
-colors = Array[Color]([Color(0, 2, 0, 1), Color(0, 2, 0, 1)])
+color_mode = 1
+colors = Array[Color]([Color(0, 2, 0, 1), Color(0, 2, 2, 1)])
 colors_cycling = "repeat"
 
 [node name="LetterGroup_GREP" type="Control" parent="." index="48"]

@@ -20,7 +20,11 @@ func _board_on_letter_group_completed(group: LetterIndicatorGroup, _ball: Ball):
 	# On this board, activate the kickbacks everytime a group is completed.
 	_activate_kickbacks()
 	match group.letters:
-		&"ACTIVATE": %Computer.activated = true
+		&"ACTIVATE":
+			%Computer.activated = true
+		&"BACKUP":
+			SessionManager.ball_save_active = true
+			%Computer.backup_done = true
 
 
 func _is_board_complete():
