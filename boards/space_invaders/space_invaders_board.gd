@@ -4,9 +4,9 @@ extends PinballBoard
 
 
 func _board_ready() -> void:
-	launcher_plot.load_ball(new_ball())
+	_board_load_ball_in_launcher(new_ball())
 
 
-func _board_ball_lost(ball: Ball):
+func _board_load_ball_in_launcher(ball: Ball):
 	await launcher_plot.reset_position()
 	launcher_plot.load_ball(ball)
