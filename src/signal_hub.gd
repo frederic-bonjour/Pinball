@@ -1,52 +1,36 @@
 extends Node
 
+#region Hits
+@warning_ignore("unused_signal")
 signal bumper_hit(bumper: Bumper, ball: Ball)
+@warning_ignore("unused_signal")
 signal brick_hit(brick: Brick, ball: Ball, destroyed: bool)
+@warning_ignore("unused_signal")
 signal slingshot_hit(slingshot: Slingshot, ball: Ball)
-
+@warning_ignore("unused_signal")
 signal wall_hit(wall: Node2D, ball: Ball)
+@warning_ignore("unused_signal")
 signal flipper_hit(flipper: Flipper, ball: Ball)
-signal ball_lost(ball: Ball)
+#endregion
 
 #region Kickbacks
+@warning_ignore("unused_signal")
 signal kickback_loading(kickback: KickBack, value: float)
+@warning_ignore("unused_signal")
 signal kickback_ejection(kickback: KickBack, ball: PhysicsBody2D, force: int)
+@warning_ignore("unused_signal")
 signal kickback_ball_entered(kickback: KickBack, ball: PhysicsBody2D)
 #endregion
 
 #region Letter groups
+@warning_ignore("unused_signal")
 signal letter_group_letter_lit(group_node: LetterIndicatorGroup, letter: IndicatorLetter)
-signal letter_group_completed(group_node: LetterIndicatorGroup)
+@warning_ignore("unused_signal")
+signal letter_group_completed(group_node: LetterIndicatorGroup, ball: Ball)
 #endregion
 
-
+@warning_ignore("unused_signal")
 signal brick_group_cleared(group: BrickGroup)
 
-
-func _ready() -> void:
-	# This is to avoid GDScript warnings.
-	bumper_hit.connect(_noop2)
-	brick_hit.connect(_noop3)
-	slingshot_hit.connect(_noop2)
-	wall_hit.connect(_noop2)
-	flipper_hit.connect(_noop2)
-	ball_lost.connect(_noop1)
-
-	kickback_ejection.connect(_noop3)
-	kickback_loading.connect(_noop2)
-	kickback_ball_entered.connect(_noop2)
-
-	letter_group_completed.connect(_noop1)
-	letter_group_letter_lit.connect(_noop2)
-
-	brick_group_cleared.connect(_noop1)
-
-
-func _noop1(_arg1) -> void:
-	pass
-
-func _noop2(_arg1, _arg2) -> void:
-	pass
-
-func _noop3(_arg1, _arg2, _arg3) -> void:
-	pass
+@warning_ignore("unused_signal")
+signal ball_lost(ball: Ball)
