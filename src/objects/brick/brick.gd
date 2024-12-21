@@ -1,5 +1,4 @@
 @tool
-@icon("res://icons/cube.svg")
 class_name Brick
 extends RigidBody2D
 

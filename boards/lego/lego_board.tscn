@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bnyoenxxtoopi"]
+[gd_scene load_steps=18 format=3 uid="uid://bnyoenxxtoopi"]
 
 [ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_3rspk"]
 [ext_resource type="Texture2D" uid="uid://d1rrc08vhvxuy" path="res://boards/lego/assets/bg2.jpg" id="2_gga8n"]
@@ -12,6 +12,11 @@
 [ext_resource type="Resource" uid="uid://t1nposk7d4nw" path="res://boards/lego/brick_2x1_front.tres" id="6_vypvm"]
 [ext_resource type="Texture2D" uid="uid://bfldpgcvh2p0b" path="res://boards/lego/assets/bricks_2x2.png" id="8_8emy7"]
 [ext_resource type="Texture2D" uid="uid://dkcso2m2j1uve" path="res://boards/lego/assets/bricks.png" id="8_48qgb"]
+[ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="12_71xan"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_msht6"]
+friction = 0.2
+bounce = 1.0
 
 [sub_resource type="Resource" id="Resource_b5fde"]
 script = ExtResource("6_8tjcf")
@@ -29,9 +34,11 @@ vframes = 1
 frame = 0
 collision_shape = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhatm"]
+size = Vector2(60, 80)
+
 [node name="Lego Board" instance=ExtResource("1_3rspk")]
 script = ExtResource("2_whd6h")
-shadow_offset = Vector2(0, -10)
 
 [node name="Background" parent="." index="4"]
 modulate = Color(0.435192, 0.435192, 0.435192, 1)
@@ -41,7 +48,8 @@ texture = ExtResource("2_gga8n")
 position = Vector2(1810, -1530)
 
 [node name="Brick" parent="Bricks" index="0" instance=ExtResource("3_6ex4n")]
-position = Vector2(0, -10)
+position = Vector2(-110, 110)
+physics_material_override = SubResource("PhysicsMaterial_msht6")
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick6" parent="Bricks" index="1" instance=ExtResource("3_6ex4n")]
@@ -61,12 +69,14 @@ properties_alt = ExtResource("6_vypvm")
 
 [node name="Brick2" parent="Bricks" index="4" instance=ExtResource("3_6ex4n")]
 modulate = Color(0.8, 0.8, 0.8, 1)
-position = Vector2(120, -10)
+position = Vector2(10, 110)
+physics_material_override = SubResource("PhysicsMaterial_msht6")
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick3" parent="Bricks" index="5" instance=ExtResource("3_6ex4n")]
 modulate = Color(0.8, 0.8, 0.8, 1)
-position = Vector2(240, -10)
+position = Vector2(130, 110)
+physics_material_override = SubResource("PhysicsMaterial_msht6")
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick4" parent="Bricks" index="6" instance=ExtResource("3_6ex4n")]
@@ -79,8 +89,43 @@ modulate = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(360, -45)
 properties_alt = SubResource("Resource_76cky")
 
-[node name="Left Flippers" parent="." index="11" instance=ExtResource("5_ksovm")]
-position = Vector2(940, -60)
+[node name="Flippers Left" parent="." index="11" instance=ExtResource("5_ksovm")]
+position = Vector2(960, -60)
 
-[node name="LauncherPlot" parent="." index="12" instance=ExtResource("6_2oxf0")]
+[node name="BallPathDriftLeft" type="Area2D" parent="Flippers Left" index="6"]
+position = Vector2(590, -420)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(-3, 0)
+gravity_direction = Vector2(-3, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippers Left/BallPathDriftLeft" index="0"]
+shape = SubResource("RectangleShape2D_rhatm")
+
+[node name="KickBack" parent="Flippers Left" index="7" instance=ExtResource("12_71xan")]
+position = Vector2(590, -290)
+strength = 350000.0
+
+[node name="Flippers Right" parent="." index="12" instance=ExtResource("5_ksovm")]
+position = Vector2(2880, -60)
+
+[node name="BallPathDriftRight" type="Area2D" parent="Flippers Right" index="0"]
+position = Vector2(-590, -420)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(3, 0)
+gravity_direction = Vector2(3, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippers Right/BallPathDriftRight" index="0"]
+shape = SubResource("RectangleShape2D_rhatm")
+
+[node name="KickBack" parent="Flippers Right" index="7" instance=ExtResource("12_71xan")]
+position = Vector2(-590, -290)
+strength = 350000.0
+
+[node name="LauncherPlot" parent="." index="13" instance=ExtResource("6_2oxf0")]
 background_color = Color(0, 0, 0, 0.648)

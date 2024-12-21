@@ -142,13 +142,13 @@ offset_bottom = 40.0
 [node name="ScoreLabel" type="Label" parent="HUD"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 1640.0
+offset_left = 1650.0
 offset_top = -2140.0
 offset_right = 2190.0
-offset_bottom = -2054.0
+offset_bottom = -2049.0
 theme_type_variation = &"ScoreLabel"
 text = "202 548 900"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="body_entered" from="LoseBallArea" to="." method="_on_lose_ball_area_body_entered"]

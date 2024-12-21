@@ -5,7 +5,7 @@ extends Control
 @onready var border_line: Line2D = %BorderLine
 
 @export var sfxfb: SfxDb
-@export var shadow_offset: Vector2 = BodySpriteShadow.DEFAULT_OFFSET
+
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
 const BallScene = preload("res://src/objects/ball/ball.tscn")
@@ -40,7 +40,6 @@ func _ready():
 	SessionManager.connect(&"ball_saver_changed", _on_ball_saver_changed)
 
 	_apply_theme()
-	_apply_shadows()
 	_update_score(SessionManager.score)
 	_activate_kickbacks()
 	_board_ready()
@@ -48,22 +47,28 @@ func _ready():
 
 func _apply_theme() -> void:
 	var t := get_tree()
-	t.set_group(&"slingshots", "modulate", get_theme_color(&"color", &"Slingshot"))
-	t.set_group(&"bumpers", "modulate", get_theme_color(&"color", &"Bumper"))
-	t.set_group(&"flippers", "modulate", get_theme_color(&"color", &"Flipper"))
-	t.set_group(&"balls", "modulate", get_theme_color(&"default_color", &"Ball"))
+	var objects := {
+		&"Brick": &"bricks",
+		&"Ball": &"balls",
+		&"Slingshot": &"slingshots",
+		&"Flipper": &"flippers",
+		&"Bumper": &"bumpers",
+	}
+	for theme_name in objects:
+		if has_theme_color(&"color", theme_name):
+			t.set_group(objects[theme_name], "modulate", get_theme_color(&"color", theme_name))
+		var offset_x: int = get_theme_constant(&"shadow_offset_x", theme_name)
+		var offset_y: int = get_theme_constant(&"shadow_offset_y", theme_name)
+		var offset := Vector2(offset_x, offset_y)
+		if offset.length() > 0:
+			for b in get_tree().get_nodes_in_group(objects[theme_name]):
+				BodySpriteShadow.add_to_body(b, offset)
 
 	for wall in get_tree().get_nodes_in_group(&"walls"):
 		var a = wall.modulate.a
 		wall.modulate = get_theme_color(&"color", &"SwitchWall" if wall.is_in_group(&"has_rotate_on_flip") else &"Wall")
 		wall.modulate.a = a
 	border_line.default_color = get_theme_color(&"color", &"Wall")
-
-
-func _apply_shadows() -> void:
-	if shadow_offset.length() > 0:
-		for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
-			BodySpriteShadow.add_to_body(b, shadow_offset)
 
 
 func new_ball() -> Ball:
