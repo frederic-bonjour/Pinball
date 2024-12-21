@@ -21,7 +21,7 @@
 [ext_resource type="Script" path="res://src/objects/brick/brick_group.gd" id="16_wrpk5"]
 
 [sub_resource type="Gradient" id="Gradient_svkh7"]
-colors = PackedColorArray(0.10672, 0.0759, 0.23, 1, 0.328167, 0.2475, 0.55, 1)
+colors = PackedColorArray(0.0910386, 0.0851662, 0.225444, 1, 0.261255, 0.27833, 0.548356, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2nrbc"]
 resource_local_to_scene = true
