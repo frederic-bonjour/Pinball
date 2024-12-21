@@ -6,7 +6,4 @@
 script = ExtResource("1_086pq")
 shape = 0
 scale = Vector2(1, 1)
-alt_texture_hframes = 0
-alt_texture_vframes = 0
-alt_collision_shape = 0
 hits = 1

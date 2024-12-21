@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnyoenxxtoopi"]
+
+[ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_3rspk"]
+[ext_resource type="Texture2D" uid="uid://d1rrc08vhvxuy" path="res://boards/lego/assets/bg2.jpg" id="2_gga8n"]
+[ext_resource type="Script" path="res://boards/lego/lego_board.gd" id="2_whd6h"]
+[ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="3_6ex4n"]
+[ext_resource type="PackedScene" uid="uid://cpr3fjreo8q7j" path="res://src/objects/board/flippers_slingshots.tscn" id="5_ksovm"]
+[ext_resource type="PackedScene" uid="uid://cqgpu3bpdlpwk" path="res://src/objects/board/launcher_plot.tscn" id="6_2oxf0"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties_alt.gd" id="6_8tjcf"]
+[ext_resource type="Texture2D" uid="uid://bgboy7c27fv6y" path="res://boards/lego/assets/bricks_rect.png" id="7_sopk8"]
+
+[sub_resource type="Resource" id="Resource_b5fde"]
+script = ExtResource("6_8tjcf")
+texture = ExtResource("7_sopk8")
+hframes = 1
+vframes = 3
+frame = 1
+collision_shape = 0
+
+[node name="Lego Board" instance=ExtResource("1_3rspk")]
+script = ExtResource("2_whd6h")
+
+[node name="Background" parent="." index="4"]
+modulate = Color(0.435192, 0.435192, 0.435192, 1)
+texture = ExtResource("2_gga8n")
+
+[node name="Bricks" type="Node2D" parent="." index="10"]
+position = Vector2(1810, -1330)
+
+[node name="Brick" parent="Bricks" index="0" instance=ExtResource("3_6ex4n")]
+properties_alt = SubResource("Resource_b5fde")
+
+[node name="Brick2" parent="Bricks" index="1" instance=ExtResource("3_6ex4n")]
+position = Vector2(120, 0)
+properties_alt = SubResource("Resource_b5fde")
+
+[node name="Brick3" parent="Bricks" index="2" instance=ExtResource("3_6ex4n")]
+position = Vector2(240, 0)
+properties_alt = SubResource("Resource_b5fde")
+
+[node name="Brick4" parent="Bricks" index="3" instance=ExtResource("3_6ex4n")]
+position = Vector2(120, -50)
+properties_alt = SubResource("Resource_b5fde")
+
+[node name="Left Flippers" parent="." index="11" instance=ExtResource("5_ksovm")]
+position = Vector2(940, -60)
+
+[node name="LauncherPlot" parent="." index="12" instance=ExtResource("6_2oxf0")]
+background_color = Color(0, 0, 0, 0.648)

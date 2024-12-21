@@ -7,6 +7,19 @@ extends RigidBody2D
 signal touched(brick: Brick)
 
 @export var properties: BrickProperties
+@export var properties_alt: BrickPropertiesAlt:
+	set(v):
+		if v and not properties_alt:
+			v.connect(&"property_changed", _on_alt_property_changed)
+			if is_node_ready():
+				_use_alt_texture()
+		properties_alt = v
+		if is_node_ready():
+			if v:
+				_use_alt_texture()
+			else:
+				_use_default_texture()
+
 
 const BASE_TEXTURE: Texture2D = preload("res://assets/brick/bricks.png")
 const BASE_TEXTURE_HFRAMES: int = 4
@@ -34,9 +47,22 @@ func _ready() -> void:
 		properties = load("res://src/objects/brick/default_brick_properties.tres")
 	properties.connect(&"property_changed", _on_property_changed)
 	_remaining_hit_count = properties.hits
-	if not _update_alt_texture():
-		_update_shape()
+	
+	if properties_alt:
+		properties_alt.connect(&"property_changed", _on_alt_property_changed)
+		_use_alt_texture()
+	else:
+		_use_default_texture()
 
+
+func _on_alt_property_changed(prop_name: StringName) -> void:
+	match prop_name:
+		&"texture", \
+		&"texture_hframes", \
+		&"texture_vframes", \
+		&"frame", \
+		&"collision_shape":
+			_use_alt_texture()
 
 func _on_property_changed(prop_name: StringName) -> void:
 	match prop_name:
@@ -44,35 +70,30 @@ func _on_property_changed(prop_name: StringName) -> void:
 			sprite.scale = properties.scale
 		&"shape":
 			_update_shape()
-		&"alt_texture", \
-		&"alt_texture_hframes", \
-		&"alt_texture_vframes", \
-		&"alt_collision_shape":
-			_update_alt_texture()
 
 
-func _update_alt_texture() -> bool:
-	if is_node_ready():
-		if properties.alt_texture:
-			sprite.texture = properties.alt_texture
-			sprite.hframes = properties.alt_texture_hframes if properties.alt_texture_hframes else BASE_TEXTURE_HFRAMES
-			sprite.vframes = properties.alt_texture_vframes if properties.alt_texture_vframes else BASE_TEXTURE_VFRAMES
-			match properties.alt_collision_shape:
-				0: _use_square_shape()
-				1: _use_triangle_shape()
-				2: _use_circle_shape()
-			return true
-		else:
-			sprite.texture = BASE_TEXTURE
-			cs_square.shape.size = BASE_SHAPE_SIZE
-			sprite.hframes = BASE_TEXTURE_HFRAMES
-			sprite.vframes = BASE_TEXTURE_VFRAMES
-	return false
+func _use_alt_texture() -> void:
+	sprite.texture = properties_alt.texture
+	sprite.hframes = properties_alt.hframes
+	sprite.vframes = properties_alt.vframes
+	sprite.frame = properties_alt.frame
+	match properties_alt.collision_shape:
+		0: _use_square_shape()
+		1: _use_triangle_shape()
+		2: _use_circle_shape()
+	
+
+func _use_default_texture() -> void:
+	sprite.texture = BASE_TEXTURE
+	cs_square.shape.size = BASE_SHAPE_SIZE
+	sprite.hframes = BASE_TEXTURE_HFRAMES
+	sprite.vframes = BASE_TEXTURE_VFRAMES
+	sprite.frame = properties.shape
+	_update_shape()
 
 
 func _update_shape():
 	if is_node_ready():
-		sprite.frame = properties.shape
 		sprite.scale = properties.scale
 		match properties.shape:
 			8, 9: _use_triangle_shape()

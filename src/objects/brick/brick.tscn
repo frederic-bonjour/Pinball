@@ -30,7 +30,6 @@ show_behind_parent = true
 texture = ExtResource("1_u4g8l")
 hframes = 4
 vframes = 3
-frame = 6
 
 [node name="CS_Square" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4pobi")

@@ -2,7 +2,6 @@ class_name PinballBoard
 extends Control
 
 @onready var camera: Camera2D = %Camera
-@onready var effects: Control = %Effects
 @onready var border_line: Line2D = %BorderLine
 
 @export var sfxfb: SfxDb
@@ -192,7 +191,7 @@ func add_score(value: int, node: Node, large: bool = false) -> VanishingTooltip:
 	var t = VanishingTooltip.make_int(value, p)
 	if large:
 		t.theme_type_variation = &"VanishingTooltipLarge"
-	effects.add_child(t)
+	add_child(t)
 	return t
 
 
