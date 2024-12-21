@@ -24,8 +24,8 @@ extends Node2D
 
 
 var is_complete: bool:
-	get:
-		return started and activated and backup_done
+	get: return started and activated and backup_done
+
 
 func _ready():
 	screen_contents.text = ""
