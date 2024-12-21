@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BrickPropertiesAlt" load_steps=3 format=3 uid="uid://ds1olls83dj3b"]
+
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties_alt.gd" id="1_twuv7"]
+[ext_resource type="Texture2D" uid="uid://dkcso2m2j1uve" path="res://boards/lego/assets/bricks.png" id="2_casym"]
+
+[resource]
+script = ExtResource("1_twuv7")
+texture = ExtResource("2_casym")
+hframes = 1
+vframes = 3
+frame = 2
+collision_shape = 0

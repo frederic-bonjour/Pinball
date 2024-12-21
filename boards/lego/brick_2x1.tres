@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="BrickProperties" load_steps=2 format=3 uid="uid://birbcdxkpublm"]
+[gd_resource type="Resource" script_class="BrickPropertiesAlt" load_steps=3 format=3 uid="uid://birbcdxkpublm"]
 
-[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="2_01735"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties_alt.gd" id="1_qxocg"]
+[ext_resource type="Texture2D" uid="uid://dkcso2m2j1uve" path="res://boards/lego/assets/bricks.png" id="2_xd0eg"]
 
 [resource]
-script = ExtResource("2_01735")
-shape = 0
-scale = Vector2(1, 1)
-hits = 1
+script = ExtResource("1_qxocg")
+texture = ExtResource("2_xd0eg")
+hframes = 1
+vframes = 3
+frame = 0
+collision_shape = 0

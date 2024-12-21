@@ -6,16 +6,27 @@ extends RigidBody2D
 @warning_ignore("unused_signal")
 signal touched(brick: Brick)
 
-@export var properties: BrickProperties
+@export var properties: BrickProperties:
+	set(v):
+		if v != properties:
+			if properties:
+				properties.disconnect(&"property_changed", _on_property_changed)
+			properties = v
+			if properties:
+				properties.connect(&"property_changed", _on_property_changed)
+			_update_shape()
+
 @export var properties_alt: BrickPropertiesAlt:
 	set(v):
-		if v and not properties_alt:
-			v.connect(&"property_changed", _on_alt_property_changed)
-			if is_node_ready():
-				_use_alt_texture()
-		properties_alt = v
+		if v != properties_alt:
+			if properties_alt:
+				properties_alt.disconnect(&"property_changed", _on_alt_property_changed)
+			properties_alt = v
+			if properties_alt:
+				properties_alt.connect(&"property_changed", _on_alt_property_changed)
+
 		if is_node_ready():
-			if v:
+			if properties_alt:
 				_use_alt_texture()
 			else:
 				_use_default_texture()
@@ -45,14 +56,10 @@ func _ready() -> void:
 	add_to_group(&"bodies_with_shadow")
 	if not properties:
 		properties = load("res://src/objects/brick/default_brick_properties.tres")
-	properties.connect(&"property_changed", _on_property_changed)
-	_remaining_hit_count = properties.hits
-	
-	if properties_alt:
-		properties_alt.connect(&"property_changed", _on_alt_property_changed)
-		_use_alt_texture()
 	else:
-		_use_default_texture()
+		properties = properties
+	_remaining_hit_count = properties.hits
+	properties_alt = properties_alt
 
 
 func _on_alt_property_changed(prop_name: StringName) -> void:
@@ -95,6 +102,7 @@ func _use_default_texture() -> void:
 func _update_shape():
 	if is_node_ready():
 		sprite.scale = properties.scale
+		sprite.frame = properties.shape
 		match properties.shape:
 			8, 9: _use_triangle_shape()
 			10, 11: _use_circle_shape()
