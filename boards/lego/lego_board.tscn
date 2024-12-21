@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnyoenxxtoopi"]
+[gd_scene load_steps=15 format=3 uid="uid://bnyoenxxtoopi"]
 
 [ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_3rspk"]
 [ext_resource type="Texture2D" uid="uid://d1rrc08vhvxuy" path="res://boards/lego/assets/bg2.jpg" id="2_gga8n"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cusqg50x0lop2" path="res://boards/lego/brick_2x1_circle.tres" id="5_tjtmp"]
 [ext_resource type="PackedScene" uid="uid://cqgpu3bpdlpwk" path="res://src/objects/board/launcher_plot.tscn" id="6_2oxf0"]
 [ext_resource type="Script" path="res://src/objects/brick/brick_properties_alt.gd" id="6_8tjcf"]
+[ext_resource type="Resource" uid="uid://t1nposk7d4nw" path="res://boards/lego/brick_2x1_front.tres" id="6_vypvm"]
 [ext_resource type="Texture2D" uid="uid://bfldpgcvh2p0b" path="res://boards/lego/assets/bricks_2x2.png" id="8_8emy7"]
 [ext_resource type="Texture2D" uid="uid://dkcso2m2j1uve" path="res://boards/lego/assets/bricks.png" id="8_48qgb"]
 
@@ -30,6 +31,7 @@ collision_shape = 0
 
 [node name="Lego Board" instance=ExtResource("1_3rspk")]
 script = ExtResource("2_whd6h")
+shadow_offset = Vector2(0, -10)
 
 [node name="Background" parent="." index="4"]
 modulate = Color(0.435192, 0.435192, 0.435192, 1)
@@ -42,19 +44,38 @@ position = Vector2(1810, -1530)
 position = Vector2(0, -10)
 properties_alt = ExtResource("4_dgpl5")
 
-[node name="Brick2" parent="Bricks" index="1" instance=ExtResource("3_6ex4n")]
+[node name="Brick6" parent="Bricks" index="1" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.8, 0.8, 0, 1)
+position = Vector2(-310, 0)
+properties_alt = ExtResource("6_vypvm")
+
+[node name="Brick7" parent="Bricks" index="2" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.8, 0, 0, 1)
+position = Vector2(-310, 60)
+properties_alt = ExtResource("6_vypvm")
+
+[node name="Brick8" parent="Bricks" index="3" instance=ExtResource("3_6ex4n")]
+modulate = Color(0, 0.8, 0, 1)
+position = Vector2(-310, 120)
+properties_alt = ExtResource("6_vypvm")
+
+[node name="Brick2" parent="Bricks" index="4" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(120, -10)
 properties_alt = ExtResource("5_tjtmp")
 
-[node name="Brick3" parent="Bricks" index="2" instance=ExtResource("3_6ex4n")]
+[node name="Brick3" parent="Bricks" index="5" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(240, -10)
 properties_alt = ExtResource("5_tjtmp")
 
-[node name="Brick4" parent="Bricks" index="3" instance=ExtResource("3_6ex4n")]
+[node name="Brick4" parent="Bricks" index="6" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.8, 0.8, 0.8, 1)
 position = Vector2(120, -80)
 properties_alt = SubResource("Resource_b5fde")
 
-[node name="Brick5" parent="Bricks" index="4" instance=ExtResource("3_6ex4n")]
+[node name="Brick5" parent="Bricks" index="7" instance=ExtResource("3_6ex4n")]
+modulate = Color(0.2, 0.2, 0.2, 1)
 position = Vector2(360, -45)
 properties_alt = SubResource("Resource_76cky")
 
