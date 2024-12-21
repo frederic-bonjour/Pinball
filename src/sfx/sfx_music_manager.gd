@@ -46,14 +46,7 @@ func remove_db(db_id: StringName) -> void:
 	var db = _databases[db_id]
 	for e in db.entries:
 		if _compiled.has(e.key):
-			print_debug("Removing existing Entries for %s/%s" % [db_id, e.key])
-			for j in range(_compiled[e.key].size() - 1, -1, -1):
-				var entry: CompiledEntry = _compiled[e.key][j]
-				if entry.db_id == db_id:
-					prints("--- removing entry at", j)
-					_compiled[e.key].remove_at(j)
-			if _compiled[e.key].is_empty():
-				_compiled.erase(e.key)
+			_compiled.erase(e.key)
 	_databases.erase(db_id)
 
 
