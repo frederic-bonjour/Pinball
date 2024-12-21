@@ -19,8 +19,10 @@ var boards: Array[StringName]:
 
 func nav_to_board(board_name: StringName, play_fade_out: bool = true) -> void:
 	if play_fade_out:
+		get_tree().paused = true
 		await fade_out()
 	_load_scene("res://boards/%s/%s_board.tscn" % [board_name, board_name])
+	get_tree().paused = false
 	_current_board_name = board_name
 
 
