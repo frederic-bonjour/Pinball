@@ -85,7 +85,11 @@ func _on_body_entered(body: Node) -> void:
 		SignalHub.brick_hit.emit(body, self, destroyed)
 		if destroyed:
 			body.queue_free()
-	elif body as ModularWall or body.name.containsn(&"wall"):
+	elif body is Wall:
+		body.ball_hit.emit()
+		touched_wall.emit(body)
+		SignalHub.wall_hit.emit(body, self)
+	elif body.name.containsn(&"wall"):
 		touched_wall.emit(body)
 		SignalHub.wall_hit.emit(body, self)
 	elif body is Flipper:

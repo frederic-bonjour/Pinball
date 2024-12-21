@@ -22,3 +22,13 @@ func _board_on_letter_group_completed(_group: LetterIndicatorGroup, _ball: Ball)
 
 func _is_board_complete():
 	return all_brick_groups_cleared
+
+
+func _on_accelerator_body_entered(body):
+	%BottomCenterBlocker.ball_can_pass_through = false
+	%BottomCenterBlocker.visible = true
+
+
+func _on_ball_teleporter_body_entered(body):
+	%BottomCenterBlocker.ball_can_pass_through = true
+	%BottomCenterBlocker.visible = false

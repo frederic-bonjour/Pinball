@@ -2,6 +2,9 @@
 class_name Wall
 extends AntialiasedLine2D
 
+signal ball_hit
+
+
 const physics_material = preload("res://src/materials/walls.tres")
 
 
