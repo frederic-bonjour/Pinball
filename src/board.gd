@@ -5,7 +5,7 @@ extends Control
 @onready var border_line: Line2D = %BorderLine
 
 @export var sfxfb: SfxDb
-
+@export var shadow_offset: Vector2 = BodySpriteShadow.DEFAULT_OFFSET
 const BallBounceScene = preload("res://src/fx/ball_bounce_particles.tscn")
 const BrickExplosionScene = preload("res://src/fx/brick_explosion.tscn")
 const BallScene = preload("res://src/objects/ball/ball.tscn")
@@ -61,8 +61,9 @@ func _apply_theme() -> void:
 
 
 func _apply_shadows() -> void:
-	for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
-		BodySpriteShadow.add_to_body(b)
+	if shadow_offset.length() > 0:
+		for b in get_tree().get_nodes_in_group(&"bodies_with_shadow"):
+			BodySpriteShadow.add_to_body(b, shadow_offset)
 
 
 func new_ball() -> Ball:
@@ -225,6 +226,7 @@ func _on_letter_group_completed_common(group: LetterIndicatorGroup, ball: Ball):
 		&"LOAD": _board_load_ball_in_launcher(ball)
 		&"SAVE": SessionManager.ball_save_active = true
 	_board_on_letter_group_completed(group, ball)
+	_check_board_complete()
 
 
 func _activate_explosive_balls() -> void:

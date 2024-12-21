@@ -1,18 +1,21 @@
 class_name BodySpriteShadow
 extends Sprite2D
 
+const DEFAULT_OFFSET := Vector2(0, 15)
+
 @export var parent_sprite: Sprite2D
-@export var shadow_offset: Vector2 = Vector2(0, 15)
+@export var shadow_offset: Vector2 = DEFAULT_OFFSET
 @export var shadow_color: Color = Color(0, 0, 0, 0.4)
 var _parent_body: Node2D
 
 
 func _ready() -> void:
 	z_as_relative = false
-	z_index = -10
 	top_level = true
 	_parent_body = get_parent()
 	if parent_sprite:
+		parent_sprite.z_index = 1
+		z_index = 0
 		texture = parent_sprite.texture
 		hframes = parent_sprite.hframes
 		vframes = parent_sprite.vframes
@@ -32,8 +35,9 @@ func _process(_delta: float) -> void:
 	frame = parent_sprite.frame
 
 
-static func add_to_body(body: Node2D) -> BodySpriteShadow:
+static func add_to_body(body: Node2D, shadow_offset: Vector2 = DEFAULT_OFFSET) -> BodySpriteShadow:
 	var s := BodySpriteShadow.new()
+	s.shadow_offset = shadow_offset
 	s.parent_sprite = body.get_node_or_null("Sprite")
 	if not s.parent_sprite:
 		s.parent_sprite = body.get_node_or_null("Sprite2D")
