@@ -669,7 +669,6 @@ background_color = Color(0, 0, 0, 0.5)
 [node name="Computer" parent="LauncherPlot" index="4" instance=ExtResource("24_ftnk7")]
 unique_name_in_owner = true
 position = Vector2(0, -420)
-backup_done = false
 
 [node name="LetterGroup_ACTIVATE" type="Control" parent="." index="32"]
 anchors_preset = 0
