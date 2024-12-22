@@ -30,6 +30,17 @@ signal touched(brick: Brick)
 			else:
 				_use_default_texture()
 
+@export var ghost: bool:
+	set(v):
+		ghost = v
+		modulate = Color8(100, 100, 100, 60) if ghost else unghost_modulate
+		collision_layer = 0 if ghost else 16
+
+@export var unghost_modulate: Color:
+	set(v):
+		unghost_modulate = v
+		modulate = Color8(100, 100, 100, 60) if ghost else unghost_modulate
+
 
 const BASE_TEXTURE: Texture2D = preload("res://assets/brick/bricks.png")
 const BASE_TEXTURE_HFRAMES: int = 4
@@ -154,14 +165,8 @@ func destroy(by: Ball) -> void:
 	SignalHub.brick_hit.emit(self, by, true)
 	queue_free()
 
-"""
+
 func _on_body_entered(body: Node) -> void:
-	if body is Ball:
-		_remaining_hit_count -= 1
-		touched.emit(self)
-		if _remaining_hit_count == 0:
-			SignalHub.brick_hit.emit(self, body, true)
-			queue_free()
-		else:
-			SignalHub.brick_hit.emit(self, body, false)
-"""
+	if ghost and body is Ball:
+		print_debug("ball hit ghost brick")
+		ghost = false

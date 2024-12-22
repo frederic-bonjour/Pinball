@@ -2,6 +2,7 @@
 class_name Wall
 extends AntialiasedLine2D
 
+@warning_ignore("unused_signal")
 signal ball_hit
 
 

@@ -1,6 +1,6 @@
 extends PinballBoard
 
-@onready var launcher: LauncherPlot = $LauncherPlot
+@onready var launcher: BoardObjectLegoLauncher = %LegoLauncher
 
 
 func _board_ready():
@@ -8,7 +8,6 @@ func _board_ready():
 
 
 func _board_load_ball_in_launcher(ball: Ball):
-	await launcher.reset_position()
 	launcher.load_ball(ball)
 
 
@@ -24,11 +23,11 @@ func _is_board_complete():
 	return all_brick_groups_cleared
 
 
-func _on_accelerator_body_entered(body):
+func _on_accelerator_body_entered(_body):
 	%BottomCenterBlocker.ball_can_pass_through = false
 	%BottomCenterBlocker.visible = true
 
 
-func _on_ball_teleporter_body_entered(body):
+func _on_ball_teleporter_body_entered(_body):
 	%BottomCenterBlocker.ball_can_pass_through = true
 	%BottomCenterBlocker.visible = false

@@ -38,6 +38,9 @@ signal loading(value: float)
 			$Blocker.visible = not disable_blocker_body
 			$Blocker/CollisionShape2D.set_deferred(&"disabled", inactive or disable_blocker_body)
 
+var is_loaded: bool:
+	get: return _loaded_body != null
+
 
 @onready var top_line = %TopLine
 
