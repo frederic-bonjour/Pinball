@@ -258,145 +258,118 @@ script = ExtResource("14_5s7xo")
 position = Vector2(1920, -1370)
 
 [node name="Brick32" parent="WallLauncherBricks" index="0" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 560)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick55" parent="WallLauncherBricks" index="1" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 490)
 collision_layer = 0
 collision_mask = 0
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick56" parent="WallLauncherBricks" index="2" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 420)
 collision_layer = 0
 collision_mask = 0
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick57" parent="WallLauncherBricks" index="3" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 350)
 collision_layer = 0
 collision_mask = 0
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick58" parent="WallLauncherBricks" index="4" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 280)
 collision_layer = 0
 collision_mask = 0
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick33" parent="WallLauncherBricks" index="5" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 630)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick34" parent="WallLauncherBricks" index="6" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 700)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick35" parent="WallLauncherBricks" index="7" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 770)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick36" parent="WallLauncherBricks" index="8" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 840)
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick52" parent="WallLauncherBricks" index="9" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-120, 840)
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick53" parent="WallLauncherBricks" index="10" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(0, 840)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick54" parent="WallLauncherBricks" index="11" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(120, 840)
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick37" parent="WallLauncherBricks" index="12" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 910)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick38" parent="WallLauncherBricks" index="13" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 980)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick39" parent="WallLauncherBricks" index="14" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 1050)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick40" parent="WallLauncherBricks" index="15" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 1120)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick41" parent="WallLauncherBricks" index="16" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 1190)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick42" parent="WallLauncherBricks" index="17" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 1260)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick43" parent="WallLauncherBricks" index="18" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(-240, 1330)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick44" parent="WallLauncherBricks" index="19" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 840)
 properties_alt = ExtResource("5_tjtmp")
 
 [node name="Brick45" parent="WallLauncherBricks" index="20" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 910)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick46" parent="WallLauncherBricks" index="21" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 980)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick47" parent="WallLauncherBricks" index="22" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 1050)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick48" parent="WallLauncherBricks" index="23" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 1120)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick49" parent="WallLauncherBricks" index="24" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 1190)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick50" parent="WallLauncherBricks" index="25" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 1260)
 properties_alt = ExtResource("4_dgpl5")
 
 [node name="Brick51" parent="WallLauncherBricks" index="26" instance=ExtResource("3_6ex4n")]
-modulate = Color(0.75, 0.75, 0.75, 1)
 position = Vector2(240, 1330)
 properties_alt = ExtResource("4_dgpl5")
 

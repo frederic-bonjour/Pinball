@@ -36,7 +36,7 @@ signal touched(brick: Brick)
 		modulate = Color8(100, 100, 100, 60) if ghost else unghost_modulate
 		collision_layer = 0 if ghost else 16
 
-@export var unghost_modulate: Color:
+@export var unghost_modulate: Color = Color.WHITE:
 	set(v):
 		unghost_modulate = v
 		modulate = Color8(100, 100, 100, 60) if ghost else unghost_modulate
