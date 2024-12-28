@@ -181,6 +181,9 @@ color = Color(1, 2, 1, 1)
 color_ramp = SubResource("Gradient_nwwa4")
 anim_offset_max = 1.0
 
+[node name="BorderLine" parent="Borders" index="3"]
+z_index = 1
+
 [node name="Wall" parent="Score Display" index="0"]
 ball_can_pass_through = true
 
