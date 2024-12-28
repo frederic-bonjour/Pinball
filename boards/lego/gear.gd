@@ -1,4 +1,4 @@
-class_name Cog
+class_name Gear
 extends Sprite2D
 
 @export var teeth_count: int
