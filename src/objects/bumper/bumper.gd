@@ -11,6 +11,7 @@ extends RigidBody2D
 
 @onready var collision_shape = %CollisionShape
 @onready var sprite: Sprite2D = $Sprite
+@onready var light = $Light
 
 const BUMPER_WAVE_SCENE = preload("res://src/objects/bumper/bumper_wave.tscn")
 
@@ -29,6 +30,14 @@ func _update_radius() -> void:
 		sprite.scale = Vector2(s, s)
 
 
+func _process(delta: float) -> void:
+	_light_progress = move_toward(_light_progress, 0.0, delta * 10.0)
+	light.energy = ease(_light_progress, 0.4) * 4
+	light.enabled = light.energy >= 0.1
+
+
+var _light_progress := 0.0
+
 func _on_body_entered(body):
 	if body is Ball:
 		# FIXME Enhance bounce
@@ -36,3 +45,5 @@ func _on_body_entered(body):
 		var wave = BUMPER_WAVE_SCENE.instantiate()
 		wave.scale = sprite.scale
 		add_child(wave)
+		_light_progress = 1.0
+		
