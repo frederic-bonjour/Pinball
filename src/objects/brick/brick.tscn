@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjqub7vse1qrt"]
+[gd_scene load_steps=6 format=3 uid="uid://cjqub7vse1qrt"]
 
 [ext_resource type="PhysicsMaterial" uid="uid://bpb580y2n4mcp" path="res://src/materials/brick.tres" id="1_8ga3t"]
 [ext_resource type="Script" path="res://src/objects/brick/brick.gd" id="1_a18mc"]
 [ext_resource type="Texture2D" uid="uid://bhi2bgxcuyg4o" path="res://assets/brick/bricks.png" id="1_u4g8l"]
-[ext_resource type="Resource" uid="uid://co8yaufxv43rp" path="res://src/objects/brick/unbreakable_brick_properties.tres" id="3_540r4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pobi"]
 resource_local_to_scene = true
@@ -23,7 +22,6 @@ freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_a18mc")
-properties = ExtResource("3_540r4")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 show_behind_parent = true
