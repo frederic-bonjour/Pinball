@@ -1,0 +1,762 @@
+[gd_scene load_steps=51 format=3 uid="uid://dii1qcpxjrftt"]
+
+[ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_i5vxl"]
+[ext_resource type="Texture2D" uid="uid://lb6gy0c6l86m" path="res://boards/mansion/assets/moon.png" id="2_chihr"]
+[ext_resource type="Theme" uid="uid://bv47cykegdumq" path="res://boards/mansion/mansion_theme.tres" id="2_pc73e"]
+[ext_resource type="Texture2D" uid="uid://bvq1nh0o3fbg2" path="res://boards/mansion/assets/mansion.png" id="2_qui2e"]
+[ext_resource type="Script" path="res://boards/mansion/mansion_board.gd" id="3_6lpdm"]
+[ext_resource type="AudioStream" uid="uid://cfoytxte7y1l5" path="res://boards/mansion/assets/music/Blue Screen Of Death - The Soundlings.mp3" id="3_qptot"]
+[ext_resource type="Texture2D" uid="uid://bt0daxc17tlac" path="res://boards/mansion/assets/tree1_trunk.png" id="3_xv6w6"]
+[ext_resource type="Texture2D" uid="uid://oeiyl0m715dd" path="res://boards/mansion/assets/moon_light.png" id="4_b2gji"]
+[ext_resource type="Texture2D" uid="uid://cyww66autl1sj" path="res://boards/mansion/assets/tree1_b1.png" id="4_fm5xj"]
+[ext_resource type="Texture2D" uid="uid://b73tu2o0fc151" path="res://boards/mansion/assets/tree1_b2.png" id="5_otidi"]
+[ext_resource type="Texture2D" uid="uid://ddwaa0q145luv" path="res://boards/mansion/assets/tree1_b3.png" id="6_lsloa"]
+[ext_resource type="Texture2D" uid="uid://bjndyu7w2v6vg" path="res://boards/mansion/assets/tree1_b4.png" id="7_dvytm"]
+[ext_resource type="PackedScene" uid="uid://cpr3fjreo8q7j" path="res://src/objects/board/flippers_slingshots.tscn" id="10_6lb2x"]
+[ext_resource type="PackedScene" uid="uid://du2feeoelork" path="res://src/objects/kickback/kickback.tscn" id="11_oo23w"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_group.gd" id="13_r6w4v"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties.gd" id="14_7koih"]
+[ext_resource type="PackedScene" uid="uid://cjqub7vse1qrt" path="res://src/objects/brick/brick.tscn" id="15_0tk4q"]
+[ext_resource type="Script" path="res://src/objects/brick/brick_properties_alt.gd" id="16_pmqb7"]
+[ext_resource type="Texture2D" uid="uid://ehmg3cvecxj1" path="res://boards/mansion/assets/bricks.png" id="17_m7j4w"]
+[ext_resource type="PackedScene" uid="uid://bnu631kutmn24" path="res://src/objects/launcher/launcher.tscn" id="20_bq7w8"]
+[ext_resource type="PackedScene" uid="uid://de2kcbjq5ukfq" path="res://src/objects/board/rounded_corner.tscn" id="21_33ceq"]
+[ext_resource type="Texture2D" uid="uid://cq34dbhwf5woj" path="res://boards/mansion/assets/window_mask.png" id="22_bhdtl"]
+[ext_resource type="Script" path="res://src/objects/indicators/letter_group.gd" id="23_4mmbq"]
+[ext_resource type="Texture2D" uid="uid://ch0o10lwqlpcs" path="res://boards/mansion/assets/cloud1.png" id="24_gbkfh"]
+
+[sub_resource type="Gradient" id="Gradient_1naq4"]
+colors = PackedColorArray(0.414066, 0.414066, 0.414066, 1, 0.0475577, 0.0475576, 0.0475576, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nt7ry"]
+gradient = SubResource("Gradient_1naq4")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_1bln3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Branch1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Branch2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Branch3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Branch4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_pcvhd"]
+resource_name = "rest"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Branch1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.566667, 0.933333, 1.16667),
+"transitions": PackedFloat32Array(1.86607, 0.707107, 0.707107, 1),
+"update": 0,
+"values": [0.0, -0.0261799, 0.00872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Branch2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 8),
+"transitions": PackedFloat32Array(0.535887, 1.6245, 1),
+"update": 0,
+"values": [0.0, 0.0349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Branch3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.53333, 4.83333, 8),
+"transitions": PackedFloat32Array(1, 0.615572, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -0.0349066, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Branch4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.16667, 5.86667, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0698132, 0.0261799, -4.16119e-09]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vga3q"]
+_data = {
+"RESET": SubResource("Animation_1bln3"),
+"rest": SubResource("Animation_pcvhd")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83seh"]
+size = Vector2(60, 80)
+
+[sub_resource type="Animation" id="Animation_4r8kc"]
+resource_name = "move"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.95, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.02, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ahew5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t4gp"]
+_data = {
+"RESET": SubResource("Animation_ahew5"),
+"move": SubResource("Animation_4r8kc")
+}
+
+[sub_resource type="Resource" id="Resource_1ct5i"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(5, 1)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_c4x3w"]
+script = ExtResource("16_pmqb7")
+texture = ExtResource("17_m7j4w")
+hframes = 2
+vframes = 2
+frame = 0
+collision_shape = 0
+
+[sub_resource type="Resource" id="Resource_cdiay"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 1)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_vf3oo"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 2)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_r2hst"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 7)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_0b7t0"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 9)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_bovjk"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(2, 3)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_snkcl"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(3, 3)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_sfcg0"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 2)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_b8mtj"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(1, 3)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_xnxqf"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(2, 3)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_t1mkm"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(5, 1)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_eyckf"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(7, 1)
+hits = 1
+
+[sub_resource type="Resource" id="Resource_q6p5y"]
+script = ExtResource("14_7koih")
+shape = 0
+scale = Vector2(9, 1)
+hits = 1
+
+[sub_resource type="Animation" id="Animation_vekhv"]
+resource_name = "lights"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.4, 0.5, 0.666667),
+"transitions": PackedFloat32Array(0.143587, 0.435275, 1, 1, 0.435275, 1),
+"update": 0,
+"values": [Color(0.121569, 0.121569, 0.121569, 1), Color(0.122, 0.122, 0.122, 0), Color(0.121569, 0.121569, 0.121569, 1), Color(0.121569, 0.121569, 0.121569, 1), Color(0.122, 0.122, 0.122, 0), Color(0.121569, 0.121569, 0.121569, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uuo6y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.121569, 0.121569, 0.121569, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jcb0s"]
+_data = {
+"RESET": SubResource("Animation_uuo6y"),
+"lights": SubResource("Animation_vekhv")
+}
+
+[node name="Mansion Board" instance=ExtResource("1_i5vxl")]
+theme = ExtResource("2_pc73e")
+script = ExtResource("3_6lpdm")
+
+[node name="AudioStreamPlayer" parent="." index="3"]
+stream = ExtResource("3_qptot")
+
+[node name="Background" parent="." index="4"]
+light_mask = 2
+texture = SubResource("GradientTexture2D_nt7ry")
+
+[node name="Borders" parent="." index="6"]
+z_index = 1
+
+[node name="Moon" type="Sprite2D" parent="." index="10"]
+modulate = Color(0.68101, 0.68101, 0.68101, 1)
+position = Vector2(1920, -560)
+texture = ExtResource("2_chihr")
+metadata/_edit_group_ = true
+
+[node name="PointLight2D" type="PointLight2D" parent="Moon" index="0"]
+range_item_cull_mask = 2
+texture = ExtResource("4_b2gji")
+texture_scale = 1.2
+
+[node name="Mansion" type="Sprite2D" parent="." index="11"]
+position = Vector2(1920, -1012)
+scale = Vector2(1.35, 1.2)
+texture = ExtResource("2_qui2e")
+
+[node name="Tree1" type="Node2D" parent="." index="12"]
+position = Vector2(672, -370)
+scale = Vector2(1.5, 1.5)
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tree1" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_vga3q")
+}
+autoplay = "rest"
+
+[node name="Tree1Trunk" type="Sprite2D" parent="Tree1" index="1"]
+position = Vector2(-11.5, -250.5)
+texture = ExtResource("3_xv6w6")
+
+[node name="Branch1" type="Node2D" parent="Tree1" index="2"]
+position = Vector2(-5.55556, -205.556)
+metadata/_edit_group_ = true
+
+[node name="Tree1B1" type="Sprite2D" parent="Tree1/Branch1" index="0"]
+position = Vector2(-105.556, -27.7777)
+texture = ExtResource("4_fm5xj")
+
+[node name="Branch2" type="Node2D" parent="Tree1" index="3"]
+position = Vector2(16.6667, -222.222)
+metadata/_edit_group_ = true
+
+[node name="Tree1B2" type="Sprite2D" parent="Tree1/Branch2" index="0"]
+position = Vector2(-133.333, -150)
+texture = ExtResource("5_otidi")
+
+[node name="Branch3" type="Node2D" parent="Tree1" index="4"]
+position = Vector2(44.4444, -294.444)
+metadata/_edit_group_ = true
+
+[node name="Tree1B3" type="Sprite2D" parent="Tree1/Branch3" index="0"]
+position = Vector2(72.2222, -116.667)
+texture = ExtResource("6_lsloa")
+
+[node name="Branch4" type="Node2D" parent="Tree1" index="5"]
+position = Vector2(81.1111, -260)
+metadata/_edit_group_ = true
+
+[node name="Tree1B4" type="Sprite2D" parent="Tree1/Branch4" index="0"]
+position = Vector2(77.7778, -50)
+texture = ExtResource("7_dvytm")
+
+[node name="Flippers Left" parent="." index="13" instance=ExtResource("10_6lb2x")]
+position = Vector2(630, -60)
+
+[node name="BallPathDriftLeft" type="Area2D" parent="Flippers Left" index="6"]
+position = Vector2(590, -420)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(-3, 0)
+gravity_direction = Vector2(-3, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippers Left/BallPathDriftLeft" index="0"]
+shape = SubResource("RectangleShape2D_83seh")
+
+[node name="KickBackLeft" parent="Flippers Left" index="7" instance=ExtResource("11_oo23w")]
+position = Vector2(-590, -280)
+strength = 450000.0
+
+[node name="KickBackRight" parent="Flippers Left" index="8" instance=ExtResource("11_oo23w")]
+position = Vector2(590, -290)
+strength = 350000.0
+
+[node name="Flippers Right" parent="." index="14" instance=ExtResource("10_6lb2x")]
+position = Vector2(3180, -60)
+
+[node name="BallPathDriftRight" type="Area2D" parent="Flippers Right" index="0"]
+position = Vector2(-590, -420)
+collision_layer = 0
+collision_mask = 2
+gravity_space_override = 1
+gravity_point_center = Vector2(3, 0)
+gravity_direction = Vector2(3, 0)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flippers Right/BallPathDriftRight" index="0"]
+shape = SubResource("RectangleShape2D_83seh")
+
+[node name="KickBack" parent="Flippers Right" index="7" instance=ExtResource("11_oo23w")]
+position = Vector2(-590, -290)
+strength = 350000.0
+
+[node name="Ghost" type="Node2D" parent="." index="15"]
+modulate = Color(1, 1, 1, 0.336844)
+position = Vector2(630, -2040)
+script = ExtResource("13_r6w4v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ghost" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_8t4gp")
+}
+autoplay = "move"
+
+[node name="Brick01" parent="Ghost" index="1" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+properties = SubResource("Resource_1ct5i")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick02" parent="Ghost" index="2" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(120, 40)
+properties = SubResource("Resource_cdiay")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick05" parent="Ghost" index="3" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-120, 40)
+properties = SubResource("Resource_cdiay")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick03" parent="Ghost" index="4" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(160, 100)
+properties = SubResource("Resource_vf3oo")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick06" parent="Ghost" index="5" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(200, 280)
+properties = SubResource("Resource_r2hst")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick07" parent="Ghost" index="6" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-200, 280)
+properties = SubResource("Resource_r2hst")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick10" parent="Ghost" index="7" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-80, 640)
+properties = SubResource("Resource_r2hst")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick13" parent="Ghost" index="8" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(80, 640)
+properties = SubResource("Resource_r2hst")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick08" parent="Ghost" index="9" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-240, 600)
+properties = SubResource("Resource_0b7t0")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick09" parent="Ghost" index="10" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(240, 600)
+properties = SubResource("Resource_0b7t0")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick04" parent="Ghost" index="11" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-160, 100)
+properties = SubResource("Resource_vf3oo")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick11" parent="Ghost" index="12" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(-60, 200)
+properties = SubResource("Resource_bovjk")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick12" parent="Ghost" index="13" instance=ExtResource("15_0tk4q")]
+modulate = Color(0.129412, 0.129412, 0.129412, 1)
+position = Vector2(60, 200)
+properties = SubResource("Resource_bovjk")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(0.129412, 0.129412, 0.129412, 1)
+
+[node name="Brick14" parent="Ghost" index="14" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(160, 480)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick15" parent="Ghost" index="15" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(160, 600)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick16" parent="Ghost" index="16" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(160, 720)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick17" parent="Ghost" index="17" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-160, 480)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick29" parent="Ghost" index="18" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-80, 460)
+properties = SubResource("Resource_sfcg0")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick34" parent="Ghost" index="19" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 200)
+properties = SubResource("Resource_b8mtj")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick30" parent="Ghost" index="20" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(80, 460)
+properties = SubResource("Resource_sfcg0")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick23" parent="Ghost" index="21" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-120, 360)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick31" parent="Ghost" index="22" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-140, 200)
+properties = SubResource("Resource_xnxqf")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick32" parent="Ghost" index="23" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(140, 200)
+properties = SubResource("Resource_xnxqf")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick24" parent="Ghost" index="24" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 360)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick26" parent="Ghost" index="25" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 40)
+properties = SubResource("Resource_t1mkm")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick27" parent="Ghost" index="26" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 80)
+properties = SubResource("Resource_eyckf")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick28" parent="Ghost" index="27" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 120)
+properties = SubResource("Resource_eyckf")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick33" parent="Ghost" index="28" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 280)
+properties = SubResource("Resource_q6p5y")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick25" parent="Ghost" index="29" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(120, 360)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick18" parent="Ghost" index="30" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-160, 600)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick20" parent="Ghost" index="31" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 720)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick21" parent="Ghost" index="32" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 600)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick22" parent="Ghost" index="33" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(0, 480)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Brick19" parent="Ghost" index="34" instance=ExtResource("15_0tk4q")]
+modulate = Color(2, 2, 2, 1)
+position = Vector2(-160, 720)
+properties = SubResource("Resource_snkcl")
+properties_alt = SubResource("Resource_c4x3w")
+unghost_modulate = Color(2, 2, 2, 1)
+
+[node name="Launcher" parent="." index="16" instance=ExtResource("20_bq7w8")]
+offset_left = 1580.0
+offset_top = -360.0
+offset_right = 1580.0
+offset_bottom = -360.0
+
+[node name="RoundedCorner3" parent="." index="17" groups=["walls"] instance=ExtResource("21_33ceq")]
+position = Vector2(10, -2150)
+rotation = -1.5708
+scale = Vector2(1.5, 1.5)
+
+[node name="Windows" type="Node2D" parent="." index="18"]
+
+[node name="Floor3" type="Node2D" parent="Windows" index="0"]
+modulate = Color(0.121569, 0.121569, 0.121569, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Windows/Floor3" index="0"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_jcb0s")
+}
+autoplay = "lights"
+
+[node name="WindowMask" type="Sprite2D" parent="Windows/Floor3" index="1"]
+position = Vector2(1495, -1179.25)
+scale = Vector2(1.57143, 1.20588)
+texture = ExtResource("22_bhdtl")
+
+[node name="WindowMask2" type="Sprite2D" parent="Windows/Floor3" index="2"]
+position = Vector2(1711.5, -1176)
+scale = Vector2(1.75001, 1.45883)
+texture = ExtResource("22_bhdtl")
+
+[node name="WindowMask3" type="Sprite2D" parent="Windows/Floor3" index="3"]
+position = Vector2(2150, -1177)
+scale = Vector2(1.75001, 1.45883)
+texture = ExtResource("22_bhdtl")
+
+[node name="WindowMask4" type="Sprite2D" parent="Windows/Floor3" index="4"]
+position = Vector2(2393.25, -1161.5)
+scale = Vector2(1.41071, 1.25882)
+texture = ExtResource("22_bhdtl")
+
+[node name="LetterIndicatorGroup" type="Control" parent="." index="19"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = -1350.0
+offset_right = 90.0
+offset_bottom = -980.0
+script = ExtResource("23_4mmbq")
+letters = "MOON"
+offset = Vector2(0, 100)
+colors = Array[Color]([Color(1, 1, 1, 1), Color(0.716296, 0.716296, 0.716296, 1)])
+reset_on_ball_lost = true
+
+[node name="Cloud1" type="Sprite2D" parent="." index="20"]
+modulate = Color(0.548963, 0.548963, 0.548963, 1)
+position = Vector2(1150, -960)
+scale = Vector2(2, 2)
+texture = ExtResource("24_gbkfh")
+
+[connection signal="brick_hit_in_group" from="Ghost" to="." method="_on_ghost_brick_hit_in_group"]

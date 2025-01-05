@@ -2,6 +2,8 @@
 class_name BrickGroup
 extends Node2D
 
+signal brick_hit_in_group(group_name: StringName)
+
 
 @export var properties: BrickProperties:
 	set(v):

@@ -94,6 +94,7 @@ func _on_score_steps_reached(steps: Array[StringName]) -> void:
 func _process(delta: float):
 	_process_inputs()
 	_update_camera(delta)
+	_board_process(delta)
 
 
 func _process_inputs() -> void:
@@ -259,6 +260,10 @@ func _on_flipper_hit(flipper: Flipper, _ball: Ball) -> void:
 
 
 func _board_ready() -> void:
+	pass
+
+
+func _board_process(_delta: float) -> void:
 	pass
 
 

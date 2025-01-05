@@ -61,6 +61,9 @@ var sprite_size: Vector2:
 	get: return (sprite.texture.get_size() / Vector2(sprite.hframes, sprite.vframes)) * properties.scale
 
 
+var brick_group: BrickGroup
+
+
 func _ready() -> void:
 	add_to_group(&"bricks")
 	add_to_group(&"bodies_with_shadow")
@@ -70,6 +73,8 @@ func _ready() -> void:
 		properties = properties
 	_remaining_hit_count = properties.hits
 	properties_alt = properties_alt
+	if get_parent() is BrickGroup:
+		brick_group = get_parent()
 
 
 func _on_alt_property_changed(prop_name: StringName) -> void:
@@ -94,11 +99,12 @@ func _use_alt_texture() -> void:
 	sprite.hframes = properties_alt.hframes
 	sprite.vframes = properties_alt.vframes
 	sprite.frame = properties_alt.frame
+	sprite.scale = properties.scale
 	match properties_alt.collision_shape:
 		0: _use_square_shape()
 		1: _use_triangle_shape()
 		2: _use_circle_shape()
-	
+
 
 func _use_default_texture() -> void:
 	sprite.texture = BASE_TEXTURE
@@ -157,6 +163,8 @@ func _use_triangle_shape() -> void:
 
 func hit() -> int:
 	_remaining_hit_count -= 1
+	if brick_group:
+		brick_group.brick_hit_in_group.emit(brick_group.name)
 	return _remaining_hit_count
 
 

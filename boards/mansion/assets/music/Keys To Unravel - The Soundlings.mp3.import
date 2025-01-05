@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b2w8h45mxx5ib"
+path="res://.godot/imported/Keys To Unravel - The Soundlings.mp3-2e76fac90702b681590180fd4016d001.mp3str"
+
+[deps]
+
+source_file="res://boards/mansion/assets/music/Keys To Unravel - The Soundlings.mp3"
+dest_files=["res://.godot/imported/Keys To Unravel - The Soundlings.mp3-2e76fac90702b681590180fd4016d001.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
