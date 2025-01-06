@@ -217,7 +217,9 @@ func _brick_group_cleared(group_node: BrickGroup) -> void:
 
 func _check_board_complete() -> void:
 	if _is_board_complete():
-		if SceneManager.has_next_board():
+		if get_tree().current_scene == self:
+			get_tree().quit()
+		elif SceneManager.has_next_board():
 			SceneManager.next_board()
 		else:
 			SceneManager.nav_home()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dii1qcpxjrftt"]
+[gd_scene load_steps=51 format=3 uid="uid://dii1qcpxjrftt"]
 
 [ext_resource type="PackedScene" uid="uid://vpks3lkdh6n5" path="res://src/board.tscn" id="1_i5vxl"]
 [ext_resource type="Texture2D" uid="uid://lb6gy0c6l86m" path="res://boards/mansion/assets/moon.png" id="2_chihr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://boards/mansion/mansion_board.gd" id="3_6lpdm"]
 [ext_resource type="AudioStream" uid="uid://cfoytxte7y1l5" path="res://boards/mansion/assets/music/Blue Screen Of Death - The Soundlings.mp3" id="3_qptot"]
 [ext_resource type="Texture2D" uid="uid://bt0daxc17tlac" path="res://boards/mansion/assets/tree1_trunk.png" id="3_xv6w6"]
+[ext_resource type="Resource" uid="uid://bojlw7cfjpbnp" path="res://boards/mansion/sfxdb.tres" id="4_76m0b"]
 [ext_resource type="Texture2D" uid="uid://oeiyl0m715dd" path="res://boards/mansion/assets/moon_light.png" id="4_b2gji"]
 [ext_resource type="Texture2D" uid="uid://cyww66autl1sj" path="res://boards/mansion/assets/tree1_b1.png" id="4_fm5xj"]
 [ext_resource type="Texture2D" uid="uid://b73tu2o0fc151" path="res://boards/mansion/assets/tree1_b2.png" id="5_otidi"]
@@ -290,6 +291,7 @@ _data = {
 [node name="Mansion Board" instance=ExtResource("1_i5vxl")]
 theme = ExtResource("2_pc73e")
 script = ExtResource("3_6lpdm")
+sfxfb = ExtResource("4_76m0b")
 
 [node name="AudioStreamPlayer" parent="." index="3"]
 stream = ExtResource("3_qptot")

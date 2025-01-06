@@ -40,5 +40,6 @@ func _is_board_complete():
 
 
 func _on_ghost_brick_hit_in_group(_group: BrickGroup):
+	SfxMusicManager.play(&"ghost")
 	var t := create_tween()
 	t.tween_property($Ghost, "modulate:a", 0.2, 0.2).from(1.0)

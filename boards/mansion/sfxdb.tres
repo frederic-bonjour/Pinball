@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SfxDb" load_steps=6 format=3 uid="uid://bojlw7cfjpbnp"]
+
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry.gd" id="1_b5ixm"]
+[ext_resource type="AudioStream" uid="uid://xf0kpjewp0op" path="res://boards/mansion/assets/ghost.mp3" id="2_4l2uh"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db_entry_stream.gd" id="3_mlvll"]
+[ext_resource type="Script" path="res://src/sfx/sfx_db.gd" id="4_lanwg"]
+
+[sub_resource type="Resource" id="Resource_78bdo"]
+resource_name = "ghost (SE, 1)"
+script = ExtResource("1_b5ixm")
+key = &"ghost"
+type = 2
+multiple_streams = false
+single_stream = ExtResource("2_4l2uh")
+weighted_streams = Array[ExtResource("3_mlvll")]([])
+volume_db = 0.0
+pitch_scale = 1.0
+max_distance = 0.0
+attenuation = 1.0
+
+[resource]
+script = ExtResource("4_lanwg")
+entries = Array[ExtResource("1_b5ixm")]([SubResource("Resource_78bdo")])
+background_music_bus = &""
+background_sound_bus = &""
+sound_effect_bus = &""
+music_effect_bus = &""
