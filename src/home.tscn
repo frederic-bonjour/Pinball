@@ -35,7 +35,7 @@ shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vv21j"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cx544"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
@@ -54,7 +54,7 @@ shader_parameter/stripe_slope = 2.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r2nyi"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hs8x1"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -73,7 +73,7 @@ shader_parameter/stripe_slope = 5.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4nke1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvaub"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -103,7 +103,7 @@ shader_parameter/stripe_slope = 5.0
 shader_parameter/stripe_count = 10
 shader_parameter/speed = 2.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qk0jq"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvndu"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 25
 corner_radius_top_right = 25
@@ -158,12 +158,11 @@ offset_left = 1800.0
 offset_top = 30.0
 offset_right = 1890.0
 offset_bottom = 120.0
-pivot_offset = Vector2(45, 45)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_styles/focus = SubResource("StyleBoxFlat_vv21j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_vv21j")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_vv21j")
-theme_override_styles/normal = SubResource("StyleBoxFlat_vv21j")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cx544")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cx544")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cx544")
+theme_override_styles/normal = SubResource("StyleBoxFlat_cx544")
 icon_texture = ExtResource("6_jf41c")
 margin_h = 20
 separation = 15
@@ -192,10 +191,10 @@ metadata/_edit_group_ = true
 [node name="PlayButton" parent="VBoxContainer" instance=ExtResource("3_1cpbu")]
 material = SubResource("ShaderMaterial_rmcal")
 layout_mode = 2
-theme_override_styles/focus = SubResource("StyleBoxFlat_r2nyi")
-theme_override_styles/hover = SubResource("StyleBoxFlat_r2nyi")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_r2nyi")
-theme_override_styles/normal = SubResource("StyleBoxFlat_r2nyi")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hs8x1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hs8x1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hs8x1")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hs8x1")
 label = "PLAY"
 icon_texture = ExtResource("5_jqi8r")
 margin_h = 20
@@ -217,10 +216,10 @@ material = SubResource("ShaderMaterial_tdt32")
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_styles/focus = SubResource("StyleBoxFlat_4nke1")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4nke1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_4nke1")
-theme_override_styles/normal = SubResource("StyleBoxFlat_4nke1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_mvaub")
+theme_override_styles/hover = SubResource("StyleBoxFlat_mvaub")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_mvaub")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mvaub")
 margin_h = 20
 separation = 15
 corner_radius = 25
@@ -258,10 +257,10 @@ material = SubResource("ShaderMaterial_dujb6")
 custom_minimum_size = Vector2(360, 360)
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_styles/focus = SubResource("StyleBoxFlat_qk0jq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qk0jq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_qk0jq")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qk0jq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_bvndu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_bvndu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_bvndu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bvndu")
 margin_h = 20
 separation = 15
 corner_radius = 25

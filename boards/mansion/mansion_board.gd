@@ -1,16 +1,11 @@
 extends PinballBoard
 
 @onready var launcher: BallLauncher = $Launcher
-
-
-var _moon_position: float
-var _moon_initial_position: float
+@onready var windows_floor3_ap: AnimationPlayer = %WindowsFloor3AP
 
 
 func _board_ready():
 	_board_load_ball_in_launcher(new_ball())
-	_moon_initial_position = $Moon.position.y
-	_moon_position = _moon_initial_position
 
 
 func _board_load_ball_in_launcher(ball: Ball):
@@ -22,19 +17,13 @@ func _on_ball_saver_changed(_active: bool):
 
 
 func _board_process(delta: float) -> void:
-	if $Moon.position.y > -1200:
-		var mp = $Moon.position.y
-		$Moon.position.y = move_toward($Moon.position.y, _moon_position, delta * 5)
-		if mp != $Moon.position.y:
-			var s = remap($Moon.position.y, -1200, _moon_initial_position, 1.4, 1.0)
-			$Moon.scale = Vector2(s, s)
-	
+	pass
 
 
 func _board_on_letter_group_completed(group: LetterIndicatorGroup, _ball: Ball):
 	match group.letters:
-		&"MOON":
-			_moon_position -= 10
+		&"MOON": $Moon.rise()
+		&"LIGHTS": windows_floor3_ap.play(&"completed")
 
 
 func _is_board_complete():
