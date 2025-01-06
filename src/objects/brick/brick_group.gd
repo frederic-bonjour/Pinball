@@ -2,7 +2,8 @@
 class_name BrickGroup
 extends Node2D
 
-signal brick_hit_in_group(group_name: StringName)
+@warning_ignore("unused_signal")
+signal brick_hit_in_group(group: BrickGroup)
 
 
 @export var properties: BrickProperties:

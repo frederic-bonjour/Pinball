@@ -164,7 +164,7 @@ func _use_triangle_shape() -> void:
 func hit() -> int:
 	_remaining_hit_count -= 1
 	if brick_group:
-		brick_group.brick_hit_in_group.emit(brick_group.name)
+		brick_group.brick_hit_in_group.emit(brick_group)
 	return _remaining_hit_count
 
 

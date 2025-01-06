@@ -30,6 +30,7 @@ func has_next_board() -> bool:
 	if not _current_board_name:
 		return true
 	var b := boards.find(_current_board_name)
+	print_debug(b)
 	return b >= 0 and b < boards.size() - 1
 
 
