@@ -702,7 +702,8 @@ offset_bottom = -980.0
 script = ExtResource("23_4mmbq")
 letters = "MOON"
 offset = Vector2(0, 100)
-colors = Array[Color]([Color(1, 1, 1, 1), Color(0.716296, 0.716296, 0.716296, 1)])
+color_mode = 1
+colors = Array[Color]([Color(2, 2, 0, 1), Color(0, 2, 2, 1)])
 reset_on_ball_lost = true
 
 [node name="LetterGroup_LIGHTS" type="Control" parent="." index="20"]
@@ -715,7 +716,8 @@ script = ExtResource("23_4mmbq")
 letters = "LIGHTS"
 offset = Vector2(100, 0)
 color_mode = 1
-colors = Array[Color]([Color(1.5, 0, 2, 1), Color(0, 2, 0, 1)])
+colors = Array[Color]([Color(2, 2, 0, 1), Color(0, 2, 2, 1)])
+colors_cycling = "repeat"
 redoable = false
 
 [node name="Cloud1" type="Sprite2D" parent="." index="21"]
